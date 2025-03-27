@@ -1,0 +1,202 @@
+/* Contenedor principal de movimientos */
+.wallet-movements-container {
+    padding: 20px;
+    background-color: #f4f7fc; /* Fondo más claro para simular una app financiera */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 650px;
+    margin: 20px auto;
+    font-family: 'Roboto', sans-serif;
+    min-height: 400px; /* Altura mínima para evitar que se achique */
+    display: flex;
+    flex-direction: column; /* Asegura que los elementos internos estén bien organizados */
+    justify-content: space-between; /* Distribuye espacio entre elementos */
+}
+
+/* Lista de movimientos */
+.wallet-movements-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0; /* Elimina márgenes para mantener el diseño limpio */
+    flex-grow: 1; /* Ocupa el espacio restante */
+}
+
+/* Mensaje de error o vacío */
+.wallet-movements-container p {
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+    margin: auto 0; /* Centra verticalmente el mensaje */
+}
+
+/* Ajustes para cuando no hay movimientos */
+.wallet-movements-container .empty-message {
+    min-height: 200px; /* Espacio consistente para mensajes vacíos */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+  
+  /* Título de la sección */
+  .wallet-movements-container h3 {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  
+  /* Mensaje de error o vacío */
+  .wallet-movements-container p {
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+    margin: 10px 0;
+  }
+  
+  /* Estilo para los movimientos (transacciones) */
+  .wallet-movements-container ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .wallet-movements-container li {
+    background-color: #fff;
+    padding: 18px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Estilo para transacciones de recompensa (verde) */
+  .wallet-movements-container li.recompensa {
+    background-color: #e8f5e9; /* Fondo verde claro */
+    border-left: 5px solid #4CAF50; /* Borde verde para destacar */
+  }
+  
+  /* Estilo para transacciones de canje (rojo) */
+  .wallet-movements-container li.canje {
+    background-color: #f8d7da; /* Fondo rojo claro */
+    border-left: 5px solid #f44336; /* Borde rojo para destacar */
+  }
+  
+  /* Texto de la transacción de recompensa */
+  .wallet-movements-container li.recompensa p {
+    color: #333;
+  }
+  
+  /* Resaltar el valor de recompensa en verde */
+  .wallet-movements-container li.recompensa .reward-amount {
+    color: #4CAF50; /* Verde para las recompensas */
+    font-weight: bold;
+  }
+  
+
+  /* Iconos de transacción */
+  .wallet-movements-container li .transaction-icon {
+    font-size: 24px;
+    margin-right: 10px;
+    color: #4CAF50; /* Verde para las transacciones positivas */
+  }
+  
+  /* Estilo de fecha */
+  .wallet-movements-container li p:last-child {
+    font-size: 14px;
+    color: #999;
+    text-align: right;
+  }
+  
+  /* Estilo de botones para acciones (transferir, canjear) */
+  .wallet-movements-container .action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .wallet-movements-container .action-buttons button {
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 48%;
+  }
+  
+  .wallet-movements-container .action-buttons button:hover {
+    transform: scale(1.05);
+  }
+  
+  .wallet-movements-container .action-buttons .canje-button {
+    background-color: #ff9800;
+    color: white;
+  }
+  
+  .wallet-movements-container .action-buttons .transfer-button {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  /* Estilo para los movimientos vacíos */
+  .wallet-movements-container .empty-message {
+    font-size: 16px;
+    color: #999;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Transiciones suaves */
+  .wallet-movements-container li {
+    transition: all 0.3s ease;
+  }
+  
+  .wallet-movements-container li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Estilos para la paginación */
+.wallet-movements-container .pagination {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .wallet-movements-container .pagination button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #003366;
+    color: #fff;
+  }
+  
+  .wallet-movements-container .pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .wallet-movements-container .pagination button:hover {
+    background-color: transparent;
+    color:#030732;
+  }
+
+  .trophy-icon-green {
+    margin-right: 10px;
+    color: green; /* Verde para recompensas */
+    font-size: 90px; /* Más grande */
+
+  }
+  
+  .trophy-icon-red {
+    margin-right: 10px;
+    color: red; /* Rojo para canjes */
+    font-size: 90px; /* Más grande */
+
+  }

@@ -1,0 +1,34 @@
+/* Estilos para el componente Tareas */
+.tareas-container {
+  padding: 20px;
+  margin: 20px 0;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tareas-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.tareas-list {
+  list-style: none;
+  padding: 0;
+}
+
+.tareas-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.tareas-item .task-name {
+  font-weight: bold;
+  color: #333;
+}
+
+.tareas-item .task-description {
+  color: #777;
+}
