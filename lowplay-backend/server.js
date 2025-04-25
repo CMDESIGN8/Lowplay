@@ -40,7 +40,7 @@ app.use(express.json());
 
 // Configuración de CORS (ajusta la origin para producción)
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://www.lowcargo.lat'],
+    origin: ['http://localhost:3000', 'https://lowplay-1.onrender.com'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
 }));
