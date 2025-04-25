@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.32867dd7.css",
-    "main.js": "/static/js/main.6be25035.js",
+    "main.js": "/static/js/main.8fbf3e6b.js",
     "static/media/cartaf.png": "/static/media/cartaf.e0c3782652b311646db3.png",
     "static/media/1.jpeg": "/static/media/1.d664117ad324b81dcd92.jpeg",
     "static/media/mision.jpg": "/static/media/mision.0d857cd299c7729c7466.jpg",
@@ -12,10 +12,10 @@
     "static/media/13.webp": "/static/media/13.fb41851a7529a711e6f4.webp",
     "index.html": "/index.html",
     "main.32867dd7.css.map": "/static/css/main.32867dd7.css.map",
-    "main.6be25035.js.map": "/static/js/main.6be25035.js.map"
+    "main.8fbf3e6b.js.map": "/static/js/main.8fbf3e6b.js.map"
   },
   "entrypoints": [
     "static/css/main.32867dd7.css",
-    "static/js/main.6be25035.js"
+    "static/js/main.8fbf3e6b.js"
   ]
 }
