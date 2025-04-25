@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:5000/api', // Cambia si el backend tiene otro puerto
+  baseURL: 'https://lowplay.lowcargo.lat/api', // Cambia si el backend tiene otro puerto
   headers: {
     'Content-Type': 'application/json',
   },

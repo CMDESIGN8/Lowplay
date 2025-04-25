@@ -1,0 +1,177 @@
+/* Estilos generales para el componente de calendario */
+.calendar-container {
+  padding: 20px;
+  margin: 20px 0;
+  background-color: #ffffff; /* Fondo blanco */
+  border-radius: 12px; /* Bordes redondeados */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  backdrop-filter: blur(8px); /* Filtro para dar un efecto de suavizado */
+  max-width: 100%; /* Asegura que el contenedor no sea más grande que el 100% del ancho */
+  overflow: hidden; /* Evita desbordes */
+  width: 100%; /* Hace que ocupe todo el ancho disponible */
+  background-color: #f7f7f7; /* Fondo más claro */
+}
+
+/* Estilo para el título del calendario */
+.calendar-container h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #003267; /* Color de texto azul oscuro */
+  margin-bottom: 15px;
+  text-align: center; /* Centrar el título */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: 'Poppins', sans-serif; /* Fuente moderna */
+}
+
+/* Estilo general para el calendario */
+.react-calendar {
+  border: none;
+  border-radius: 12px; /* Bordes redondeados */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  background-color:cd lowpl #fff;
+  color: #003267; /* Texto azul oscuro */
+  font-family: 'Roboto', sans-serif; /* Fuente más moderna */
+  width: 100%; /* Asegura que el calendario ocupe todo el ancho disponible */
+  max-width: 400px; /* Limita el ancho máximo del calendario */
+  margin: 0 auto; /* Centra el calendario */
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+/* Estilo para los días del calendario */
+.react-calendar__tile {
+  font-size: 16px;
+  color: #003267; /* Texto azul oscuro */
+  background-color: transparent;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+  border-radius: 10px; /* Bordes redondeados */
+  padding: 10px;
+}
+
+/* Hover sobre cualquier día */
+.react-calendar__tile:hover {
+  background-color: #003267; /* Fondo azul oscuro */
+  color: #fff; /* Texto blanco */
+  transform: scale(1.05); /* Efecto de agrandamiento */
+}
+
+/* Estilo para el día seleccionado */
+.react-calendar__tile--active {
+  background-color: #003267; /* Fondo azul oscuro */
+  color: white; /* Texto blanco */
+  font-weight: bold; /* Negrita para el día seleccionado */
+  transform: scale(1.1); /* Efecto de agrandamiento */
+}
+
+/* Estilo para el día actual */
+.react-calendar__tile--now {
+  background-color: #003267; /* Fondo azul oscuro */
+  color: #fff; /* Texto blanco */
+  font-weight: bold;
+  border-radius: 12px; /* Bordes redondeados */
+}
+
+/* Estilo para los días deshabilitados (inactivos) */
+.react-calendar__tile--disabled {
+  background-color: transparent;
+  color: #ccc; /* Color gris para los días inactivos */
+  cursor: not-allowed;
+}
+
+/* Estilo para las flechas de navegación (mes/año) */
+.react-calendar__navigation__prev2,
+.react-calendar__navigation__next2 {
+  border-radius: 50%;
+  background-color: #fff;
+  color: #003267;
+  padding: 10px;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #003267; /* Borde sutil */
+}
+
+/* Flechas con texto "Mes" y "Año" */
+.react-calendar__navigation__prev2::before {
+  content: "Mes"; /* Texto "Mes" en la flecha de izquierda */
+  font-size: 12px;
+  margin-right: 5px;
+}
+
+.react-calendar__navigation__next2::before {
+  content: "Año"; /* Texto "Año" en la flecha de derecha */
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+/* Estilo para el hover sobre las flechas */
+.react-calendar__navigation__prev2:hover,
+.react-calendar__navigation__next2:hover {
+  background-color: #003267;
+  color: #fff;
+  transform: scale(1.1); /* Efecto de agrandamiento */
+}
+
+/* Estilo para el mes y año */
+.react-calendar__navigation__label {
+  font-size: 20px;
+  color: #003267;
+  font-weight: 600;
+  padding: 0 20px;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+}
+
+/* Estilo para el mes/año y las flechas centrados */
+.react-calendar__navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  
+}
+
+/* Responsividad para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .calendar-container {
+    padding: 15px;
+  }
+
+  .react-calendar {
+    max-width: 100%; /* El calendario ocupará el 100% del ancho en pantallas pequeñas */
+  }
+
+  .react-calendar__tile {
+    font-size: 14px; /* Reducir el tamaño de los números en pantallas pequeñas */
+  }
+
+  .calendar-container h3 {
+    font-size: 20px; /* Reducir el tamaño del título */
+  }
+}
+
+/* Estilo para el título adicional */
+.calendario-title  {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  padding: 10px;
+  border-radius: 8px;
+  color: #003267;
+  font-weight: bold;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}

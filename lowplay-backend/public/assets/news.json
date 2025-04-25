@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "Nueva alianza estratégica",
+    "description": "Hemos firmado una nueva alianza con reconocidas empresas del sector tecnológico y logístico, lo que traerá beneficios exclusivos para nuestros usuarios. Esta colaboración permitirá integrar servicios avanzados de seguimiento de envíos, mejores tiempos de entrega y acceso a promociones exclusivas en productos de tecnología. ¡Prepárate para una experiencia de usuario aún más completa y eficiente!",
+    "image": "/assets/img/1.jpeg"
+  },
+  {
+    "id": 2,
+    "title": "Actualización de la app",
+    "description": "La última versión de nuestra app está aquí, con mejoras que transformarán tu experiencia. Ahora podrás gestionar tus envíos con mayor facilidad gracias a un nuevo diseño intuitivo y herramientas avanzadas como notificaciones en tiempo real y un sistema de recompensas más dinámico. Descarga la actualización y descubre cómo LowCargo evoluciona para ti.",
+    "image": "/assets/img/2.jpeg"
+  },
+  {
+    "id": 3,
+    "title": "Beneficios exclusivos",
+    "description": "¡Buenas noticias! Los usuarios de LowCargo ahora pueden disfrutar de nuevos descuentos y promociones especiales. Desde tarifas reducidas en envíos internacionales hasta recompensas adicionales al completar tareas. Además, nuestros socios comerciales ofrecen ofertas únicas en productos de tecnología y viajes. Aprovecha estos beneficios y saca el máximo provecho de tu experiencia con LowCargo.",
+    "image": "/assets/img/3.jpeg"
+  }
+]

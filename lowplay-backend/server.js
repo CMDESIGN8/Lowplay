@@ -207,7 +207,7 @@ app.get('/wallet/movimientos', verifyToken, async (req, res) => {
 });
 
 // Endpoint para obtener premios disponibles
-app.get('/api/premios', async (req, res) => {
+app.get('/premios', async (req, res) => {
     try {
         const result = await pool.query(
             'SELECT id, nombre, descripcion, costo_lowcoins, stock_disponible, imagen_url FROM premios WHERE stock_disponible > 0'
@@ -220,7 +220,7 @@ app.get('/api/premios', async (req, res) => {
 });
 
 // Endpoint para canjear un premio
-app.post('/api/premios/canjear', verifyToken, [
+app.post('/premios/canjear', verifyToken, [
     body('rewardId').isInt().withMessage('El ID del premio debe ser un entero.'),
 ], async (req, res) => {
     const errors = validationResult(req);
@@ -287,7 +287,7 @@ app.post('/api/premios/canjear', verifyToken, [
 });
 
 // Rutas para tareas
-app.post('/api/tasks', verifyToken, [
+app.post('/tasks', verifyToken, [
     body('title').notEmpty().trim().escape().withMessage('El título es requerido.'),
     body('description').optional().trim().escape(),
     body('due_date').optional().isISO8601().withMessage('La fecha debe ser válida (ISO 8601).'),
@@ -310,7 +310,7 @@ app.post('/api/tasks', verifyToken, [
     }
 });
 
-app.get('/api/tasks', verifyToken, async (req, res) => {
+app.get('/tasks', verifyToken, async (req, res) => {
     try {
         const result = await pool.query(
             'SELECT * FROM tasks WHERE user_id = $1 ORDER BY due_date',
@@ -323,7 +323,7 @@ app.get('/api/tasks', verifyToken, async (req, res) => {
     }
 });
 
-app.put('/api/tasks/:id/completar', verifyToken, [
+app.put('/tasks/:id/completar', verifyToken, [
     body('id').isInt().withMessage('El ID de la tarea debe ser un entero.'),
 ], async (req, res) => {
     const errors = validationResult(req);
@@ -348,7 +348,7 @@ app.put('/api/tasks/:id/completar', verifyToken, [
 });
 
 // Rutas para recordatorios
-app.post('/api/reminders', verifyToken, [
+app.post('/reminders', verifyToken, [
     body('taskId').isInt().withMessage('El ID de la tarea debe ser un entero.'),
     body('reminder_time').isISO8601().withMessage('La hora del recordatorio debe ser válida (ISO 8601).'),
     body('message').optional().trim().escape(),
@@ -371,7 +371,7 @@ app.post('/api/reminders', verifyToken, [
     }
 });
 
-app.get('/api/reminders', verifyToken, async (req, res) => {
+app.get('/reminders', verifyToken, async (req, res) => {
     try {
         const result = await pool.query(
             'SELECT * FROM reminders WHERE task_id IN (SELECT id FROM tasks WHERE user_id = $1)',
@@ -387,7 +387,7 @@ app.get('/api/reminders', verifyToken, async (req, res) => {
 // ... (código anterior)
 
 // Rutas para eventos (continuación)
-app.post('/api/events', verifyToken, [
+app.post('/events', verifyToken, [
   body('title').notEmpty().trim().escape().withMessage('El título es requerido.'),
   body('description').optional().trim().escape(),
   body('start_time').isISO8601().withMessage('La hora de inicio debe ser válida (ISO 8601).'),
@@ -411,7 +411,7 @@ app.post('/api/events', verifyToken, [
   }
 });
 
-app.get('/api/events', verifyToken, async (req, res) => {
+app.get('/events', verifyToken, async (req, res) => {
   try {
       const result = await pool.query(
           'SELECT * FROM events WHERE user_id = $1 ORDER BY start_time',

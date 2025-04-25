@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.32867dd7.css",
+    "main.js": "/static/js/main.8f604967.js",
+    "static/media/cartaf.png": "/static/media/cartaf.e0c3782652b311646db3.png",
+    "static/media/1.jpeg": "/static/media/1.d664117ad324b81dcd92.jpeg",
+    "static/media/mision.jpg": "/static/media/mision.0d857cd299c7729c7466.jpg",
+    "static/media/2.jpeg": "/static/media/2.994eff1563ed23dcf606.jpeg",
+    "static/media/fondo.jpg": "/static/media/fondo.8fde5b916050eba1427b.jpg",
+    "static/media/3.jpeg": "/static/media/3.3fa946023af464bb559f.jpeg",
+    "static/media/4.jpeg": "/static/media/4.5888dd9db1ac2f4546a3.jpeg",
+    "static/media/13.webp": "/static/media/13.fb41851a7529a711e6f4.webp",
+    "index.html": "/index.html",
+    "main.32867dd7.css.map": "/static/css/main.32867dd7.css.map",
+    "main.8f604967.js.map": "/static/js/main.8f604967.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.32867dd7.css",
+    "static/js/main.8f604967.js"
+  ]
+}

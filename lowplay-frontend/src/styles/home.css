@@ -1,0 +1,847 @@
+/* Estilos generales */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Opcional: para un efecto de paralaje */
+    background-color: rgba(0, 0, 0, 0.93); /* Fondo negro semitransparente */
+    background-image: url(../assets/img/1.jpeg); /* Imagen de fondo */
+    background-blend-mode: multiply; /* Modo de mezcla para oscurecer la imagen */
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    
+  }
+
+
+.lema {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 2rem; /* Tamaño de fuente */
+    color: #FFFFFF; /* Blanco */
+    text-shadow: 0 0 10px #00BFFF, 0 0 20px #00BFFF; /* Brillo azul */
+    letter-spacing: 0.3rem; /* Espaciado entre letras */
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    
+    animation: pulse 2s infinite alternate;
+    text-transform: uppercase; /* Mayúsculas */
+    font-weight: 700; /* Negrita */
+    
+}
+
+
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+  #app-container {
+    position: relative;
+    min-height: 100vh; /* Cambia height por min-height */
+    overflow: hidden;
+    background-color: transparent;
+}
+
+#app-container video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.1; /* Ajusta la opacidad del video */
+  
+}
+
+.video-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+#app-container > * {
+    position: relative;
+    z-index: 1;
+    background-color: transparent;
+}
+.app-content {
+  padding-bottom: 20vh; /* Agrega relleno inferior */
+  overflow: auto; /* Agrega barra de desplazamiento si es necesario */
+
+}
+
+.home-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: transparent;
+    
+}
+  
+  /* Encabezado */
+  .home-header {
+    background: linear-gradient(to bottom, #00003343, #00006648); /* Gradiente azul oscuro */
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.5); /* Sombra de brillo */
+    text-align: center;
+    padding: 4rem 2rem;
+   
+  }
+  
+  .logo img {
+    height: 80px;
+    margin-bottom: 1rem;
+  }
+
+  .app-container {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Cubre toda la altura de la ventana */
+    overflow: hidden; /* Oculta cualquier desbordamiento del video */
+}
+
+.app-background-video {
+    position: fixed; /* Posiciona el video fijo en la ventana */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cubre el contenedor manteniendo la proporción */
+    z-index: -1; /* Coloca el video detrás del contenido */
+    opacity: 0.5; /* Agrega opacidad al video (ajusta el valor según sea necesario) */
+}
+
+.app-content {
+    position: relative; /* Permite que el contenido esté encima del video */
+    z-index: 1; /* Coloca el contenido encima del video */
+    background-color: rgba(255, 255, 255, 0.8); /* Agrega un fondo semi-transparente al contenido para mejorar la legibilidad */
+}
+  
+  .header-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  
+  
+  .header-buttons a {
+    padding: 1rem 2rem;
+    margin: 0 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .register-btn {
+    background-color: #4CAF50;
+  }
+  
+  .learn-btn {
+    background-color: #003366;
+  }
+  
+  /* Contenido principal */
+  .home-main {
+    padding: 2rem;
+  }
+  
+  
+  .intro-section, .how-it-works-section, .community-section, .final-cta-section {
+    background: linear-gradient(135deg, #1e1e1e, #000000); /* Degradado de fondo */
+    color: #fff; /* Texto blanco */
+    padding: 3rem; /* Aumenta el padding para mayor espacio */
+    margin-bottom: 2rem;
+    border-radius: 15px; /* Bordes más redondeados */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Sombra para efecto de elevación */
+}
+
+.intro-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-around; /* Distribuye el espacio */
+}
+
+.intro-visual {
+    flex: 1;
+    text-align: center;
+}
+
+.intro-visual img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.intro-text {
+    flex: 1;
+    padding-left: 2rem;
+}
+
+.intro-text h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    color: #64FFDA ;
+    text-shadow: 0 0 10px #011818, 0 0 20px #00ffff;
+    margin-bottom: 1rem;
+}
+
+.intro-text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.features-list-container {
+    height: 30px;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.3); /* Fondo semitransparente */
+    border-radius: 8px;
+    padding: 0 1rem; /* Añade padding horizontal */
+}
+
+.features-list {
+    list-style-type: none;
+    padding: 0;
+    animation: scrollFeatures 12s linear infinite;
+    font-size: 15px;
+}
+
+.features-list li {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #00ffff; /* Cambia el color a cian */
+    text-shadow: 0 0 5px #00ffff; /* Agrega un brillo sutil */
+}
+
+@keyframes scrollFeatures {
+    0% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-30px);
+    }
+    50% {
+        transform: translateY(-60px);
+    }
+    75% {
+        transform: translateY(-90px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+} 
+  
+
+
+
+
+
+
+
+
+.how-it-works-section {
+  padding: 4rem 2rem;
+  text-align: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../assets/img/13.webp);
+  background-size: cover;
+  background-position: center;
+  border-radius: 5%;
+  width: 100%;
+}
+
+.how-it-works-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #FFFFFF;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.steps {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.step {
+  flex: 0 0 auto;
+  width: 295px;
+  padding: 2rem;
+  border-radius: 10px;
+  background-image: url(../assets/img/cartaf.png);
+  background-size: cover;
+  background-position: center;
+  margin: 1rem;
+  cursor: pointer;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  display: none;
+  transform-style: preserve-3d;
+  user-select: none; /* Desactivar la selección de texto */
+}
+
+.step:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  transform: scale(1.2); /* Ajusta el valor para el nivel de zoom deseado */
+}
+
+.step.active {
+  display: flex; /* Mostrar solo el paso activo */
+  flex-direction: column;
+}
+
+.step i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #f3e412; /* Naranja vibrante para los iconos */
+  text-shadow: 0 0 10px rgba(243, 228, 18, 0.7); /* Brillo sutil */
+}
+
+.step h3 {
+  font-size: 1.8rem;
+  margin: 0 0 1rem 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  color: #f3e412; /* Naranja vibrante para los iconos */
+  text-shadow: 0 0 10px rgba(243, 228, 18, 0.7); /* Brillo sutil */
+}
+
+.step p {
+  font-size: 1.1rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);  
+}
+
+
+.step-header p {
+    font-family: 'Roboto Condensed', sans-serif; /* O la fuente que prefieras */
+    font-size: 1rem; /* Tamaño de fuente */
+    color: #FFFFFF; /* Blanco */
+    text-shadow: 0 0 10px rgba(0, 191, 255, 0.7), 0 0 20px rgba(0, 191, 255, 0.5); /* Brillo azul */
+    letter-spacing: 0.2rem; /* Espaciado entre letras */
+    text-align: center;
+    border-radius: 8px;
+    background: linear-gradient(to bottom, rgba(0, 0, 51, 0.615), rgba(0, 0, 102, 0.237)); /* Gradiente azul oscuro sutil */
+    font-weight: 600; /* Seminegrita */
+    padding: 0 1rem;
+   
+}
+
+/* Mantener el espacio fijo para los datos */
+.player-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px; /* Asegura que el espacio de los datos sea constante */
+  text-align: center;
+  margin-top: 500px;
+}
+
+.player-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.player-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 100%;
+}
+
+.player-name {
+  margin-top: 0.5rem;
+  white-space: nowrap;
+  font-family: 'Roboto Condensed', sans-serif;
+  margin-left: 100%;
+}
+
+p.player-name {
+  font-size: 22px;
+}
+
+/* Asegurar que todos los jugadores tengan el mismo espacio */
+.step .attributes {
+  margin-bottom: 20px;
+  margin-top: 1.4rem;
+  background-color: rgba(0, 0, 0, 0.15);
+  padding: 0.5rem;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto auto;
+  gap: 0;
+  font-family: 'Roboto Condensed', sans-serif;
+  color: #4FD1DE;
+  font-weight: bold;
+}
+
+.step .attribute {
+  padding: 1.5rem;
+  border-radius: 5px;
+  font-size: 22px;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 10%;
+}
+
+.step .attribute::before {
+  content: attr(data-label) " ";
+  font-weight: bold;
+}
+
+
+.community-section {
+  background: linear-gradient(135deg, #1a1a1a, #2a2a2a); /* Degradado oscuro Fortnite */
+  padding: 3rem 2rem;
+  border-radius: 12px;
+  margin: 2rem auto;
+  max-width: 100%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Sombra más pronunciada */
+  border: 2px solid #3498db; /* Borde azul vibrante */
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.stat {
+  text-align: center;
+  padding: 2rem;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.3); /* Fondo semitransparente */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  margin: 1rem;
+  min-width: 180px;
+  color: white; /* Texto blanco */
+}
+
+.stat i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #f39c12; /* Naranja vibrante para los iconos */
+  text-shadow: 0 0 10px rgba(243, 156, 18, 0.7); /* Brillo sutil */
+}
+
+.stat h3 {
+  font-size: 2.5rem;
+  color: #3498db; /* Azul vibrante para los números */
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 10px rgba(52, 152, 219, 0.8); /* Resplandor */
+  font-family: 'Bebas Neue', sans-serif; /* Fuente moderna */
+}
+
+.stat p {
+  font-size: 1.1rem;
+  color: #e0e0e0; /* Gris claro para el texto */
+  font-family: 'Montserrat', sans-serif; /* Fuente legible */
+}
+
+/* Adaptabilidad */
+@media (max-width: 600px) {
+  .stat {
+      min-width: 100%;
+      margin: 0.5rem 0;
+  }
+}
+  
+  .final-cta-section {
+    text-align: center;
+  }
+  
+  .final-cta-section .final-register-btn {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 1.5rem 3rem;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  
+
+#typing-text {
+    font-size: 1.1rem;
+    overflow: hidden;
+    border-right: .15em solid rgb(0, 34, 85);
+    animation:
+        typing 2s steps(40, end),
+        blink-caret .75s step-end infinite;
+    white-space: normal; /* Permitimos saltos de línea */
+    width: 100%; /* Inicializamos el ancho a 0 */
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: rgb(0, 34, 85); }
+}
+    .section-hidden {
+        opacity: 0;
+        transform: translateY(20px); /* Opcional: para una pequeña animación de desplazamiento */
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    
+    .section-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+
+.cta-login-section {
+    color: white;
+    padding: 3rem 2rem;
+    border-radius: 12px;
+    margin: 2rem auto;
+    max-width: 100%;
+    background: linear-gradient(135deg, #101010, #202020); /* Degradado oscuro Xbox */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.cta-login-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cta-login-content {
+    flex: 1;
+    padding-right: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.cta-login-content:hover {
+    transform: scale(1.05);
+}
+
+.cta-login-content h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    color: #e0e0e0;
+}
+
+.cta-login-content p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #e0e0e0;
+}
+
+.cta-login-button {
+    background: linear-gradient(135deg, #107c10, #10a710); /* Degradado verde Xbox */
+    color: white;
+    padding: 1.2rem 2.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.cta-login-button:hover {
+    background: linear-gradient(135deg, #10a710, #107c10);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.cta-login-container > div:last-child {
+    flex: 1;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #e0e0e0;
+    padding: 2rem;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.cta-login-container > div:last-child:hover {
+    transform: scale(1.05);
+}
+
+/* Adaptabilidad */
+@media (max-width: 768px) {
+    .cta-login-container {
+        flex-direction: column;
+    }
+
+    .cta-login-content,
+    .cta-login-container > div:last-child {
+        padding-right: 0;
+        margin-bottom: 2rem;
+    }
+}
+
+/* Media queries para adaptabilidad móvil */
+@media (max-width: 768px) {
+  .lema {
+      font-size: 1.5rem; /* Ajuste adicional para pantallas más pequeñas */
+      letter-spacing: 0.1rem;
+  }
+  .intro-section {
+      flex-direction: column;
+  }
+
+  .intro-text {
+      padding-left: 0;
+      margin-top: 1rem;
+  }
+
+  .how-it-works-section .steps {
+      flex-direction: column;
+  }
+
+  .how-it-works-section .step {
+      margin-bottom: 1rem;
+  }
+
+  .community-section .stats {
+      flex-direction: column;
+  }
+
+  .community-section .stat {
+      margin-bottom: 1rem;
+  }
+
+  .home-header {
+      padding: 2rem 1rem;
+  }
+
+  .header-buttons a {
+      display: block;
+      margin: 1rem auto;
+      width: 80%;
+  }
+
+  .home-main {
+      padding: 1rem;
+  }
+
+  .intro-section, .how-it-works-section, .community-section, .final-cta-section {
+      padding: 1.5rem;
+  }
+  .player-info-container {
+      margin-top: 50px;
+  }
+}
+
+.news-section {
+  background-color: #000;
+  color: #fff;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0;
+  border-bottom: 2px solid #e60012;
+}
+
+.news-section h2 {
+  text-align: left;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-bottom: 1px solid #333;
+  padding-bottom: 0.5rem;
+}
+
+.news-list {
+  list-style: none;
+  padding: 0;
+}
+
+.news-item {
+  background-color: #1a1a1a;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #333;
+  display: flex; /* Usamos flexbox para alinear la imagen y el texto */
+}
+
+.news-image {
+  width: 20%; /* Reducimos el ancho de la imagen */
+  height: auto;
+  margin-right: 1rem; /* Espacio entre imagen y texto */
+}
+
+.news-item .news-content {
+  flex-grow: 1; /* El texto ocupa el espacio restante */
+}
+
+.news-item h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.news-item p {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem; /* Espacio inferior */
+}
+
+.news-item a {
+  color: #e60012;
+  text-decoration: none;
+  font-weight: bold;
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.news-item button {
+  background-color: #e60012;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 1rem; /* Espacio superior */
+}
+
+.news-item button:hover {
+  background-color: #cc0000;
+}
+
+.news-item p:last-child {
+  margin-top: 1rem;
+  background-color: #252525;
+  padding: 1rem;
+  border-radius: 4px;
+  border-top: 1px solid #333; /* Separador superior */
+}
+
+/* Pie de página */
+.home-footer {
+  text-align: center;
+  padding: 2rem;
+  background-color: #040714; /* Fondo negro azulado oscuro */
+  color: #f9f9f9; /* Texto blanco ligeramente grisáceo */
+  font-family: sans-serif;
+}
+
+.home-footer .footer-links a {
+  color: #f9f9f9;
+  text-decoration: none;
+  margin: 0 1.5rem;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.home-footer .footer-links a:hover {
+  color: #00a9e0; /* Azul claro al pasar el ratón */
+}
+
+/* Media queries para adaptabilidad móvil */
+@media (max-width: 768px) {
+  .intro-section {
+      flex-direction: column;
+  }
+
+  .intro-text {
+      padding-left: 0;
+      margin-top: 1rem;
+  }
+
+  .how-it-works-section .steps {
+      flex-direction: column;
+  }
+
+  .how-it-works-section .step {
+      margin-bottom: 1rem;
+  }
+
+  .community-section .stats {
+      flex-direction: column;
+  }
+
+  .community-section .stat {
+      margin-bottom: 1rem;
+  }
+
+  .home-header {
+      padding: 2rem 1rem;
+  }
+
+  .header-buttons a {
+      display: block;
+      margin: 1rem auto;
+      width: 80%;
+  }
+
+  .home-main {
+      padding: 1rem;
+  }
+
+  .intro-section,
+  .how-it-works-section,
+  .community-section,
+  .final-cta-section {
+      padding: 1.5rem;
+  }
+}
+
+/* ... otros estilos ... */
+
+.social-links a {
+  color: #f9f9f9; /* Texto blanco ligeramente grisáceo */
+  font-size: 1.8rem;
+  margin: 0 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #00a9e0; /* Azul claro al pasar el ratón */
+}
+
+.social-links a i {
+  font-size: 2rem;
+}
+
+/* Estilos específicos para cada icono (opcional) */
+.social-links a .fa-facebook-f {
+  color: #1877f2; /* Color específico de Facebook */
+}
+
+.social-links a .fa-twitter {
+  color: #1da1f2; /* Color específico de Twitter */
+}
+
+.social-links a .fa-instagram {
+  color: #e1306c; /* Color específico de Instagram */
+}
