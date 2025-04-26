@@ -5,6 +5,7 @@ import Tareas from '../components/Tareas'; // Nuevo componente de tareas
 import Eventos from '../components/Eventos'; // Nuevo componente de eventos
 import Calendario from '../components/Calendario.js'; // Nuevo componente de calendario
 import { Link } from 'react-router-dom';
+import WalletMovements from '../components/WalletMovements.js';
 
 const Dashboard = () => {
   // Datos estáticos en lugar de obtenerlos del servidor
