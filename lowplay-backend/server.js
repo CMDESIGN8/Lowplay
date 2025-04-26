@@ -73,6 +73,8 @@ connectDBWithRetry();
 
 // Rutas de autenticación
 app.use('/api/auth', authRoutes);
+app.use('/api', authRoutes); // ¡Esto es clave!
+
 
 // Ruta para obtener los datos del perfil
 app.get('/profile', verifyToken, async (req, res) => {
