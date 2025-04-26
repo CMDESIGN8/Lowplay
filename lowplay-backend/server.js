@@ -114,6 +114,10 @@ app.get('/misiones', verifyToken, async (req, res) => {
     }
 });
 
+app.get('/api/test', (req, res) => {
+    res.send('Servidor activo');
+});
+
 app.post('/misiones/completar', verifyToken, [
     body('misionId').isInt().withMessage('El ID de la misión debe ser un entero.'),
 ], async (req, res) => {
