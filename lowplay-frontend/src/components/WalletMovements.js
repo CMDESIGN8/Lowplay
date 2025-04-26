@@ -19,7 +19,7 @@ const WalletMovements = () => {
       }
 
       try {
-        const response = await api.get('http://lowplay.lowcargo.lat/wallet/movimientos', {
+        const response = await api.get('https://lowplay.lowcargo.lat/wallet/movimientos', {
           headers: { Authorization: `Bearer ${token}` },
         });
 
