@@ -73,6 +73,7 @@ const Dashboard = () => {
       <div className="dashboard-info">
         <div className="info-card">
           <h3>Últimos Movimientos</h3>
+          <WalletMovements />
         </div>
         <div className="info-card">
           <h3>Misiones Diarias</h3>
