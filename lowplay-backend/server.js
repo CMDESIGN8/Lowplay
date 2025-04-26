@@ -81,11 +81,17 @@ app.use('/api', authRoutes); // Asegúrate de que las rutas estén configuradas 
 
 // Ruta para obtener los datos del perfil
 
+// Ruta para obtener el perfil del usuario
 app.get('/api/profile', verifyToken, async (req, res) => {
     try {
-        const userId = req.userId;
+        const userId = req.userId; // Asegúrate de que `userId` esté presente en req.userId
+        if (!userId) {
+            return res.status(401).json({ error: 'Usuario no autenticado' });
+        }
+
+        // Consulta a la base de datos para obtener la información del usuario
         const result = await pool.query(
-            'SELECT id, nombre, email FROM usuarios WHERE id = $1',
+            'SELECT id, nombre, email, billetera FROM usuarios WHERE id = $1',
             [userId]
         );
 
@@ -93,9 +99,16 @@ app.get('/api/profile', verifyToken, async (req, res) => {
             return res.status(404).json({ error: 'Usuario no encontrado' });
         }
 
-        res.json(result.rows[0]);
+        // Responder con los datos del usuario
+        res.json({
+            id: result.rows[0].id,
+            nombre: result.rows[0].nombre,
+            email: result.rows[0].email,
+            billetera: result.rows[0].billetera,
+        });
     } catch (error) {
-        logger.error('Error al obtener perfil:', error);
+        // Manejo de errores, usando console.error() si no estás usando un logger
+        console.error('Error al obtener perfil:', error);
         res.status(500).json({ error: 'Error al obtener perfil' });
     }
 });
