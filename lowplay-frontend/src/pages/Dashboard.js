@@ -26,7 +26,7 @@ const Dashboard = () => {
 
     const fetchUserData = async () => {
       try {
-        const response = await api.get('http://localhost:5000/profile', {
+        const response = await api.get('https://lowplay-1.onrender.com/profile', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUserData(response.data);
