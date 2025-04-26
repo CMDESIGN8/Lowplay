@@ -23,6 +23,8 @@ logger.info('----------------------------');
 
 const app = express();
 
+// Configurar Express para que confíe en el proxy
+app.set('trust proxy', true);
 // Middleware de seguridad
 app.use(helmet());
 
