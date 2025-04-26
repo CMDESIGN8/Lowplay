@@ -74,8 +74,6 @@ connectDBWithRetry();
 
 // Rutas de autenticación
 app.use('/api/auth', authRoutes);
-app.use('/api', authRoutes); // ¡Esto es clave!
-
 
 // Ruta para obtener los datos del perfil
 app.get('/api/profile', verifyToken, async (req, res) => {
@@ -390,7 +388,7 @@ app.get('/api/reminders', verifyToken, async (req, res) => {
 // ... (código anterior)
 
 // Rutas para eventos (continuación)
-app.post('/api/events', verifyToken, [
+app.post('/events', verifyToken, [
   body('title').notEmpty().trim().escape().withMessage('El título es requerido.'),
   body('description').optional().trim().escape(),
   body('start_time').isISO8601().withMessage('La hora de inicio debe ser válida (ISO 8601).'),
@@ -414,7 +412,7 @@ app.post('/api/events', verifyToken, [
   }
 });
 
-app.get('/api/events', verifyToken, async (req, res) => {
+app.get('/events', verifyToken, async (req, res) => {
   try {
       const result = await pool.query(
           'SELECT * FROM events WHERE user_id = $1 ORDER BY start_time',
