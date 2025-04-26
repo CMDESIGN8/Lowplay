@@ -27,19 +27,29 @@ const Dashboard = () => {
     }
 
     const fetchUserData = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('No estás autenticado');
+        window.location.href = '/'; // Redirigir al login si no hay token
+        return;
+      }
+
       try {
+        console.log("Token enviado:", token);  // <-- Verificamos que se está enviando
         const response = await axios.get('https://lowplay-1.onrender.com/api/profile', {
           headers: { Authorization: `Bearer ${token}` },
         });
+
         setUserData(response.data);
-        setAvatar(response.data.avatar || null); // Establecer el avatar del usuario
-        setBalance(response.data.saldo || 0); // Establecer el saldo
+        setAvatar(response.data.foto_perfil || null); // Ojo: en tu backend es "foto_perfil"
+        setBalance(response.data.saldo || 0);
       } catch (error) {
         console.error(error);
         alert('Error al obtener la información');
       }
     };
-    fetchUserData();
+
+    fetchUserData(); // Se ejecuta al montar el componente
   }, []);
 
   if (!userData) return <div>Cargando...</div>;
