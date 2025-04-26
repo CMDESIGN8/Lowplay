@@ -78,6 +78,7 @@ app.use('/api', authRoutes); // ¡Esto es clave!
 
 
 // Ruta para obtener los datos del perfil
+
 app.get('/api/profile', verifyToken, async (req, res) => {
     try {
         const userId = req.userId;
