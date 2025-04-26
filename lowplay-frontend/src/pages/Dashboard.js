@@ -34,11 +34,6 @@ const Dashboard = () => {
       <div className="dashboard-header">
         {/* Mostrar avatar estático */}
         <div className="profile-picture-container">
-          <img
-            src={require(`../assets/avatars/${userData.foto_perfil}`)} // Cargar el avatar estático
-            alt="Avatar"
-            className="profile-picture"
-          />
         </div>
 
         {/* Título de bienvenida */}
