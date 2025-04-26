@@ -74,7 +74,9 @@ connectDBWithRetry();
 
 // Rutas de autenticación
 app.use('/api/auth', authRoutes);
-app.use('/api', authRoutes); // ¡Esto es clave!
+// Usar las rutas de usuario
+app.use('/api', authRoutes); // Asegúrate de que las rutas estén configuradas correctamente
+
 
 
 // Ruta para obtener los datos del perfil
