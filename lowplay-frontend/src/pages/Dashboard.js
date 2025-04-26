@@ -88,13 +88,13 @@ const Dashboard = () => {
       {/* Información del usuario */}
     <div className="user-info">
       <div className="welcome-and-logout">
-        <h1 className="welcome-text">Bienvenido, {userData.nombre} 👋</h1>
+        <h1 className="welcome-text">Bienvenido,  👋</h1>
       </div>
-      <p className="wallet-number">Número de Wallet: {userData.billetera}</p>
+      <p className="wallet-number">Número de Wallet: </p>
       <div className="wallet-balance-container">
       <div className="wallet-balance">
     <span className="balance-label">Saldo Disponible</span>
-    <span className="balance-amount">LC {userData.saldo}</span> {/* Aquí se muestra el saldo real */}
+    <span className="balance-amount">LC </span> {/* Aquí se muestra el saldo real */}
   </div>
 </div>
   </div>
@@ -140,14 +140,14 @@ const Dashboard = () => {
       <div className="dashboard-info">
       <div className="info-card">
            <h3>Últimos Movimientos</h3>
-           <WalletMovements />
+           
   </div>
         <div className="info-card">
           <h3>Misiones Diarias </h3>
           {/* Agregar el componente de misiones diarias */}
-          <Missions />
+         
           <h3>Premios Disponibles</h3>
-          <Rewards />
+          
           {/* Agregar el componente de misiones completas */}
         </div>
       </div>
@@ -163,7 +163,7 @@ const Dashboard = () => {
   
   <div className="tasks-section">
     
-    <Tareas /> {/* Aquí va tu lista de tareas */}
+    
   </div>
 
   <div className="calendar-section">
