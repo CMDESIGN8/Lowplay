@@ -10,6 +10,8 @@ import Tareas from '../components/Tareas'; // Nuevo componente de tareas
 import Eventos from '../components/Eventos'; // Nuevo componente de eventos
 import Calendario from '../components/Calendario.js'; // Nuevo componente de calendario
 import { Link } from 'react-router-dom';
+import axios from 'axios'; // Asegurate de importar axios arriba
+
 
 
 const Dashboard = () => {
@@ -26,7 +28,7 @@ const Dashboard = () => {
 
     const fetchUserData = async () => {
       try {
-        const response = await api.get('/api/profile', {
+        const response = await axios.get('https://lowplay-1.onrender.com/api/profile', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUserData(response.data);
