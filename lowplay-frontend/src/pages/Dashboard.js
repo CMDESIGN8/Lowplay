@@ -37,18 +37,6 @@ const Dashboard = () => {
         </div>
 
         {/* Título de bienvenida */}
-        <div className="user-info">
-          <div className="welcome-and-logout">
-            <h1 className="welcome-text">Bienvenido, {userData.nombre} 👋</h1>
-          </div>
-          <p className="wallet-number">Número de Wallet: {userData.email}</p>
-          <div className="wallet-balance-container">
-            <div className="wallet-balance">
-              <span className="balance-label">Saldo Disponible</span>
-              <span className="balance-amount">LC {balance}</span> {/* Aquí se muestra el saldo real */}
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Menu de opciones */}
