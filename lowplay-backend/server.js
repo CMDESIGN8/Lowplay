@@ -78,29 +78,22 @@ app.use('/api', authRoutes); // ¡Esto es clave!
 
 
 // Ruta para obtener los datos del perfil
-app.get('/profile', verifyToken, async (req, res) => {
+app.get('/api/profile', verifyToken, async (req, res) => {
     try {
-        const userResult = await pool.query(
-            'SELECT id, nombre, email, foto_perfil, fecha_creacion, billetera FROM usuarios WHERE id = $1',
-            [req.userId]
+        const userId = req.userId;
+        const result = await pool.query(
+            'SELECT id, nombre, email FROM usuarios WHERE id = $1',
+            [userId]
         );
-        const user = userResult.rows[0];
 
-        if (!user) {
-            return res.status(404).json({ message: 'Usuario no encontrado' });
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'Usuario no encontrado' });
         }
 
-        const lowcoinsResult = await pool.query(
-            'SELECT saldo FROM lowcoins WHERE usuario_id = $1',
-            [req.userId]
-        );
-
-        const saldo = lowcoinsResult.rows[0]?.saldo || 0;
-
-        res.json({ ...user, saldo });
+        res.json(result.rows[0]);
     } catch (error) {
-        logger.error('Error al obtener los datos del usuario:', error);
-        res.status(500).json({ message: 'Error al obtener los datos del usuario.' });
+        logger.error('Error al obtener perfil:', error);
+        res.status(500).json({ error: 'Error al obtener perfil' });
     }
 });
 
