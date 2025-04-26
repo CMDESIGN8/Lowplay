@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/dashboard.css'; // Importamos el archivo de estilos
 import NewsCarousel from '../components/NewsCarousel'; // Importar el componente de noticias
 import Tareas from '../components/Tareas'; // Nuevo componente de tareas
@@ -19,10 +19,14 @@ const Dashboard = () => {
 
   const handleLogout = () => {
     // Lógica para cerrar sesión
-    // Limpia el token o los datos del usuario
     localStorage.removeItem('token'); // Elimina el token del almacenamiento local
     window.location.href = '/';  // Redirige al usuario a la página de login
   };
+
+  useEffect(() => {
+    // Eliminar cualquier llamada API que se haya configurado.
+    // No hay más necesidad de hacer un axios.get() a la API
+  }, []);
 
   return (
     <div className="dashboard-container">
