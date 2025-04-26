@@ -31,11 +31,10 @@ app.use(helmet());
 // Rate limiting para prevenir ataques de fuerza bruta
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutos
-    max: 100, // Límite de 100 solicitudes por IP en cada ventana
-    standardHeaders: true,
-    legacyHeaders: false,
-    message: 'Demasiadas solicitudes desde esta IP, por favor intenta de nuevo en 15 minutos.',
-});
+    max: 100, // Límite de 100 peticiones por IP
+    message: 'Demasiadas solicitudes, por favor intente más tarde.',
+    skipFailedRequests: true, // No aplicar el límite en peticiones fallidas
+  });
 app.use(limiter);
 
 app.use(express.json());
