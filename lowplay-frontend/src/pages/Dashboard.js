@@ -35,8 +35,6 @@ const Dashboard = () => {
         {/* Mostrar avatar estático */}
         <div className="profile-picture-container">
         </div>
-
-        {/* Título de bienvenida */}
       </div>
 
       {/* Menu de opciones */}
