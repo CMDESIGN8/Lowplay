@@ -78,7 +78,7 @@ app.use('/api', authRoutes); // ¡Esto es clave!
 
 
 // Ruta para obtener los datos del perfil
-app.get('/profile', verifyToken, async (req, res) => {
+app.get('/api/profile', verifyToken, async (req, res) => {
     try {
         const userResult = await pool.query(
             'SELECT id, nombre, email, foto_perfil, fecha_creacion, billetera FROM usuarios WHERE id = $1',
@@ -104,7 +104,7 @@ app.get('/profile', verifyToken, async (req, res) => {
     }
 });
 
-app.get('/misiones', verifyToken, async (req, res) => {
+app.get('/api/misiones', verifyToken, async (req, res) => {
     try {
         const dailyMissions = await pool.query(
             `SELECT m.id, m.nombre, m.descripcion, m.recompensa, m.tipo
@@ -121,7 +121,7 @@ app.get('/misiones', verifyToken, async (req, res) => {
     }
 });
 
-app.post('/misiones/completar', verifyToken, [
+app.post('/api/misiones/completar', verifyToken, [
     body('misionId').isInt().withMessage('El ID de la misión debe ser un entero.'),
 ], async (req, res) => {
     const errors = validationResult(req);
@@ -179,7 +179,7 @@ app.post('/misiones/completar', verifyToken, [
 });
 
 // Ruta para obtener todos los movimientos de la billetera (recompensas + canjes)
-app.get('/wallet/movimientos', verifyToken, async (req, res) => {
+app.get('/api/wallet/movimientos', verifyToken, async (req, res) => {
     try {
         const movementsResult = await pool.query(
             `SELECT
@@ -210,7 +210,7 @@ app.get('/wallet/movimientos', verifyToken, async (req, res) => {
 });
 
 // Endpoint para obtener premios disponibles
-app.get('/premios', async (req, res) => {
+app.get('/api/premios', async (req, res) => {
     try {
         const result = await pool.query(
             'SELECT id, nombre, descripcion, costo_lowcoins, stock_disponible, imagen_url FROM premios WHERE stock_disponible > 0'
@@ -223,7 +223,7 @@ app.get('/premios', async (req, res) => {
 });
 
 // Endpoint para canjear un premio
-app.post('/premios/canjear', verifyToken, [
+app.post('/api/premios/canjear', verifyToken, [
     body('rewardId').isInt().withMessage('El ID del premio debe ser un entero.'),
 ], async (req, res) => {
     const errors = validationResult(req);
@@ -290,7 +290,7 @@ app.post('/premios/canjear', verifyToken, [
 });
 
 // Rutas para tareas
-app.post('/tasks', verifyToken, [
+app.post('/api/tasks', verifyToken, [
     body('title').notEmpty().trim().escape().withMessage('El título es requerido.'),
     body('description').optional().trim().escape(),
     body('due_date').optional().isISO8601().withMessage('La fecha debe ser válida (ISO 8601).'),
@@ -313,7 +313,7 @@ app.post('/tasks', verifyToken, [
     }
 });
 
-app.get('/tasks', verifyToken, async (req, res) => {
+app.get('/api/tasks', verifyToken, async (req, res) => {
     try {
         const result = await pool.query(
             'SELECT * FROM tasks WHERE user_id = $1 ORDER BY due_date',
@@ -326,7 +326,7 @@ app.get('/tasks', verifyToken, async (req, res) => {
     }
 });
 
-app.put('/tasks/:id/completar', verifyToken, [
+app.put('/api/tasks/:id/completar', verifyToken, [
     body('id').isInt().withMessage('El ID de la tarea debe ser un entero.'),
 ], async (req, res) => {
     const errors = validationResult(req);
@@ -351,7 +351,7 @@ app.put('/tasks/:id/completar', verifyToken, [
 });
 
 // Rutas para recordatorios
-app.post('/reminders', verifyToken, [
+app.post('/api/reminders', verifyToken, [
     body('taskId').isInt().withMessage('El ID de la tarea debe ser un entero.'),
     body('reminder_time').isISO8601().withMessage('La hora del recordatorio debe ser válida (ISO 8601).'),
     body('message').optional().trim().escape(),
@@ -374,7 +374,7 @@ app.post('/reminders', verifyToken, [
     }
 });
 
-app.get('/reminders', verifyToken, async (req, res) => {
+app.get('/api/reminders', verifyToken, async (req, res) => {
     try {
         const result = await pool.query(
             'SELECT * FROM reminders WHERE task_id IN (SELECT id FROM tasks WHERE user_id = $1)',
@@ -390,7 +390,7 @@ app.get('/reminders', verifyToken, async (req, res) => {
 // ... (código anterior)
 
 // Rutas para eventos (continuación)
-app.post('/events', verifyToken, [
+app.post('/api/events', verifyToken, [
   body('title').notEmpty().trim().escape().withMessage('El título es requerido.'),
   body('description').optional().trim().escape(),
   body('start_time').isISO8601().withMessage('La hora de inicio debe ser válida (ISO 8601).'),
@@ -414,7 +414,7 @@ app.post('/events', verifyToken, [
   }
 });
 
-app.get('/events', verifyToken, async (req, res) => {
+app.get('/api/events', verifyToken, async (req, res) => {
   try {
       const result = await pool.query(
           'SELECT * FROM events WHERE user_id = $1 ORDER BY start_time',
