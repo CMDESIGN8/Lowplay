@@ -23,6 +23,14 @@ logger.info('----------------------------');
 
 const app = express();
 
+const corsOptions = {
+    origin: 'https://lowplay-1.onrender.com', // tu frontend permitido
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+  };
+  
+  app.use(cors(corsOptions));
+
 // Configurar Express para que confíe en el proxy
 app.set('trust proxy', false);
 // Middleware de seguridad
@@ -38,13 +46,6 @@ const limiter = rateLimit({
 app.use(limiter);
 
 app.use(express.json());
-
-app.use(cors({
-    origin: ['https://lowplay-1.onrender.com', 'http://localhost:3000'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true, // Si usas cookies o credenciales
-}));
 
 // Middleware de logging (opcional)
 app.use(morgan('combined', { stream: { write: message => logger.info(message.trim()) } }));
