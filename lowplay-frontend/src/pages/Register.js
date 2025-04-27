@@ -15,7 +15,7 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post('/register', { nombre, email, password });
+      const response = await api.post('api/register', { nombre, email, password });
       alert('Registro exitoso');
       // Después del registro, redirigimos al Dashboard
       navigate('/');
