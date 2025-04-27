@@ -7,13 +7,13 @@ const pool = require('./models/db');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-const { body, validationResult } = require('express-validator');
+const { body, validationResult } = require('express-validator'); // Para validación
 const morgan = require('morgan');
-const logger = require('./utils/logger');
+const logger = require('./utils/logger'); // Asume que tienes un logger configurado
 
 dotenv.config();
 
-// Imprimir configuración de la base de datos al inicio
+// Imprimir configuración de la base de datos al inicio (para depuración)
 logger.info('--- Database Configuration ---');
 logger.info(`DB_HOST: ${process.env.DB_HOST}`);
 logger.info(`DB_PORT: ${process.env.DB_PORT}`);
@@ -24,30 +24,33 @@ logger.info('----------------------------');
 const app = express();
 
 const corsOptions = {
-    origin: 'https://lowplay-1.onrender.com', // Frontend permitido
+    origin: 'https://lowplay-1.onrender.com', // tu frontend permitido
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
-};
-app.use(cors(corsOptions));
+  };
+  
+  app.use(cors(corsOptions));
 
-// Configuración de seguridad
+// Configurar Express para que confíe en el proxy
 app.set('trust proxy', false);
+// Middleware de seguridad
 app.use(helmet());
 
-// Rate limiting para evitar ataques de fuerza bruta
+// Rate limiting para prevenir ataques de fuerza bruta
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutos
     max: 100, // Límite de 100 peticiones por IP
     message: 'Demasiadas solicitudes, por favor intente más tarde.',
-    skipFailedRequests: true,
-});
+    skipFailedRequests: true, // No aplicar el límite en peticiones fallidas
+  });
 app.use(limiter);
 
-// Configuración de middlewares
 app.use(express.json());
+
+// Middleware de logging (opcional)
 app.use(morgan('combined', { stream: { write: message => logger.info(message.trim()) } }));
 
-// Conexión a la base de datos con reintentos
+// Función para intentar la conexión a la base de datos con reintento
 async function connectDBWithRetry(maxAttempts = 5, delay = 2000) {
     let attempts = 0;
     while (attempts < maxAttempts) {
@@ -67,21 +70,27 @@ async function connectDBWithRetry(maxAttempts = 5, delay = 2000) {
     process.exit(1); // Terminar la aplicación si no se puede conectar
 }
 
-// Intentar la conexión a la base de datos al inicio
+// Conectar a la base de datos al inicio
 connectDBWithRetry();
 
-// Rutas
+// Rutas de autenticación
 app.use('/api/auth', authRoutes);
-app.use('/api', authRoutes);
+// Usar las rutas de usuario
+app.use('/api', authRoutes); // Asegúrate de que las rutas estén configuradas correctamente
 
-// Ruta para obtener perfil de usuario
+
+
+// Ruta para obtener los datos del perfil
+
+// Ruta para obtener el perfil del usuario
 app.get('/api/profile', verifyToken, async (req, res) => {
     try {
-        const userId = req.userId;
+        const userId = req.userId; // Asegúrate de que `userId` esté presente en req.userId
         if (!userId) {
             return res.status(401).json({ error: 'Usuario no autenticado' });
         }
 
+        // Consulta a la base de datos para obtener la información del usuario
         const result = await pool.query(
             'SELECT id, nombre, email, billetera FROM usuarios WHERE id = $1',
             [userId]
@@ -91,6 +100,7 @@ app.get('/api/profile', verifyToken, async (req, res) => {
             return res.status(404).json({ error: 'Usuario no encontrado' });
         }
 
+        // Responder con los datos del usuario
         res.json({
             id: result.rows[0].id,
             nombre: result.rows[0].nombre,
@@ -98,12 +108,12 @@ app.get('/api/profile', verifyToken, async (req, res) => {
             billetera: result.rows[0].billetera,
         });
     } catch (error) {
-        logger.error('Error al obtener perfil:', error);
+        // Manejo de errores, usando console.error() si no estás usando un logger
+        console.error('Error al obtener perfil:', error);
         res.status(500).json({ error: 'Error al obtener perfil' });
     }
 });
 
-// Ruta para obtener misiones diarias y únicas
 app.get('/misiones', verifyToken, async (req, res) => {
     try {
         const dailyMissions = await pool.query(
@@ -121,7 +131,10 @@ app.get('/misiones', verifyToken, async (req, res) => {
     }
 });
 
-// Ruta para completar misión
+app.get('/api/test', (req, res) => {
+    res.send('Servidor activo');
+});
+
 app.post('/misiones/completar', verifyToken, [
     body('misionId').isInt().withMessage('El ID de la misión debe ser un entero.'),
 ], async (req, res) => {
@@ -133,7 +146,10 @@ app.post('/misiones/completar', verifyToken, [
     const { misionId } = req.body;
 
     try {
-        const missionResult = await pool.query('SELECT * FROM misiones WHERE id = $1', [misionId]);
+        const missionResult = await pool.query(
+            'SELECT * FROM misiones WHERE id = $1',
+            [misionId]
+        );
         const mission = missionResult.rows[0];
         if (!mission) {
             return res.status(404).json({ message: 'Misión no encontrada.' });
@@ -176,7 +192,7 @@ app.post('/misiones/completar', verifyToken, [
     }
 });
 
-// Ruta para obtener movimientos de la billetera
+// Ruta para obtener todos los movimientos de la billetera (recompensas + canjes)
 app.get('/wallet/movimientos', verifyToken, async (req, res) => {
     try {
         const movementsResult = await pool.query(
@@ -207,7 +223,7 @@ app.get('/wallet/movimientos', verifyToken, async (req, res) => {
     }
 });
 
-// Ruta para obtener premios disponibles
+// Endpoint para obtener premios disponibles
 app.get('/premios', async (req, res) => {
     try {
         const result = await pool.query(
@@ -220,7 +236,7 @@ app.get('/premios', async (req, res) => {
     }
 });
 
-// Ruta para canjear premio
+// Endpoint para canjear un premio
 app.post('/premios/canjear', verifyToken, [
     body('rewardId').isInt().withMessage('El ID del premio debe ser un entero.'),
 ], async (req, res) => {
@@ -237,59 +253,198 @@ app.post('/premios/canjear', verifyToken, [
             'SELECT id, nombre, costo_lowcoins, stock_disponible FROM premios WHERE id = $1',
             [rewardId]
         );
-
         const premio = premioResult.rows[0];
-
         if (!premio) {
-            return res.status(404).json({ message: 'Premio no encontrado.' });
-        }
-
-        if (premio.stock_disponible <= 0) {
-            return res.status(400).json({ message: 'No hay stock disponible para este premio.' });
+            return res.status(404).json({ message: 'Premio no encontrado' });
         }
 
         const saldoResult = await pool.query(
             'SELECT saldo FROM lowcoins WHERE usuario_id = $1',
             [usuarioId]
         );
-        const saldoActual = saldoResult.rows[0]?.saldo || 0;
-
-        if (saldoActual < premio.costo_lowcoins) {
-            return res.status(400).json({ message: 'No tienes suficientes LOWCOINS para canjear este premio.' });
+        if (!saldoResult.rows[0] || saldoResult.rows[0].saldo < premio.costo_lowcoins) {
+            return res.status(400).json({ message: 'No tienes suficientes LOWCOINS para canjear este premio' });
         }
 
-        // Actualizar saldo
-        const nuevoSaldo = saldoActual - premio.costo_lowcoins;
-        await pool.query(
-            'UPDATE lowcoins SET saldo = $1 WHERE usuario_id = $2',
-            [nuevoSaldo, usuarioId]
-        );
+        if (premio.stock_disponible <= 0) {
+            return res.status(400).json({ message: 'El premio ya no está disponible' });
+        }
 
-        // Reducir stock del premio
-        await pool.query(
-            'UPDATE premios SET stock_disponible = stock_disponible - 1 WHERE id = $1',
-            [rewardId]
-        );
+        await pool.query('BEGIN'); // Iniciar transacción
 
-        // Registrar el canje
-        await pool.query(
-            'INSERT INTO canjes (usuario_id, premio_id, fecha_canje) VALUES ($1, $2, NOW())',
-            [usuarioId, rewardId]
-        );
+        try {
+            const canjeResult = await pool.query(
+                'INSERT INTO canjes (usuario_id, premio_id) VALUES ($1, $2) RETURNING id',
+                [usuarioId, rewardId]
+            );
 
-        res.json({ message: `Premio canjeado con éxito: ${premio.nombre}.` });
+            await pool.query(
+                'UPDATE premios SET stock_disponible = stock_disponible - 1 WHERE id = $1',
+                [rewardId]
+            );
+
+            const newSaldo = saldoResult.rows[0].saldo - premio.costo_lowcoins;
+            await pool.query(
+                'UPDATE lowcoins SET saldo = $1 WHERE usuario_id = $2',
+                [newSaldo, usuarioId]
+            );
+
+            await pool.query('COMMIT'); // Confirmar transacción
+
+            res.json({ message: 'Premio canjeado exitosamente', canjeId: canjeResult.rows[0].id });
+        } catch (transactionError) {
+            await pool.query('ROLLBACK'); // Revertir transacción en caso de error
+            logger.error('Error durante la transacción de canje:', transactionError);
+            res.status(500).json({ error: 'Error al canjear premio' });
+        }
     } catch (error) {
         logger.error('Error al canjear premio:', error);
-        res.status(500).json({ message: 'Error al canjear premio.' });
+        res.status(500).json({ error: 'Error al canjear premio' });
     }
 });
 
-// Middleware de manejo de errores
-app.use((err, req, res, next) => {
-    logger.error(err.stack);
-    res.status(500).json({ message: 'Algo salió mal. Intenta de nuevo más tarde.' });
+// Rutas para tareas
+app.post('/tasks', verifyToken, [
+    body('title').notEmpty().trim().escape().withMessage('El título es requerido.'),
+    body('description').optional().trim().escape(),
+    body('due_date').optional().isISO8601().withMessage('La fecha debe ser válida (ISO 8601).'),
+], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { title, description, due_date } = req.body;
+    try {
+        const result = await pool.query(
+            'INSERT INTO tasks (user_id, title, description, due_date) VALUES ($1, $2, $3, $4) RETURNING id, title, description, due_date, completed, created_at',
+            [req.userId, title, description, due_date]
+        );
+        res.json(result.rows[0]);
+    } catch (error) {
+        logger.error('Error al crear tarea:', error);
+        res.status(500).json({ error: 'Error al crear tarea' });
+    }
 });
 
-app.listen(process.env.PORT || 3000, () => {
-    logger.info(`Servidor escuchando en puerto ${process.env.PORT || 3000}`);
+app.get('/tasks', verifyToken, async (req, res) => {
+    try {
+        const result = await pool.query(
+            'SELECT * FROM tasks WHERE user_id = $1 ORDER BY due_date',
+            [req.userId]
+        );
+        res.json(result.rows);
+    } catch (error) {
+        logger.error('Error al obtener tareas:', error);
+        res.status(500).json({ error: 'Error al obtener tareas' });
+    }
 });
+
+app.put('/tasks/:id/completar', verifyToken, [
+    body('id').isInt().withMessage('El ID de la tarea debe ser un entero.'),
+], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { id } = req.params;
+    try {
+        const result = await pool.query(
+            'UPDATE tasks SET completed = TRUE WHERE id = $1 AND user_id = $2 RETURNING *',
+            [id, req.userId]
+        );
+        if (result.rows.length === 0) {
+            return res.status(404).json({ message: 'Tarea no encontrada o no pertenece al usuario' });
+        }
+        res.json(result.rows[0]);
+    } catch (error) {
+        logger.error('Error al completar tarea:', error);
+        res.status(500).json({ error: 'Error al completar tarea' });
+    }
+});
+
+// Rutas para recordatorios
+app.post('/reminders', verifyToken, [
+    body('taskId').isInt().withMessage('El ID de la tarea debe ser un entero.'),
+    body('reminder_time').isISO8601().withMessage('La hora del recordatorio debe ser válida (ISO 8601).'),
+    body('message').optional().trim().escape(),
+], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { taskId, reminder_time, message } = req.body;
+    try {
+        const result = await pool.query(
+            'INSERT INTO reminders (task_id, reminder_time, message) VALUES ($1, $2, $3) RETURNING id, task_id, reminder_time, message, notified',
+            [taskId, reminder_time, message]
+        );
+        res.json(result.rows[0]);
+    } catch (error) {
+        logger.error('Error al crear recordatorio:', error);
+        res.status(500).json({ error: 'Error al crear recordatorio' });
+    }
+});
+
+app.get('/reminders', verifyToken, async (req, res) => {
+    try {
+        const result = await pool.query(
+            'SELECT * FROM reminders WHERE task_id IN (SELECT id FROM tasks WHERE user_id = $1)',
+            [req.userId]
+        );
+        res.json(result.rows);
+    } catch (error) {
+        logger.error('Error al obtener recordatorios:', error);
+        res.status(500).json({ error: 'Error al obtener recordatorios' });
+    }
+});
+
+// ... (código anterior)
+
+// Rutas para eventos (continuación)
+app.post('/events', verifyToken, [
+  body('title').notEmpty().trim().escape().withMessage('El título es requerido.'),
+  body('description').optional().trim().escape(),
+  body('start_time').isISO8601().withMessage('La hora de inicio debe ser válida (ISO 8601).'),
+  body('end_time').isISO8601().withMessage('La hora de fin debe ser válida (ISO 8601).'),
+], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { title, description, start_time, end_time } = req.body;
+  try {
+      const result = await pool.query(
+          'INSERT INTO events (user_id, title, description, start_time, end_time) VALUES ($1, $2, $3, $4, $5) RETURNING id, title, description, start_time, end_time, created_at',
+          [req.userId, title, description, start_time, end_time]
+      );
+      res.json(result.rows[0]);
+  } catch (error) {
+      logger.error('Error al crear evento:', error);
+      res.status(500).json({ error: 'Error al crear evento' });
+  }
+});
+
+app.get('/events', verifyToken, async (req, res) => {
+  try {
+      const result = await pool.query(
+          'SELECT * FROM events WHERE user_id = $1 ORDER BY start_time',
+          [req.userId]
+      );
+      res.json(result.rows);
+  } catch (error) {
+      logger.error('Error al obtener eventos:', error);
+      res.status(500).json({ error: 'Error al obtener eventos' });
+  }
+});
+
+// Iniciar el servidor
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  logger.info(`Servidor corriendo en puerto ${port}`);
+});
+
+module.exports = app; // Exportar la aplicación para pruebas (opcional)

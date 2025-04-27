@@ -33,7 +33,7 @@ const Dashboard = () => {
     <div className="dashboard-container">
       {/* Header */}
       <div className="dashboard-header">
-        {/* Mostrar avatar estático */}
+        {/* Mostrar avatar estático */}z
         <div className="profile-picture-container">
         </div>
       </div>
