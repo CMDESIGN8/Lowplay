@@ -114,4 +114,20 @@ router.put('/edit-profile', async (req, res) => {
   }
 });
 
+// Ruta de prueba para verificar conexión a la base de datos
+router.get('/test-db', async (req, res) => {
+    try {
+      const client = await pool.connect();
+      const result = await client.query('SELECT NOW()'); // Verifica si puedes hacer una consulta simple
+      client.release();
+      res.json({
+        message: 'Conexión a la base de datos exitosa!',
+        time: result.rows[0].now
+      });
+    } catch (err) {
+      console.error('Error de conexión a la base de datos', err);
+      res.status(500).json({ error: 'Error al conectar con la base de datos' });
+    }
+  });
+
 module.exports = router;
