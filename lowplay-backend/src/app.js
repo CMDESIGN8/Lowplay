@@ -1,29 +1,22 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const cors = require('cors');
-const pool = require('./config/db'); // Importamos la conexión a la base de datos
+const userRoutes = require('./routes/userRoutes');
 require('dotenv').config();
 
 const app = express();
+const port = process.env.PORT || 3000;
 
+// Middleware para permitir solicitudes CORS
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.json()); // Para poder procesar solicitudes JSON
 
-// Ruta básica para test
-app.get('/', (req, res) => {
-  res.send('LowPlay backend funcionando!');
+// Usar rutas de usuario
+app.use('/api', userRoutes);
+
+// Iniciar el servidor
+app.listen(port, () => {
+  console.log(`Servidor corriendo en el puerto ${port}`);
 });
 
-// Ruta de prueba para consultar la base de datos
-app.get('/test-db', async (req, res) => {
-  try {
-    const result = await pool.query('SELECT NOW()');
-    res.json(result.rows[0]); // Retorna la fecha y hora actual de la base de datos
-  } catch (error) {
-    console.error('Error de conexión a la base de datos:', error);
-    res.status(500).send('Error al conectar a la base de datos');
-  }
-});
-
-// Server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Servidor corriendo en puerto ${PORT}`));
+module.exports = app;
