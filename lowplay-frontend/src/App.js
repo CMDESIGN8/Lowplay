@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './App.css';
+import './app.css';
 
 const API_URL = 'https://lowplay-1.onrender.com/api/auth';
 
