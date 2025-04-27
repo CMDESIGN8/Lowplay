@@ -1,4 +1,5 @@
 const { registerUser } = require('../models/user');
+const pool = require('../config/db');
 
 // Función que maneja el registro de un nuevo usuario
 const register = async (req, res) => {
