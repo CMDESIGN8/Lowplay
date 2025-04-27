@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../styles/WalletMovements.css';
 import api from '../services/api';
 import { GiTrophy } from "react-icons/gi";
-import { MdOutlinePublishedWithChanges } from "react-icons/md"; // Importa el ícono para el canje
+import { MdOutlinePublishedWithChanges } from "react-icons/md"; // Icono para el canje
 
 const WalletMovements = () => {
   const [movements, setMovements] = useState([]);
@@ -19,11 +19,11 @@ const WalletMovements = () => {
       }
 
       try {
-        const response = await api.get('https://lowplay-1.onrender.com/wallet/movimientos', {
+        const response = await api.get('/wallet/movimientos', {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        console.log(response.data); // Añadir este log para verificar los datos recibidos
+        console.log(response.data); // Verifica la respuesta de la API
         setMovements(response.data);
       } catch (err) {
         console.error(err);
@@ -34,10 +34,11 @@ const WalletMovements = () => {
     fetchWalletMovements();
   }, []);
 
-  // Lógica para obtener los movimientos de la página actual
+  // Paginación: calcular los elementos de la página actual
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentMovements = movements.slice(startIndex, startIndex + itemsPerPage);
 
+  // Funciones para manejar la paginación
   const handleNextPage = () => {
     if (currentPage < Math.ceil(movements.length / itemsPerPage)) {
       setCurrentPage(currentPage + 1);
@@ -53,6 +54,7 @@ const WalletMovements = () => {
   return (
     <div className="wallet-movements-container">
       {error && <p>{error}</p>}
+
       {movements.length === 0 ? (
         <p>No tienes movimientos recientes.</p>
       ) : (
@@ -60,26 +62,32 @@ const WalletMovements = () => {
           <ul>
             {currentMovements.map((movement) => (
               <li
-                key={movement.id}
-                className={movement.tipo_movimiento === 'recompensa' ? 'recompensa' : 'canje'}
+                key={movement.id} // Asegúrate de que 'id' sea un campo único y válido
+                className={movement.tipo === 'recompensa' ? 'recompensa' : 'canje'}
               >
                 {/* Mostrar el ícono correspondiente según el tipo de movimiento */}
-                {movement.tipo_movimiento === 'recompensa' ? (
+                {movement.tipo === 'recompensa' ? (
                   <GiTrophy className="trophy-icon-green" />
                 ) : (
                   <MdOutlinePublishedWithChanges className="trophy-icon-red" />
                 )}
-                <p><strong>{movement.tipo_movimiento === 'recompensa' ? 'Misión' : 'Canje'}:</strong> {movement.nombre || movement.premio_nombre}</p>
+                <p>
+                  <strong>{movement.tipo === 'recompensa' ? 'Misión' : 'Canje'}:</strong> {movement.nombre || movement.premio_nombre}
+                </p>
                 <p>
                   <strong>Recompensa:</strong>{' '}
-                  <span className={movement.tipo_movimiento === 'recompensa' ? 'reward-amount' : ''}>
+                  <span className={movement.tipo === 'recompensa' ? 'reward-amount' : ''}>
                     {movement.recompensa || movement.costo_lowcoins} LOWCOINS
                   </span>
                 </p>
-                <p><strong>Fecha:</strong> {new Date(movement.fecha_completada).toLocaleString()}</p>
+                <p>
+                  <strong>Fecha:</strong> {new Date(movement.fecha).toLocaleString()}
+                </p>
               </li>
             ))}
           </ul>
+
+          {/* Paginación */}
           <div className="pagination">
             <button onClick={handlePrevPage} disabled={currentPage === 1}>
               Anterior

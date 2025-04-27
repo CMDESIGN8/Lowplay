@@ -193,7 +193,7 @@ app.post('/misiones/completar', verifyToken, [
 });
 
 // Ruta para obtener todos los movimientos de la billetera (recompensas + canjes)
-app.get('/wallet/movimientos',  async (req, res) => {
+app.get('/wallet/movimientos', verifyToken, async (req, res) => {
     try {
         const movementsResult = await pool.query(
             `SELECT
