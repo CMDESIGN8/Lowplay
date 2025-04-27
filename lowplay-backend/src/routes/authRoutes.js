@@ -1,49 +1,49 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const pool = require('../db'); // Conexión a la base de datos
+const pool = require('../config/db'); // Conexión a la base de datos
 const router = express.Router();
 
-const SECRET_KEY = 'tu_secreto_aqui'; // Cambia por una clave secreta más segura
+const SECRET_KEY = 'lowplay'; // Cambia por una clave secreta más segura
 
-// Registrar usuario
+// Ruta para registrar un usuario
 router.post('/register', async (req, res) => {
-  const { name, email, password } = req.body;
-  if (!name || !email || !password) {
-    return res.status(400).json({ message: 'Por favor, proporciona todos los datos requeridos.' });
-  }
-  try {
-    const userExists = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
-    if (userExists.rows.length > 0) {
-      return res.status(400).json({ message: 'Este correo ya está registrado.' });
+    const { name, email, password } = req.body;
+  
+    if (!name || !email || !password) {
+      return res.status(400).json({ message: 'Por favor, ingresa todos los campos' });
     }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const wallet = `${email.split('@')[0]}.LC`;
-
-    const newUser = await pool.query(
-      'INSERT INTO users (name, email, password, wallet, lowcoins) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-      [name, email, hashedPassword, wallet, 50]
-    );
-
-    const token = jwt.sign({ userId: newUser.rows[0].id }, SECRET_KEY, { expiresIn: '1h' });
-
-    res.status(201).json({
-      message: 'Usuario registrado con éxito.',
-      user: {
-        id: newUser.rows[0].id,
-        name: newUser.rows[0].name,
-        email: newUser.rows[0].email,
-        wallet: newUser.rows[0].wallet,
-        lowcoins: newUser.rows[0].lowcoins,
-      },
-      token,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Hubo un error al registrar el usuario.' });
-  }
-});
+  
+    try {
+      // Verificar si el email ya existe en la base de datos
+      const checkEmailQuery = 'SELECT * FROM users WHERE email = $1';
+      const checkEmailResult = await pool.query(checkEmailQuery, [email]);
+  
+      if (checkEmailResult.rows.length > 0) {
+        return res.status(400).json({ message: 'El email ya está registrado' });
+      }
+  
+      // Insertar nuevo usuario
+      const insertUserQuery = 'INSERT INTO users (name, email, password, wallet) VALUES ($1, $2, $3, $4) RETURNING *';
+      const wallet = `${email.split('@')[0]}.LC`; // Generar billetera con el email
+      const result = await pool.query(insertUserQuery, [name, email, password, wallet]);
+  
+      // Asignar 50 lowcoins al usuario recién registrado
+      const userId = result.rows[0].id; // Obtener el ID del usuario insertado
+      const addLowcoinsQuery = 'UPDATE users SET lowcoins = lowcoins + 50 WHERE id = $1';
+      await pool.query(addLowcoinsQuery, [userId]);
+  
+      // Respuesta exitosa con el nuevo usuario y mensaje
+      res.status(201).json({
+        message: 'Usuario registrado exitosamente',
+        user: result.rows[0], // Regresar los datos del usuario registrado
+        wallet: wallet, // Devolver billetera asociada al usuario
+      });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Error al registrar usuario', error: err });
+    }
+  });
 
 // Login de usuario
 router.post('/login', async (req, res) => {
