@@ -21,7 +21,7 @@
       const fetchMissions = async () => {
         try {
           const token = localStorage.getItem('token');
-          const response = await api.get('http://lowplay.lowcargo.lat/misiones', {
+          const response = await api.get('https://lowplay-1.onrender.com/misiones', {
             headers: { Authorization: `Bearer ${token}` },
           });
       
@@ -43,7 +43,7 @@
         try {
           const token = localStorage.getItem('token');
           const response = await api.post(
-            'http://lowplay.lowcargo.lat/misiones/completar',
+            'https://lowplay-1.onrender.com/misiones/completar',
             { misionId },
             { headers: { Authorization: `Bearer ${token}` } }
           );
@@ -67,7 +67,7 @@
       const token = localStorage.getItem('token');
       try {
         const response = await api.post(
-          'http://lowplay.lowcargo.lat/misiones/completar',
+          'https://lowplay-1.onrender.com/misiones/completar',
           { misionId },
           {
             headers: { Authorization: `Bearer ${token}` },
