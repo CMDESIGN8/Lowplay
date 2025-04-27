@@ -39,8 +39,6 @@ app.use(limiter);
 
 app.use(express.json());
 
-const cors = require('cors');
-
 app.use(cors({
     origin: ['https://lowplay-1.onrender.com', 'http://localhost:3000'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
