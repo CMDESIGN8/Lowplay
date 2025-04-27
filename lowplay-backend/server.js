@@ -39,11 +39,12 @@ app.use(limiter);
 
 app.use(express.json());
 
-// Configuración de CORS (ajusta la origin para producción)
+const cors = require('cors');
+
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://lowplay-1.onrender.com'],
+    origin: ['https://lowplay-1.onrender.com', 'http://localhost:3000'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true,
+    credentials: true, // Si usas cookies o credenciales
 }));
 
 // Middleware de logging (opcional)
