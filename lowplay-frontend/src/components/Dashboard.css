@@ -142,7 +142,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.671); /* Capa negra con transparencia */
+    background: rgba(0, 0, 0, 0.781); /* Capa negra con transparencia */
     z-index: -1; /* Por encima de la imagen pero debajo del contenido */
   }
   
