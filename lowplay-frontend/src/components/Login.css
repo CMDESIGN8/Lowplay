@@ -1,84 +1,111 @@
-/* login.css */
-.login-container {
-    width: 100%;
-    max-width: 400px;
-    margin: 2rem auto;
-    padding: 2.5rem;
-    border-radius: 12px;
-  
-    color: white;
-    font-family: 'Montserrat', sans-serif;
-  }
-  
-  .login-title {
+/* Estilos base PS4 */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
+
+body {
+    font-family: 'Orbitron', sans-serif;
+    background-color: #000; /* Negro puro */
+    background-image: url(../assets/img/1.jpeg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-blend-mode: overlay;
+    color: #e0e0e0; /* Gris claro */
+    margin: 0;
+    padding: 0;
+}
+
+.lema {
+    font-size: 2.5rem;
+    color: #00BFFF; /* Azul eléctrico */
+    text-shadow: 0 0 20px #00BFFF, 0 0 30px #00BFFF;
     text-align: center;
-    color: #e0e0e0;
-    font-size: 2.2rem;
-    font-weight: 600;
+    margin: 2rem 0;
+    letter-spacing: 0.5rem;
+    animation: pulse 2s infinite alternate;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+/* Fondo video */
+#app-container video {
+    opacity: 0.15; /* Más tenue */
+}
+
+/* Secciones principales */
+.intro-section, .how-it-works-section, .community-section, .final-cta-section {
+    background: rgba(0, 0, 30, 0.6);
+    border: 1px solid rgba(0, 191, 255, 0.3);
+    border-radius: 20px;
+    padding: 3rem;
     margin-bottom: 2rem;
-  }
-  
-  .login-form-group {
-    margin-bottom: 1.8rem;
-  }
-  
-  .login-label {
-    font-size: 1rem;
-    color: #e0e0e0;
-    display: block;
-    margin-bottom: 0.6rem;
-  }
-  
-  .login-input {
-    width: 100%;
-    padding: 1rem;
-    margin-top: 0.5rem;
-    border: 1px solid #444; /* Borde gris más claro */
-    border-radius: 6px;
-    font-size: 1rem;
-    background-color: #333; /* Gris claro sutil */
-    color: #e0e0e0;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra interior sutil */
-    transition: box-shadow 0.3s ease;
-  }
-  
-  .login-input:focus {
-    outline: none;
-    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  .login-button {
-    width: 100%;
-    padding: 1.2rem;
-    background: linear-gradient(135deg, #0070d2, #0084e9);
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
+}
+
+/* Títulos */
+.intro-text h2, .how-it-works-section h2 {
+    font-size: 2.8rem;
+    color: #00BFFF;
+    text-shadow: 0 0 15px #00BFFF;
+    margin-bottom: 1rem;
+}
+
+/* Texto general */
+.intro-text p, .step p {
+    font-size: 1.2rem;
+    line-height: 1.7;
+}
+
+/* Botones */
+.header-buttons a, .register-btn, .learn-btn {
+    background: linear-gradient(135deg, #003366, #0055aa);
     border: none;
-    border-radius: 6px;
+    padding: 1rem 2.5rem;
+    border-radius: 10px;
+    font-size: 1.2rem;
     color: white;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .login-button:hover {
-    background: linear-gradient(135deg, #0084e9, #0070d2);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  .login-link {
-    display: block;
-    text-align: center;
-    margin-top: 2rem;
-  }
-  
-  .login-link a {
-    color: #81d4fa;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  
-  .login-link a:hover {
-    text-decoration: underline;
-    color: #4fc3f7;
-  } 
+    text-shadow: 0 0 5px #00BFFF;
+    transition: all 0.3s ease;
+}
+
+.header-buttons a:hover, .register-btn:hover, .learn-btn:hover {
+    background: linear-gradient(135deg, #0055aa, #00BFFF);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #00BFFF;
+}
+
+/* Tarjetas pasos */
+.step {
+    background: rgba(0, 0, 50, 0.7);
+    border: 1px solid #00BFFF;
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
+    transition: transform 0.5s, box-shadow 0.5s;
+}
+
+.step:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(0, 191, 255, 0.8);
+}
+
+/* Iconos de los pasos */
+.step i, .step h3 {
+    color: #00FFFF;
+    text-shadow: 0 0 10px #00FFFF;
+}
+
+/* Lista de características */
+.features-list-container {
+    background: rgba(0, 0, 30, 0.6);
+    border: 1px solid #00BFFF;
+}
+
+.features-list li {
+    color: #00FFFF;
+    text-shadow: 0 0 8px #00FFFF;
+}
+
+/* Animación de pulso */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.08); }
+}
