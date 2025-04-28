@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './Register.css'; // Importamos el nuevo estilo
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -18,7 +19,6 @@ const Register = () => {
         email,
         password,
       });
-
       navigate('/login');
     } catch (err) {
       setError('Hubo un error al registrarse');
@@ -26,37 +26,45 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <h2>Registro</h2>
-      {error && <p>{error}</p>}
-      <form onSubmit={handleRegister}>
-        <div>
+    <div className="register-container">
+      <form className="register-form" onSubmit={handleRegister}>
+        <h2><i className="fas fa-user-plus"></i> Crear cuenta</h2>
+
+        {error && <p className="error-message">{error}</p>}
+
+        <div className="form-group">
           <label>Nombre:</label>
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            placeholder="Tu nombre"
           />
         </div>
-        <div>
+
+        <div className="form-group">
           <label>Email:</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            placeholder="Tu email"
           />
         </div>
-        <div>
+
+        <div className="form-group">
           <label>Contraseña:</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            placeholder="Tu contraseña"
           />
         </div>
+
         <button type="submit">Registrarse</button>
       </form>
     </div>
