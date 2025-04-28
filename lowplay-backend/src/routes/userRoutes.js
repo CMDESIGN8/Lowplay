@@ -6,5 +6,7 @@ const { register, login } = require('../controllers/userController');
 router.post('/register', register);
 // Ruta para login
 router.post('/login', login);
+// Ruta privada
+router.get('/profile', authenticateToken, getProfile);
 
 module.exports = router;

@@ -109,5 +109,21 @@ const login = async (req, res) => {
       res.status(500).json({ message: 'Error interno del servidor', error: err.message });
     }
   };
+
+  const getProfile = async (req, res) => {
+    try {
+      const { id } = req.user; // Info del token
+      const userResult = await pool.query('SELECT id, name, email, wallet, lowcoins, profile_completed, created_at FROM users WHERE id = $1', [id]);
+      
+      if (userResult.rows.length === 0) {
+        return res.status(404).json({ message: 'Usuario no encontrado' });
+      }
   
-  module.exports = { register, login };
+      res.status(200).json({ user: userResult.rows[0] });
+    } catch (error) {
+      console.error('Error al obtener perfil:', error);
+      res.status(500).json({ message: 'Error interno del servidor' });
+    }
+  };
+  
+  module.exports = { register, login, getProfile  };
