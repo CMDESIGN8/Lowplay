@@ -127,7 +127,7 @@ const login = async (req, res) => {
   };
   
   // Función para editar perfil
-const editProfile = async (req, res) => {
+  const editProfile = async (req, res) => {
     const userId = req.user.id; // Viene del token
     const { name, email } = req.body;
   
@@ -144,32 +144,38 @@ const editProfile = async (req, res) => {
         return res.status(400).json({ message: 'El email ya está en uso por otro usuario' });
       }
   
+      // Buscar usuario actual para saber si el perfil ya estaba completado
+      const currentUserResult = await pool.query('SELECT profile_completed FROM users WHERE id = $1', [userId]);
+      if (currentUserResult.rows.length === 0) {
+        return res.status(404).json({ message: 'Usuario no encontrado' });
+      }
+      const currentProfileCompleted = currentUserResult.rows[0].profile_completed;
+  
       // Actualizar usuario
       const updateQuery = `
         UPDATE users
         SET name = $1, email = $2, profile_completed = TRUE
         WHERE id = $3
-        RETURNING *;
+        RETURNING id, name, email, wallet, lowcoins, profile_completed, created_at;
       `;
       const updatedUserResult = await pool.query(updateQuery, [name, email, userId]);
       const updatedUser = updatedUserResult.rows[0];
   
-      // Si el usuario no había completado su perfil antes, sumar 10 lowcoins
-      if (!req.user.profile_completed) {
-        await pool.query('UPDATE users SET lowcoins = lowcoins + 10 WHERE id = $1', [userId]);
+      // Si el perfil no estaba completado antes, asignar 10 lowcoins
+      if (!currentProfileCompleted) {
+        const addLowcoinsQuery = `
+          UPDATE users
+          SET lowcoins = lowcoins + 10
+          WHERE id = $1
+          RETURNING lowcoins;
+        `;
+        const addLowcoinsResult = await pool.query(addLowcoinsQuery, [userId]);
+        updatedUser.lowcoins = addLowcoinsResult.rows[0].lowcoins; // Actualizar el lowcoins en la respuesta
       }
   
       res.json({
         message: 'Perfil actualizado correctamente',
-        user: {
-          id: updatedUser.id,
-          name: updatedUser.name,
-          email: updatedUser.email,
-          wallet: updatedUser.wallet,
-          lowcoins: updatedUser.lowcoins,
-          profile_completed: true,
-          created_at: updatedUser.created_at
-        }
+        user: updatedUser
       });
     } catch (err) {
       console.error('Error al editar perfil: ', err);
@@ -177,51 +183,6 @@ const editProfile = async (req, res) => {
     }
   };
   
-  // Función para completar el perfil y asignar lowcoins solo una vez
-const completeProfile = async (req, res) => {
-    const { name, email } = req.body;  // Recibimos los datos de perfil
-  
-    // Verificación de datos
-    if (!name || !email) {
-      return res.status(400).json({ message: 'Por favor, ingresa todos los campos para completar el perfil' });
-    }
-  
-    try {
-      const userId = req.user.id; // Usuario autenticado
-      const query = 'SELECT * FROM users WHERE id = $1'; // Obtenemos los datos actuales
-      const userResult = await pool.query(query, [userId]);
-  
-      if (userResult.rows.length === 0) {
-        return res.status(404).json({ message: 'Usuario no encontrado' });
-      }
-  
-      const user = userResult.rows[0];
-  
-      // Verificamos si el perfil ya está completado
-      if (user.profile_completed) {
-        return res.status(400).json({ message: 'El perfil ya está completo' });
-      }
-  
-      // Actualizamos el perfil
-      const updateProfileQuery = 'UPDATE users SET name = $1, email = $2, profile_completed = true WHERE id = $3 RETURNING *';
-      const updatedUser = await pool.query(updateProfileQuery, [name, email, userId]);
-  
-      // Asignar 10 lowcoins solo si no estaban asignados previamente
-      const addLowcoinsQuery = 'UPDATE users SET lowcoins = lowcoins + 10 WHERE id = $1 RETURNING lowcoins';
-      const addLowcoinsResult = await pool.query(addLowcoinsQuery, [userId]);
-  
-      // Enviar respuesta con el perfil actualizado y los lowcoins
-      res.status(200).json({
-        message: 'Perfil actualizado y 10 lowcoins asignados',
-        user: updatedUser.rows[0],
-        lowcoins: addLowcoinsResult.rows[0].lowcoins
-      });
-  
-    } catch (err) {
-      console.error('Error al completar perfil: ', err);
-      res.status(500).json({ message: 'Error interno del servidor', error: err.message });
-    }
-  };
   
   module.exports = { register, login, editProfile, getProfile, completeProfile };
   
