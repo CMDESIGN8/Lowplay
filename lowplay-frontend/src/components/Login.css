@@ -84,7 +84,7 @@ body {
   .login-button:hover {
     background: linear-gradient(135deg, #00aa33, #00ff4c);
     transform: scale(1.05);
-    box-shadow: 0 0 12px #00BFFF;
+    box-shadow: 0 0 12px #00ff4c;
   }
   
   /* Mensaje de error */
@@ -99,7 +99,7 @@ body {
   }
   
   /* Mensaje de éxito o información */
-  .login.form p {
+  .login-form p {
     background: rgba(0, 255, 0, 0.1);
     color: #00ff7f;
     padding: 12px;
