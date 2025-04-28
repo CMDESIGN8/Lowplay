@@ -67,18 +67,20 @@
   }
   
   .menu a {
-    color: #ccc;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
     text-decoration: none;
-    padding: 12px 0;
-    display: block;
-    font-size: 16px;
-    transition: all 0.3s;
+    padding: 12px 16px;
+    transition: background 0.3s;
   }
   
   .menu a:hover {
-    color: #00ff4c;
-    transform: translateX(8px);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
   }
+  
   
   /* Contenido principal */
   .dashboard-main {
