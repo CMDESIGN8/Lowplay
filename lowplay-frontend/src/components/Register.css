@@ -57,7 +57,7 @@
   
   button {
     padding: 12px;
-    background-color: #ffd700;
+    background-color: #2600ff;
     color: #000;
     border: none;
     border-radius: 8px;
@@ -68,7 +68,7 @@
   }
   
   button:hover {
-    background-color: #e6c200;
+    background-color: #1700e6;
   }
   
   .error-message {
