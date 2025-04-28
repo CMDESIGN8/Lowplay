@@ -8,7 +8,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Middleware para permitir solicitudes CORS
-app.use(cors({ origin: 'https://https://lowplay-1.onrender.com' }));
+app.use(cors({ origin: 'https://lowplay-1.onrender.com' }));
 app.use(bodyParser.json()); // Para poder procesar solicitudes JSON
 
 // Usar rutas de usuario
