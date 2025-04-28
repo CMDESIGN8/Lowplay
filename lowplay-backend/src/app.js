@@ -23,16 +23,6 @@ app.get('/api/profile', (req, res) => {
   if (!token) {
     return res.status(401).json({ error: 'Token no proporcionado' });
   }
-
-  // Suponiendo que validas el token y encuentras al usuario
-  const user = {
-    name: 'Juan Pérez',
-    email: 'juanperez@example.com',
-    wallet: '1000',
-    lowcoins: '500',
-    profile_completed: true
-  };
-
   res.json(user);
 });
 
