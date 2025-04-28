@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useNavigate  } from 'react-router-dom';
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
 
     if (!token) {
-      history.push('/login');
+      navigate.push('/login');
       return;
     }
 
@@ -27,7 +27,7 @@ const Dashboard = () => {
     };
 
     fetchUserData();
-  }, [history]);
+  }, [navigate]);
 
   return (
     <div>
