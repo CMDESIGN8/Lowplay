@@ -177,4 +177,40 @@ const editProfile = async (req, res) => {
     }
   };
   
-  module.exports = { register, login, editProfile, getProfile };
+  // Función para completar el perfil y asignar lowcoins
+const completeProfile = async (req, res) => {
+    const { name, email } = req.body;  // Recibimos los datos de perfil
+  
+    // Verificación de datos
+    if (!name || !email) {
+      return res.status(400).json({ message: 'Por favor, ingresa todos los campos para completar el perfil' });
+    }
+  
+    try {
+      const userId = req.user.id; // Usuario autenticado
+      const query = 'UPDATE users SET name = $1, email = $2, profile_completed = true WHERE id = $3 RETURNING *';
+      const result = await pool.query(query, [name, email, userId]);
+  
+      if (result.rows.length === 0) {
+        return res.status(404).json({ message: 'Usuario no encontrado' });
+      }
+  
+      // Asignar 10 lowcoins
+      const addLowcoinsQuery = 'UPDATE users SET lowcoins = lowcoins + 10 WHERE id = $1 RETURNING lowcoins';
+      const addLowcoinsResult = await pool.query(addLowcoinsQuery, [userId]);
+  
+      // Enviar respuesta con el perfil actualizado y los lowcoins
+      res.status(200).json({
+        message: 'Perfil actualizado y 10 lowcoins asignados',
+        user: result.rows[0],
+        lowcoins: addLowcoinsResult.rows[0].lowcoins
+      });
+  
+    } catch (err) {
+      console.error('Error al completar perfil: ', err);
+      res.status(500).json({ message: 'Error interno del servidor', error: err.message });
+    }
+  };
+  
+  module.exports = { register, login, editProfile, getProfile, completeProfile };
+  
