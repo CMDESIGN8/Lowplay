@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Dashboard.css'; // Asegurate de tener este CSS
+import './Dashboard.css'; // Asegurate que esté actualizado
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
@@ -37,18 +37,34 @@ const Dashboard = () => {
   }
 
   return (
-    <div className={`dashboard-container ${showContent ? 'fade-in' : ''}`}>
-      {user ? (
-        <>
-          <h2>Bienvenido, {user.name}</h2>
-          <p>Email: {user.email}</p>
-          <p>Wallet: {user.wallet}</p>
-          <p>Lowcoins: {user.lowcoins}</p>
-          <p>Perfil completado: {user.profile_completed ? 'Sí' : 'NO'}</p>
-        </>
-      ) : (
-        <p>No se pudo cargar la información del usuario.</p>
-      )}
+    <div className={`dashboard-wrapper ${showContent ? 'fade-in' : ''}`}>
+      <aside className="sidebar">
+        <h1 className="logo">LOWPLAY</h1>
+        <nav className="menu">
+          <a href="#">Inicio</a>
+          <a href="#">Wallet</a>
+          <a href="#">Misiones</a>
+          <a href="#">Premios</a>
+          <a href="#">Perfil</a>
+          <a href="#">Cerrar sesión</a>
+        </nav>
+      </aside>
+
+      <main className="dashboard-main">
+        {user ? (
+          <div className="dashboard-content">
+            <h2>Bienvenido, {user.name}</h2>
+            <div className="user-info">
+              <p><strong>Email:</strong> {user.email}</p>
+              <p><strong>Wallet:</strong> {user.wallet}</p>
+              <p><strong>Lowcoins:</strong> {user.lowcoins}</p>
+              <p><strong>Perfil completado:</strong> {user.profile_completed ? 'Sí' : 'No'}</p>
+            </div>
+          </div>
+        ) : (
+          <p>No se pudo cargar la información del usuario.</p>
+        )}
+      </main>
     </div>
   );
 };

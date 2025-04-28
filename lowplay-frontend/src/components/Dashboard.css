@@ -1,21 +1,100 @@
-.spinner-container {
+/* General */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at top, #0a0a0a 0%, #000000 100%);
+    min-height: 100vh;
+    color: #fff;
+  }
+  
+  /* Wrapper del Dashboard */
+  .dashboard-wrapper {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 240px;
+    background: rgba(46, 46, 46, 0.95);
+    backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 2px 0 10px rgba(0, 191, 255, 0.2);
+  }
+  
+  .logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: #00bfff;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  
+  .menu a {
+    color: #ccc;
+    text-decoration: none;
+    padding: 12px 0;
+    display: block;
+    font-size: 16px;
+    transition: all 0.3s;
+  }
+  
+  .menu a:hover {
+    color: #00ff4c;
+    transform: translateX(8px);
+  }
+  
+  /* Contenido principal */
+  .dashboard-main {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(6px);
+  }
+  
+  .dashboard-content {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.2);
+    max-width: 700px;
+    margin: 0 auto;
+    animation: fadeInUp 0.8s ease-out;
+  }
+  
+  .dashboard-content h2 {
+    text-align: center;
+    color: #00bfff;
+    margin-bottom: 20px;
+  }
+  
+  .user-info p {
+    margin-bottom: 12px;
+    font-size: 16px;
+  }
+  
+  /* Spinner de carga */
+  .spinner-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
   }
   
   .spinner {
-    width: 60px;
-    height: 60px;
-    border: 8px solid transparent;
-    border-top: 8px solid #ff3e3e; /* Rojo */
-    border-right: 8px solid #3eff61; /* Verde */
-    border-bottom: 8px solid #3e9eff; /* Azul */
-    border-left: 8px solid #ffeb3b; /* Amarillo */
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    border-top: 4px solid #00bfff;
     border-radius: 50%;
-    animation: spin 1.2s linear infinite;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
   }
   
   @keyframes spin {
@@ -23,21 +102,25 @@
     100% { transform: rotate(360deg); }
   }
   
-  /* Fade-in para el contenido */
-  .dashboard-container {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  
+  /* Fade In del dashboard */
   .fade-in {
-    opacity: 1;
-    transform: translateY(0);
+    animation: fadeIn 0.8s ease-out;
   }
   
-  .spinner-container p {
-    margin-top: 20px;
-    font-size: 18px;
-    color: #555;
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  
+  /* Animación extra */
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
