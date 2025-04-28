@@ -22,7 +22,7 @@ const Dashboard = () => {
         setUser(response.data);
       } catch (err) {
         console.error(err);
-        history.push('/login');
+        naviagate.push('/login');
       }
     };
 
