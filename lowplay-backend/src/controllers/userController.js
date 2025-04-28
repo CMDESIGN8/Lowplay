@@ -1,5 +1,7 @@
 const { registerUser } = require('../models/user');
 const pool = require('../config/db');
+const jwt = require('jsonwebtoken');
+
 
 // Función para generar una wallet única
 const generateUniqueWallet = async (baseWallet) => {
