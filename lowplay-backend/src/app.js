@@ -17,7 +17,7 @@ app.use(cors({
 app.use(bodyParser.json()); // Para poder procesar solicitudes JSON
 
 // Ruta de perfil de usuario
-app.get('/api/profile', (req, res) => {
+app.get('/profile', (req, res) => {
   // Aquí deberías manejar la autenticación con el token y devolver los datos del perfil
   const token = req.headers['authorization']?.split(' ')[1];  // Obtener token
   if (!token) {
