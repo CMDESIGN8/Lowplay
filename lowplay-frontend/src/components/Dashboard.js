@@ -1,50 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // Para mostrar un estado de carga
-  const [error, setError] = useState(null);  // Para manejar errores
-  const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    
-    if (!token) {
-      navigate('/login');
-      return;
-    }
-
-    const fetchUserData = async () => {
+    const fetchProfile = async () => {
       try {
+        const token = localStorage.getItem('token'); // Buscás el token
         const response = await axios.get('https://lowplay.onrender.com/api/profile', {
-          headers: { 
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
         });
-        setUser(response.data);
-        setLoading(false);  // Se ha recibido la información, ahora paramos el loading
-      } catch (err) {
-        setError('Hubo un error al cargar tu perfil.');
-        setLoading(false); // También detener el loading en caso de error
-        console.error('Error fetching profile:', err.response || err.message);
-        navigate('/login');
+        console.log('Datos del usuario:', response.data);
+        setUser(response.data); // Acá guardás los datos en el estado
+      } catch (error) {
+        console.error('Error fetching profile:', error);
       }
     };
 
-    fetchUserData();
-  }, [navigate]);
-
-  if (loading) {
-    return <p>Cargando...</p>;
-  }
-
-  if (error) {
-    return <p>{error}</p>;
-  }
+    fetchProfile();
+  }, []);
 
   return (
     <div>
