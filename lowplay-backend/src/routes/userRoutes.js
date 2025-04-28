@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { register, login } = require('../controllers/userController');
+const { register, login, editProfile  } = require('../controllers/userController');
 const { authenticateToken } = require('../middlewares/authMiddleware');
 const { getProfile } = require('../controllers/userController');
 
@@ -10,5 +10,8 @@ router.post('/register', register);
 router.post('/login', login);
 // Ruta privada
 router.get('/profile', authenticateToken, getProfile);
+router.put('/profile', authenticateToken, editProfile); // 👈 Nueva ruta para actualizar perfil
+
+
 
 module.exports = router;

@@ -126,4 +126,59 @@ const login = async (req, res) => {
     }
   };
   
-  module.exports = { register, login, getProfile  };
+  // Función para editar perfil
+const editProfile = async (req, res) => {
+    const userId = req.user.id; // Viene del token
+    const { name, email } = req.body;
+  
+    if (!name || !email) {
+      return res.status(400).json({ message: 'Por favor, completa nombre y email' });
+    }
+  
+    try {
+      // Verificar si el email ya está siendo usado por otro usuario
+      const checkEmailQuery = 'SELECT * FROM users WHERE email = $1 AND id != $2';
+      const emailExists = await pool.query(checkEmailQuery, [email, userId]);
+  
+      if (emailExists.rows.length > 0) {
+        return res.status(400).json({ message: 'El email ya está en uso por otro usuario' });
+      }
+  
+      // Actualizar usuario
+      const updateQuery = `
+        UPDATE users
+        SET name = $1, email = $2, profile_completed = TRUE
+        WHERE id = $3
+        RETURNING *;
+      `;
+      const updatedUserResult = await pool.query(updateQuery, [name, email, userId]);
+      const updatedUser = updatedUserResult.rows[0];
+  
+      // Si el usuario no había completado su perfil antes, sumar 10 lowcoins
+      if (!req.user.profile_completed) {
+        await pool.query('UPDATE users SET lowcoins = lowcoins + 10 WHERE id = $1', [userId]);
+      }
+  
+      res.json({
+        message: 'Perfil actualizado correctamente',
+        user: {
+          id: updatedUser.id,
+          name: updatedUser.name,
+          email: updatedUser.email,
+          wallet: updatedUser.wallet,
+          lowcoins: updatedUser.lowcoins,
+          profile_completed: true,
+          created_at: updatedUser.created_at
+        }
+      });
+    } catch (err) {
+      console.error('Error al editar perfil: ', err);
+      res.status(500).json({ message: 'Error interno del servidor', error: err.message });
+    }
+  };
+  
+  module.exports = {
+    register,
+    login,
+    editProfile
+  };
