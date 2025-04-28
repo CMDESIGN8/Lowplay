@@ -1,6 +1,24 @@
 const { registerUser } = require('../models/user');
 const pool = require('../config/db');
 
+// Función para generar una wallet única
+const generateUniqueWallet = async (baseWallet) => {
+  let wallet = baseWallet;
+  let counter = 1;
+
+  // Buscar si la wallet ya existe
+  let result = await pool.query('SELECT * FROM users WHERE wallet = $1', [wallet]);
+
+  // Si existe, seguir probando agregando números
+  while (result.rows.length > 0) {
+    wallet = `${baseWallet.split('.LC')[0]}-${counter}.LC`;
+    result = await pool.query('SELECT * FROM users WHERE wallet = $1', [wallet]);
+    counter++;
+  }
+
+  return wallet;
+};
+
 // Función que maneja el registro de un nuevo usuario
 const register = async (req, res) => {
   const { name, email, password } = req.body;
@@ -19,13 +37,15 @@ const register = async (req, res) => {
       return res.status(400).json({ message: 'El email ya está registrado' });
     }
 
-    // Generar billetera asociada al usuario
-    const wallet = `${email.split('@')[0]}.LC`; 
+    // Generar billetera base
+    const baseWallet = `${email.split('@')[0]}.LC`;
 
-    // Llamada al modelo para registrar el usuario
+    // Asegurar billetera única
+    const wallet = await generateUniqueWallet(baseWallet);
+
+    // Registrar el usuario (ahora asigna también 50 lowcoins)
     const newUser = await registerUser(name, email, password, wallet);
 
-    // Responder con éxito y enviar los datos del nuevo usuario
     res.status(201).json({
       message: 'Usuario registrado exitosamente',
       user: newUser,
