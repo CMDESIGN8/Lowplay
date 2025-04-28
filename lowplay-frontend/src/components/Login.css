@@ -39,13 +39,12 @@ body {
     margin-bottom: 24px;
     color: #fff;
     font-weight: 700;
-    text-shadow: 0 0 10px #fff;
   }
   
   /* Formulario */
   .form-group input {
     width: 100%;
-    padding: 14px 16px;
+    padding: 16px 16px;
     margin-bottom: 20px;
     border: none;
     background: rgba(255, 255, 255, 0.05);
@@ -70,7 +69,7 @@ body {
   .login-button {
     width: 100%;
     padding: 14px;
-    background: linear-gradient(135deg, #006605, #00aa39);
+    background: #015e1d;
     color: #fff;
     border: none;
     border-radius: 14px;
@@ -100,8 +99,7 @@ body {
   
   /* Mensaje de éxito o información */
   .login-form p {
-    background: rgba(0, 255, 0, 0.1);
-    color: #00ff7f;
+    color: #0c4201;
     padding: 12px;
     border-radius: 10px;
     margin-bottom: 16px;
