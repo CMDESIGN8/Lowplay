@@ -37,9 +37,9 @@ body {
   .login-form h2 {
     text-align: center;
     margin-bottom: 24px;
-    color: #00BFFF;
+    color: #fff;
     font-weight: 700;
-    text-shadow: 0 0 10px #00BFFF;
+    text-shadow: 0 0 10px #fff;
   }
   
   /* Formulario */
@@ -70,7 +70,7 @@ body {
   .login-button {
     width: 100%;
     padding: 14px;
-    background: linear-gradient(135deg, #003366, #0055aa);
+    background: linear-gradient(135deg, #006605, #00aa39);
     color: #fff;
     border: none;
     border-radius: 14px;
@@ -82,7 +82,7 @@ body {
   }
   
   .login-button:hover {
-    background: linear-gradient(135deg, #0055aa, #00BFFF);
+    background: linear-gradient(135deg, #00aa33, #00ff4c);
     transform: scale(1.05);
     box-shadow: 0 0 12px #00BFFF;
   }
