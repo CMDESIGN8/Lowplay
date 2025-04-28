@@ -5,17 +5,22 @@ const Dashboard = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const fetchUser = async () => {
+    const fetchProfile = async () => {
       try {
-        const response = await axios.get('https://lowplay.onrender.com/api/profile', { headers: { Authorization: `Bearer ${token}` } });
+        const token = localStorage.getItem('token'); // Buscás el token
+        const response = await axios.get('https://lowplay.onrender.com/api/profile', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         console.log('Datos del usuario:', response.data.user); // Ahora ves directamente los campos
-        setUser(response.data.user);  // ✔️
-      } catch (error) {
-        console.error('Error fetching profile:', error);
+      setUser(response.data.user);  // ✔️
+    } catch (error) {
+      console.error('Error fetching profile:', error);
       }
     };
-  
-    fetchUser();
+
+    fetchProfile();
   }, []);
 
   return (
