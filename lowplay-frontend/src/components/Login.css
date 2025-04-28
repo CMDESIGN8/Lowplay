@@ -50,13 +50,13 @@ body {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
     font-size: 16px;
-    color: #fff;
+    color: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(5px);
     transition: all 0.3s;
   }
   
   .form-group input::placeholder {
-    color: rgba(255, 255, 255, 0.05);
+    color: #fff;
   }
   
   .form-group input:focus {
@@ -99,7 +99,7 @@ body {
   
   /* Mensaje de éxito o información */
   .login-form p {
-    color: #fff;
+    color: #ffffffe0;
     padding: 12px;
     border-radius: 10px;
     margin-bottom: 16px;
