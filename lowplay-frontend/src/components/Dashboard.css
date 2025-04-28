@@ -112,4 +112,10 @@
     font-size: 16px;
     color:#ccc;
   }
-  
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at top, #0a0a0a 0%, #000000 100%);
+    min-height: 100vh;
+    color: #fff;
+  }
