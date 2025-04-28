@@ -18,7 +18,7 @@ const Dashboard = () => {
 
     const fetchUserData = async () => {
       try {
-        const response = await axios.get('/api/profile', {
+        const response = await axios.get('https://lowplay.onrender.com/api/profile', {
           headers: { 
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
