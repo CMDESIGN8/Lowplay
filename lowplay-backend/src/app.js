@@ -15,17 +15,6 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],  // Headers permitidos
 }));
 app.use(bodyParser.json()); // Para poder procesar solicitudes JSON
-
-// Ruta de perfil de usuario
-app.get('/profile', (req, res) => {
-  // Aquí deberías manejar la autenticación con el token y devolver los datos del perfil
-  const token = req.headers['authorization']?.split(' ')[1];  // Obtener token
-  if (!token) {
-    return res.status(401).json({ error: 'Token no proporcionado' });
-  }
-  res.json(user);
-});
-
 // Usar rutas de usuario
 app.use('/api', userRoutes);
 
@@ -33,5 +22,5 @@ app.use('/api', userRoutes);
 app.listen(port, () => {
   console.log(`Servidor corriendo en el puerto ${port}`);
 });
-
+  
 module.exports = app;
