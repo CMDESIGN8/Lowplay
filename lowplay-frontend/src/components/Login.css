@@ -1,6 +1,6 @@
 /* Fondo general */
 body {
-  background: linear-gradient(135deg, #00020a, #010252);
+    background: #000000;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -52,14 +52,14 @@ body {
 }
 
 .form-group input:focus {
-  border-color: #667eea;
+  border-color: #667eea;    
 }
 
 /* Botón */
 .login-button {
   width: 100%;
   padding: 14px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, #075300, #0b5301);
   color: #fff;
   border: none;
   border-radius: 12px;
@@ -82,3 +82,13 @@ body {
   text-align: center;
   font-size: 14px;
 }
+
+.p 
+{
+    color: #014606;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    text-align: center;
+    font-size: 18px;
+  }
