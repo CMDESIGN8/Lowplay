@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { register, login, editProfile  } = require('../controllers/userController');
+const { register, login, editProfile, getProfile   } = require('../controllers/userController');
 const { authenticateToken } = require('../middlewares/authMiddleware');
-const { getProfile } = require('../controllers/userController');
 
 // Ruta para registrar un usuario
 router.post('/register', register);

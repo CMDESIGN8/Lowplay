@@ -177,8 +177,4 @@ const editProfile = async (req, res) => {
     }
   };
   
-  module.exports = {
-    register,
-    login,
-    editProfile
-  };
+  module.exports = { register, login, editProfile, getProfile };
