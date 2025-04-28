@@ -54,7 +54,7 @@ const Dashboard = () => {
           <p>Email: {user.email}</p>
           <p>Wallet: {user.wallet}</p>
           <p>Lowcoins: {user.lowcoins}</p>
-          <p>Perfil completado: {user.profile_completed ? 'Sí' : 'No'}</p>
+          <p>Perfil completado: {user.profile_completed ? 'Sí' : 'RE'}</p>
         </>
       ) : (
         <p>No se pudo cargar la información del usuario.</p>
