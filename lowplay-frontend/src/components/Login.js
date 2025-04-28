@@ -12,15 +12,20 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://lowplay.onrender.com/api/login', {
-        email,
-        password,
-      });
-
+        const response = await axios.post(
+          'https://lowplay.onrender.com/api/login',
+          { email, password },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
       localStorage.setItem('token', response.data.token);
       navigate('/dashboard');
     } catch (err) {
       setError('Credenciales incorrectas');
+      console.error(err.response?.data || err.message);
     }
   };
 
