@@ -17,11 +17,15 @@ const Dashboard = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get('https://lowplay.onrender.com/api/profile', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+            headers: { 
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+            });
         setUser(response.data);
       } catch (err) {
-        console.error(err);
+        console.error('Error fetching profile:', err.response || err.message);
         navigate('/login');
       }
     };
