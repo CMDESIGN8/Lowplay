@@ -1,91 +1,84 @@
-/* Estilo para el contenedor general del login */
+/* login.css */
 .login-container {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-    padding: 2rem;
-  }
-  
-  /* Tarjeta del login */
-  .login-card {
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.85), rgba(10, 10, 30, 0.95));
-    padding: 3rem 2rem;
-    border-radius: 20px;
-    box-shadow: 0 0 20px rgba(0, 191, 255, 0.4);
-    backdrop-filter: blur(10px);
+    width: 100%;
     max-width: 400px;
-    width: 100%;
-    text-align: center;
+    margin: 2rem auto;
+    padding: 2.5rem;
+    border-radius: 12px;
+  
+    color: white;
+    font-family: 'Montserrat', sans-serif;
   }
   
-  /* Título del login */
   .login-title {
-    font-family: 'Roboto Condensed', sans-serif;
-    font-size: 2.5rem;
-    color: #64FFDA;
-    text-shadow: 0 0 10px #011818, 0 0 20px #00ffff;
+    text-align: center;
+    color: #e0e0e0;
+    font-size: 2.2rem;
+    font-weight: 600;
     margin-bottom: 2rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
   }
   
-  /* Formulario */
-  .login-form input {
-    width: 100%;
-    padding: 1rem;
-    margin-bottom: 1.5rem;
-    border: none;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
+  .login-form-group {
+    margin-bottom: 1.8rem;
+  }
+  
+  .login-label {
     font-size: 1rem;
-    transition: background-color 0.3s ease;
+    color: #e0e0e0;
+    display: block;
+    margin-bottom: 0.6rem;
   }
   
-  .login-form input::placeholder {
-    color: #ccc;
-  }
-  
-  .login-form input:focus {
-    background-color: rgba(255, 255, 255, 0.2);
-    outline: none;
-  }
-  
-  /* Botón */
-  .login-form button {
+  .login-input {
     width: 100%;
     padding: 1rem;
+    margin-top: 0.5rem;
+    border: 1px solid #444; /* Borde gris más claro */
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #333; /* Gris claro sutil */
+    color: #e0e0e0;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra interior sutil */
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .login-input:focus {
+    outline: none;
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .login-button {
+    width: 100%;
+    padding: 1.2rem;
+    background: linear-gradient(135deg, #0070d2, #0084e9);
     border: none;
-    border-radius: 10px;
-    background-color: #00BFFF;
-    color: #fff;
-    font-weight: bold;
-    font-size: 1.2rem;
+    border-radius: 6px;
+    color: white;
+    font-size: 1.1rem;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
-  .login-form button:hover {
-    background-color: #009acd;
-    transform: scale(1.05);
+  .login-button:hover {
+    background: linear-gradient(135deg, #0084e9, #0070d2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
   
-  /* Link para registrarse */
-  .register-link {
-    margin-top: 1rem;
-    font-size: 0.9rem;
-    color: #aaa;
+  .login-link {
+    display: block;
+    text-align: center;
+    margin-top: 2rem;
   }
   
-  .register-link a {
-    color: #00BFFF;
+  .login-link a {
+    color: #81d4fa;
     text-decoration: none;
-    font-weight: bold;
+    transition: color 0.3s ease;
   }
   
-  .register-link a:hover {
+  .login-link a:hover {
     text-decoration: underline;
-  }
-  
+    color: #4fc3f7;
+  } 
