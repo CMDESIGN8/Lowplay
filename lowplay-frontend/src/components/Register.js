@@ -19,7 +19,7 @@ const Register = () => {
         password,
       });
 
-      navigate.push('/login');
+      navigate('/login');
     } catch (err) {
       setError('Hubo un error al registrarse');
     }

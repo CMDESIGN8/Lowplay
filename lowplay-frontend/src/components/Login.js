@@ -18,7 +18,7 @@ const Login = () => {
       });
 
       localStorage.setItem('token', response.data.token);
-      navigate.push('/dashboard');
+      navigate('/dashboard');
     } catch (err) {
       setError('Credenciales incorrectas');
     }

@@ -10,7 +10,7 @@ const Dashboard = () => {
     const token = localStorage.getItem('token');
 
     if (!token) {
-      navigate.push('/login');
+      navigate('/login');
       return;
     }
 
@@ -22,7 +22,7 @@ const Dashboard = () => {
         setUser(response.data);
       } catch (err) {
         console.error(err);
-        navigate.push('/login');
+        navigate('/login');
       }
     };
 
