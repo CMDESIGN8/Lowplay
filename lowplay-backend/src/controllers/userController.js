@@ -127,7 +127,7 @@ const login = async (req, res) => {
   };
   
   // Función para editar perfil
-const editProfile = async (req, res) => {
+  const editProfile = async (req, res) => {
     const userId = req.user.id; // Viene del token
     const { name, email } = req.body;
   
@@ -144,6 +144,14 @@ const editProfile = async (req, res) => {
         return res.status(400).json({ message: 'El email ya está en uso por otro usuario' });
       }
   
+      // Traer el usuario actual para verificar si su perfil ya estaba completado
+      const currentUserQuery = 'SELECT profile_completed FROM users WHERE id = $1';
+      const currentUserResult = await pool.query(currentUserQuery, [userId]);
+      const currentUser = currentUserResult.rows[0];
+  
+      // Saber si el perfil estaba incompleto antes de editar
+      const wasProfileIncomplete = !currentUser.profile_completed;
+  
       // Actualizar usuario
       const updateQuery = `
         UPDATE users
@@ -154,13 +162,16 @@ const editProfile = async (req, res) => {
       const updatedUserResult = await pool.query(updateQuery, [name, email, userId]);
       const updatedUser = updatedUserResult.rows[0];
   
-      // Si el usuario no había completado su perfil antes, sumar 10 lowcoins
-      if (!req.user.profile_completed) {
+      let message = 'Perfil actualizado correctamente.';
+  
+      // Si el perfil no estaba completo antes, asignar 10 lowcoins
+      if (wasProfileIncomplete) {
         await pool.query('UPDATE users SET lowcoins = lowcoins + 10 WHERE id = $1', [userId]);
+        message = 'Perfil modificado con éxito, ganaste 10 lowcoins.';
       }
   
       res.json({
-        message: 'Perfil actualizado correctamente',
+        message,
         user: {
           id: updatedUser.id,
           name: updatedUser.name,
@@ -176,6 +187,7 @@ const editProfile = async (req, res) => {
       res.status(500).json({ message: 'Error interno del servidor', error: err.message });
     }
   };
+  
   
   // Función para completar el perfil y asignar lowcoins solo una vez
 const completeProfile = async (req, res) => {
