@@ -51,7 +51,7 @@
   }
   
   .progress-fill {
-    background: linear-gradient(90deg, #4caf50, #81c784);
+    background: linear-gradient(90deg, #0c1445, #1d265e);
     height: 100%;
     display: flex;
     align-items: center;
