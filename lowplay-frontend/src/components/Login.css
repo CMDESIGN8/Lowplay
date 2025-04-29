@@ -93,6 +93,7 @@ body {
   .error-message {
     background: rgba(255, 0, 0, 0.041);
     color: #ff4c4c;
+    font-weight: bold;
     padding: 12px;
     border-radius: 10px;
     margin-bottom: 16px;
