@@ -22,9 +22,10 @@ const UserProfile = ({ user }) => {
         <h2>{user.username}</h2>
         <p className="user-level">{getBadge(user.level)} {user.level}</p>
         <div className="lowcoins-display">
-  <i className="fas fa-coins lowcoins-icon animated-coin"></i>
+  <i className={`fas fa-coins lowcoins-icon animated-coin coin-${level.toLowerCase()}`}></i>
   <span className="lowcoins-count">{user.lowcoins} Lowcoins</span>
 </div>
+
 
         <div className="progress-bar">
           <div
