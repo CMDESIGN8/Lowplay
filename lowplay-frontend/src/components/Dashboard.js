@@ -100,13 +100,13 @@ const Dashboard = () => {
                 <i className="fas fa-user-edit"></i> Editar Perfil
               </button>
             </div>
-            <div className="Misiones">
-            <Missions />
-            </div>
           </div>
         ) : (
           <p>No se pudo cargar la información del usuario.</p>
         )}
+        <div className="Misiones">
+            <Missions />
+            </div>
       </main>
 
       {/* MODAL */}
