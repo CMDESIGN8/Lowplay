@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Estilos de react-toastify
 
 const EditProfile = () => {
   const [formData, setFormData] = useState({ name: '', email: '' });
-  const [message, setMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -11,17 +13,22 @@ const EditProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true); // Marca el estado como "enviando"
+
     try {
       const token = localStorage.getItem('token');
       const res = await axios.put('/api/profile', formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      setMessage(res.data.message); // 💬 Aca se setea el mensaje
-      alert(res.data.message);      // ✅ Para asegurarte de que lo ves
+      // Muestra el mensaje exitoso usando toast
+      toast.success(res.data.message);
+
+      setIsSubmitting(false); // Finaliza el estado de envío
     } catch (err) {
+      setIsSubmitting(false); // Finaliza el estado de envío
       console.error(err);
-      setMessage('Error al actualizar el perfil');
+      toast.error('Hubo un error al actualizar el perfil');
     }
   };
 
@@ -29,12 +36,42 @@ const EditProfile = () => {
     <div>
       <h2>Editar Perfil</h2>
 
-      {message && <div style={{ color: 'green' }}>{message}</div>}
+      {/* Contenedor de Toast */}
+      <ToastContainer 
+        position="top-right" 
+        autoClose={5000} 
+        hideProgressBar={true} 
+        newestOnTop={true} 
+        closeOnClick
+        rtl={false}
+      />
 
       <form onSubmit={handleSubmit}>
-        <input type="text" name="name" placeholder="Nombre" onChange={handleChange} />
-        <input type="email" name="email" placeholder="Email" onChange={handleChange} />
-        <button type="submit">Guardar</button>
+        <div>
+          <input 
+            type="text" 
+            name="name" 
+            placeholder="Nombre" 
+            value={formData.name} 
+            onChange={handleChange} 
+            required
+          />
+        </div>
+        
+        <div>
+          <input 
+            type="email" 
+            name="email" 
+            placeholder="Email" 
+            value={formData.email} 
+            onChange={handleChange} 
+            required
+          />
+        </div>
+
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? 'Guardando...' : 'Guardar'}
+        </button>
       </form>
     </div>
   );
