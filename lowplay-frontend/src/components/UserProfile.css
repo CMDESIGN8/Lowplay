@@ -108,5 +108,16 @@
   .coin-gold {
     color: #ffd700;
   }
+  .progress-fill.bronce {
+    background: linear-gradient(90deg, #cd7f32, #b87333);
+  }
+  
+  .progress-fill.plata {
+    background: linear-gradient(90deg, #c0c0c0, #a9a9a9);
+  }
+  
+  .progress-fill.oro {
+    background: linear-gradient(90deg, #ffd700, #ffb700);
+  }
   
   

@@ -29,10 +29,10 @@ const UserProfile = ({ user }) => {
 
 
 <div className="progress-bar">
-  <div
-    className="progress-fill"
-    style={{ width: `${user.progress || 0}%` }}
-  >
+<div
+  className={`progress-fill ${user.level?.toLowerCase()}`}
+  style={{ width: `${user.progress || 0}%` }}
+>
     <span className="progress-text">{user.progress || 0}%</span>
   </div>
 </div></div></div>
