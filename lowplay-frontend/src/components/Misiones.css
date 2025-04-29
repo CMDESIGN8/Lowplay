@@ -57,13 +57,13 @@
   
   .mission-reward {
     font-size: 17px;
-    color: #ffd700;
+    color: #f1c40f;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    text-shadow: 0 0 5px #ffd700aa;
+    text-shadow: 0 0 5px #f1c40f;
   }
   
   button {
