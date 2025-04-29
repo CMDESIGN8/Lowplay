@@ -102,16 +102,6 @@ const Dashboard = () => {
         {user ? (
           <div className="dashboard-content">
             <h2>Bienvenido, {user.name}</h2>
-            <div className="lowcoins-display">
-  <i className="fas fa-coins lowcoins-icon"></i>
-  <span className="lowcoins-count">{user.lowcoins} Lowcoins</span>
-</div>
-
-<div className="user-info">
-  <p><i className="fas fa-envelope"></i> <strong>Email:</strong> {user.email}</p>
-  <p><i className="fas fa-wallet"></i> <strong>Wallet:</strong> {user.wallet}</p>
-  <p><i className="fas fa-check-circle"></i> <strong>Perfil completado:</strong> {user.profile_completed ? 'Sí' : 'No'}</p>
-</div>
           </div>
         ) : (
           <p>No se pudo cargar la información del usuario.</p>
