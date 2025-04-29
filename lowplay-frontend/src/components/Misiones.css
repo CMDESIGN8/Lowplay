@@ -36,8 +36,6 @@
     background: linear-gradient(to bottom, #1c2759, #111b3c);
     padding: 30px;
     border-radius: 15px;
-    border: 1px solid #00b2ff;
-    box-shadow: 0 0 15px rgba(0, 132, 255, 0.2);
     transition: transform 0.3s ease;
     margin-bottom: 20px;
     position: relative;
