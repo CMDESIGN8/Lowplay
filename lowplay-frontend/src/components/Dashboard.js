@@ -55,6 +55,12 @@ const Dashboard = () => {
     } catch (error) {
       console.error('Error actualizando perfil:', error);
     }
+
+    const getLevel = (coins) => {
+        if (coins >= 200) return 'Oro';
+        if (coins >= 100) return 'Plata';
+        return 'Bronce';
+      };
   };
   
 
@@ -84,12 +90,13 @@ const Dashboard = () => {
       <main className="dashboard-main">
       <UserProfile
   user={{
-    username: '{user.name}',
+    username: user.name,
     avatar: '/avatars/mateo.png',
-    level: 'Plata',
-    lowcoins: 120,
-    progress: 65
+    level: getLevel(user.lowcoins),
+    lowcoins: user.lowcoins,
+    progress: Math.min((user.lowcoins % 100), 100), // por si querés mostrar progreso al siguiente rango
   }}
+  onEditProfile={() => setShowEditModal(true)}
 />
         {user ? (
           <div className="dashboard-content">
