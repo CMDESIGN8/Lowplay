@@ -1,85 +1,96 @@
 .missions-section {
     max-width: 600px;
     margin: 40px auto;
-    padding: 20px;
-    background: linear-gradient(145deg, #111820, #1e2633);
-    color: #fff;
+    padding: 25px;
+    background: linear-gradient(145deg, #0c1445, #1d265e);
+    color: #ffffff;
     border-radius: 20px;
-    box-shadow: 0 0 25px rgba(255, 215, 0, 0.2);
-    border: 2px solid #ffd700;
-    font-family: 'Orbitron', sans-serif;
+    box-shadow: 0 0 25px rgba(0, 132, 255, 0.3);
+    border: 2px solid #00b2ff;
+    font-family: 'Poppins', sans-serif;
     text-align: center;
+    position: relative;
+  }
+  
+  .missions-section::before {
+    content: '★';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #ffffff33;
+    font-size: 80px;
+    z-index: 0;
   }
   
   .missions-section h3 {
-    font-size: 28px;
-    color: #ffd700;
-    margin-bottom: 30px;
+    font-size: 26px;
+    color: #00b2ff;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+    z-index: 1;
+    position: relative;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
   }
   
   .mission-card {
-    background: radial-gradient(circle, #2c3e50, #1c2833);
+    background: linear-gradient(to bottom, #1c2759, #111b3c);
     padding: 30px;
-    border-radius: 16px;
-    border: 2px solid #444;
-    box-shadow: 0 0 15px rgba(0,0,0,0.6);
+    border-radius: 15px;
+    border: 1px solid #00b2ff;
+    box-shadow: 0 0 15px rgba(0, 132, 255, 0.2);
     transition: transform 0.3s ease;
-  }
-  
-  .mission-card:hover {
-    transform: scale(1.02);
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
   }
   
   .mission-card h4 {
-    font-size: 22px;
-    color: #00ffe7;
+    font-size: 20px;
+    color: #ffffff;
     margin-bottom: 15px;
-    text-shadow: 0 0 6px #00ffe7aa;
+    text-shadow: 0 0 5px #00b2ff99;
   }
   
   .mission-card p {
-    font-size: 16px;
+    font-size: 15px;
+    color: #d0d9ff;
     margin-bottom: 20px;
-    color: #ddd;
   }
   
   .mission-reward {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    font-size: 18px;
-    color: #f8f32b;
+    font-size: 17px;
+    color: #ffd700;
     margin-bottom: 20px;
-    text-shadow: 0 0 5px #f8f32baa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-shadow: 0 0 5px #ffd700aa;
   }
   
   button {
-    background: linear-gradient(90deg, #ffd700, #f8f32b);
+    background: linear-gradient(90deg, #00b2ff, #3dc7ff);
     border: none;
     padding: 12px 25px;
-    border-radius: 8px;
+    border-radius: 10px;
     font-weight: bold;
-    font-size: 16px;
-    color: #000;
+    font-size: 15px;
+    color: #fff;
     cursor: pointer;
-    box-shadow: 0 0 12px #f8f32b77;
+    box-shadow: 0 0 15px rgba(0, 178, 255, 0.5);
     text-transform: uppercase;
-    letter-spacing: 1px;
     transition: all 0.3s ease;
   }
   
   button:hover {
-    background: linear-gradient(90deg, #f8f32b, #ffd700);
-    box-shadow: 0 0 20px #ffd700;
+    background: linear-gradient(90deg, #3dc7ff, #00b2ff);
+    box-shadow: 0 0 25px rgba(0, 178, 255, 0.7);
   }
   
   .completed {
-    color: #00ff88;
-    font-size: 18px;
+    color: #30ffb2;
+    font-size: 17px;
     font-weight: bold;
-    text-shadow: 0 0 6px #00ff8899;
+    text-shadow: 0 0 6px #30ffb288;
   }
   
