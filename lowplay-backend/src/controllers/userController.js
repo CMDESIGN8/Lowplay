@@ -128,7 +128,7 @@ const login = async (req, res) => {
   
   // Función para editar perfil
   const editProfile = async (req, res) => {
-    const userId = req.user.id; // Viene del token
+    const userId = req.user.id; // Del token
     const { name, email } = req.body;
   
     if (!name || !email) {
@@ -136,7 +136,6 @@ const login = async (req, res) => {
     }
   
     try {
-      // Verificar si el email ya está siendo usado por otro usuario
       const checkEmailQuery = 'SELECT * FROM users WHERE email = $1 AND id != $2';
       const emailExists = await pool.query(checkEmailQuery, [email, userId]);
   
@@ -144,49 +143,31 @@ const login = async (req, res) => {
         return res.status(400).json({ message: 'El email ya está en uso por otro usuario' });
       }
   
-      // Traer el usuario actual para verificar si su perfil ya estaba completado
-      const currentUserQuery = 'SELECT profile_completed, lowcoins FROM users WHERE id = $1';
-      const currentUserResult = await pool.query(currentUserQuery, [userId]);
-      const currentUser = currentUserResult.rows[0];
-  
-      const wasProfileIncomplete = !currentUser.profile_completed;
-  
-      // Actualizar usuario (sin actualizar lowcoins todavía)
       const updateQuery = `
         UPDATE users
         SET name = $1, email = $2, profile_completed = TRUE
         WHERE id = $3
-        RETURNING id, name, email, wallet, profile_completed, created_at;
+        RETURNING *;
       `;
       const updatedUserResult = await pool.query(updateQuery, [name, email, userId]);
       const updatedUser = updatedUserResult.rows[0];
   
-      let message = 'Perfil actualizado correctamente.';
-      let finalLowcoins = currentUser.lowcoins;
+      let mensaje = 'Perfil actualizado correctamente.';
   
-      // Si el perfil no estaba completo antes, asignar 10 lowcoins
-      if (wasProfileIncomplete) {
-        const updateLowcoinsQuery = `
-          UPDATE users
-          SET lowcoins = lowcoins + 10
-          WHERE id = $1
-          RETURNING lowcoins;
-        `;
-        const lowcoinsResult = await pool.query(updateLowcoinsQuery, [userId]);
-        finalLowcoins = lowcoinsResult.rows[0].lowcoins;
-  
-        message = 'Perfil modificado con éxito, ganaste 10 lowcoins.';
+      if (!req.user.profile_completed) {
+        await pool.query('UPDATE users SET lowcoins = lowcoins + 10 WHERE id = $1', [userId]);
+        mensaje = '¡Perfil completado! Ganaste 10 Lowcoins.';
       }
   
       res.json({
-        message,
+        message: mensaje, // 👈 este campo ahora SIEMPRE se manda
         user: {
           id: updatedUser.id,
           name: updatedUser.name,
           email: updatedUser.email,
           wallet: updatedUser.wallet,
-          lowcoins: finalLowcoins,
-          profile_completed: updatedUser.profile_completed,
+          lowcoins: updatedUser.lowcoins,
+          profile_completed: true,
           created_at: updatedUser.created_at
         }
       });
@@ -195,7 +176,8 @@ const login = async (req, res) => {
       console.error('Error al editar perfil: ', err);
       res.status(500).json({ message: 'Error interno del servidor', error: err.message });
     }
-  };  
+  };
+  
   
   // Función para completar el perfil y asignar lowcoins solo una vez
 const completeProfile = async (req, res) => {
