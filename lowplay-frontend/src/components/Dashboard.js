@@ -112,11 +112,6 @@ const Dashboard = () => {
   <p><i className="fas fa-wallet"></i> <strong>Wallet:</strong> {user.wallet}</p>
   <p><i className="fas fa-check-circle"></i> <strong>Perfil completado:</strong> {user.profile_completed ? 'Sí' : 'No'}</p>
 </div>
-            <div className="edit-profile-button-container">
-              <button className="edit-profile-button" onClick={() => setShowEditModal(true)}>
-                <i className="fas fa-user-edit"></i> Editar Perfil
-              </button>
-            </div>
           </div>
         ) : (
           <p>No se pudo cargar la información del usuario.</p>

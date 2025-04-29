@@ -86,5 +86,17 @@
     display: inline-block;
     animation: coinSpin 2s infinite linear;
   }
+
+  .coin-bronze {
+    color: #cd7f32;
+  }
+  
+  .coin-silver {
+    color: #c0c0c0;
+  }
+  
+  .coin-gold {
+    color: #ffd700;
+  }
   
   
