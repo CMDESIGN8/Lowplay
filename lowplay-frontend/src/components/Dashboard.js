@@ -80,6 +80,11 @@ const Dashboard = () => {
         {user ? (
           <div className="dashboard-content">
             <h2>Bienvenido, {user.name}</h2>
+            <div className="lowcoins-display">
+  <i className="fas fa-coins lowcoins-icon"></i>
+  <span className="lowcoins-count">{user.lowcoins} Lowcoins</span>
+</div>
+
             <div className="user-info">
               <p><strong>Email:</strong> {user.email}</p>
               <p><strong>Wallet:</strong> {user.wallet}</p>
