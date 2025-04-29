@@ -15,6 +15,12 @@ const Dashboard = () => {
   
   const token = localStorage.getItem('token');
 
+  const getLevel = (coins) => {
+    if (coins >= 200) return 'Oro 🥇';
+    if (coins >= 100) return 'Plata 🥈';
+    return 'Bronce 🥉';
+  };
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -56,11 +62,6 @@ const Dashboard = () => {
       console.error('Error actualizando perfil:', error);
     }
 
-    const getLevel = (coins) => {
-        if (coins >= 200) return 'Oro 🥇';
-        if (coins >= 100) return 'Plata 🥈';
-        return 'Bronce 🥉';
-      };
   };
   
 
