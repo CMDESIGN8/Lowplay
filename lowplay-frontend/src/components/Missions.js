@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.min.css';
 import './Misiones.css';
 
 const Missions = () => {
@@ -33,26 +35,44 @@ const Missions = () => {
   return (
     <div className="missions-section">
       <h3>Misiones</h3>
-      <ul>
+      <Swiper
+        spaceBetween={30}
+        slidesPerView={3}  // Mostrar 3 misiones a la vez
+        loop={true}  // Hacer que el slider se repita
+        pagination={{
+          clickable: true,
+        }}
+        breakpoints={{
+          640: {
+            slidesPerView: 1, // 1 misión en pantallas pequeñas
+          },
+          768: {
+            slidesPerView: 2, // 2 misiones en pantallas medianas
+          },
+          1024: {
+            slidesPerView: 3, // 3 misiones en pantallas grandes
+          }
+        }}
+      >
         {missions.map((m) => (
-          <li key={m.id}>
-            <strong>{m.nombre}</strong>: {m.descripcion} ({m.tipo})<br />
-            <div className="mission-reward">
+          <SwiperSlide key={m.id}>
+            <div className="mission-card">
+              <strong>{m.nombre}</strong>: {m.descripcion} ({m.tipo})
+              <div className="mission-reward">
                 <i className="fas fa-coins"></i>
-                           
-            <span>Recompensa: {m.recompensa} lowcoins</span><br />
-            {m.completada ? (
-              <span style={{ color: 'green' }}>✅ Completada</span>
-            ) : (
-              <button onClick={() => completeMission(m.id)}>Completar</button>
-            )}
+                <span>Recompensa: {m.recompensa} lowcoins</span>
+                <br />
+                {m.completada ? (
+                  <span style={{ color: 'green' }}>✅ Completada</span>
+                ) : (
+                  <button onClick={() => completeMission(m.id)}>Completar</button>
+                )}
+              </div>
             </div>
-          </li>
+          </SwiperSlide>
         ))}
-      </ul>
+      </Swiper>
     </div>
-
-    
   );
 };
 

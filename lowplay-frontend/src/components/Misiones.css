@@ -4,7 +4,7 @@
     background: rgba(0, 0, 0, 0.7);
     border-radius: 12px;
     box-shadow: 0 0 20px rgba(0, 191, 255, 0.2);
-    max-width: 800px;
+    max-width: 900px;
     margin: 20px auto;
     color: #fff;
   }
@@ -16,13 +16,8 @@
     margin-bottom: 20px;
   }
   
-  /* Estilo de la lista de misiones */
-  .missions-section ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .missions-section li {
+  /* Estilo de cada tarjeta de misión */
+  .mission-card {
     background: rgba(46, 46, 46, 0.95);
     padding: 20px;
     margin-bottom: 15px;
@@ -31,16 +26,16 @@
     transition: transform 0.3s ease-in-out;
   }
   
-  .missions-section li:hover {
+  .mission-card:hover {
     transform: scale(1.05);
   }
   
-  .missions-section li strong {
+  .mission-card strong {
     color: #ffeb3b;
     font-size: 1.2rem;
   }
   
-  .missions-section li .mission-reward {
+  .mission-card .mission-reward {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -49,14 +44,14 @@
     color: #f1c40f;
   }
   
-  .missions-section li .mission-reward i {
+  .mission-card .mission-reward i {
     font-size: 1.5rem;
     color: #f1c40f;
     animation: coinSpin 2s infinite linear;
   }
   
   /* Botón de completar misión */
-  .missions-section li button {
+  .mission-card button {
     background-color: #3498db;
     color: white;
     padding: 10px 20px;
@@ -67,17 +62,17 @@
     transition: background-color 0.3s ease;
   }
   
-  .missions-section li button:hover {
+  .mission-card button:hover {
     background-color: #2980b9;
   }
   
   /* Estado de misión completada */
-  .missions-section li span {
+  .mission-card span {
     font-size: 1.1rem;
     margin-left: 10px;
   }
   
-  .missions-section li span[style="color: green;"] {
+  .mission-card span[style="color: green;"] {
     font-weight: bold;
     color: #2ecc71;
   }
