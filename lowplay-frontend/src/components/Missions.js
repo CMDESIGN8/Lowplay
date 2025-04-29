@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './Misiones.css';
 
 const Missions = () => {
   const [missions, setMissions] = useState([]);
