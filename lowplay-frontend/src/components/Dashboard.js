@@ -76,7 +76,6 @@ const Dashboard = () => {
       <a href="#"><i className="fas fa-bullseye"></i> Misiones</a>
       <a href="#"><i className="fas fa-gift"></i> Premios</a>
       <a href="#"><i className="fas fa-user"></i> Perfil</a>
-      <Missions />
       <a href="#"><i className="fas fa-sign-out-alt"></i> Cerrar sesión</a>
     </nav>
   </aside>
@@ -100,6 +99,9 @@ const Dashboard = () => {
               <button className="edit-profile-button" onClick={() => setShowEditModal(true)}>
                 <i className="fas fa-user-edit"></i> Editar Perfil
               </button>
+            </div>
+            <div className="Misiones">
+            <Missions />
             </div>
           </div>
         ) : (
