@@ -94,6 +94,15 @@ const Dashboard = () => {
   <p><i className="fas fa-wallet"></i> <strong>Wallet:</strong> {user.wallet}</p>
   <p><i className="fas fa-check-circle"></i> <strong>Perfil completado:</strong> {user.profile_completed ? 'Sí' : 'No'}</p>
 </div>
+<UserProfile
+  user={{
+    username: 'MateoGamer',
+    avatar: '/avatars/mateo.png',
+    level: 'Plata',
+    lowcoins: 120,
+    progress: 65
+  }}
+/>
 
             <div className="edit-profile-button-container">
               <button className="edit-profile-button" onClick={() => setShowEditModal(true)}>

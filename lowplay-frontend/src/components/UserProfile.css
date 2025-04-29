@@ -1,0 +1,72 @@
+.user-profile-card {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to right, #1c1c3c, #1f3b8b);
+    color: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    gap: 20px;
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+  
+  .user-avatar img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    object-fit: cover;
+  }
+  
+  .user-info {
+    flex: 1;
+  }
+  
+  .user-info h2 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .user-level {
+    font-weight: bold;
+    color: #f0e130;
+  }
+  
+  .user-coins {
+    margin: 5px 0;
+  }
+  
+  .progress-bar {
+    background-color: rgba(255, 255, 255, 0.2);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 8px 0;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background: #00ff90;
+    width: 0%;
+    transition: width 0.4s ease-in-out;
+  }
+  
+  .edit-button {
+    margin-top: 10px;
+    padding: 6px 14px;
+    background-color: #0084ff;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  
+  .edit-button:hover {
+    background-color: #005fd1;
+  }
+  
