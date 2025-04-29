@@ -99,13 +99,6 @@ const Dashboard = () => {
   }}
   onEditProfile={() => setShowEditModal(true)}
 />
-        {user ? (
-          <div className="dashboard-content">
-            <h2>Bienvenido, {user.name}</h2>
-          </div>
-        ) : (
-          <p>No se pudo cargar la información del usuario.</p>
-        )}
         <div className="Misiones">
             <Missions />
             </div>

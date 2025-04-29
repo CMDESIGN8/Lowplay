@@ -19,12 +19,13 @@ const UserProfile = ({ user }) => {
         <img src={user.avatar || '/default-avatar.png'} alt="avatar" />
       </div>
       <div className="user-info">
-        <h2>{user.username}</h2>
+        <h2>Bienvenido, {user.username}</h2>
         <p className="user-level">{getBadge(user.level)} {user.level}</p>
         <div className="lowcoins-display">
-  <i className={`fas fa-coins lowcoins-icon animated-coin coin-${level.toLowerCase()}`}></i>
+  <i className={`fas fa-coins lowcoins-icon animated-coin coin-${user.level.toLowerCase()}`}></i>
   <span className="lowcoins-count">{user.lowcoins} Lowcoins</span>
 </div>
+
 
 
         <div className="progress-bar">
