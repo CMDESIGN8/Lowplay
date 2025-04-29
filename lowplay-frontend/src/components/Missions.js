@@ -1,22 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Misiones.css';
+import './Misiones.css'; // Asegúrate de que este archivo esté importado correctamente
 
 const Missions = () => {
   const [missions, setMissions] = useState([]);
-  const [currentMissionIndex, setCurrentMissionIndex] = useState(0);
 
   const fetchMissions = async () => {
     const token = localStorage.getItem('token');
     const res = await axios.get('https://lowplay.onrender.com/api/missions', {
       headers: { Authorization: `Bearer ${token}` }
     });
-
     setMissions(res.data.missions);
-
-    // Buscar la primera misión no completada
-    const firstIncompleteIndex = res.data.missions.findIndex(m => !m.completada);
-    setCurrentMissionIndex(firstIncompleteIndex !== -1 ? firstIncompleteIndex : res.data.missions.length - 1);
   };
 
   const completeMission = async (missionId) => {
@@ -26,61 +20,42 @@ const Missions = () => {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert(`¡Ganaste ${res.data.recompensa} lowcoins!`);
-  
-      // Volvemos a obtener las misiones actualizadas
-      const updated = await axios.get('https://lowplay.onrender.com/api/missions', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-  
-      const updatedMissions = updated.data.missions;
-      setMissions(updatedMissions);
-  
-      // Buscar la siguiente misión no completada
-      const nextIndex = updatedMissions.findIndex(m => !m.completada);
-      if (nextIndex !== -1) {
-        setCurrentMissionIndex(nextIndex);
-      } else {
-        setCurrentMissionIndex(updatedMissions.length - 1); // si todas están completadas
-      }
-  
+      fetchMissions(); // recargar para mostrar estado actualizado
     } catch (err) {
       alert(err.response?.data?.message || 'Error al completar misión');
     }
   };
+
   useEffect(() => {
     fetchMissions();
   }, []);
 
-  const currentMission = missions[currentMissionIndex];
-
   return (
-    <div className="missions-section">
-      <h3>Misiones</h3>
-      {currentMission ? (
-        <div className={`mission-card ${currentMission.completada ? 'completed' : ''}`}>
-          <div className="mission-header">
-            <strong>{currentMission.nombre}</strong>
-            <span className="mission-type">({currentMission.tipo})</span>
+    <div className="missions-container">
+      <h3 className="missions-header">Misiones</h3>
+      <div className="missions-list">
+        {missions.slice(0, 3).map((m) => (
+          <div key={m.id} className="mission-item">
+            <div className="mission-title">
+              <strong>{m.nombre}</strong>
+            </div>
+            <div className="mission-description">
+              {m.descripcion} ({m.tipo})
+            </div>
+            <div className="mission-reward">
+              <i className="fas fa-coins"></i>
+              <span>Recompensa: {m.recompensa} lowcoins</span>
+            </div>
+            <div className="mission-status">
+              {m.completada ? (
+                <span style={{ color: 'green' }}>✅ Completada</span>
+              ) : (
+                <button onClick={() => completeMission(m.id)} className="complete-btn">Completar</button>
+              )}
+            </div>
           </div>
-          <p className="mission-description">{currentMission.descripcion}</p>
-          <div className="mission-reward">
-            <i className="fas fa-coins"></i>
-            <span>{currentMission.recompensa} lowcoins</span>
-          </div>
-          {currentMission.completada ? (
-            <span className="mission-status">✅ Completada</span>
-          ) : (
-            <button
-              className="mission-button"
-              onClick={() => completeMission(currentMission.id)}
-            >
-              Completar
-            </button>
-          )}
-        </div>
-      ) : (
-        <p>No hay misiones disponibles.</p>
-      )}
+        ))}
+      </div>
     </div>
   );
 };
