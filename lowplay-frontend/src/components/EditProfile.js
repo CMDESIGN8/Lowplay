@@ -19,7 +19,7 @@ const EditProfile = () => {
 
     try {
       const token = localStorage.getItem('token'); // Obtener token de localStorage
-      const res = await axios.put('/api/profile', formData, {
+      const res = await axios.put('https://lowplay.onrender.com/api/profile', formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
