@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Dashboard.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
@@ -63,17 +64,17 @@ const Dashboard = () => {
 
   return (
     <div className={`dashboard-wrapper ${showContent ? 'fade-in' : ''}`}>
-      <aside className="sidebar">
-        <h1 className="logo">LOWPLAY</h1>
-        <nav className="menu">
-          <a href="#">Inicio</a>
-          <a href="#">Wallet</a>
-          <a href="#">Misiones</a>
-          <a href="#">Premios</a>
-          <a href="#">Perfil</a>
-          <a href="#">Cerrar sesión</a>
-        </nav>
-      </aside>
+       <aside className="sidebar">
+    <h1 className="logo">LOWPLAY</h1>
+    <nav className="menu">
+      <a href="#"><i className="fas fa-home"></i> Inicio</a>
+      <a href="#"><i className="fas fa-wallet"></i> Wallet</a>
+      <a href="#"><i className="fas fa-bullseye"></i> Misiones</a>
+      <a href="#"><i className="fas fa-gift"></i> Premios</a>
+      <a href="#"><i className="fas fa-user"></i> Perfil</a>
+      <a href="#"><i className="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+    </nav>
+  </aside>
 
       <main className="dashboard-main">
         {user ? (
