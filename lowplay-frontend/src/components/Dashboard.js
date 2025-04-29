@@ -40,15 +40,21 @@ const Dashboard = () => {
         { name: editedName, email: editedEmail },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-  
-      // Actualizar toda la info del usuario, incluyendo lowcoins
-      setUser(response.data.user);
+      
+      // Actualizar los lowcoins directamente al estado
+      setUser(prevState => ({
+        ...prevState,
+        name: editedName,
+        email: editedEmail,
+        lowcoins: response.data.user.lowcoins  // Asegúrate de que lowcoins se incluya en la respuesta
+      }));
   
       setShowEditModal(false);
     } catch (error) {
       console.error('Error actualizando perfil:', error);
     }
   };
+  
 
   if (loading) {
     return (
