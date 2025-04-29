@@ -1,48 +1,64 @@
+// src/components/EditProfile.js
+
+import React, { useState } from 'react';
 import axios from 'axios';
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const EditProfile = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate();
 
-  const handleSave = async () => {
+  const handleEditProfile = async (e) => {
+    e.preventDefault();
+
     try {
-      const response = await axios.put('/api/usuarios/edit-profile', {
+      const response = await axios.put('https://lowplay.onrender.com/api/edit-profile', {
         name,
-        email
+        email,
       });
 
-      if (response.data && response.data.message) {
-        alert(response.data.message);  // Muestra el mensaje que viene del backend
-      } else {
-        alert('Perfil actualizado con éxito');
+      // Si fue exitoso, mostramos el mensaje de éxito
+      if (response.data.message) {
+        setSuccessMessage(response.data.message); // Mensaje de éxito
       }
 
-      // Opcional: recargar el usuario o redirigir si querés
-      // window.location.reload(); 
-
-    } catch (error) {
-      console.error('Error al actualizar el perfil:', error);
-      alert('Error al actualizar el perfil');
+      navigate('/profile'); // Redirigimos a la página de perfil después de editar
+    } catch (err) {
+      setError('Hubo un error al editar el perfil');
     }
   };
 
   return (
-    <div className="edit-profile">
+    <div>
       <h2>Editar Perfil</h2>
-      <input
-        type="text"
-        placeholder="Nombre"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <input
-        type="email"
-        placeholder="Correo electrónico"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <button onClick={handleSave}>Guardar cambios</button>
+      
+      {error && <p className="error">{error}</p>}
+      {successMessage && <p className="success">{successMessage}</p>} {/* Aquí mostramos el mensaje de éxito */}
+      
+      <form onSubmit={handleEditProfile}>
+        <div>
+          <label>Nombre:</label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Actualizar Perfil</button>
+      </form>
     </div>
   );
 };
