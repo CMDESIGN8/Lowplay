@@ -3,6 +3,7 @@ import axios from 'axios';
 import './Dashboard.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Missions from './Missions';
+import UserProfile from './UserProfile';
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
