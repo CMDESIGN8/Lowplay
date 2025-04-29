@@ -26,12 +26,27 @@ const Missions = () => {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert(`¡Ganaste ${res.data.recompensa} lowcoins!`);
-      fetchMissions();
+  
+      // Volvemos a obtener las misiones actualizadas
+      const updated = await axios.get('https://lowplay.onrender.com/api/missions', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+  
+      const updatedMissions = updated.data.missions;
+      setMissions(updatedMissions);
+  
+      // Buscar la siguiente misión no completada
+      const nextIndex = updatedMissions.findIndex(m => !m.completada);
+      if (nextIndex !== -1) {
+        setCurrentMissionIndex(nextIndex);
+      } else {
+        setCurrentMissionIndex(updatedMissions.length - 1); // si todas están completadas
+      }
+  
     } catch (err) {
       alert(err.response?.data?.message || 'Error al completar misión');
     }
   };
-
   useEffect(() => {
     fetchMissions();
   }, []);
