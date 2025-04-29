@@ -19,7 +19,7 @@ const Missions = () => {
       const res = await axios.post('https://lowplay.onrender.com/api/missions/complete', { missionId }, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      alert(`¡Ganaste ${res.data.recompensa} lowcoins!`);
+      alert(`¡Ganaste ${res.data.recompensa} lowcoins!, Volve Mañana para hacerl de nuevo`);
       fetchMissions(); // recargar para mostrar estado actualizado
     } catch (err) {
       alert(err.response?.data?.message || 'Error al completar misión');
