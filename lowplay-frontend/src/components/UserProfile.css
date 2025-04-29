@@ -1,17 +1,19 @@
 .user-profile-card {
     display: flex;
     align-items: center;
-    background: radial-gradient(circle at top, #0a0a0a 0%, #000000 100%);
-    box-shadow: 2px 0 10px rgba(0, 191, 255, 0.2);
     color: white;
     border-radius: 20px;
     padding: 20px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.4);
     gap: 20px;
     width: 100%;
     max-width: 500px;
     margin: auto;
     margin-bottom: 30px;
+    background: rgba(46, 46, 46, 0.8);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
+    animation: fadeIn 0.8s ease-out;
   }
   
   .user-avatar img {
