@@ -35,18 +35,15 @@ const Dashboard = () => {
 
   const handleSaveChanges = async () => {
     try {
-      await axios.put('https://lowplay.onrender.com/api/profile', 
-        { name: editedName, email: editedEmail }, 
+      const response = await axios.put(
+        'https://lowplay.onrender.com/api/profile',
+        { name: editedName, email: editedEmail },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-
-      // Actualizar la vista con los datos nuevos
-      setUser(prev => ({
-        ...prev,
-        name: editedName,
-        email: editedEmail
-      }));
-
+  
+      // Actualizar toda la info del usuario, incluyendo lowcoins
+      setUser(response.data.user);
+  
       setShowEditModal(false);
     } catch (error) {
       console.error('Error actualizando perfil:', error);
@@ -85,12 +82,11 @@ const Dashboard = () => {
   <span className="lowcoins-count">{user.lowcoins} Lowcoins</span>
 </div>
 
-            <div className="user-info">
-              <p><strong>Email:</strong> {user.email}</p>
-              <p><strong>Wallet:</strong> {user.wallet}</p>
-              <p><strong>Lowcoins:</strong> {user.lowcoins}</p>
-              <p><strong>Perfil completado:</strong> {user.profile_completed ? 'Sí' : 'No'}</p>
-            </div>
+<div className="user-info">
+  <p><i className="fas fa-envelope"></i> <strong>Email:</strong> {user.email}</p>
+  <p><i className="fas fa-wallet"></i> <strong>Wallet:</strong> {user.wallet}</p>
+  <p><i className="fas fa-check-circle"></i> <strong>Perfil completado:</strong> {user.profile_completed ? 'Sí' : 'No'}</p>
+</div>
 
             <div className="edit-profile-button-container">
               <button className="edit-profile-button" onClick={() => setShowEditModal(true)}>
