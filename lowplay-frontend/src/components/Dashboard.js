@@ -57,9 +57,9 @@ const Dashboard = () => {
     }
 
     const getLevel = (coins) => {
-        if (coins >= 200) return 'Oro';
-        if (coins >= 100) return 'Plata';
-        return 'Bronce';
+        if (coins >= 200) return 'Oro 🥇';
+        if (coins >= 100) return 'Plata 🥈';
+        return 'Bronce 🥉';
       };
   };
   
