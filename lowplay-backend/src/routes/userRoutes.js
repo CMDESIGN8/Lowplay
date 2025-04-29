@@ -10,7 +10,7 @@ router.post('/login', login);
 // Ruta privada
 router.get('/profile', authenticateToken, getProfile);
 router.put('/profile', authenticateToken, editProfile); // 👈 Nueva ruta para actualizar perfil
-router.put('/complete-profile', authenticateToken, completeProfile); // Completar el perfil y sumar lowcoins
+// router.put('/complete-profile', authenticateToken, completeProfile);
 
 
 
