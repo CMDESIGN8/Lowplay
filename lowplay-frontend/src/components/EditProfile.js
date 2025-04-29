@@ -1,52 +1,94 @@
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useState } from 'react';
 
 const EditProfile = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+  });
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(true);
 
-  const handleSave = async () => {
+  const token = localStorage.getItem('token');
+
+  // Cargar datos actuales del usuario
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res = await axios.get('/api/profile', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setFormData({
+          name: res.data.user.name,
+          email: res.data.user.email,
+        });
+      } catch (error) {
+        console.error('Error al cargar el perfil:', error);
+        setMessage('Error al cargar el perfil');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProfile();
+  }, [token]);
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setMessage('');
     try {
-      const response = await axios.put('/api/usuarios/edit-profile', {
-        name,
-        email
+      const res = await axios.put('/api/profile', formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
-  
-      console.log('Respuesta completa del servidor:', response.data); // 👈
-  
-      if (response.data && response.data.message) {
-        alert(response.data.message);
-      } else {
-        alert('Perfil actualizado con éxito (sin mensaje personalizado)');
-      }
-  
+
+      setMessage(res.data.message); // ✅ Mensaje del backend
     } catch (error) {
-      console.error('Error al actualizar el perfil:', error);
-      if (error.response && error.response.data && error.response.data.message) {
-        alert('Error: ' + error.response.data.message);
-      } else {
-        alert('Error desconocido al actualizar perfil');
-      }
+      console.error('Error al editar perfil:', error);
+      setMessage('Error al editar perfil');
     }
   };
-  
+
+  if (loading) return <p>Cargando perfil...</p>;
 
   return (
-    <div className="edit-profile">
+    <div>
       <h2>Editar Perfil</h2>
-      <input
-        type="text"
-        placeholder="Nombre"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <input
-        type="email"
-        placeholder="Correo electrónico"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <button onClick={handleSave}>Guardar cambios</button>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Nombre:</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div>
+          <label>Email:</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <button type="submit">Guardar Cambios</button>
+      </form>
+
+      {message && <p style={{ marginTop: '10px', color: 'green' }}>{message}</p>}
     </div>
   );
 };
