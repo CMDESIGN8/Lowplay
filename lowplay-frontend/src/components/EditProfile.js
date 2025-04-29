@@ -1,34 +1,36 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; // Estilos de react-toastify
+import { ToastContainer, toast } from 'react-toastify'; // Importar react-toastify
+import 'react-toastify/dist/ReactToastify.css'; // Importar los estilos de react-toastify
 
 const EditProfile = () => {
   const [formData, setFormData] = useState({ name: '', email: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Función que maneja el cambio en los campos del formulario
   const handleChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  // Función para manejar el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true); // Marca el estado como "enviando"
 
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('token'); // Obtener token de localStorage
       const res = await axios.put('/api/profile', formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
       // Muestra el mensaje exitoso usando toast
-      toast.success(res.data.message);
+      toast.success(res.data.message); // Muestra el mensaje de éxito
 
       setIsSubmitting(false); // Finaliza el estado de envío
     } catch (err) {
       setIsSubmitting(false); // Finaliza el estado de envío
       console.error(err);
-      toast.error('Hubo un error al actualizar el perfil');
+      toast.error('Hubo un error al actualizar el perfil'); // Muestra el mensaje de error
     }
   };
 
