@@ -38,8 +38,7 @@ const Missions = () => {
             <strong>{m.nombre}</strong>: {m.descripcion} ({m.tipo})<br />
             <div className="mission-reward">
                 <i className="fas fa-coins"></i>
-                {mission.recompensa} Lowcoins
-              
+                           
             <span>Recompensa: {m.recompensa} lowcoins</span><br />
             {m.completada ? (
               <span style={{ color: 'green' }}>✅ Completada</span>
