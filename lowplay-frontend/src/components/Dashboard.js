@@ -84,7 +84,7 @@ const Dashboard = () => {
       <main className="dashboard-main">
       <UserProfile
   user={{
-    username: 'MateoGamer',
+    username: '{user.name}',
     avatar: '/avatars/mateo.png',
     level: 'Plata',
     lowcoins: 120,
