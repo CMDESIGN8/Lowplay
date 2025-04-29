@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Misiones.css'; // Asegúrate de que este archivo esté importado correctamente
+import { Swiper, SwiperSlide } from 'swiper/react'; // Importar Swiper y SwiperSlide
+import 'swiper/swiper-bundle.min.css'; // Estilos de Swiper
+import './Misiones.css';
 
 const Missions = () => {
   const [missions, setMissions] = useState([]);
@@ -33,9 +35,23 @@ const Missions = () => {
   return (
     <div className="missions-container">
       <h3 className="missions-header">Misiones</h3>
-      <div className="missions-list">
-        {missions.slice(0, 3).map((m) => (
-          <div key={m.id} className="mission-item">
+      <Swiper
+        spaceBetween={20}
+        slidesPerView={3}  // Mostrar 3 misiones a la vez
+        loop={true}  // Habilitar el loop para que el slider sea infinito
+        pagination={{ clickable: true }} // Paginación
+        navigation  // Agregar controles de navegación
+        breakpoints={{
+          768: { // Para pantallas más pequeñas (móviles y tablets)
+            slidesPerView: 1, // Mostrar 1 misión por vez en pantallas pequeñas
+          },
+          1024: {
+            slidesPerView: 2, // Mostrar 2 misiones por vez en pantallas medianas
+          },
+        }}
+      >
+        {missions.slice(0, 3).map((m) => (  // Solo mostrar las 3 primeras misiones
+          <SwiperSlide key={m.id} className="mission-item">
             <div className="mission-title">
               <strong>{m.nombre}</strong>
             </div>
@@ -53,9 +69,9 @@ const Missions = () => {
                 <button onClick={() => completeMission(m.id)} className="complete-btn">Completar</button>
               )}
             </div>
-          </div>
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </div>
   );
 };
