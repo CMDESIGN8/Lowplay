@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Misiones.css'; // Asegúrate de que este archivo esté importado correctamente
+import './Misiones.css';
 
 const Missions = () => {
   const [missions, setMissions] = useState([]);
@@ -31,32 +31,28 @@ const Missions = () => {
   }, []);
 
   return (
-    <div className="missions-container">
-      <h3 className="missions-header">Misiones</h3>
-      <div className="missions-list">
-        {missions.slice(0, 3).map((m) => (
-          <div key={m.id} className="mission-item">
-            <div className="mission-title">
-              <strong>{m.nombre}</strong>
-            </div>
-            <div className="mission-description">
-              {m.descripcion} ({m.tipo})
-            </div>
+    <div className="missions-section">
+      <h3>Misiones</h3>
+      <ul>
+        {missions.map((m) => (
+          <li key={m.id}>
+            <strong>{m.nombre}</strong>: {m.descripcion} ({m.tipo})<br />
             <div className="mission-reward">
-              <i className="fas fa-coins"></i>
-              <span>Recompensa: {m.recompensa} lowcoins</span>
+                <i className="fas fa-coins"></i>
+                           
+            <span>Recompensa: {m.recompensa} lowcoins</span><br />
+            {m.completada ? (
+              <span style={{ color: 'green' }}>✅ Completada</span>
+            ) : (
+              <button onClick={() => completeMission(m.id)}>Completar</button>
+            )}
             </div>
-            <div className="mission-status">
-              {m.completada ? (
-                <span style={{ color: 'green' }}>✅ Completada</span>
-              ) : (
-                <button onClick={() => completeMission(m.id)} className="complete-btn">Completar</button>
-              )}
-            </div>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
+
+    
   );
 };
 
