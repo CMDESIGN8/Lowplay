@@ -11,21 +11,25 @@ const EditProfile = () => {
         name,
         email
       });
-
+  
+      console.log('Respuesta completa del servidor:', response.data); // 👈
+  
       if (response.data && response.data.message) {
-        alert(response.data.message);  // Muestra el mensaje que viene del backend
+        alert(response.data.message);
       } else {
-        alert('Perfil actualizado con éxito');
+        alert('Perfil actualizado con éxito (sin mensaje personalizado)');
       }
-
-      // Opcional: recargar el usuario o redirigir si querés
-      // window.location.reload(); 
-
+  
     } catch (error) {
       console.error('Error al actualizar el perfil:', error);
-      alert('Error al actualizar el perfil');
+      if (error.response && error.response.data && error.response.data.message) {
+        alert('Error: ' + error.response.data.message);
+      } else {
+        alert('Error desconocido al actualizar perfil');
+      }
     }
   };
+  
 
   return (
     <div className="edit-profile">
