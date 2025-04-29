@@ -1,85 +1,79 @@
-/* Estilos generales de la sección de misiones */
-.missions-section {
-    padding: 30px;
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0, 191, 255, 0.2);
-    max-width: 900px;
-    margin: 20px auto;
-    color: #fff;
+/* Misiones contenedor principal */
+.missions-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(46, 46, 46, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.2);
   }
   
-  .missions-section h3 {
+  /* Título de la sección */
+  .missions-header {
     text-align: center;
     color: #00bfff;
-    font-size: 2rem;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: 700;
   }
   
-  /* Estilo de cada tarjeta de misión */
-  .mission-card {
-    background: rgba(46, 46, 46, 0.95);
+  /* Lista de misiones */
+  .missions-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  /* Cada misión individual */
+  .mission-item {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
     padding: 20px;
-    margin-bottom: 15px;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0, 191, 255, 0.2);
-    transition: transform 0.3s ease-in-out;
+    width: 280px;
+    box-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
+    color: #fff;
+    text-align: center;
+    transition: transform 0.3s ease;
   }
   
-  .mission-card:hover {
+  .mission-item:hover {
     transform: scale(1.05);
   }
   
-  .mission-card strong {
+  .mission-title {
+    font-size: 20px;
+    font-weight: bold;
     color: #ffeb3b;
-    font-size: 1.2rem;
   }
   
-  .mission-card .mission-reward {
+  .mission-description {
+    margin: 10px 0;
+    font-size: 14px;
+    color: #ccc;
+  }
+  
+  .mission-reward {
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 8px;
-    margin-top: 10px;
-    font-size: 1.1rem;
+    gap: 5px;
     color: #f1c40f;
   }
   
-  .mission-card .mission-reward i {
-    font-size: 1.5rem;
-    color: #f1c40f;
-    animation: coinSpin 2s infinite linear;
-  }
-  
-  /* Botón de completar misión */
-  .mission-card button {
+  .complete-btn {
+    margin-top: 15px;
     background-color: #3498db;
     color: white;
-    padding: 10px 20px;
     border: none;
+    padding: 10px 20px;
     border-radius: 8px;
-    font-size: 16px;
     cursor: pointer;
+    font-size: 16px;
     transition: background-color 0.3s ease;
   }
   
-  .mission-card button:hover {
+  .complete-btn:hover {
     background-color: #2980b9;
-  }
-  
-  /* Estado de misión completada */
-  .mission-card span {
-    font-size: 1.1rem;
-    margin-left: 10px;
-  }
-  
-  .mission-card span[style="color: green;"] {
-    font-weight: bold;
-    color: #2ecc71;
-  }
-  
-  /* Animación de giro para las monedas */
-  @keyframes coinSpin {
-    0% { transform: rotateY(0deg); }
-    100% { transform: rotateY(360deg); }
   }
   
