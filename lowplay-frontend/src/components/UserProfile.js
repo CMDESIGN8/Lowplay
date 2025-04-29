@@ -20,7 +20,7 @@ const UserProfile = ({ user }) => {
       </div>
       <div className="user-info">
         <h2>Bienvenido, {user.username}</h2>
-        <p className="user-level">{getBadge(user.level)} {user.level}</p>
+        <p className="user-level">{getBadge(user.level)} Ranked {user.level}</p>
         <div className="lowcoins-display">
   <i className={`fas fa-coins lowcoins-icon animated-coin coin-${user.level.toLowerCase()}`}></i>
   <span className="lowcoins-count">{user.lowcoins} Lowcoins</span>
@@ -28,17 +28,14 @@ const UserProfile = ({ user }) => {
 
 
 
-        <div className="progress-bar">
-          <div
-            className="progress-fill"
-            style={{ width: `${user.progress || 0}%` }}
-          ></div>
-        </div>
-        <small>Progreso: {user.progress || 0}%</small>
-
-        <button className="edit-button">Editar perfil</button>
-      </div>
-    </div>
+<div className="progress-bar">
+  <div
+    className="progress-fill"
+    style={{ width: `${user.progress || 0}%` }}
+  >
+    <span className="progress-text">{user.progress || 0}%</span>
+  </div>
+</div></div></div>
   );
 };
 
