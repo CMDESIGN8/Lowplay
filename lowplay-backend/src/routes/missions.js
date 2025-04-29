@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../db'); // tu pool de conexión
-const authenticateToken = require('../middleware/auth'); // tu middleware JWT
+const { authenticateToken } = require('../middlewares/authMiddleware');
 
 // GET todas las misiones
 router.get('/', authenticateToken, async (req, res) => {
