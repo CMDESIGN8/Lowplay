@@ -67,7 +67,7 @@ const Missions = () => {
 
       <div className="mission-card">
         <h4>{currentMission.nombre}</h4>
-        <p>{currentMission.descripcion} ({currentMission.tipo})</p>
+        <p>{currentMission.descripcion} Mision: {currentMission.tipo}</p>
         <div className="mission-reward">
           <i className="fas fa-coins"></i>
           <span>Recompensa: {currentMission.recompensa} lowcoins</span>
