@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Misiones.css';
+import { motion, AnimatePresence } from 'framer-motion';
+
 
 const Missions = () => {
   const [missions, setMissions] = useState([]);
@@ -88,34 +90,28 @@ const Missions = () => {
         </div>
       </div>
 
-      <div className="mission-card">
-        <h4>{currentMission.nombre}</h4>
-        <p>{currentMission.descripcion}<br />Tipo de Misión: {currentMission.tipo}</p>
-        <div className="mission-reward">
-          <i className="fas fa-coins"></i>
-          <span>Recompensa: {currentMission.recompensa} lowcoins</span>
-        </div>
-        {currentMission.completada ? (
-          <span className="completed">✅ Completada</span>
-        ) : (
-          <button onClick={() => completeMission(currentMission.id)}>Completar</button>
-        )}
-        <div className="mission-nav">
-  <button
-    onClick={() => setCurrentIndex(prev => prev - 1)}
-    disabled={currentIndex === 0}
+      <AnimatePresence mode="wait">
+  <motion.div
+    key={currentMission.id}
+    className="mission-card"
+    initial={{ opacity: 0, x: 30 }}
+    animate={{ opacity: 1, x: 0 }}
+    exit={{ opacity: 0, x: -30 }}
+    transition={{ duration: 0.4 }}
   >
-    <i className="fas fa-arrow-left"></i> Anterior
-  </button>
-
-  <button
-    onClick={() => setCurrentIndex(prev => prev + 1)}
-    disabled={currentIndex === missions.length - 1}
-  >
-    Siguiente <i className="fas fa-arrow-right"></i>
-  </button>
-</div>
-      </div>
+    <h4>{currentMission.nombre}</h4>
+    <p>{currentMission.descripcion} <br />Tipo de Mision: {currentMission.tipo}</p>
+    <div className="mission-reward">
+      <i className="fas fa-coins"></i>
+      <span>Recompensa: {currentMission.recompensa} lowcoins</span>
+    </div>
+    {currentMission.completada ? (
+      <span className="completed">✅ Completada</span>
+    ) : (
+      <button onClick={() => completeMission(currentMission.id)}>Completar</button>
+    )}
+  </motion.div>
+</AnimatePresence>
     </div>
   );
 };

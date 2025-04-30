@@ -2,7 +2,7 @@
     max-width: 600px;
     margin: 40px auto;
     padding: 25px;
-    background: linear-gradient(145deg, #0c1445, #1d265e);
+    background: rgba(46, 46, 46, 0.8);
     color: #ffffff;
     border-radius: 20px;
     box-shadow: 0 0 20px rgba(0, 191, 255, 0.2);
@@ -187,6 +187,11 @@
     box-shadow: none;
     transform: none;
   }
+  .mission-card {
+    min-height: 200px;
+    transition: all 0.3s ease;
+  }
+  
   
   
   
