@@ -153,10 +153,36 @@
   }
   
   .mission-nav {
-    margin-top: 10px;
+    margin-top: 15px;
     display: flex;
-    gap: 10px;
+    gap: 15px;
     justify-content: center;
+  }
+  
+  .mission-nav button {
+    background: linear-gradient(90deg, #00b2ff, #3dc7ff);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0px 3px 6px rgba(0, 178, 255, 0.3);
+  }
+  
+  .mission-nav button:hover {
+    background: linear-gradient(90deg, #3dc7ff, #00b2ff);
+    transform: scale(1.05);
+  }
+  
+  .mission-nav button:disabled {
+    background: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
   }
   
   
