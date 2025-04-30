@@ -6,9 +6,9 @@ const UserProfile = ({ user }) => {
 
   const getBadge = (level) => {
     switch (level) {
-      case 'Bronce': return 'BRONCE';
-      case 'Plata': return 'PLATA';
-      case 'Oro': return 'ORO';
+      case 'Bronce': return '🥉';
+      case 'Plata': return '🥈';
+      case 'Oro': return '🥇';
       default: return '';
     }
   };
