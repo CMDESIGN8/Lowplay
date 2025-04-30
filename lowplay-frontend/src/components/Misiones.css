@@ -2,7 +2,7 @@
     max-width: 600px;
     margin: 40px auto;
     padding: 25px;
-    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    background: linear-gradient(145deg, #0c1445, #1d265e); 
     color: #ffffff;
     border-radius: 20px;
     box-shadow: 0 0 20px rgba(0, 191, 255, 0.2);
@@ -160,7 +160,7 @@
   }
   
   .mission-nav button {
-    background: transparent;
+    background: linear-gradient(90deg, #48ff00, #3dff47);
     color: white;
     border: none;
     padding: 10px 20px;
@@ -176,7 +176,7 @@
   }
   
   .mission-nav button:hover {
-    background: linear-gradient(90deg, #00610a, #004613);
+    background: linear-gradient(90deg, #3dff4d, #00ff40);
     transform: scale(1.05);
   }
   
@@ -187,11 +187,6 @@
     box-shadow: none;
     transform: none;
   }
-  .mission-card {
-    min-height: 200px;
-    transition: all 0.3s ease;
-  }
-  
   
   
   

@@ -287,3 +287,98 @@
     transform: translateY(0);
   }
 }
+
+/* === Responsive para tablets (≤ 768px) === */
+@media (max-width: 768px) {
+  .dashboard-wrapper {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    justify-content: space-around;
+    padding: 10px;
+  }
+
+  .dashboard-main {
+    padding: 20px;
+  }
+
+  .dashboard-content {
+    padding: 20px;
+    margin: 20px 10px;
+  }
+
+  .Misiones {
+    padding: 10px;
+    margin-top: 20px;
+  }
+
+  .edit-profile-button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .modal {
+    padding: 20px;
+  }
+
+  .modal input {
+    padding: 10px;
+  }
+}
+
+/* === Responsive para móviles (≤ 480px) === */
+@media (max-width: 480px) {
+  .logo {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .menu a {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .dashboard-content h2 {
+    font-size: 20px;
+  }
+
+  .user-info p {
+    font-size: 16px;
+  }
+
+  .lowcoins-display {
+    font-size: 1rem;
+  }
+
+  .lowcoins-icon {
+    font-size: 1.2rem;
+  }
+
+  .modal h3 {
+    font-size: 18px;
+  }
+
+  .modal-buttons {
+    flex-direction: column;
+  }
+
+  .save-button,
+  .cancel-button {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border-width: 6px;
+  }
+
+  .spinner-container p {
+    font-size: 16px;
+  }
+}
