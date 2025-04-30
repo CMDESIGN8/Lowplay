@@ -101,8 +101,8 @@ const Missions = () => {
           <button onClick={() => completeMission(currentMission.id)}>Completar</button>
         )}
         <div className="mission-nav">
-          <button onClick={handlePrev} disabled={currentIndex === 0}>Anterior</button>
-          <button onClick={handleNext} disabled={currentIndex === missions.length - 1}>Siguiente</button>
+          <button onClick={handlePrev} disabled={currentIndex === 0}>← Anterior</button>
+          <button onClick={handleNext} disabled={currentIndex === missions.length - 1}>Siguiente →</button>
         </div>
       </div>
     </div>
