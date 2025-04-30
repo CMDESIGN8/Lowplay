@@ -30,8 +30,8 @@ const UserProfile = ({ user }) => {
         </div>
 
         <div className="wallet-email-info">
-          <p><strong>Wallet:</strong> {user.wallet}</p>
-          <p><strong>Email:</strong> {user.email}</p>
+          <p>Wallet: {user.wallet}</p>
+          <p>Email: {user.email}</p>
         </div>
 
         <div className="progress-bar">

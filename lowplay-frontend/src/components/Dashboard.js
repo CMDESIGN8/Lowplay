@@ -102,15 +102,14 @@ const Dashboard = () => {
   onEditProfile={() => setShowEditModal(true)}
 />
 <div className="particles">
-  {Array.from({ length: 30 }).map((_, i) => (
+  {[...Array(20)].map((_, i) => (
     <div
       key={i}
-      className="particle"
+      className={`particle ${user.level?.toLowerCase()}`}
       style={{
+        top: `${Math.random() * 100}%`,
         left: `${Math.random() * 100}%`,
-        top: `${Math.random() * 100}vh`,
-        animationDuration: `${3 + Math.random() * 5}s`,
-        animationDelay: `${Math.random() * 5}s`
+        animationDelay: `${Math.random() * 6}s`
       }}
     />
   ))}
