@@ -5,6 +5,7 @@ import './Misiones.css';
 const Missions = () => {
   const [missions, setMissions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [dailyProgress, setDailyProgress] = useState({ completed: 0, total: 0 });
 
   const fetchMissions = async () => {
     const token = localStorage.getItem('token');
@@ -12,12 +13,19 @@ const Missions = () => {
       headers: { Authorization: `Bearer ${token}` }
     });
 
-    const orderedMissions = res.data.missions.sort((a, b) => a.id - b.id); // Asegura orden
+    const orderedMissions = res.data.missions.sort((a, b) => a.id - b.id);
     setMissions(orderedMissions);
 
-    // Buscar la primera misión incompleta
-    const next = orderedMissions.findIndex(m => !m.completada);
-    setCurrentIndex(next !== -1 ? next : orderedMissions.length - 1);
+    // Calcular progreso de misiones diarias
+    const dailyMissions = orderedMissions.filter(m => m.tipo === 'diaria');
+    const completed = dailyMissions.filter(m => m.completada).length;
+    setDailyProgress({ completed, total: dailyMissions.length });
+
+    // Buscar primera diaria incompleta
+    const nextDaily = orderedMissions.findIndex(m => m.tipo === 'diaria' && !m.completada);
+    const fallbackNext = orderedMissions.findIndex(m => !m.completada);
+
+    setCurrentIndex(nextDaily !== -1 ? nextDaily : fallbackNext !== -1 ? fallbackNext : 0);
   };
 
   const completeMission = async (missionId) => {
@@ -27,19 +35,7 @@ const Missions = () => {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert(`¡Ganaste ${res.data.recompensa} lowcoins!`);
-
-      // Recargar y avanzar a la siguiente misión
-      const updated = await axios.get('https://lowplay.onrender.com/api/missions', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-
-      const ordered = updated.data.missions.sort((a, b) => a.id - b.id);
-      setMissions(ordered);
-
-      const next = ordered.findIndex((m, idx) => idx > currentIndex && !m.completada);
-      if (next !== -1) {
-        setCurrentIndex(next);
-      }
+      await fetchMissions();
     } catch (err) {
       alert(err.response?.data?.message || 'Error al completar misión');
     }
@@ -49,13 +45,26 @@ const Missions = () => {
     fetchMissions();
   }, []);
 
-  if (!missions.length || currentIndex === -1) return <p>No hay misiones disponibles.</p>;
+  if (!missions.length) return <p>No hay misiones disponibles.</p>;
 
   const currentMission = missions[currentIndex];
 
   return (
     <div className="missions-section">
       <h3>Misiones</h3>
+
+      <div className="daily-progress-bar">
+        <span>
+          Progreso diario: {dailyProgress.completed} / {dailyProgress.total}
+        </span>
+        <div className="progress-bar">
+          <div
+            className="progress-fill"
+            style={{ width: `${(dailyProgress.completed / dailyProgress.total) * 100 || 0}%` }}
+          ></div>
+        </div>
+      </div>
+
       <div className="mission-card">
         <h4>{currentMission.nombre}</h4>
         <p>{currentMission.descripcion} ({currentMission.tipo})</p>

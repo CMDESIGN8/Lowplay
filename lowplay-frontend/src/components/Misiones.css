@@ -91,4 +91,24 @@
     font-weight: bold;
     text-shadow: 0 0 6px #30ffb288;
   }
+
+  .daily-progress-bar {
+    margin-bottom: 1rem;
+  }
+  
+  .progress-bar {
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    height: 20px;
+    width: 100%;
+    margin-top: 4px;
+    overflow: hidden;
+  }
+  
+  .progress-fill {
+    background: linear-gradient(90deg, #ffd700, #ffb700);
+    height: 100%;
+    transition: width 0.3s ease;
+  }
+  
   
