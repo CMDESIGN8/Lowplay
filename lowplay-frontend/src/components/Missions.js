@@ -110,6 +110,21 @@ const Missions = () => {
     ) : (
       <button onClick={() => completeMission(currentMission.id)}>Completar</button>
     )}
+    <div className="mission-nav">
+  <button
+    onClick={() => setCurrentIndex(prev => prev - 1)}
+    disabled={currentIndex === 0}
+  >
+    <i className="fas fa-arrow-left"></i> Anterior
+  </button>
+
+  <button
+    onClick={() => setCurrentIndex(prev => prev + 1)}
+    disabled={currentIndex === missions.length - 1}
+  >
+    Siguiente <i className="fas fa-arrow-right"></i>
+  </button>
+</div>
   </motion.div>
 </AnimatePresence>
     </div>
