@@ -6,9 +6,9 @@ const UserProfile = ({ user }) => {
 
   const getBadge = (level) => {
     switch (level) {
-      case 'Bronce': return '🥉';
-      case 'Plata': return '🥈';
-      case 'Oro': return '🥇';
+      case 'Bronce': return 'BRONCE';
+      case 'Plata': return 'PLATA';
+      case 'Oro': return 'ORO';
       default: return '';
     }
   };
@@ -17,7 +17,7 @@ const UserProfile = ({ user }) => {
     <div className="user-profile-card">
       <div className="user-avatar">
         <img src={user.avatar || '/assets/avatars/mateo.png'} alt="avatar" />
-        <div className="avatar-badge">{getBadge(user.level)}</div>
+        <div className="avatar-badge">{getBadge(user.level)}</div>  
       </div>
 
       <div className="user-info">
