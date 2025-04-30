@@ -95,6 +95,8 @@ const Dashboard = () => {
     avatar: '/assets/avatars/mateo.png',
     level: getLevel(user.lowcoins),
     lowcoins: user.lowcoins,
+    email: user.email,
+    wallet: user.wallet,
     progress: Math.min((user.lowcoins % 100), 100), // por si querés mostrar progreso al siguiente rango
   }}
   onEditProfile={() => setShowEditModal(true)}
