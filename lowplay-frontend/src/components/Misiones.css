@@ -160,7 +160,7 @@
   }
   
   .mission-nav button {
-    background: linear-gradient(90deg, #48ff00, #3dff47);
+    background: transparent;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -176,7 +176,7 @@
   }
   
   .mission-nav button:hover {
-    background: linear-gradient(90deg, #3dff4d, #00ff40);
+    background: linear-gradient(90deg, #03660c, #005014);
     transform: scale(1.05);
   }
   
