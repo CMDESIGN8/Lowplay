@@ -1,123 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 .user-profile-card {
-    display: flex;
-    align-items: center;
-    color: white;
-    border-radius: 20px;
-    padding: 20px;
-    gap: 20px;
-    width: 100%;
-    max-width: 500px;
-    margin: auto;
-    margin-bottom: 30px;
-    background: rgba(46, 46, 46, 0.8);
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
-    animation: fadeIn 0.8s ease-out;
-  }
-  
-  .user-avatar img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 3px solid #fff;
-    object-fit: cover;
-  }
-  
-  .user-info {
-    flex: 1;    
-  }
-  
-  .user-info h2 {
-    margin: 0;
-    font-size: 24px;
-  }
-  
-  .user-level {
-    font-weight: bold;
-    color: #f0e130;
-  }
-  
-  .user-coins {
-    margin: 5px 0;
-  }
-  
-  .progress-bar {
-    background-color: #e0e0e0;
-    border-radius: 20px;
-    overflow: hidden;
-    height: 25px;
-    margin: 10px 0;
-  }
-  
-  .progress-fill {
-    background: linear-gradient(90deg, #3dc7ff, #00b2ff);
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right: 10px;
-    color: white;
-    font-weight: bold;
-    transition: width 0.3s ease;
-  }
-  
-  .progress-text {
-    font-size: 14px;
-  }
-  
-  
-  .edit-button {
-    margin-top: 10px;
-    padding: 6px 14px;
-    background-color: #0084ff;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
-  }
-  
-  .edit-button:hover {
-    background-color: #005fd1;
-  }
+  display: flex;
+  align-items: center;
+  font-family: 'Press Start 2P', cursive;
+  color: white;
+  border-radius: 20px;
+  padding: 20px;
+  gap: 20px;
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  margin-bottom: 30px;
+  background: linear-gradient(145deg, #1f1f1f, #2b2b2b);
+  border: 4px solid gold;
+  box-shadow: 0 0 20px gold, 0 0 60px rgba(255, 215, 0, 0.3);
+  animation: fadeIn 0.8s ease-out;
+  position: relative;
+  overflow: hidden;
+}
 
-  @keyframes coinSpin {
-    0% {
-      transform: rotateY(0deg);
-    }
-    100% {
-      transform: rotateY(360deg);
-    }
-  }
-  
-  .animated-coin {
-    display: inline-block;
-    animation: coinSpin 2s infinite linear;
-  }
+.user-profile-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: linear-gradient(60deg, rgba(255,215,0,0.3), rgba(255,255,255,0.05));
+  pointer-events: none;
+  z-index: 0;
+}
 
-  .coin-bronze {
-    color: #cd7f32;
+.user-avatar img {
+  width: 120px;
+  height: 120px;
+  border-radius: 10%;
+  border: 4px solid gold;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.user-info {
+  flex: 1;
+  z-index: 1;
+}
+
+.user-info h2 {
+  margin: 0;
+  font-size: 16px;
+  text-shadow: 1px 1px 3px #000;
+}
+
+.user-level {
+  font-size: 14px;
+  color: #ffdd57;
+}
+
+.user-coins {
+  margin: 8px 0;
+  font-size: 12px;
+}
+
+.progress-bar {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  height: 18px;
+  margin: 10px 0;
+  border: 1px solid gold;
+}
+
+.progress-fill {
+  background: linear-gradient(90deg, #ffe600, #ffc107);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10px;
+  color: #000;
+  font-weight: bold;
+  font-size: 10px;
+  transition: width 0.3s ease;
+}
+
+.edit-button {
+  margin-top: 12px;
+  padding: 8px 16px;
+  background-color: #ffbb00;
+  border: none;
+  border-radius: 8px;
+  color: black;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0 0 10px #ffbb00;
+  transition: 0.3s;
+}
+
+.edit-button:hover {
+  background-color: #ffaa00;
+  box-shadow: 0 0 20px #ffaa00;
+}
+
+.animated-coin {
+  display: inline-block;
+  animation: coinSpin 2s infinite linear;
+  margin-left: 6px;
+}
+
+@keyframes coinSpin {
+  0% {
+    transform: rotateY(0deg);
   }
-  
-  .coin-silver {
-    color: #c0c0c0;
+  100% {
+    transform: rotateY(360deg);
   }
-  
-  .coin-gold {
-    color: #ffd700;
-  }
-  .progress-fill.bronce {
-    background: linear-gradient(90deg, #cd7f32, #b87333);
-  }
-  
-  .progress-fill.plata {
-    background: linear-gradient(90deg, #c0c0c0, #a9a9a9);
-  }
-  
-  .progress-fill.oro {
-    background: linear-gradient(90deg, #ffd700, #ffb700);
-  }
-  
-  
+}

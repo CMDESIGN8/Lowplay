@@ -24,6 +24,8 @@ const UserProfile = ({ user }) => {
         <div className="lowcoins-display">
   <i className={`fas fa-coins lowcoins-icon animated-coin coin-${user.level.toLowerCase()}`}></i>
   <span className="lowcoins-count">{user.lowcoins} Lowcoins</span>
+  <span>{user.wallet} WALLET</span>
+  <span>{user.email} EMAIL</span>
 </div>
 
 
