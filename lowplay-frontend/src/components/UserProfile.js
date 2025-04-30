@@ -16,7 +16,7 @@ const UserProfile = ({ user }) => {
   return (
     <div className="user-profile-card">
       <div className="user-avatar">
-        <img src={user.avatar || '../assets/avatars/img/1.jpeg'} alt="avatar" />
+        <img src={user.avatar || '/assets/avatars/mateo.png'} alt="avatar" />
       </div>
       <div className="user-info">
         <h2>Bienvenido, {user.username}</h2>
