@@ -35,7 +35,13 @@ const Missions = () => {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert(`¡Ganaste ${res.data.recompensa} lowcoins!`);
-      await fetchMissions();
+      await fetchMissions(); // Actualiza misiones
+
+      // Avanza automáticamente a la siguiente misión
+      setCurrentIndex(prev => {
+        const nextIndex = missions.findIndex((m, i) => i > prev && !m.completada);
+        return nextIndex !== -1 ? nextIndex : prev;
+      });
     } catch (err) {
       alert(err.response?.data?.message || 'Error al completar misión');
     }
@@ -49,6 +55,20 @@ const Missions = () => {
 
   const currentMission = missions[currentIndex];
 
+  const handleNext = () => {
+    if (currentIndex < missions.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
+
+  const progressPercent = (dailyProgress.completed / dailyProgress.total) * 100 || 0;
+
   return (
     <div className="missions-section">
       <h3>Misiones</h3>
@@ -60,14 +80,17 @@ const Missions = () => {
         <div className="progress-bar">
           <div
             className="progress-fill"
-            style={{ width: `${(dailyProgress.completed / dailyProgress.total) * 100 || 0}%` }}
+            style={{
+              width: `${progressPercent}%`,
+              background: 'linear-gradient(90deg, #3dc7ff, #00b2ff)'
+            }}
           ></div>
         </div>
       </div>
 
       <div className="mission-card">
         <h4>{currentMission.nombre}</h4>
-        <p>{currentMission.descripcion} <br></br>Tipo de Mision: {currentMission.tipo}</p>
+        <p>{currentMission.descripcion}<br />Tipo de Misión: {currentMission.tipo}</p>
         <div className="mission-reward">
           <i className="fas fa-coins"></i>
           <span>Recompensa: {currentMission.recompensa} lowcoins</span>
@@ -77,6 +100,10 @@ const Missions = () => {
         ) : (
           <button onClick={() => completeMission(currentMission.id)}>Completar</button>
         )}
+        <div className="mission-nav">
+          <button onClick={handlePrev} disabled={currentIndex === 0}>Anterior</button>
+          <button onClick={handleNext} disabled={currentIndex === missions.length - 1}>Siguiente</button>
+        </div>
       </div>
     </div>
   );
