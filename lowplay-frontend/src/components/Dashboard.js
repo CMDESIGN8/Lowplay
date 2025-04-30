@@ -92,7 +92,7 @@ const Dashboard = () => {
       <UserProfile
   user={{
     username: user.name,
-    avatar: '../avatars/mateo.png',
+    avatar: '..assets/avatars/mateo.png',
     level: getLevel(user.lowcoins),
     lowcoins: user.lowcoins,
     progress: Math.min((user.lowcoins % 100), 100), // por si querés mostrar progreso al siguiente rango
