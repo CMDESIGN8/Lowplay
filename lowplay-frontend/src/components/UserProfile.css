@@ -127,7 +127,7 @@ body {
   position: absolute;
   width: 6px;
   height: 6px;
-  background: gold;
+  background: rgb(0, 162, 255);
   border-radius: 50%;
   opacity: 0.6;
   animation: float 6s infinite linear;
@@ -142,4 +142,38 @@ body {
     transform: translateY(-100vh) scale(0.5);
     opacity: 0;
   }
+}
+
+.card-wrapper {
+  position: relative;
+  max-width: 400px;
+  margin: 40px auto;
+}
+
+.card-border.bronce {
+  border: 4px solid #cd7f32;
+  box-shadow: 0 0 20px rgba(205, 127, 50, 0.4);
+}
+
+.card-border.plata {
+  border: 4px solid #c0c0c0;
+  box-shadow: 0 0 20px rgba(192, 192, 192, 0.4);
+}
+
+.card-border.oro {
+  border: 4px solid #ffd700;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+}
+
+.rank-badge {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  background-color: #222;
+  border-radius: 50%;
+  padding: 12px;
+  border: 3px solid white;
+  font-size: 26px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  z-index: 3;
 }
