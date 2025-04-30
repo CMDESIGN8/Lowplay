@@ -160,7 +160,7 @@
   }
   
   .mission-nav button {
-    background: linear-gradient(90deg, #09ff00, #43ff3d);
+    background: linear-gradient(90deg, #48ff00, #3dff47);
     color: white;
     border: none;
     padding: 10px 20px;
@@ -170,10 +170,13 @@
     cursor: pointer;
     transition: background 0.3s ease, transform 0.2s ease;
     box-shadow: 0px 3px 6px rgba(0, 178, 255, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
   
   .mission-nav button:hover {
-    background: linear-gradient(90deg, #3dff47, #00ff2a);
+    background: linear-gradient(90deg, #3dff4d, #00ff40);
     transform: scale(1.05);
   }
   
@@ -184,6 +187,7 @@
     box-shadow: none;
     transform: none;
   }
+  
   
   
   
