@@ -160,7 +160,7 @@
   }
   
   .mission-nav button {
-    background: linear-gradient(90deg, #1c6100, #082209);
+    background: transparent;
     color: white;
     border: none;
     padding: 10px 20px;
