@@ -288,7 +288,7 @@
   }
 }
 
-/* === Responsive para tablets (≤ 768px) === */
+/* === Responsive para tablets y móviles (≤ 768px) === */
 @media (max-width: 768px) {
   .dashboard-wrapper {
     flex-direction: column;
@@ -307,13 +307,18 @@
   }
 
   .dashboard-content {
+    width: 100%;
+    max-width: none;
     padding: 20px;
-    margin: 20px 10px;
+    margin: 20px auto;
+    box-sizing: border-box;
   }
 
   .Misiones {
-    padding: 10px;
+    width: 100%;
+    padding: 16px;
     margin-top: 20px;
+    box-sizing: border-box;
   }
 
   .edit-profile-button {
