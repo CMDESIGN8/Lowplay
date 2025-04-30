@@ -99,6 +99,20 @@ const Dashboard = () => {
   }}
   onEditProfile={() => setShowEditModal(true)}
 />
+<div className="particles">
+  {Array.from({ length: 30 }).map((_, i) => (
+    <div
+      key={i}
+      className="particle"
+      style={{
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}vh`,
+        animationDuration: `${3 + Math.random() * 5}s`,
+        animationDelay: `${Math.random() * 5}s`
+      }}
+    />
+  ))}
+</div>
         <div className="Misiones">
             <Missions />
             </div>
