@@ -29,7 +29,7 @@ const UserProfile = ({ user }) => {
           )}
         </div>
         <div className="user-info">
-          <h2>{user.name}</h2>
+        <h2>Bienvenido, {user.username}</h2>
           <div className="user-level">Nivel: {user.level}</div>
           <div className="lowcoins-display">
             <i className={`fa-solid fa-coins coin-${normalizedLevel}`}></i>
