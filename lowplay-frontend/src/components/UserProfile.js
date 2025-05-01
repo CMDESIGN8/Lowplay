@@ -1,5 +1,7 @@
 import React from 'react';
 import './UserProfile.css';
+import '@fortawesome/fontawesome-free/css/all.min.css'; // Asegurate de tener FontAwesome
+
 
 const UserProfile = ({ user }) => {
   const getBadge = (level) => {
