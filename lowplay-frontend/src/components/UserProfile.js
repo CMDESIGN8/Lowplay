@@ -2,27 +2,28 @@ import React from 'react';
 import './UserProfile.css';
 
 const UserProfile = ({ user }) => {
-  if (!user) return null;
-
-  const normalizedLevel = (user.level || '').trim().toLowerCase();
-
   const getBadge = (level) => {
-    switch (level?.toLowerCase()) {
-      case 'Bronce': return 'Bruner';
-      case 'Plata': return 'Ppapa';
-      case 'Oro': return 'Oruski';
-      case 'Platino': return 'Diamond';
-      case 'Esmeralda': return 'Perehil';
-      case 'Elite': return 'Eliteed';
+    if (!level) return '';
+    switch (level.toLowerCase().trim()) {
+      case 'bronce': return 'Bruner';
+      case 'plata': return 'Ppapa';
+      case 'oro': return 'Oruski';
+      case 'platino': return 'Diamond';
+      case 'esmeralda': return 'Perehil';
+      case 'elite': return 'Eliteed';
       default: return '';
     }
   };
+
+  const normalizedLevel = user.level?.toLowerCase();
 
   return (
     <div className="user-profile-card">
       <div className="user-avatar">
         <img src={user.avatar || '/assets/avatars/mateo.png'} alt="avatar" />
-        <div className="avatar-badge">{getBadge(user.level)}</div>  
+        {getBadge(user.level) && (
+          <div className="avatar-badge">{getBadge(user.level)}</div>
+        )}
       </div>
 
       <div className="user-info">
@@ -40,13 +41,13 @@ const UserProfile = ({ user }) => {
         </div>
 
         <div className="progress-bar">
-  <div
-    className={`progress-fill ${user.level?.toLowerCase()}`}
-    style={{ width: `${user.progress || 0}%` }}
-  >
-    <span className="progress-text">{user.progress || 0}%</span>
-  </div>
-</div>
+          <div
+            className={`progress-fill ${normalizedLevel}`}
+            style={{ width: `${user.progress || 0}%` }}
+          >
+            <span className="progress-text">{user.progress || 0}%</span>
+          </div>
+        </div>
       </div>
     </div>
   );
