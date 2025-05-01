@@ -213,17 +213,46 @@ body {
   box-shadow: 0 0 10px gold;
 }
 
-.progress-fill.plata {
-  background: linear-gradient(90deg, #c0c0c0 25%, #a9a9a9 50%, #c0c0c0 75%)!important;
+.user-profile-card .progress-bar {
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  height: 24px;
+  width: 100%;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.user-profile-card .progress-fill {
+  height: 100%;
+  line-height: 24px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  animation: shine 2s infinite linear;
+}
+
+/* Efectos por nivel (ajustados con más especificidad) */
+.user-profile-card .progress-fill.oro {
+  background: linear-gradient(90deg, gold 25%, goldenrod 50%, gold 75%);
+  background-size: 200% 100%;
+  box-shadow: 0 0 10px gold;
+}
+
+.user-profile-card .progress-fill.plata {
+  background: linear-gradient(90deg, #c0c0c0 25%, #a9a9a9 50%, #c0c0c0 75%);
   background-size: 200% 100%;
   box-shadow: 0 0 10px #c0c0c0aa;
 }
 
-.progress-fill.bronce {
-  background: linear-gradient(90deg, #cd7f32 25%, #a0522d 50%, #cd7f32 75%)!important;
+.user-profile-card .progress-fill.bronce {
+  background: linear-gradient(90deg, #cd7f32 25%, #a0522d 50%, #cd7f32 75%);
   background-size: 200% 100%;
   box-shadow: 0 0 10px #cd7f32aa;
 }
+
 
 .progress-fill.platino {
   background: linear-gradient(90deg, #e5e4e2 25%, #b0c4de 50%, #e5e4e2 75%)!important;
