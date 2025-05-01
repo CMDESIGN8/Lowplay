@@ -106,21 +106,6 @@
   }
   
   .progress-fill {
-    background: linear-gradient(90deg, #00b2ff, #3dc7ff);
-    height: 100%;
-    transition: width 0.3s ease;
-  }
-
-  .progress-bar {
-    background-color: #e0e0e0;
-    border-radius: 8px;
-    height: 20px;
-    width: 100%;
-    margin-top: 4px;
-    overflow: hidden;
-  }
-  
-  .progress-fill {
     background: linear-gradient(90deg, #3dc7ff, #00b2ff);
     height: 100%;
     transition: width 0.5s ease;
@@ -138,18 +123,6 @@
   @keyframes pop {
     from { transform: scale(1); opacity: 1; }
     to { transform: scale(1.3); opacity: 0.8; }
-  }
-
-  .progress-bar {
-    height: 12px;
-    background-color: #e0e0e0;
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  
-  .progress-fill {
-    height: 100%;
-    transition: width 0.3s ease-in-out;
   }
   
   .mission-nav {
