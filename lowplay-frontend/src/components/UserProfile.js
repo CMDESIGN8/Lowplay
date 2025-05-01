@@ -12,7 +12,7 @@ const UserProfile = ({ user }) => {
       case 'plata': return '🥈';
       case 'oro': return '🥇';
       case 'platino': return '💎';
-      case 'diamante': return '🔷';
+      case 'esmeralda': return '🔷';
       case 'maestro': return '👑';
       default: return '';
     }
