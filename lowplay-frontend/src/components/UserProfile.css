@@ -213,61 +213,51 @@ body {
   box-shadow: 0 0 10px gold;
 }
 
+/* Asegurate de que estos estilos estén en UserProfile.css o mejor aún en un módulo */
+
 .user-profile-card .progress-bar {
   background-color: #e0e0e0;
-  border-radius: 8px;
-  height: 24px;
-  width: 100%;
-  margin-top: 10px;
+  border-radius: 12px;
+  height: 20px;
   overflow: hidden;
+  width: 100%;
+  margin-top: 8px;
 }
 
 .user-profile-card .progress-fill {
   height: 100%;
-  line-height: 24px;
+  transition: width 0.5s ease;
   color: white;
-  font-weight: bold;
   text-align: center;
+  line-height: 20px;
+  font-weight: bold;
   border-radius: 12px;
-  position: relative;
-  overflow: hidden;
   animation: shine 2s infinite linear;
 }
 
-/* Efectos por nivel (ajustados con más especificidad) */
+/* Estilos por nivel */
 .user-profile-card .progress-fill.oro {
-  background: linear-gradient(90deg, gold 25%, goldenrod 50%, gold 75%);
-  background-size: 200% 100%;
-  box-shadow: 0 0 10px gold;
+  background: linear-gradient(90deg, gold, goldenrod);
+  box-shadow: 0 0 8px gold;
 }
 
 .user-profile-card .progress-fill.plata {
-  background: linear-gradient(90deg, #c0c0c0 25%, #a9a9a9 50%, #c0c0c0 75%);
-  background-size: 200% 100%;
-  box-shadow: 0 0 10px #c0c0c0aa;
+  background: linear-gradient(90deg, #c0c0c0, #a9a9a9);
+  box-shadow: 0 0 8px silver;
 }
 
 .user-profile-card .progress-fill.bronce {
-  background: linear-gradient(90deg, #cd7f32 25%, #a0522d 50%, #cd7f32 75%);
-  background-size: 200% 100%;
-  box-shadow: 0 0 10px #cd7f32aa;
+  background: linear-gradient(90deg, #cd7f32, #a0522d);
+  box-shadow: 0 0 8px #cd7f32;
 }
 
-
-.progress-fill.platino {
-  background: linear-gradient(90deg, #e5e4e2 25%, #b0c4de 50%, #e5e4e2 75%)!important;
-  background-size: 200% 100%;
-  box-shadow: 0 0 10px #b0c4deaa;
+/* Animación de brillo */
+@keyframes shine {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
-.progress-fill.diamante {
-  background: linear-gradient(90deg, #b9f2ff 25%, #00ffff 50%, #b9f2ff 75%)!important;
-  background-size: 200% 100%;
-  box-shadow: 0 0 10px #00ffffaa;
-}
-
-.progress-fill.maestro {
-  background: linear-gradient(90deg, #ff00ff 25%, #8b008b 50%, #ff00ff 75%)!important;
-  background-size: 200% 100%;
-  box-shadow: 0 0 10px #ff00ffaa;
-}
