@@ -245,3 +245,48 @@ body {
   background-size: 200% 100%;
   box-shadow: 0 0 10px #ff00ffaa;
 }
+/* Brillo hover en la tarjeta */
+.user-profile-card:hover {
+  box-shadow: 0 0 60px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 102, 255, 0.8);
+  transform: scale(1.02);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Brillo especial por nivel */
+.user-profile-card.bronce { border-color: #cd7f32; }
+.user-profile-card.plata { border-color: #c0c0c0; }
+.user-profile-card.oro { border-color: gold; }
+.user-profile-card.rubi { border-color: #d50032; }
+.user-profile-card.diamante { border-color: #00ffff; }
+.user-profile-card.elite { border-color: #ff00ff; }
+
+/* Glow coin animado por nivel */
+.coin-oro {
+  animation: coinGlow 1.5s infinite alternate;
+  color: gold;
+}
+.coin-plata {
+  animation: coinGlow 1.5s infinite alternate;
+  color: #c0c0c0;
+}
+.coin-bronce {
+  animation: coinGlow 1.5s infinite alternate;
+  color: #cd7f32;
+}
+.coin-rubi {
+  animation: coinGlow 1.5s infinite alternate;
+  color: #d50032;
+}
+.coin-diamante {
+  animation: coinGlow 1.5s infinite alternate;
+  color: #00ffff;
+}
+.coin-elite {
+  animation: coinGlow 1.5s infinite alternate;
+  color: #ff00ff;
+}
+
+@keyframes coinGlow {
+  0% { text-shadow: 0 0 4px currentColor; }
+  100% { text-shadow: 0 0 12px currentColor, 0 0 20px currentColor; }
+}
