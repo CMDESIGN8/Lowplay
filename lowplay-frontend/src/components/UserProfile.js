@@ -28,6 +28,20 @@ const UserProfile = ({ user }) => {
         )}
       </div>
 
+      <div className="particles">
+  {[...Array(20)].map((_, i) => (
+    <div
+      key={i}
+      className={`particle ${user.level?.toLowerCase()}`}
+      style={{
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        animationDelay: `${Math.random() * 6}s`
+      }}
+    />
+  ))}
+</div>
+
       <div className="user-info">
         <h2>Bienvenido, {user.username}</h2>
         <p className="user-level">Ranked {user.level}</p>
