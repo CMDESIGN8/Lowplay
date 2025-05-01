@@ -87,7 +87,7 @@ body {
   position: absolute;
   bottom: -12px;
   right: -12px;
-  background: transparent;
+  background: rgb(14, 12, 0);
   border: 3px solid #ffffffaa;
   box-shadow: 0 0 12px rgba(255, 215, 0, 0.8);
   border-radius: 50%;
