@@ -5,28 +5,14 @@ const UserProfile = ({ user }) => {
   const getBadge = (level) => {
     if (!level) return '';
     switch (level.toLowerCase().trim()) {
-      case 'Bronce': return 'Bruner';
-      case 'Plata': return 'Ppapa';
-      case 'Oro': return 'Oruski';
-      case 'Platino': return 'Diamond';
-      case 'Esmeralda': return 'Perehil';
-      case 'Elite': return 'Eliteed';
-      default: return 'S/R';
+      case 'bronce': return 'Bruner';
+      case 'plata': return 'Ppapa';
+      case 'oro': return 'Oruski';
+      case 'platino': return 'Diamond';
+      case 'esmeralda': return 'Perehil';
+      case 'elite': return 'Eliteed';
+      default: return 'L';
     }
-
-    const getBadgeIconClass = (level) => {
-      switch (level?.toLowerCase()) {
-        case 'bronce': return 'fas fa-medal';
-        case 'plata': return 'fas fa-award';
-        case 'oro': return 'fas fa-trophy';
-        case 'diamante': return 'fas fa-gem';
-        case 'esmeralda': return 'fas fa-leaf';
-        case 'elite': return 'fas fa-crown';
-        default: return 'fas fa-user';
-      }
-    };
-    
-    
   };
 
   const normalizedLevel = user.level?.toLowerCase();
@@ -36,9 +22,7 @@ const UserProfile = ({ user }) => {
       <div className="user-avatar">
         <img src={user.avatar || '/assets/avatars/mateo.png'} alt="avatar" />
         {getBadge(user.level) && (
-          <div className="avatar-badge">
-          <i className={getBadgeIconClass(level)} style={{ fontSize: '24px', color: 'gold' }}></i>
-        </div>
+          <div className="avatar-badge">{getBadge(user.level)}</div>
         )}
       </div>
 
