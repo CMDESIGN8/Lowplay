@@ -212,6 +212,16 @@ body {
   background-size: 200% 100%;
   box-shadow: 0 0 10px gold;
 }
+.progress-fill.plata {
+  background: linear-gradient(90deg, rgb(255, 0, 43) 25%, rgb(32, 218, 32) 50%, rgb(25, 0, 255) 75%);
+  background-size: 200% 100%;
+  box-shadow: 0 0 10px gold;
+}
+.progress-fill.bronce {
+  background: linear-gradient(90deg, rgb(38, 0, 255) 25%, rgb(100, 5, 10) 50%, gold 75%);
+  background-size: 200% 100%;
+  box-shadow: 0 0 10px gold;
+}
 
 /* Asegurate de que estos estilos estén en UserProfile.css o mejor aún en un módulo */
 

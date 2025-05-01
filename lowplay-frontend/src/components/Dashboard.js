@@ -16,8 +16,11 @@ const Dashboard = () => {
   const token = localStorage.getItem('token');
 
   const getLevel = (coins) => {
-    if (coins >= 200) return ' ORO';
-    if (coins >= 100) return ' 🥈';
+    if (coins >= 1000) return ' ELITE';
+    if (coins >= 800) return ' DIAMANTE';
+    if (coins >= 600) return ' ESMERALDA';
+    if (coins >= 400) return ' ORO';
+    if (coins >= 200) return ' PLATA';
     return ' 🥉';
   };
 
