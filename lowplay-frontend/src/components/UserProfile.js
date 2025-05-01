@@ -38,7 +38,7 @@ const UserProfile = ({ user }) => {
 
         <div className="wallet-email-info">
           <p>Socio: {user.id}</p>
-          <p>Email: {user.email}</p>
+          <p>Wallet: {user.wallet}</p>
         </div>
 
         <div className="progress-bar">

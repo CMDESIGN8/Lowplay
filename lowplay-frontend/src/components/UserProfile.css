@@ -307,3 +307,26 @@ body {
   flex: 1;
 }
 
+.user-profile-card.bronce {
+  background: linear-gradient(135deg, #3e2f1f, #5a3c24); /* tonos bronce */
+}
+
+.user-profile-card.plata {
+  background: linear-gradient(135deg, #b0b0b0, #d3d3d3); /* tonos plata */
+}
+
+.user-profile-card.oro {
+  background: linear-gradient(135deg, #ffd700, #ffa500); /* tonos dorados */
+}
+
+.user-profile-card.rubi {
+  background: linear-gradient(135deg, #8b0000, #c41e3a); /* tonos rubí */
+}
+
+.user-profile-card.diamante {
+  background: linear-gradient(135deg, #b9f2ff, #00ffff); /* tonos diamante */
+}
+
+.user-profile-card.elite {
+  background: linear-gradient(135deg, #800080, #ff00ff); /* tonos elite */
+}
