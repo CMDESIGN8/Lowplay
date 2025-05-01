@@ -37,6 +37,10 @@ body {
   z-index: -1;
 }
 
+.wallet-email-info p {
+text-shadow: 1px 1px 3px black;
+}
+
 @keyframes pulse {
   0%, 100% {
     opacity: 0.2;
