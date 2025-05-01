@@ -42,6 +42,7 @@ const UserProfile = ({ user }) => {
           <div className="progress-bar">
             <div className={`progress-fill ${normalizedLevel}`} style={{ width: `${user.progress}%` }}>
               {user.progress}%
+              <p>Socio Nº: {user.id}</p>
             </div>
           </div>
         </div>

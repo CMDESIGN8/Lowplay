@@ -100,6 +100,7 @@ const Dashboard = () => {
     lowcoins: user.lowcoins,
     email: user.email,
     wallet: user.wallet,
+    id: user.id,
     progress: Math.min((user.lowcoins % 100), 100), // por si querés mostrar progreso al siguiente rango
   }}
   onEditProfile={() => setShowEditModal(true)}
