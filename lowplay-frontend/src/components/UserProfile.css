@@ -225,8 +225,8 @@ body {
   box-shadow: 0 0 10px #cd7f32aa;
 }
 
-.progress-fill.platino {
-  background: linear-gradient(90deg, #e5e4e2 25%, #b0c4de 50%, #e5e4e2 75%);
+.progress-fill.rubi {
+  background: linear-gradient(90deg, #9b111e 25%, #d50032 50%, #9b111e 75%);
   background-size: 200% 100%;
   box-shadow: 0 0 10px #b0c4deaa;
 }
@@ -237,7 +237,7 @@ body {
   box-shadow: 0 0 10px #00ffffaa;
 }
 
-.progress-fill.esmeralda {
+.progress-fill.elite {
   background: linear-gradient(90deg, #ff00ff 25%, #8b008b 50%, #ff00ff 75%);
   background-size: 200% 100%;
   box-shadow: 0 0 10px #ff00ffaa;
