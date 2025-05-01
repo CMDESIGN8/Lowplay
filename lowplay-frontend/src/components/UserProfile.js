@@ -8,11 +8,11 @@ const UserProfile = ({ user }) => {
     if (!level) return '';
     switch (level.toLowerCase().trim()) {
       case 'bronce': return '🥉';
-      case 'plata': return 'P';
-      case 'oro': return 'O';
-      case 'platino': return 'D';
-      case 'esmeralda': return 'P';
-      case 'elite': return 'E';
+      case 'plata': return '🥈';
+      case 'oro': return '🥇';
+      case 'diamante': return '💎';
+      case 'rubi': return '♦️';
+      case 'elite': return '👑';
       default: return 'L';
     }
   };
