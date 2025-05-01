@@ -7,7 +7,7 @@ const UserProfile = ({ user }) => {
   const getBadge = (level) => {
     if (!level) return '';
     switch (level.toLowerCase().trim()) {
-      case 'bronce': return 'fas fa-medal';
+      case 'bronce': return '🥉';
       case 'plata': return 'P';
       case 'oro': return 'O';
       case 'platino': return 'D';
