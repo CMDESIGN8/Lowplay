@@ -16,12 +16,12 @@ const Dashboard = () => {
   const token = localStorage.getItem('token');
 
   const getLevel = (coins) => {
-    if (coins >= 1000) return ' 👑';
-    if (coins >= 800) return ' 💎';
-    if (coins >= 600) return ' 🔷';
+    if (coins >= 1000) return ' Elite';
+    if (coins >= 800) return ' Diamante';
+    if (coins >= 600) return ' Esmeralda';
     if (coins >= 400) return ' Oro';
     if (coins >= 200) return ' Plata';
-    return ' 🥉';
+    return ' Bronce';
   };
 
   useEffect(() => {
