@@ -214,31 +214,31 @@ body {
 }
 
 .progress-fill.plata {
-  background: linear-gradient(90deg, #c0c0c0 25%, #a9a9a9 50%, #c0c0c0 75%)!important;;
+  background: linear-gradient(90deg, #c0c0c0 25%, #a9a9a9 50%, #c0c0c0 75%)!important;
   background-size: 200% 100%;
   box-shadow: 0 0 10px #c0c0c0aa;
 }
 
 .progress-fill.bronce {
-  background: linear-gradient(90deg, #cd7f32 25%, #a0522d 50%, #cd7f32 75%)!important;;
+  background: linear-gradient(90deg, #cd7f32 25%, #a0522d 50%, #cd7f32 75%)!important;
   background-size: 200% 100%;
   box-shadow: 0 0 10px #cd7f32aa;
 }
 
 .progress-fill.platino {
-  background: linear-gradient(90deg, #e5e4e2 25%, #b0c4de 50%, #e5e4e2 75%);
+  background: linear-gradient(90deg, #e5e4e2 25%, #b0c4de 50%, #e5e4e2 75%)!important;
   background-size: 200% 100%;
   box-shadow: 0 0 10px #b0c4deaa;
 }
 
 .progress-fill.diamante {
-  background: linear-gradient(90deg, #b9f2ff 25%, #00ffff 50%, #b9f2ff 75%);
+  background: linear-gradient(90deg, #b9f2ff 25%, #00ffff 50%, #b9f2ff 75%)!important;
   background-size: 200% 100%;
   box-shadow: 0 0 10px #00ffffaa;
 }
 
 .progress-fill.maestro {
-  background: linear-gradient(90deg, #ff00ff 25%, #8b008b 50%, #ff00ff 75%);
+  background: linear-gradient(90deg, #ff00ff 25%, #8b008b 50%, #ff00ff 75%)!important;
   background-size: 200% 100%;
   box-shadow: 0 0 10px #ff00ffaa;
 }
