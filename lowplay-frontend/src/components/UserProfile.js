@@ -10,8 +10,8 @@ const UserProfile = ({ user }) => {
       case 'bronce': return '🥉';
       case 'plata': return '🥈';
       case 'oro': return '🥇';
-      case 'diamante': return '💎';
       case 'rubi': return '♦️';
+      case 'diamante': return '💎';
       case 'elite': return '👑';
       default: return 'L';
     }
