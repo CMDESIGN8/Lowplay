@@ -37,7 +37,7 @@ const UserProfile = ({ user }) => {
           </div>
           <div className="wallet-email-info">
           <p>Wallet: {user.wallet}</p>
-          <p>Email: {user.email}</p>
+          <p>Socio Nº: {user.id}</p>
         </div>
           <div className="progress-bar">
             <div className={`progress-fill ${normalizedLevel}`} style={{ width: `${user.progress}%` }}>
