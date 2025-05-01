@@ -4,7 +4,6 @@ import './UserProfile.css';
 const UserProfile = ({ user }) => {
   if (!user) return null;
 
-  // Normaliza el nivel: quita espacios y pasa a minúsculas
   const normalizedLevel = (user.level || '').trim().toLowerCase();
 
   const getBadge = (level) => {
@@ -12,6 +11,9 @@ const UserProfile = ({ user }) => {
       case 'bronce': return '🥉';
       case 'plata': return '🥈';
       case 'oro': return '🥇';
+      case 'platino': return '💎';
+      case 'diamante': return '🔷';
+      case 'maestro': return '👑';
       default: return '';
     }
   };

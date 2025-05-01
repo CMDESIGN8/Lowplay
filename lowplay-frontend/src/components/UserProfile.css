@@ -140,30 +140,6 @@ body {
   color: #ffd700;
 }
 
-/* PROGRESS BAR */
-.progress-bar {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  height: 20px;
-  overflow: hidden;
-  margin: 15px 0;
-  border: 1px solid rgb(248, 248, 245);
-}
-
-
-.progress-fill.bronce {
-  background: linear-gradient(90deg, #cd7f32, #a0522d);
-  box-shadow: 0 0 10px #cd7f32aa;
-}
-.progress-fill.plata {
-  background: linear-gradient(90deg, #c0c0c0, #a9a9a9);
-  box-shadow: 0 0 10px #c0c0c0aa;
-}
-.progress-fill.oro {
-  background: linear-gradient(90deg, #ffd700, #ffb700);
-  box-shadow: 0 0 12px #ffd700aa;
-}
-
 /* PARTICLES METALIZADAS */
 .particles {
   position: fixed;
@@ -197,4 +173,72 @@ body {
     transform: translateY(-100vh) scale(0.5);
     opacity: 0;
   }
+}
+
+.progress-bar {
+  width: 100%;
+  height: 24px;
+  background-color: #eee;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+  line-height: 24px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  animation: shine 2s infinite linear;
+}
+
+/* Efecto brillo tipo "shine" */
+@keyframes shine {
+  0% {
+    background-position: -100px;
+  }
+  100% {
+    background-position: 200px;
+  }
+}
+
+/* Niveles con estilos y brillo animado */
+.progress-fill.oro {
+  background: linear-gradient(90deg, gold 25%, goldenrod 50%, gold 75%);
+  background-size: 200% 100%;
+  box-shadow: 0 0 10px gold;
+}
+
+.progress-fill.plata {
+  background: linear-gradient(90deg, #c0c0c0 25%, #a9a9a9 50%, #c0c0c0 75%);
+  background-size: 200% 100%;
+  box-shadow: 0 0 10px #c0c0c0aa;
+}
+
+.progress-fill.bronce {
+  background: linear-gradient(90deg, #cd7f32 25%, #a0522d 50%, #cd7f32 75%);
+  background-size: 200% 100%;
+  box-shadow: 0 0 10px #cd7f32aa;
+}
+
+.progress-fill.platino {
+  background: linear-gradient(90deg, #e5e4e2 25%, #b0c4de 50%, #e5e4e2 75%);
+  background-size: 200% 100%;
+  box-shadow: 0 0 10px #b0c4deaa;
+}
+
+.progress-fill.diamante {
+  background: linear-gradient(90deg, #b9f2ff 25%, #00ffff 50%, #b9f2ff 75%);
+  background-size: 200% 100%;
+  box-shadow: 0 0 10px #00ffffaa;
+}
+
+.progress-fill.maestro {
+  background: linear-gradient(90deg, #ff00ff 25%, #8b008b 50%, #ff00ff 75%);
+  background-size: 200% 100%;
+  box-shadow: 0 0 10px #ff00ffaa;
 }
