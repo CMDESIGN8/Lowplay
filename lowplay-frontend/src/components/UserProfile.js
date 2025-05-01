@@ -5,12 +5,12 @@ const UserProfile = ({ user }) => {
   const getBadge = (level) => {
     if (!level) return '';
     switch (level.toLowerCase().trim()) {
-      case 'bronce': return 'Bruner';
-      case 'plata': return 'Ppapa';
-      case 'oro': return 'Oruski';
-      case 'platino': return 'Diamond';
-      case 'esmeralda': return 'Perehil';
-      case 'elite': return 'Eliteed';
+      case 'bronce': return 'B';
+      case 'plata': return 'P';
+      case 'oro': return 'O';
+      case 'platino': return 'D';
+      case 'esmeralda': return 'P';
+      case 'elite': return 'E';
       default: return 'L';
     }
   };
