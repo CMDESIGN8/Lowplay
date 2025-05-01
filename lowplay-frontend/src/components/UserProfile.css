@@ -150,17 +150,6 @@ body {
   border: 1px solid rgb(248, 248, 245);
 }
 
-.progress-fill {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 10px;
-  color: #000;
-  font-weight: bold;
-  transition: width 0.3s ease;
-  font-size: 12px;
-}
 
 .progress-fill.bronce {
   background: linear-gradient(90deg, #cd7f32, #a0522d);
