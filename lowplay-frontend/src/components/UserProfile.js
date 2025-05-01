@@ -13,6 +13,20 @@ const UserProfile = ({ user }) => {
       case 'Elite': return 'Eliteed';
       default: return 'S/R';
     }
+
+    const getBadgeIconClass = (level) => {
+      switch (level?.toLowerCase()) {
+        case 'bronce': return 'fas fa-medal';
+        case 'plata': return 'fas fa-award';
+        case 'oro': return 'fas fa-trophy';
+        case 'diamante': return 'fas fa-gem';
+        case 'esmeralda': return 'fas fa-leaf';
+        case 'elite': return 'fas fa-crown';
+        default: return 'fas fa-user';
+      }
+    };
+    
+    
   };
 
   const normalizedLevel = user.level?.toLowerCase();
@@ -22,7 +36,9 @@ const UserProfile = ({ user }) => {
       <div className="user-avatar">
         <img src={user.avatar || '/assets/avatars/mateo.png'} alt="avatar" />
         {getBadge(user.level) && (
-          <div className="avatar-badge">{getBadge(user.level)}</div>
+          <div className="avatar-badge">
+          <i className={getBadgeIconClass(level)} style={{ fontSize: '24px', color: 'gold' }}></i>
+        </div>
         )}
       </div>
 
