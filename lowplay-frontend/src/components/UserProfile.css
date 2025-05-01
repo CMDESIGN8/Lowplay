@@ -214,13 +214,13 @@ body {
 }
 
 .progress-fill.plata {
-  background: linear-gradient(90deg, #c0c0c0 25%, #a9a9a9 50%, #c0c0c0 75%);
+  background: linear-gradient(90deg, #c0c0c0 25%, #a9a9a9 50%, #c0c0c0 75%)!important;;
   background-size: 200% 100%;
   box-shadow: 0 0 10px #c0c0c0aa;
 }
 
 .progress-fill.bronce {
-  background: linear-gradient(90deg, #cd7f32 25%, #a0522d 50%, #cd7f32 75%);
+  background: linear-gradient(90deg, #cd7f32 25%, #a0522d 50%, #cd7f32 75%)!important;;
   background-size: 200% 100%;
   box-shadow: 0 0 10px #cd7f32aa;
 }
