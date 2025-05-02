@@ -20,15 +20,15 @@
     const normalizedLevel = user.level?.toLowerCase();
 
     return (
-      <div className={`user-profile-card ${normalizedLevel}`}>
+      <div className={`user-profile-card horizontal-card ${normalizedLevel}`}>
         <div className="user-card-content">
-          <div className="user-avatar">
+        <div className="avatar-section">
             <img src={user.avatar || '/assets/avatars/mateo.png'} alt="avatar" />
             {getBadge(user.level) && (
               <div className="avatar-badge">{getBadge(user.level)}</div>
             )}
           </div>
-          <div className="user-info">
+          <div className="info-section">
             <h2>Bienvenido, {user.username}</h2>
             <p className="user-level">Ranked {user.level}</p>
     
