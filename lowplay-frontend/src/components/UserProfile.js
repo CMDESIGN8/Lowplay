@@ -33,6 +33,8 @@ const UserProfile = ({ user }) => {
 
         <div className="lowcoins-display">
         <span className="lowcoins-count">LOWCOINS</span>
+        </div>
+        <div className="lowcoins-display">
           <i className={`fa-solid fa-coins coin-${normalizedLevel}`}><br></br></i>
           <span className="lowcoins-count">{user.lowcoins}</span>
         </div>
