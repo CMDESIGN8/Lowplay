@@ -79,10 +79,9 @@ text-shadow: 1px 1px 3px black;
 }
 
 .user-avatar img {
-  width: 120px;
+  width: 100%;
   height: 120px;
   border-radius: 20%;
-  border: 4px solid rgb(0, 102, 255);
   object-fit: cover;
   margin-bottom: 15px;
 }
