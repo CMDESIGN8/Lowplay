@@ -167,7 +167,7 @@ text-shadow: 1px 1px 3px black;
   position: absolute;
   width: 6px;
   height: 6px;
-  background: radial-gradient(circle, #c0c0c0, #8c8c8c);
+  background: radial-gradient(circle, #7f96b1, #2599bd);
   border-radius: 50%;
   opacity: 0.8;
   animation: float 6s infinite linear;
