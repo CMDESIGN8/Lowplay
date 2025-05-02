@@ -137,7 +137,6 @@ body {
   text-shadow:
     2px 2px 0 #000,
     4px 4px 6px #1e90ff;
-  background: linear-gradient(to right, #00e6e6, #1e90ff);
   -webkit-text-fill-color: transparent;
   letter-spacing: 1px;
   text-transform: uppercase;
