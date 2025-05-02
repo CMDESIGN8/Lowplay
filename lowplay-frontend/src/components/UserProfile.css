@@ -174,6 +174,10 @@ body {
   overflow: hidden;
   margin-top: 15px;
   border: 1px solid #555;
+  /* Asegúrate de que no haya propiedades que oculten la barra */
+  opacity: 1;
+  visibility: visible;
+  display: block; /* Asegura que el elemento sea de bloque */
 }
 
 .progress-fill {
