@@ -32,8 +32,9 @@ const UserProfile = ({ user }) => {
         <p className="user-level">Ranked {user.level}</p>
 
         <div className="lowcoins-display">
+        <span className="lowcoins-count">LCOINS</span>
           <i className={`fa-solid fa-coins coin-${normalizedLevel}`}></i>
-          <span className="lowcoins-count">{user.lowcoins} Lowcoins</span>
+          <span className="lowcoins-count">{user.lowcoins}</span>
         </div>
 
         <div className="wallet-email-info">
