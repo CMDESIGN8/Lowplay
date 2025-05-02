@@ -275,3 +275,57 @@ body {
     flex: 1 1 100%;
   }
 }
+
+.user-profile-card.horizontal-card {
+  display: flex;
+  width: 500px;
+  height: 260px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Lado del avatar */
+.avatar-section {
+  width: 50%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: #f3f3f3;
+}
+
+.avatar-section img {
+  height: 100%;
+  object-fit: contain;
+}
+
+.avatar-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(255,255,255,0.8);
+  padding: 4px 6px;
+  border-radius: 6px;
+  font-size: 1.2rem;
+  z-index: 10;
+}
+
+/* Lado de la información */
+.info-section {
+  width: 50%;
+  padding: 16px;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.info-section h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
