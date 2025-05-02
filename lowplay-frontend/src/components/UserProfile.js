@@ -40,6 +40,7 @@ const UserProfile = ({ user }) => {
           <div className="wallet-email-info">
             <p>Socio: {user.id}</p>
             <p>Wallet: {user.wallet}</p>
+            <p>Club: Flores Club Futsal</p>
           </div>
   
           <div className="progress-bar">
@@ -47,9 +48,12 @@ const UserProfile = ({ user }) => {
               {user.progress}%
             </div>
           </div>
+          <div className="proximolevel">
+          <p>Siguiente Nivel:</p>
+          </div>
         </div>
       </div>
-    </div>
+    </div>  
   );
 };
 
