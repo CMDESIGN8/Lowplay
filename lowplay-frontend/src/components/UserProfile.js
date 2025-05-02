@@ -41,6 +41,7 @@ const UserProfile = ({ user }) => {
         <div className="wallet-email-info">
           <p>Socio: {user.id}</p>
           <p>Wallet: {user.wallet}</p>
+          <p>CLUB: Flores Club Futsal</p>
         </div>
 
         <div className="progress-bar">
