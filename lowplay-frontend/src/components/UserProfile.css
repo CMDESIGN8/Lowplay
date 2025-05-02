@@ -81,7 +81,7 @@ text-shadow: 1px 1px 3px black;
 .user-avatar {
   position: relative;
   width: 300px;
-  height: 150px;
+  height: 300px;
   flex-shrink: 0;
 }
 
