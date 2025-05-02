@@ -13,17 +13,20 @@ body {
   position: relative;
   background: linear-gradient(135deg, #1f1f1f, #2d2d2d);
   border: 4px solid rgb(0, 102, 255);
-  border-radius: 30px;
-  padding: 30px;
+  border-radius: 1rem;
+  padding: 1.5rem;
   max-width: 700px;
   margin: 60px auto;
   box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
   color: white;
-  text-align: left;
+  align-items: center;
   z-index: 2;
   overflow: hidden;
   font-family: 'Orbitron', sans-serif;
   backdrop-filter: blur(10px);
+  display: flex;  
+  gap: 2rem; /* Espacio entre imagen y texto */
+  flex-wrap: wrap; /* Para que sea responsive */
 }
 
 /* Animación de resplandor */
