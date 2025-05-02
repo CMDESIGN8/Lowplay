@@ -131,10 +131,19 @@ body {
 /* INFO */
 .user-info h2 {
   margin: 10px 0 5px;
-  font-size: 20px;
-  color: #fff;
-  text-shadow: 1px 1px 3px black;
+  font-size: 24px;
+  font-weight: 900;
+  color: #ffffff;
+  text-shadow:
+    2px 2px 0 #000,
+    4px 4px 6px #1e90ff;
+  background: linear-gradient(to right, #00e6e6, #1e90ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
+
 
 .user-level {
   font-size: 30px !important;
