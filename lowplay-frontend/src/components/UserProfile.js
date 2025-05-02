@@ -1,6 +1,7 @@
 import React from 'react';
 import './UserProfile.css';
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css'; // Asegurate de tener FontAwesome
+
 
 const UserProfile = ({ user }) => {
   const getBadge = (level) => {
@@ -19,37 +20,40 @@ const UserProfile = ({ user }) => {
   const normalizedLevel = user.level?.toLowerCase();
 
   return (
-    <div className={`user-profile-card horizontal-card ${normalizedLevel}`}>
-      {/* Avatar a la izquierda */}
-      <div className="avatar-section">
-        <img src={user.avatar || '/assets/avatars/mateo.png'} alt="avatar" />
-        {getBadge(user.level) && (
-          <div className="avatar-badge">{getBadge(user.level)}</div>
-        )}
-      </div>
-
-      {/* Información a la derecha */}
-      <div className="info-section">
-        <h2>Bienvenido {user.username}</h2>
-        <p className="user-level">Ranked {user.level}</p>
-
-        <div className="lowcoins-display">
-          <i className={`fa-solid fa-coins coin-${normalizedLevel}`}></i>
-          <span className="lowcoins-count">{user.lowcoins} Lowcoins</span>
+    <div className={`user-profile-card ${normalizedLevel}`}>
+      <div className="user-card-content">
+        <div className="user-avatar">
+          <img src={user.avatar || '/assets/avatars/mateo.png'} alt="avatar" />
+          {getBadge(user.level) && (
+            <div className="avatar-badge">{getBadge(user.level)}</div>
+          )}
         </div>
-
-        <div className="wallet-email-info">
-          <p>Socio: {user.id}</p>
-          <p>Wallet: {user.wallet}</p>
-        </div>
-
-        <div className="progress-bar">
-          <div className={`progress-fill ${normalizedLevel}`} style={{ width: `${user.progress}%` }}>
-            {user.progress}%
+        <div className="user-info">
+          <h2>Bienvenido, {user.username}</h2>
+          <p className="user-level">Ranked {user.level}</p>
+  
+          <div className="lowcoins-display">
+            <i className={`fa-solid fa-coins coin-${normalizedLevel}`}></i>
+            <span className="lowcoins-count">{user.lowcoins} Lowcoins</span>
+          </div>
+          
+          <div className="wallet-email-info">
+            <p>Socio: {user.id}</p>
+            <p>Wallet: {user.wallet}</p>
+            <p>Club: Flores Club Futsal</p>
+          </div>
+  
+          <div className="progress-bar">
+            <div className={`progress-fill ${normalizedLevel}`} style={{ width: `${user.progress}%` }}>
+              {user.progress}%
+            </div>
+          </div>
+          <div className="proximolevel">
+          <p>Siguiente Nivel:</p>
           </div>
         </div>
       </div>
-    </div>
+    </div>  
   );
 };
 
