@@ -109,7 +109,7 @@ text-shadow: 1px 1px 3px black;
 /* INFO */
 .user-info h2 {
   margin: 10px 0 5px;
-  font-size: 24px;
+  font-size: 20px;
   color: #fff;
   text-shadow: 1px 1px 3px black;
 }
@@ -118,10 +118,10 @@ text-shadow: 1px 1px 3px black;
   font-size: 40px;
   color: #3e9eff;
   margin-bottom: 15px;
-  font-family: 'Rajdhani', sans-serif;
+  font-family:monospace;
   text-shadow: 1px 1px 3px black;
   text-align: center;
-  font-weight:bold ;
+  font-weight: bold ;
 }
 
 /* LOWCOINS */
