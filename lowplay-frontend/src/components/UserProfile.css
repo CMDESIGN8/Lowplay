@@ -134,7 +134,7 @@ text-shadow: 1px 1px 3px black;
   color: #ffd700;
   margin-bottom: 15px;
   font-family: 'Orbitron', sans-serif;
-  text-shadow: 1px 1px 3px black;
+  filter: drop-shadow(1px 1px 2px black);
 }
 
 .lowcoins-display i {
