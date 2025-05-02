@@ -258,10 +258,11 @@ body {
   }
 }
 
+/* Modified CSS to achieve the desired layout */
 .user-profile-card.horizontal-card {
   display: flex;
-  width: 500px;
-  height: 260px;
+  width: 500px; /* Adjust as needed */
+  height: 260px; /* Adjust as needed */
   border-radius: 16px;
   overflow: hidden;
   background: linear-gradient(135deg, #1f1f1f, #2d2d2d);
@@ -304,10 +305,6 @@ body {
   font-weight: bold;
 }
 
-
-
-
-
 /* Lado de la información */
 .info-section {
   width: 50%;
@@ -322,6 +319,24 @@ body {
   margin: 0;
   font-size: 1.5rem;
   font-weight: 600; 
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .user-profile-card.horizontal-card {
+    flex-direction: column;
+    width: auto;
+    height: auto;
+  }
+
+  .avatar-section {
+    width: 100%;
+    height: auto;
+  }
+
+  .info-section {
+    width: 100%;
+  }
 }
 
 .particles {
