@@ -30,7 +30,7 @@ const UserProfile = ({ user }) => {
 
       {/* Información a la derecha */}
       <div className="info-section">
-        <h2>{user.username}</h2>
+        <h2>Bienvenido {user.username}</h2>
         <p className="user-level">Ranked {user.level}</p>
 
         <div className="lowcoins-display">
