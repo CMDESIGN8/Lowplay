@@ -338,3 +338,102 @@ text-shadow: 1px 1px 3px black;
 .user-profile-card.elite {
   background: linear-gradient(135deg, #800080, #ff00ff); /* tonos elite */
 }
+
+
+.user-profile-card.horizontal-card {
+  display: flex;
+  width: 500px;
+  height: 260px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Lado del avatar */
+.avatar-section {
+  width: 50%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: #f3f3f3;
+}
+
+.avatar-section img {
+  height: 100%;
+  object-fit: contain;
+}
+
+.avatar-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(255,255,255,0.8);
+  padding: 4px 6px;
+  border-radius: 6px;
+  font-size: 1.2rem;
+  z-index: 10;
+}
+
+/* Lado de la información */
+.info-section {
+  width: 50%;
+  padding: 16px;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.info-section h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.user-level {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.lowcoins-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+  font-weight: 500;
+}
+
+.wallet-email-info p {
+  margin: 2px 0;
+  font-size: 0.85rem;
+  color: #444;
+}
+
+.progress-bar {
+  height: 8px;
+  background: #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 6px;
+}
+
+.progress-fill {
+  height: 100%;
+  text-align: right;
+  padding-right: 4px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: white;
+}
+
+/* Colores opcionales por nivel */
+.progress-fill.bronce { background: #cd7f32; }
+.progress-fill.plata { background: #c0c0c0; }
+.progress-fill.oro { background: #ffd700; }
+.progress-fill.rubi { background: #e0115f; }
+.progress-fill.diamante { background: #00bfff; }
+.progress-fill.elite { background: #8e44ad; }
