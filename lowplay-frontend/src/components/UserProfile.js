@@ -20,8 +20,8 @@ const UserProfile = ({ user }) => {
   const normalizedLevel = user.level?.toLowerCase();
 
   return (
-    <div className={`user-profile-card ${normalizedLevel}`}>
-      <div className="user-card-content">
+<div className={`user-profile-card ${normalizedLevel}`}>
+<div className="user-card-content">
         <div className="user-avatar">
           <img src={user.avatar || '/assets/avatars/mateo.png'} alt="avatar" />
           {getBadge(user.level) && (
@@ -34,7 +34,7 @@ const UserProfile = ({ user }) => {
   
           <div className="lowcoins-display">
           <i className={`fa-solid fa-coins coin-${normalizedLevel}`}></i>
-            <span className="lowcoins-count">{user.lowcoins} Lowcoins</span>
+          <span className="lowcoins-count">{user.lowcoins} Lowcoins</span>
           </div>
           
           <div className="wallet-email-info">
@@ -44,7 +44,7 @@ const UserProfile = ({ user }) => {
   
           <div className="progress-bar">
           <div className={`progress-fill ${normalizedLevel}`} style={{ width: `${user.progress}%` }}>
-              {user.progress}%
+          {user.progress}%
             </div>
           </div>
         </div>
