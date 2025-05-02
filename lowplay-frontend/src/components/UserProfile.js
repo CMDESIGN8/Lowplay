@@ -39,6 +39,7 @@ const UserProfile = ({ user }) => {
           
           <div className="wallet-email-info">
             <p>Socio: {user.id}</p>
+            <p>Club: Flores Club Futsal</p>
             <p>Wallet: {user.wallet}</p>
           </div>
   
@@ -46,6 +47,9 @@ const UserProfile = ({ user }) => {
           <div className={`progress-fill ${normalizedLevel}`} style={{ width: `${user.progress}%` }}>
           {user.progress}%
             </div>
+          </div>
+          <div className="Siguientelvl">
+            <p>Siguiente Nivel </p>
           </div>
         </div>
       </div>
