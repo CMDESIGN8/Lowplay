@@ -84,6 +84,7 @@ text-shadow: 1px 1px 3px black;
   border-radius: 20%;
   object-fit: cover;
   margin-bottom: 15px;
+  display: block;  
 }
 
 /* Insignia de nivel */
