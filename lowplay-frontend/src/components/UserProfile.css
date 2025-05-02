@@ -15,15 +15,23 @@ body {
   border: 4px solid rgb(0, 102, 255);
   border-radius: 30px;
   padding: 30px;
-  max-width: 400px;
+  max-width: 900px;
   margin: 60px auto;
   box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
   color: white;
-  text-align: center;
   z-index: 2;
   overflow: hidden;
   font-family: 'Orbitron', sans-serif;
   backdrop-filter: blur(10px);
+}
+
+/* Distribución imagen-info lado a lado */
+.user-card-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
 }
 
 /* Animación de resplandor */
@@ -35,10 +43,6 @@ body {
   animation: pulse 4s infinite;
   border-radius: 40px;
   z-index: -1;
-}
-
-.wallet-email-info p {
-text-shadow: 1px 1px 3px black;
 }
 
 @keyframes pulse {
@@ -76,14 +80,17 @@ text-shadow: 1px 1px 3px black;
 .user-avatar {
   position: relative;
   display: inline-block;
+  flex: 1 1 40%;
+  text-align: center;
 }
 
 .user-avatar img {
-  width: 120px;
-  height: 360px;
+  width: 100%;
+  max-width: 200px;
+  height: auto;
   object-fit: contain;
   margin-bottom: 15px;
-  border-radius: 2%;
+  border-radius: 10px;
 }
 
 /* Insignia de nivel */
@@ -107,9 +114,14 @@ text-shadow: 1px 1px 3px black;
 }
 
 /* INFO */
+.user-info {
+  flex: 1 1 55%;
+  text-align: left;
+}
+
 .user-info h2 {
   margin: 10px 0 5px;
-  font-size: 20px;
+  font-size: 24px;
   color: #fff;
   text-shadow: 1px 1px 3px black;
 }
@@ -120,17 +132,15 @@ text-shadow: 1px 1px 3px black;
   margin-bottom: 15px;
   font-family: 'Rajdhani', sans-serif;
   text-shadow: 1px 1px 3px black;
-  text-align: center;
-  font-weight:bold ;
+  font-weight: bold;
 }
 
 /* LOWCOINS */
 .lowcoins-display {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 6px;
-  font-size: 14px;
+  font-size: 16px;
   color: #ffd700;
   margin-bottom: 15px;
   font-family: 'Orbitron', sans-serif;
@@ -146,42 +156,12 @@ text-shadow: 1px 1px 3px black;
 .lowcoins-count {
   font-weight: bold;
   color: #ffd700;
-  filter: drop-shadow(1px 1px 2px black);
 }
 
-/* PARTICLES METALIZADAS */
-.particles {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.particle {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: radial-gradient(circle, #59bec5, #067a8a);
-  border-radius: 50%;
-  opacity: 0.8;
-  animation: float 6s infinite linear;
-  box-shadow: 0 0 6px #e0e0e0;
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-100vh) scale(0.5);
-    opacity: 0;
-  }
+/* INFO ADICIONAL */
+.wallet-email-info p {
+  margin: 4px 0;
+  text-shadow: 1px 1px 3px black;
 }
 
 /* PROGRESS BAR */
@@ -207,7 +187,6 @@ text-shadow: 1px 1px 3px black;
   animation: shine 2s infinite linear;
 }
 
-/* Efecto brillo tipo "shine" */
 @keyframes shine {
   0% {
     background-position: -100px;
@@ -217,7 +196,7 @@ text-shadow: 1px 1px 3px black;
   }
 }
 
-/* Niveles con estilos y brillo animado */
+/* Estilos por nivel */
 .progress-fill.oro {
   background: linear-gradient(90deg, gold 25%, goldenrod 50%, gold 75%);
   background-size: 200% 100%;
@@ -225,7 +204,7 @@ text-shadow: 1px 1px 3px black;
 }
 
 .progress-fill.plata {
-  background: linear-gradient(90deg, #c0c0c0 25%, #a9a9a9 50%, #c0c0c0 75%)!important;
+  background: linear-gradient(90deg, #c0c0c0 25%, #a9a9a9 50%, #c0c0c0 75%) !important;
   background-size: 200% 100%;
   box-shadow: 0 0 10px #c0c0c0aa;
 }
@@ -253,164 +232,25 @@ text-shadow: 1px 1px 3px black;
   background-size: 200% 100%;
   box-shadow: 0 0 10px #ff00ffaa;
 }
-/* Brillo hover en la tarjeta */
+
+/* Brillo hover */
 .user-profile-card:hover {
   box-shadow: 0 0 60px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 102, 255, 0.8);
   transform: scale(1.02);
   transition: all 0.3s ease-in-out;
 }
 
-/* Brillo especial por nivel */
+/* Bordes por nivel */
 .user-profile-card.bronce { border-color: #cd7f32; }
 .user-profile-card.plata { border-color: #c0c0c0; }
 .user-profile-card.oro { border-color: gold; }
-.user-profile-card.rubi { border-color: #d50032; }
+.user-profile-card.rubi { border-color: #9b111e; }
 .user-profile-card.diamante { border-color: #00ffff; }
 .user-profile-card.elite { border-color: #ff00ff; }
 
-/* Glow coin animado por nivel */
-.coin-oro {
-  animation: coinGlow 1.5s infinite alternate;
-  color: gold;
+/* Próximo nivel */
+.proximolevel p {
+  margin-top: 10px;
+  font-size: 16px;
+  text-shadow: 1px 1px 3px black;
 }
-.coin-plata {
-  animation: coinGlow 1.5s infinite alternate;
-  color: #c0c0c0;
-}
-.coin-bronce {
-  animation: coinGlow 1.5s infinite alternate;
-  color: #cd7f32;
-}
-.coin-rubi {
-  animation: coinGlow 1.5s infinite alternate;
-  color: #d50032;
-}
-.coin-diamante {
-  animation: coinGlow 1.5s infinite alternate;
-  color: #00ffff;
-}
-.coin-elite {
-  animation: coinGlow 1.5s infinite alternate;
-  color: #ff00ff;
-}
-
-@keyframes coinGlow {
-  0% { text-shadow: 0 0 4px currentColor; }
-  100% { text-shadow: 0 0 12px currentColor, 0 0 20px currentColor; }
-} 
-
-.user-card-content {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 20px;
-  text-align: left;
-}
-
-.user-avatar {
-  flex-shrink: 0;
-}
-
-.user-info {
-  flex: 1;
-}
-
-.user-profile-card.bronce {
-  background: linear-gradient(135deg, #3e2f1f, #5a3c24); /* tonos bronce */
-}
-
-.user-profile-card.plata {
-  background: linear-gradient(135deg, #b0b0b0, #d3d3d3); /* tonos plata */
-}
-
-.user-profile-card.oro {
-  background: linear-gradient(135deg, #ffd700, #ffa500); /* tonos dorados */
-}
-
-.user-profile-card.rubi {
-  background: linear-gradient(135deg, #8b0000, #c41e3a); /* tonos rubí */
-}
-
-.user-profile-card.diamante {
-  background: linear-gradient(135deg, #b9f2ff, #00ffff); /* tonos diamante */
-}
-
-.user-profile-card.elite {
-  background: linear-gradient(135deg, #800080, #ff00ff); /* tonos elite */
-}
-
-
-.user-profile-card.horizontal-card {
-  display: flex;
-  width: 500px;
-  height: 260px;
-  border-radius: 16px;
-  overflow: hidden;
-  background: transparent;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-}
-
-/* Lado del avatar */
-.avatar-section {
-  width: 50%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  background: #f3f3f3;
-}
-
-.avatar-section img {
-  height: 100%;
-  object-fit: contain;
-}
-
-/* Lado de la información */
-.info-section {
-  width: 50%;
-  padding: 16px;
-  background: transparent;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.info-section h2 {
-  margin: 0;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color:#067a8a;
-}
-
-.user-card-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap; /* Esto lo hace responsive */
-  text-align: left;
-}
-
-.user-avatar {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
-.user-info {
-  flex: 2;
-}
-
-@media (max-width: 768px) {
-  .user-card-content {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .user-info {
-    text-align: center;
-  }
-}
-
