@@ -140,13 +140,13 @@ text-shadow: 1px 1px 3px black;
 .lowcoins-display i {
   font-size: 18px;
   color: #ffd700;
-  text-shadow: 1px 1px 3px black;
+  filter: drop-shadow(1px 1px 2px black);
 }
 
 .lowcoins-count {
   font-weight: bold;
   color: #ffd700;
-  text-shadow: 1px 1px 3px black;
+  filter: drop-shadow(1px 1px 2px black);
 }
 
 /* PARTICLES METALIZADAS */
