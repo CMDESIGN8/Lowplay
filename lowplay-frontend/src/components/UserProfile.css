@@ -166,7 +166,7 @@ body {
 }
 
 /* PROGRESS BAR */
-.progress-bar {
+.user-profile-card .progress-bar {
   width: 100%;
   height: 20px;
   background-color: #222;
@@ -174,13 +174,12 @@ body {
   overflow: hidden;
   margin-top: 15px;
   border: 1px solid #555;
-  /* Asegúrate de que no haya propiedades que oculten la barra */
   opacity: 1;
   visibility: visible;
-  display: block; /* Asegura que el elemento sea de bloque */
+  display: block;
 }
 
-.progress-fill {
+.user-profile-card .progress-bar .progress-fill {
   height: 100%;
   line-height: 20px;
   color: white;
@@ -199,37 +198,37 @@ body {
 }
 
 /* Niveles con estilos y brillo animado */
-.progress-fill.oro {
+.user-profile-card .progress-bar .progress-fill.oro {
   background: linear-gradient(90deg, gold 25%, goldenrod 50%, gold 75%);
   background-size: 200% 100%;
   box-shadow: 0 0 10px gold;
 }
 
-.progress-fill.plata {
+.user-profile-card .progress-bar .progress-fill.plata {
   background: linear-gradient(90deg, #c0c0c0 25%, #a9a9a9 50%, #c0c0c0 75%)!important;
   background-size: 200% 100%;
   box-shadow: 0 0 10px #c0c0c0aa;
 }
 
-.progress-fill.bronce {
-  background: linear-gradient(90deg, #cd7f32 25%, #a0522d 50%, #cd7f32 75%);
+.user-profile-card .progress-bar .progress-fill.bronce {
+  background: linear-gradient(90deg, #cd7f32 25%, sienna 50%, #cd7f32 75%);
   background-size: 200% 100%;
   box-shadow: 0 0 10px #cd7f32aa;
 }
 
-.progress-fill.rubi {
+.user-profile-card .progress-bar .progress-fill.rubi {
   background: linear-gradient(90deg, #9b111e 25%, #d50032 50%, #9b111e 75%);
   background-size: 200% 100%;
   box-shadow: 0 0 10px #b0c4deaa;
 }
 
-.progress-fill.diamante {
+.user-profile-card .progress-bar .progress-fill.diamante {
   background: linear-gradient(90deg, #b9f2ff 25%, #00ffff 50%, #b9f2ff 75%);
   background-size: 200% 100%;
   box-shadow: 0 0 10px #00ffffaa;
 }
 
-.progress-fill.elite {
+.user-profile-card .progress-bar .progress-fill.elite {
   background: linear-gradient(90deg, #ff00ff 25%, #8b008b 50%, #ff00ff 75%);
   background-size: 200% 100%;
   box-shadow: 0 0 10px #ff00ffaa;
