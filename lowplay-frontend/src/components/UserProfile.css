@@ -116,12 +116,13 @@ text-shadow: 1px 1px 3px black;
 }
 
 .user-level {
-  font-size: 28px;
+  font-size: 30px;
   color: #3e9eff;
   margin-bottom: 15px;
   font-family: 'Rajdhani', sans-serif;
   text-shadow: 1px 1px 3px black;
   text-align: center;
+  font-weight:bold ;
 }
 
 /* LOWCOINS */
@@ -297,7 +298,7 @@ text-shadow: 1px 1px 3px black;
 @keyframes coinGlow {
   0% { text-shadow: 0 0 4px currentColor; }
   100% { text-shadow: 0 0 12px currentColor, 0 0 20px currentColor; }
-}
+} 
 
 .user-card-content {
   display: flex;
