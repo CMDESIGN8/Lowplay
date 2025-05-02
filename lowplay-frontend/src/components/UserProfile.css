@@ -81,8 +81,9 @@ text-shadow: 1px 1px 3px black;
 .user-avatar img {
   width: 120px;
   height: 360px;
-  object-fit: cover;
+  object-fit: contain;
   margin-bottom: 15px;
+  border-radius: 2%;
 }
 
 /* Insignia de nivel */
