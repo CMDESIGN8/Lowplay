@@ -80,7 +80,7 @@ text-shadow: 1px 1px 3px black;
 
 .user-avatar img {
   width: 100%;
-  height: 100%;
+  height: 50%;
   border-radius: 20%;
   object-fit: cover;
   margin-bottom: 15px;
@@ -166,7 +166,7 @@ text-shadow: 1px 1px 3px black;
   position: absolute;
   width: 6px;
   height: 6px;
-  background: radial-gradient(circle, #7f96b1, #2599bd);
+  background: radial-gradient(circle, #7593b4, #199ec7);
   border-radius: 50%;
   opacity: 0.8;
   animation: float 6s infinite linear;
