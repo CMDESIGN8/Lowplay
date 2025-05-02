@@ -383,3 +383,34 @@ text-shadow: 1px 1px 3px black;
   font-weight: 600;
   color:#067a8a;
 }
+
+.user-card-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap; /* Esto lo hace responsive */
+  text-align: left;
+}
+
+.user-avatar {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.user-info {
+  flex: 2;
+}
+
+@media (max-width: 768px) {
+  .user-card-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .user-info {
+    text-align: center;
+  }
+}
+
