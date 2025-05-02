@@ -10,14 +10,20 @@ body {
 
 /* CARD */
 .user-profile-card {
-  display: flex;
-  align-items: center;
-  gap: 2rem; /* Espacio entre imagen y texto */
-  padding: 1.5rem;
-  border-radius: 1rem;
-  background-color: #f5f5f5;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  flex-wrap: wrap; /* Para que sea responsive */
+  position: relative;
+  background: linear-gradient(135deg, #1f1f1f, #2d2d2d);
+  border: 4px solid rgb(0, 102, 255);
+  border-radius: 30px;
+  padding: 30px;
+  max-width: 700px;
+  margin: 60px auto;
+  box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
+  color: white;
+  text-align: left;
+  z-index: 2;
+  overflow: hidden;
+  font-family: 'Orbitron', sans-serif;
+  backdrop-filter: blur(10px);
 }
 
 /* Animación de resplandor */
@@ -67,45 +73,39 @@ text-shadow: 1px 1px 3px black;
 }
 
 /* AVATAR */
-.user-profile-card {
-  display: flex;
-  align-items: center;
-  gap: 2rem; /* Espacio entre imagen y texto */
-  padding: 1.5rem;
-  border-radius: 1rem;
-  background-color: #f5f5f5;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  flex-wrap: wrap; /* Para que sea responsive */
-}
-
 .user-avatar {
   position: relative;
-  width: 300px;
-  height: 300px;
-  flex-shrink: 0;
+  display: inline-block;
 }
 
 .user-avatar img {
-  width: 100%;
-  height: 100%;
+  width: 150px;
+  height: 150px;
+  border-radius: 20%;
   object-fit: cover;
+  margin-bottom: 15px;
+  
 }
 
+/* Insignia de nivel */
 .avatar-badge {
   position: absolute;
-  bottom: 0;
-  right: 0;
-  background-color: gold;
+  bottom: -12px;
+  right: -12px;
+  background: rgb(14, 12, 0);
+  border: 3px solid #ffffffaa;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.8);
   border-radius: 50%;
-  padding: 0.5rem;
-  font-size: 1rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: gold;
+  z-index: 3;
+  font-weight: bold;
 }
-
-.user-info {
-  flex: 1;
-  min-width: 250px;
-}
-
 
 /* INFO */
 .user-info h2 {
