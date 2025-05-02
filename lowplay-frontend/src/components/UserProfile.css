@@ -80,7 +80,7 @@ text-shadow: 1px 1px 3px black;
 
 .user-avatar img {
   width: 50%;
-  height:auto;
+  height:10%;
   border-radius: 20%;
   object-fit: cover;
   margin-bottom: 15px;
