@@ -84,7 +84,7 @@ text-shadow: 1px 1px 3px black;
   border-radius: 20%;
   object-fit: cover;
   margin-bottom: 15px;
-  display: block;  
+  
 }
 
 /* Insignia de nivel */
@@ -263,8 +263,8 @@ text-shadow: 1px 1px 3px black;
 
 /* Brillo especial por nivel */
 .user-profile-card.bronce { border-color: #cd7f32; }
-.user-profile-card.plata { border-color: #868585; }
-.user-profile-card.oro { border-color: rgb(175, 149, 1); }
+.user-profile-card.plata { border-color: #5f5d5d; }
+.user-profile-card.oro { border-color: rgb(138, 117, 0); }
 .user-profile-card.rubi { border-color: #d50032; }
 .user-profile-card.diamante { border-color: #00ffff; }
 .user-profile-card.elite { border-color: #680168; }
