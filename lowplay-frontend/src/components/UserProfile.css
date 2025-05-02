@@ -188,7 +188,8 @@ body {
   border-radius: 10px;
   position: relative;
   overflow: hidden;
-  animation: shine 2s infinite linear;
+  animation: shine 2s linear infinite;
+  background: linear-gradient(90deg, #ccc, #eee) !important; /* Un color por defecto para asegurar visibilidad */
 }
 
 /* Efecto brillo tipo "shine" */
@@ -199,39 +200,39 @@ body {
 
 /* Niveles con estilos y brillo animado */
 .user-profile-card .progress-bar .progress-fill.oro {
-  background: linear-gradient(90deg, gold 25%, goldenrod 50%, gold 75%);
-  background-size: 200% 100%;
-  box-shadow: 0 0 10px gold;
+  background: linear-gradient(90deg, gold 25%, goldenrod 50%, gold 75%) !important;
+  background-size: 200% 100% !important;
+  box-shadow: 0 0 10px gold !important;
 }
 
 .user-profile-card .progress-bar .progress-fill.plata {
-  background: linear-gradient(90deg, #c0c0c0 25%, #a9a9a9 50%, #c0c0c0 75%)!important;
-  background-size: 200% 100%;
-  box-shadow: 0 0 10px #c0c0c0aa;
+  background: linear-gradient(90deg, #c0c0c0 25%, #a9a9a9 50%, #c0c0c0 75%) !important;
+  background-size: 200% 100% !important;
+  box-shadow: 0 0 10px #c0c0c0aa !important;
 }
 
 .user-profile-card .progress-bar .progress-fill.bronce {
-  background: linear-gradient(90deg, #cd7f32 25%, sienna 50%, #cd7f32 75%);
-  background-size: 200% 100%;
-  box-shadow: 0 0 10px #cd7f32aa;
+  background: linear-gradient(90deg, #cd7f32 25%, sienna 50%, #cd7f32 75%) !important;
+  background-size: 200% 100% !important;
+  box-shadow: 0 0 10px #cd7f32aa !important;
 }
 
 .user-profile-card .progress-bar .progress-fill.rubi {
-  background: linear-gradient(90deg, #9b111e 25%, #d50032 50%, #9b111e 75%);
-  background-size: 200% 100%;
-  box-shadow: 0 0 10px #b0c4deaa;
+  background: linear-gradient(90deg, #9b111e 25%, #d50032 50%, #9b111e 75%) !important;
+  background-size: 200% 100% !important;
+  box-shadow: 0 0 10px #b0c4deaa !important;
 }
 
 .user-profile-card .progress-bar .progress-fill.diamante {
-  background: linear-gradient(90deg, #b9f2ff 25%, #00ffff 50%, #b9f2ff 75%);
-  background-size: 200% 100%;
-  box-shadow: 0 0 10px #00ffffaa;
+  background: linear-gradient(90deg, #b9f2ff 25%, #00ffff 50%, #b9f2ff 75%) !important;
+  background-size: 200% 100% !important;
+  box-shadow: 0 0 10px #00ffffaa !important;
 }
 
 .user-profile-card .progress-bar .progress-fill.elite {
-  background: linear-gradient(90deg, #ff00ff 25%, #8b008b 50%, #ff00ff 75%);
-  background-size: 200% 100%;
-  box-shadow: 0 0 10px #ff00ffaa;
+  background: linear-gradient(90deg, #f0f 25%, #8b008b 50%, #f0f 75%) !important;
+  background-size: 200% 100% !important;
+  box-shadow: 0 0 10px #ff00ffaa !important;
 }
 
 /* Brillo hover en la tarjeta */
