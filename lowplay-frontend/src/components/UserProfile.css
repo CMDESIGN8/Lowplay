@@ -1,3 +1,4 @@
+/* Estilos para el carnet digital con imagen a la izquierda a cuerpo completo */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Rajdhani:wght@400&display=swap');
 
 body {
@@ -8,37 +9,37 @@ body {
   overflow-x: hidden;
 }
 
-/* CARD */
+/* Contenedor principal de la tarjeta */
 .user-profile-card {
   position: relative;
   background: linear-gradient(135deg, #1f1f1f, #2d2d2d);
   border: 4px solid rgb(0, 102, 255);
   border-radius: 30px;
-  padding: 30px;
-  max-width: 400px;
+  max-width: 600px; /* Ajusta el ancho total de la tarjeta */
+  height: 350px; /* Ajusta la altura total de la tarjeta */
   margin: 60px auto;
   box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
   color: white;
-  text-align: center;
   z-index: 2;
   overflow: hidden;
   font-family: 'Orbitron', sans-serif;
   backdrop-filter: blur(10px);
+  display: flex; /* Para alinear la imagen y la información lado a lado */
 }
 
 /* Animación de resplandor */
-.user-profile-card::before {
+.user-profile-card::before,
+.user-profile-card::after {
   content: '';
   position: absolute;
+  z-index: -1;
+  border-radius: 40px;
+}
+
+.user-profile-card::before {
   inset: -10px;
   background: radial-gradient(circle at center, rgba(255,255,255,0.1), transparent);
   animation: pulse 4s infinite;
-  border-radius: 40px;
-  z-index: -1;
-}
-
-.wallet-email-info p {
-text-shadow: 1px 1px 3px black;
 }
 
 @keyframes pulse {
@@ -54,8 +55,6 @@ text-shadow: 1px 1px 3px black;
 
 /* Efecto shimmer UEFA */
 .user-profile-card::after {
-  content: '';
-  position: absolute;
   top: 0;
   left: -75%;
   width: 50%;
@@ -63,7 +62,6 @@ text-shadow: 1px 1px 3px black;
   background: linear-gradient(120deg, transparent, rgba(255,255,255,0.1), transparent);
   transform: skewX(-20deg);
   animation: shimmer 6s infinite;
-  z-index: -1;
 }
 
 @keyframes shimmer {
@@ -72,25 +70,28 @@ text-shadow: 1px 1px 3px black;
   100% { left: 125%; }
 }
 
-/* AVATAR */
+/* Contenedor de la imagen */
 .user-avatar {
+  flex: 0 0 40%; /* La imagen ocupa el 40% del ancho */
+  height: 100%; /* Ocupa todo el alto de la tarjeta */
   position: relative;
-  display: inline-block;
+  overflow: hidden;
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente si es necesario */
+  align-items: center; /* Centrar verticalmente */
 }
 
 .user-avatar img {
-  width: 100%;
-  height: 100%;
-  border-radius: 20%;
-  object-fit: cover;
-  margin-bottom: 15px;
+  width: auto; /* Ancho automático para mantener la proporción */
+  height: 100%; /* Ocupa todo el alto del contenedor */
+  object-fit: cover; /* La imagen cubre todo el espacio sin deformarse */
 }
 
-/* Insignia de nivel */
+/* Insignia de nivel (mantiene su posición actual) */
 .avatar-badge {
   position: absolute;
-  bottom: -12px;
-  right: -12px;
+  bottom: 10px; /* Ajusta la distancia desde la parte inferior */
+  right: 10px; /* Ajusta la distancia desde la derecha */
   background: rgb(14, 12, 0);
   border: 3px solid #ffffffaa;
   box-shadow: 0 0 12px rgba(255, 215, 0, 0.8);
@@ -106,39 +107,47 @@ text-shadow: 1px 1px 3px black;
   font-weight: bold;
 }
 
-/* INFO */
+/* Contenedor de la información */
+.user-info {
+  flex: 1; /* La información ocupa el resto del espacio */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribuye el espacio verticalmente */
+}
+
 .user-info h2 {
-  margin: 10px 0 5px;
+  margin: 0 0 10px;
   font-size: 24px;
   color: #fff;
   text-shadow: 1px 1px 3px black;
+  text-align: left; /* Alinea el texto a la izquierda */
 }
 
 .user-level {
-  font-size: 40px;
+  font-size: 30px;
   color: #3e9eff;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   font-family: 'Rajdhani', sans-serif;
   text-shadow: 1px 1px 3px black;
-  text-align: center;
-  font-weight:bold ;
+  text-align: left;
+  font-weight: bold;
 }
 
 /* LOWCOINS */
 .lowcoins-display {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 6px;
-  font-size: 20px;
+  font-size: 18px;
   color: #ffd700;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   font-family: 'Orbitron', sans-serif;
   filter: drop-shadow(1px 1px 2px black);
 }
 
 .lowcoins-display i {
-  font-size: 18px;
+  font-size: 20px;
   color: #ffd700;
   filter: drop-shadow(1px 1px 2px black);
 }
@@ -149,59 +158,31 @@ text-shadow: 1px 1px 3px black;
   filter: drop-shadow(1px 1px 2px black);
 }
 
-/* PARTICLES METALIZADAS */
-.particles {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.particle {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: radial-gradient(circle, #6c92b9, #189dc5);
-  border-radius: 50%;
-  opacity: 0.8;
-  animation: float 6s infinite linear;
-  box-shadow: 0 0 6px #e0e0e0;
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-100vh) scale(0.5);
-    opacity: 0;
-  }
+.wallet-email-info p {
+  text-shadow: 1px 1px 3px black;
+  margin-bottom: 5px;
+  text-align: left;
+  font-size: 16px;
 }
 
 /* PROGRESS BAR */
 .progress-bar {
   width: 100%;
-  height: 24px;
+  height: 20px;
   background-color: #222;
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
-  margin-top: 10px;
+  margin-top: 15px;
   border: 1px solid #555;
 }
 
 .progress-fill {
   height: 100%;
-  line-height: 24px;
+  line-height: 20px;
   color: white;
   font-weight: bold;
   text-align: center;
-  border-radius: 12px;
+  border-radius: 10px;
   position: relative;
   overflow: hidden;
   animation: shine 2s infinite linear;
@@ -209,12 +190,8 @@ text-shadow: 1px 1px 3px black;
 
 /* Efecto brillo tipo "shine" */
 @keyframes shine {
-  0% {
-    background-position: -100px;
-  }
-  100% {
-    background-position: 200px;
-  }
+  0% { background-position: -100px; }
+  100% { background-position: 200px; }
 }
 
 /* Niveles con estilos y brillo animado */
@@ -253,6 +230,7 @@ text-shadow: 1px 1px 3px black;
   background-size: 200% 100%;
   box-shadow: 0 0 10px #ff00ffaa;
 }
+
 /* Brillo hover en la tarjeta */
 .user-profile-card:hover {
   box-shadow: 0 0 60px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 102, 255, 0.8);
@@ -269,72 +247,22 @@ text-shadow: 1px 1px 3px black;
 .user-profile-card.elite { border-color: #680168; }
 
 /* Glow coin animado por nivel */
-.coin-oro {
-  animation: coinGlow 1.5s infinite alternate;
-  color: gold;
-}
-.coin-plata {
-  animation: coinGlow 1.5s infinite alternate;
-  color: #c0c0c0;
-}
-.coin-bronce {
-  animation: coinGlow 1.5s infinite alternate;
-  color: #cd7f32;
-}
-.coin-rubi {
-  animation: coinGlow 1.5s infinite alternate;
-  color: #d50032;
-}
-.coin-diamante {
-  animation: coinGlow 1.5s infinite alternate;
-  color: #00ffff;
-}
-.coin-elite {
-  animation: coinGlow 1.5s infinite alternate;
-  color: #ff00ff;
-}
+.coin-oro { animation: coinGlow 1.5s infinite alternate; color: gold; }
+.coin-plata { animation: coinGlow 1.5s infinite alternate; color: #c0c0c0; }
+.coin-bronce { animation: coinGlow 1.5s infinite alternate; color: #cd7f32; }
+.coin-rubi { animation: coinGlow 1.5s infinite alternate; color: #d50032; }
+.coin-diamante { animation: coinGlow 1.5s infinite alternate; color: #00ffff; }
+.coin-elite { animation: coinGlow 1.5s infinite alternate; color: #ff00ff; }
 
 @keyframes coinGlow {
   0% { text-shadow: 0 0 4px currentColor; }
   100% { text-shadow: 0 0 12px currentColor, 0 0 20px currentColor; }
-} 
+}
 
-.user-card-content {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 20px;
+.Siguientelvl p {
   text-align: left;
-}
-
-.user-avatar {
-  flex-shrink: 0;
-}
-
-.user-info {
-  flex: 1;
-}
-
-.user-profile-card.bronce {
-  background: linear-gradient(135deg, #3e2f1f, #5a3c24); /* tonos bronce */
-}
-
-.user-profile-card.plata {
-  background: linear-gradient(135deg, #b0b0b0, #d3d3d3); /* tonos plata */
-}
-
-.user-profile-card.oro {
-  background: linear-gradient(135deg, #ffd700, #ffa500); /* tonos dorados */
-}
-
-.user-profile-card.rubi {
-  background: linear-gradient(135deg, #8b0000, #c41e3a); /* tonos rubí */
-}
-
-.user-profile-card.diamante {
-  background: linear-gradient(135deg, #b9f2ff, #00ffff); /* tonos diamante */
-}
-
-.user-profile-card.elite {
-  background: linear-gradient(135deg, #800080, #ff00ff); /* tonos elite */
+  font-size: 14px;
+  color: #aaa;
+  text-shadow: 1px 1px 2px black;
+  margin-top: 10px;
 }

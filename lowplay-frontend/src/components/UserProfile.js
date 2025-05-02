@@ -20,37 +20,35 @@ const UserProfile = ({ user }) => {
   const normalizedLevel = user.level?.toLowerCase();
 
   return (
-<div className={`user-profile-card ${normalizedLevel}`}>
-<div className="user-card-content">
-        <div className="user-avatar">
-          <img src={user.avatar || '/assets/avatars/mateo.png'} alt="avatar" />
-          {getBadge(user.level) && (
-            <div className="avatar-badge">{getBadge(user.level)}</div>
-          )}
-        </div>
-        <div className="user-info">
-          <h2>Bienvenido, {user.username}</h2>
-          <p className="user-level">Ranked {user.level}</p>
-  
-          <div className="lowcoins-display">
+    <div className={`user-profile-card ${normalizedLevel}`}>
+      <div className="user-avatar">
+        <img src={user.avatar || '/assets/avatars/mateo.png'} alt="avatar" />
+        {getBadge(user.level) && (
+          <div className="avatar-badge">{getBadge(user.level)}</div>
+        )}
+      </div>
+      <div className="user-info">
+        <h2>Bienvenido, {user.username}</h2>
+        <p className="user-level">Ranked {user.level}</p>
+
+        <div className="lowcoins-display">
           <i className={`fa-solid fa-coins coin-${normalizedLevel}`}></i>
           <span className="lowcoins-count">{user.lowcoins} Lowcoins</span>
-          </div>
-          
-          <div className="wallet-email-info">
-            <p>Socio: {user.id}</p>
-            <p>Club: Flores Club Futsal</p>
-            <p>Wallet: {user.wallet}</p>
-          </div>
-  
-          <div className="progress-bar">
+        </div>
+
+        <div className="wallet-email-info">
+          <p>Socio: {user.id}</p>
+          <p>Club: Flores Club Futsal</p>
+          <p>Wallet: {user.wallet}</p>
+        </div>
+
+        <div className="progress-bar">
           <div className={`progress-fill ${normalizedLevel}`} style={{ width: `${user.progress}%` }}>
-          {user.progress}%
-            </div>
+            {user.progress}%
           </div>
-          <div className="Siguientelvl">
-            <p>Siguiente Nivel </p>
-          </div>
+        </div>
+        <div className="Siguientelvl">
+          <p>Siguiente Nivel </p>
         </div>
       </div>
     </div>
