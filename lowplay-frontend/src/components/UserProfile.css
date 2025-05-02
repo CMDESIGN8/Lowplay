@@ -41,8 +41,24 @@ body {
 }
 
 .wallet-email-info p {
-text-shadow: 1px 1px 3px black;
+  text-shadow: 1px 1px 3px #000;
+  font-weight: bold;
+  color: #ffffff;
+  background: linear-gradient(90deg, #1e90ff, #00e6e6);
+  padding: 6px 12px;
+  margin: 6px 0;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.6);
 }
+
+.wallet-email-info i {
+  color: #ffdd57;
+  font-size: 1.2em;
+}
+
 
 @keyframes pulse {
   0%, 100% {

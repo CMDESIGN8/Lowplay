@@ -40,10 +40,10 @@ const UserProfile = ({ user }) => {
         </div>
 
         <div className="wallet-email-info">
-          <p>Socio: {user.id}</p>
-          <p>Club: Flores Club Futsal</p>
-          <p>Wallet: {user.wallet}</p>
-        </div>
+  <p><i className="fa-solid fa-id-card"></i> Socio: {user.id}</p>
+  <p><i className="fa-solid fa-futbol"></i> Club: Flores Club Futsal</p>
+  <p><i className="fa-solid fa-wallet"></i> Wallet: {user.wallet}</p>
+</div>
 
         <div className="progress-bar">
           <div className={`progress-fill ${normalizedLevel}`} style={{ width: `${user.progress}%` }}>
