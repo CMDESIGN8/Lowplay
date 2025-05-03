@@ -52,7 +52,9 @@ const UserProfile = ({ user }) => {
   <p><i className="fa-solid fa-wallet"></i> Wallet: {user.wallet}</p>
 </div>
 
-        
+<br></br>
+<br></br>
+<br></br>
         
       </div>
     </div>
