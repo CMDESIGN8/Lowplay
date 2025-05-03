@@ -295,7 +295,7 @@ body {
 .user-profile-card.oro { border-color: gold; }
 .user-profile-card.rubi { border-color: #d50032; }
 .user-profile-card.diamante { border-color: #00d3d3; }
-.user-profile-card.elite { border-color: #be01be; }
+.user-profile-card.elite { border-color: #f702f7; }
 
 /* Glow coin animado por nivel */
 .coin-oro {
@@ -365,7 +365,7 @@ body {
 }
 
 .user-profile-card.elite {
-  background: linear-gradient(135deg, #800080, #ff00ff); /* tonos elite */
+  background: linear-gradient(135deg, #5f015f, #830083); /* tonos elite */
 }
 
 .Siguientelvl {
