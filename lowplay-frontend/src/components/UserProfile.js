@@ -71,7 +71,7 @@ const UserProfile = ({ user }) => {
           ) : (
             <QRCodeCanvas
               value={`https://lowcargo.club/socio/${user.id}`} // o cualquier info relevante
-              size={64}
+              size={94}
               bgColor="#ffffff"
               fgColor="#000000"
               level="H"
