@@ -22,17 +22,18 @@ const UserProfile = ({ user }) => {
   return (
     <div className={`user-profile-card ${normalizedLevel}`}>
       <div className="user-avatar">
-        <img src={user.avatar || '/assets/avatars/mateo.png'} alt="avatar" />
-        {getBadge(user.level) && (
-          <div className="avatar-badge">{getBadge(user.level)}</div>
-        )}
-      </div>
-      {/* PROGRESS BAR DEBAJO DE LA IMAGEN */}
+  <img src={user.avatar || '/assets/avatars/mateo.png'} alt="avatar" />
+  {getBadge(user.level) && (
+    <div className="avatar-badge">{getBadge(user.level)}</div>
+  )}
+  {/* PROGRESS BAR DEBAJO DE LA IMAGEN */}
   <div className="progress-bar">
     <div className={`progress-fill ${normalizedLevel}`} style={{ width: `${user.progress}%` }}>
       {user.progress}%
     </div>
   </div>
+</div>
+
       <div className="user-info">
         <h2>Bienvenido, {user.username}</h2>
         <p className="user-level">Ranked {user.level}</p>
