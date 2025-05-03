@@ -4,6 +4,11 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import './UserProfile.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { createRoot } from 'react-dom/client';
+
+const root = createRoot(temp);
+root.render(qrReact);
+
 
 const UserProfile = ({ user }) => {
   const carnetRef = useRef();
