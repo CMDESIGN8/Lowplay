@@ -291,7 +291,7 @@ body {
 
 /* Brillo especial por nivel */
 .user-profile-card.bronce { border-color: #cd7f32; }
-.user-profile-card.plata { border-color: #5f5d5d; }
+.user-profile-card.plata { border-color: #c7c6c6; }
 .user-profile-card.oro { border-color: rgb(138, 117, 0); }
 .user-profile-card.rubi { border-color: #d50032; }
 .user-profile-card.diamante { border-color: #007e7e; }
@@ -349,7 +349,7 @@ body {
 }
 
 .user-profile-card.plata {
-  background: linear-gradient(135deg, #b0b0b0, #d3d3d3); /* tonos plata */
+  background: linear-gradient(135deg, #666666, #b0b0b0); /* tonos plata */
 }
 
 .user-profile-card.oro {
