@@ -37,7 +37,7 @@ const UserProfile = ({ user }) => {
       <div className="user-info">
         <h2>Bienvenido, {user.username}</h2>
         <p className="user-level">Ranked {user.level}</p>
-
+        <br></br>
         <div className="lowcoins-display">
         <span className="lowcoins-count">LOWCOINS</span>
         </div>
@@ -46,7 +46,6 @@ const UserProfile = ({ user }) => {
           <span className="lowcoins-count">{user.lowcoins}</span>
         </div>
         <br></br>
-<br></br>
 <br></br>
         <div className="wallet-email-info">
   <p><i className="fa-solid fa-id-card"></i> Socio: {user.id}</p>
