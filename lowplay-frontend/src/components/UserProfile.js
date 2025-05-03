@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import './UserProfile.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
 const UserProfile = ({ user }) => {
@@ -20,17 +19,16 @@ const UserProfile = ({ user }) => {
     }
   };
 
-  const handleGeneratePDF = () => {
+  const handleGeneratePNG = () => {
     const input = cardRef.current;
-    html2canvas(input).then((canvas) => {
+    html2canvas(input, { scale: 2 }).then((canvas) => {
       const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF({
-        orientation: 'portrait',
-        unit: 'px',
-        format: [canvas.width, canvas.height]
-      });
-      pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
-      pdf.save(`Carnet_${user.username}.pdf`);
+      
+      // Crear un enlace para descargar
+      const link = document.createElement('a');
+      link.download = `Carnet_${user.username}.png`;
+      link.href = imgData;
+      link.click();
     });
   };
 
@@ -72,10 +70,10 @@ const UserProfile = ({ user }) => {
         </div>
       </div>
 
-      {/* BOTÓN PARA GENERAR PDF */}
+      {/* BOTÓN PARA GENERAR PNG */}
       <div style={{ marginTop: '20px', textAlign: 'center' }}>
-        <button className="generate-pdf-btn" onClick={handleGeneratePDF}>
-          <i className="fa-solid fa-file-pdf"></i> Generar Carnet Digital
+        <button className="generate-pdf-btn" onClick={handleGeneratePNG}>
+          <i className="fa-solid fa-image"></i> Descargar Carnet como PNG
         </button>
       </div>
     </>
