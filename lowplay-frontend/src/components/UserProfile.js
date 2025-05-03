@@ -26,12 +26,6 @@ const UserProfile = ({ user }) => {
         {getBadge(user.level) && (
           <div className="avatar-badge">{getBadge(user.level)}</div>
         )}
-         <div className="progress-bar">
-          <div className={`progress-fill ${normalizedLevel}`} style={{ width: `${user.progress}%` }}>
-            {user.progress}%
-          </div>
-        </div>
-        
       </div>
       <div className="user-info">
         <h2>Bienvenido, {user.username}</h2>
@@ -51,7 +45,14 @@ const UserProfile = ({ user }) => {
   <p><i className="fa-solid fa-wallet"></i> Wallet: {user.wallet}</p>
 </div>
 
-        
+        <div className="progress-bar">
+          <div className={`progress-fill ${normalizedLevel}`} style={{ width: `${user.progress}%` }}>
+            {user.progress}%
+          </div>
+        </div>
+        <div className="Siguientelvl">
+          <p>Siguiente Nivel </p>
+        </div>
       </div>
     </div>
   );
