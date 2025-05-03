@@ -86,16 +86,15 @@ const UserProfile = ({ user }) => {
             <p><i className="fa-solid fa-futbol"></i> Club: Flores Club Futsal</p>
             <p><i className="fa-solid fa-wallet"></i> Wallet: {user.wallet}</p>
           </div>
-        </div>
-      </div>
-      
-
-      {/* BOTÓN PARA GENERAR PNG */}
+          {/* BOTÓN PARA GENERAR PNG */}
       <div style={{ marginTop: '20px', textAlign: 'center' }}>
         <button className="generate-pdf-btn" onClick={handleGeneratePNG}>
           <i className="fa-solid fa-image"></i> Descargar Carnet como PNG
         </button>
       </div>
+        </div>
+      </div>
+      
     </>
     
   );
