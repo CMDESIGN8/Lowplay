@@ -42,22 +42,6 @@ const UserProfile = ({ user }) => {
 
   return (
     <>
-      <div
-        ref={cardRef}
-        className={`user-profile-card ${normalizedLevel}`}
-        style={{
-          width: '340px',
-          height: '220px',
-          padding: '10px',
-          border: '1px solid #ccc',
-          borderRadius: '12px',
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          background: '#fff',
-        }}
-      >
       <div ref={cardRef} className={`user-profile-card ${normalizedLevel}`}>
         <div className="user-avatar">
           <img src={user.avatar || '/assets/avatars/mateo.png'} alt="avatar" />
@@ -107,7 +91,7 @@ const UserProfile = ({ user }) => {
           </div>
         </div>
       </div>
-      </div>
+      
 
       {/* BOTÓN PARA GENERAR PNG */}
       <div style={{ marginTop: '20px', textAlign: 'center' }}>
