@@ -26,12 +26,7 @@ const UserProfile = ({ user }) => {
         {getBadge(user.level) && (
           <div className="avatar-badge">{getBadge(user.level)}</div>
         )}
-      </div>
-      <div className="user-info">
-        <h2>Bienvenido, {user.username}</h2>
-        <p className="user-level">Ranked {user.level}</p>
-
-        <div className="progress-bar">
+         <div className="progress-bar">
           <div className={`progress-fill ${normalizedLevel}`} style={{ width: `${user.progress}%` }}>
             {user.progress}%
           </div>
@@ -39,6 +34,10 @@ const UserProfile = ({ user }) => {
         <div className="Siguientelvl">
           <p>Siguiente Nivel </p>
         </div>
+      </div>
+      <div className="user-info">
+        <h2>Bienvenido, {user.username}</h2>
+        <p className="user-level">Ranked {user.level}</p>
 
         <div className="lowcoins-display">
         <span className="lowcoins-count">LOWCOINS</span>
