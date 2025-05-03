@@ -57,7 +57,7 @@ const UserProfile = ({ user }) => {
           justifyContent: 'space-between',
           background: '#fff',
         }}
-      ></div>
+      >
       <div ref={cardRef} className={`user-profile-card ${normalizedLevel}`}>
         <div className="user-avatar">
           <img src={user.avatar || '/assets/avatars/mateo.png'} alt="avatar" />
@@ -107,6 +107,7 @@ const UserProfile = ({ user }) => {
           </div>
         </div>
       </div>
+      </div>
 
       {/* BOTÓN PARA GENERAR PNG */}
       <div style={{ marginTop: '20px', textAlign: 'center' }}>
@@ -115,6 +116,7 @@ const UserProfile = ({ user }) => {
         </button>
       </div>
     </>
+    
   );
 };
 
