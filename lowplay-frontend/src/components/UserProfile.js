@@ -31,6 +31,15 @@ const UserProfile = ({ user }) => {
         <h2>Bienvenido, {user.username}</h2>
         <p className="user-level">Ranked {user.level}</p>
 
+        <div className="progress-bar">
+          <div className={`progress-fill ${normalizedLevel}`} style={{ width: `${user.progress}%` }}>
+            {user.progress}%
+          </div>
+        </div>
+        <div className="Siguientelvl">
+          <p>Siguiente Nivel </p>
+        </div>
+
         <div className="lowcoins-display">
         <span className="lowcoins-count">LOWCOINS</span>
         </div>
@@ -45,14 +54,7 @@ const UserProfile = ({ user }) => {
   <p><i className="fa-solid fa-wallet"></i> Wallet: {user.wallet}</p>
 </div>
 
-        <div className="progress-bar">
-          <div className={`progress-fill ${normalizedLevel}`} style={{ width: `${user.progress}%` }}>
-            {user.progress}%
-          </div>
-        </div>
-        <div className="Siguientelvl">
-          <p>Siguiente Nivel </p>
-        </div>
+        
       </div>
     </div>
   );
