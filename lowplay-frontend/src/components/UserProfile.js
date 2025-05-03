@@ -45,16 +45,14 @@ const UserProfile = ({ user }) => {
           <i className={`fa-solid fa-coins coin-${normalizedLevel}`}><br></br></i>
           <span className="lowcoins-count">{user.lowcoins}</span>
         </div>
-
+        <br></br>
+<br></br>
+<br></br>
         <div className="wallet-email-info">
   <p><i className="fa-solid fa-id-card"></i> Socio: {user.id}</p>
   <p><i className="fa-solid fa-futbol"></i> Club: Flores Club Futsal</p>
   <p><i className="fa-solid fa-wallet"></i> Wallet: {user.wallet}</p>
 </div>
-
-<br></br>
-<br></br>
-<br></br>
         
       </div>
     </div>
