@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import './UserProfile.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import { QRCode } from 'qrcode.react';
+import QRCode from 'qrcode.react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
