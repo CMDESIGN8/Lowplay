@@ -400,3 +400,6 @@ body {
     box-shadow: 0 0 10px #4a00e0, 0 0 20px #8e2de2;
   }
 }
+.user-avatar .progress-bar {
+  margin-top: 10px;
+}
