@@ -65,6 +65,22 @@ const UserProfile = ({ user }) => {
           <div className="lowcoins-display">
             <i className={`fa-solid fa-coins coin-${normalizedLevel}`}><br /></i>
             <span className="lowcoins-count">{user.lowcoins}</span>
+            {!showQR ? (
+            <>
+              <p style={{ fontWeight: 'bold' }}>
+                <i className="fa-solid fa-coins"></i> {user.lowcoins} LOWCOINS
+              </p>
+            </>
+          ) : (
+            <QRCodeCanvas
+              value={`https://lowcargo.club/socio/${user.id}`} // o cualquier info relevante
+              size={64}
+              bgColor="#ffffff"
+              fgColor="#000000"
+              level="H"
+              includeMargin
+            />
+          )}
           </div>
           <br />
           <br />
