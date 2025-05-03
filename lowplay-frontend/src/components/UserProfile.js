@@ -52,11 +52,7 @@ const UserProfile = ({ user }) => {
   <p><i className="fa-solid fa-wallet"></i> Wallet: {user.wallet}</p>
 </div>
 
-        <div className="progress-bar">
-          <div className={`progress-fill ${normalizedLevel}`} style={{ width: `${user.progress}%` }}>
-            {user.progress}%
-          </div>
-        </div>
+        
         <div className="Siguientelvl">
           <p>Siguiente Nivel </p>
         </div>
