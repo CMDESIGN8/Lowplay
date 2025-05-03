@@ -53,9 +53,7 @@ const UserProfile = ({ user }) => {
 </div>
 
         
-        <div className="Siguientelvl">
-          <p>Siguiente Nivel </p>
-        </div>
+        
       </div>
     </div>
   );
