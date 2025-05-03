@@ -292,10 +292,10 @@ body {
 /* Brillo especial por nivel */
 .user-profile-card.bronce { border-color: #cd7f32; }
 .user-profile-card.plata { border-color: #c7c6c6; }
-.user-profile-card.oro { border-color: rgb(138, 117, 0); }
+.user-profile-card.oro { border-color: gold; }
 .user-profile-card.rubi { border-color: #d50032; }
-.user-profile-card.diamante { border-color: #007e7e; }
-.user-profile-card.elite { border-color: #680168; }
+.user-profile-card.diamante { border-color: #00d3d3; }
+.user-profile-card.elite { border-color: #be01be; }
 
 /* Glow coin animado por nivel */
 .coin-oro {
@@ -353,15 +353,15 @@ body {
 }
 
 .user-profile-card.oro {
-  background: linear-gradient(135deg, #ffd700, #ffa500); /* tonos dorados */
+  background: linear-gradient(135deg, #ac9200, #b67600); /* tonos dorados */
 }
 
 .user-profile-card.rubi {
-  background: linear-gradient(135deg, #8b0000, #c41e3a); /* tonos rubí */
+  background: linear-gradient(135deg, #630101, #8d1529); /* tonos rubí */
 }
 
 .user-profile-card.diamante {
-  background: linear-gradient(135deg, #b9f2ff, #00ffff); /* tonos diamante */
+  background: linear-gradient(135deg, #7ea6af, #019696); /* tonos diamante */
 }
 
 .user-profile-card.elite {
