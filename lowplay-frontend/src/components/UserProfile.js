@@ -6,10 +6,6 @@ import './UserProfile.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { createRoot } from 'react-dom/client';
 
-const root = createRoot(temp);
-root.render(qrReact);
-
-
 const UserProfile = ({ user }) => {
   const carnetRef = useRef();
 
@@ -29,47 +25,44 @@ const UserProfile = ({ user }) => {
   const normalizedLevel = user.level?.toLowerCase();
 
   const handleGeneratePDF = async () => {
-    // Crear un clon oculto del carnet
     const clone = carnetRef.current.cloneNode(true);
 
-    // Reemplazar el div de lowcoins por el QR en el clon
+    // Quitar lowcoins
     const lowcoinsDisplay = clone.querySelector('.lowcoins-display');
     if (lowcoinsDisplay) {
       lowcoinsDisplay.innerHTML = '';
-      const qrDiv = document.createElement('div');
-      qrDiv.style.background = 'white';
-      qrDiv.style.padding = '10px';
-      qrDiv.style.display = 'inline-block';
-
-      const qrCanvas = document.createElement('div');
-      qrDiv.appendChild(qrCanvas);
-
-      clone.querySelector('.user-info').appendChild(qrDiv);
-
-      // Agregamos el QR al div
-      const qrReact = (
-        <QRCode value={`https://tusitio.com/perfil/${user.id}`} size={100} />
-      );
-
-      const temp = document.createElement('div');
-      qrCanvas.appendChild(temp);
-      const container = document.createElement('div');
-      document.body.appendChild(container);
-      import('react-dom').then((ReactDOM) => {
-        ReactDOM.render(qrReact, temp);
-        setTimeout(() => {
-          html2canvas(clone).then((canvas) => {
-            const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF();
-            const width = pdf.internal.pageSize.getWidth();
-            const height = (canvas.height * width) / canvas.width;
-            pdf.addImage(imgData, 'PNG', 0, 0, width, height);
-            pdf.save('CarnetDigital.pdf');
-            document.body.removeChild(container);
-          });
-        }, 500); // Delay para que cargue el QR
-      });
     }
+
+    // Crear div para el QR
+    const qrContainer = document.createElement('div');
+    qrContainer.style.background = 'white';
+    qrContainer.style.padding = '10px';
+    qrContainer.style.marginTop = '10px';
+    clone.querySelector('.user-info').appendChild(qrContainer);
+
+    // Crear un div temporal para renderizar el QR
+    const tempDiv = document.createElement('div');
+    qrContainer.appendChild(tempDiv);
+    document.body.appendChild(tempDiv); // Necesario para renderizar con React
+
+    // Crear y renderizar el QR
+    const qrReact = <QRCode value={`https://tusitio.com/perfil/${user.id}`} size={100} />;
+    const root = createRoot(tempDiv);
+    root.render(qrReact);
+
+    // Esperar a que se monte el QR antes de capturar
+    setTimeout(() => {
+      html2canvas(clone).then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF();
+        const width = pdf.internal.pageSize.getWidth();
+        const height = (canvas.height * width) / canvas.width;
+        pdf.addImage(imgData, 'PNG', 0, 0, width, height);
+        pdf.save('CarnetDigital.pdf');
+
+        document.body.removeChild(tempDiv);
+      });
+    }, 500); // Espera breve para renderizar QR
   };
 
   return (
