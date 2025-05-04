@@ -358,7 +358,7 @@ body {
 
 .user-profile-card.rubi {
   background: linear-gradient(135deg, #630101, #8d1529); /* tonos rubí */
-  background-image:url('../assets/img/fondo.avif');
+  background-image:url('../assets/img/fondo.png');
 }
 
 .user-profile-card.diamante {
