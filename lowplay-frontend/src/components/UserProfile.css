@@ -363,7 +363,8 @@ body {
 }
 
 .user-profile-card.diamante {
-  background: linear-gradient(135deg, #7ea6af, #019696); /* tonos diamante */
+  background: linear-gradient(135deg, #7ea6af9a, #0196968e), /* tonos diamante */
+  url('../assets/img/fondo.png');                /* imagen debajo */
 }
 
 .user-profile-card.elite {
