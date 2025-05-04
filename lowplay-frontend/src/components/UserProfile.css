@@ -358,7 +358,7 @@ body {
 
 .user-profile-card.rubi {
   background-image: 
-    linear-gradient(135deg, #630101d3, #8d1529ad), /* degradado con transparencia */
+    linear-gradient(135deg, #630101a4, #8d152981), /* degradado con transparencia */
     url('../assets/img/fondo.png');                /* imagen debajo */
 }
 
