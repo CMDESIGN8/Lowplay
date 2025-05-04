@@ -89,7 +89,7 @@ const UserProfile = ({ user }) => {
           {/* BOTÓN PARA GENERAR PNG */}
       <div style={{ marginTop: '20px', textAlign: 'center' }}>
         <button className="generate-pdf-btn" onClick={handleGeneratePNG}>
-          <i className="fa-solid fa-card"></i> Generar Carnet Digital
+          <i className="fa-solid fa-id-card"></i> Generar Carnet Digital
         </button>
       </div>
         </div>

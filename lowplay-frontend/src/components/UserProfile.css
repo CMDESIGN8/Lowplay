@@ -345,15 +345,18 @@ body {
 }
 
 .user-profile-card.bronce {
-  background: linear-gradient(135deg, #3e2f1f, #5a3c24); /* tonos bronce */
+  background: linear-gradient(135deg, #3e2f1fab, #5a3c249a),/* tonos bronce */
+  url('../assets/img/fondo.png');  
 }
 
 .user-profile-card.plata {
-  background: linear-gradient(135deg, #666666, #b0b0b0); /* tonos plata */
+  background: linear-gradient(135deg, #66666698, #b0b0b08e), /* tonos plata */
+  url('../assets/img/fondo.png');  
 }
 
 .user-profile-card.oro {
-  background: linear-gradient(135deg, #ac9200, #b67600); /* tonos dorados */
+  background: linear-gradient(135deg, #ac920091, #b6760094), /* tonos dorados */
+  url('../assets/img/fondo.png');  
 }
 
 .user-profile-card.rubi {
@@ -368,7 +371,8 @@ body {
 }
 
 .user-profile-card.elite {
-  background: linear-gradient(135deg, #5f015f, #830083); /* tonos elite */
+  background: linear-gradient(135deg, #5f015f93, #83008381), /* tonos elite */
+  url('../assets/img/fondo.png');  
 }
 
 .Siguientelvl {
