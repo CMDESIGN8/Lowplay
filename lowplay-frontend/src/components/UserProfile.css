@@ -269,7 +269,6 @@ body {
   background: linear-gradient(90deg, #9b111e 25%, #d50032 50%, #9b111e 75%);
   background-size: 200% 100%;
   box-shadow: 0 0 10px #b0c4deaa;
-  background-image:url('../assets/img/1.jpeg');
 }
 
 .progress-fill.diamante {
@@ -359,6 +358,7 @@ body {
 
 .user-profile-card.rubi {
   background: linear-gradient(135deg, #630101, #8d1529); /* tonos rubí */
+  background-image:url('../assets/img/fondo.avif');
 }
 
 .user-profile-card.diamante {
