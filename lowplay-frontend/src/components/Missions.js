@@ -17,13 +17,13 @@ const Missions = () => {
     const orderedMissions = res.data.missions.sort((a, b) => a.id - b.id);
     setMissions(orderedMissions);
 
-    // Calcular progreso de misiones diarias
+    // Progreso de misiones diarias
     const dailyMissions = orderedMissions.filter(m => m.tipo === 'diaria');
     const completed = dailyMissions.filter(m => m.completada).length;
     setDailyProgress({ completed, total: dailyMissions.length });
 
-    // Buscar primera misión visible e incompleta
-    const nextIndex = orderedMissions.findIndex(m => m.tipo !== 'diaria' || !m.completada);
+    // Buscar primera misión incompleta
+    const nextIndex = orderedMissions.findIndex(m => !m.completada);
     setCurrentIndex(nextIndex !== -1 ? nextIndex : 0);
   };
 
@@ -34,13 +34,7 @@ const Missions = () => {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert(`¡Ganaste ${res.data.recompensa} lowcoins!`);
-      await fetchMissions(); // Actualiza misiones después de completar
-
-      // Avanza automáticamente a la siguiente misión visible
-      setCurrentIndex(prev => {
-        const nextIndex = visibleMissions.findIndex((m, i) => i > prev && (!m.completada || m.tipo !== 'diaria'));
-        return nextIndex !== -1 ? nextIndex : prev;
-      });
+      await fetchMissions(); // Recargar misiones
     } catch (err) {
       alert(err.response?.data?.message || 'Error al completar misión');
     }
@@ -50,13 +44,9 @@ const Missions = () => {
     fetchMissions();
   }, []);
 
-  // Misiones visibles (oculta diarias completadas)
-  const visibleMissions = missions.filter(m => m.tipo !== 'diaria' || !m.completada);
+  if (!missions.length) return <p>No hay misiones disponibles.</p>;
 
-  if (!visibleMissions.length) return <p>No hay misiones disponibles.</p>;
-
-  const currentMission = visibleMissions[currentIndex];
-
+  const currentMission = missions[currentIndex];
   const progressPercent = (dailyProgress.completed / dailyProgress.total) * 100 || 0;
 
   return (
@@ -93,11 +83,13 @@ const Missions = () => {
             <i className="fas fa-coins"></i>
             <span>Recompensa: {currentMission.recompensa} lowcoins</span>
           </div>
+
           {currentMission.completada ? (
             <span className="completed">✅ Completada</span>
           ) : (
             <button onClick={() => completeMission(currentMission.id)}>Completar</button>
           )}
+
           <div className="mission-nav">
             <button
               onClick={() => setCurrentIndex(prev => prev - 1)}
@@ -107,7 +99,7 @@ const Missions = () => {
             </button>
             <button
               onClick={() => setCurrentIndex(prev => prev + 1)}
-              disabled={currentIndex === visibleMissions.length - 1}
+              disabled={currentIndex === missions.length - 1}
             >
               Siguiente <i className="fas fa-arrow-right"></i>
             </button>
