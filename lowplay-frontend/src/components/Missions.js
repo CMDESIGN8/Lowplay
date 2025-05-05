@@ -3,7 +3,6 @@ import axios from 'axios';
 import './Misiones.css';
 import { motion, AnimatePresence } from 'framer-motion';
 
-
 const Missions = () => {
   const [missions, setMissions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -23,11 +22,9 @@ const Missions = () => {
     const completed = dailyMissions.filter(m => m.completada).length;
     setDailyProgress({ completed, total: dailyMissions.length });
 
-    // Buscar primera diaria incompleta
-    const nextDaily = orderedMissions.findIndex(m => m.tipo === 'diaria' && !m.completada);
-    const fallbackNext = orderedMissions.findIndex(m => !m.completada);
-
-    setCurrentIndex(nextDaily !== -1 ? nextDaily : fallbackNext !== -1 ? fallbackNext : 0);
+    // Buscar primera misión visible e incompleta
+    const nextIndex = orderedMissions.findIndex(m => m.tipo !== 'diaria' || !m.completada);
+    setCurrentIndex(nextIndex !== -1 ? nextIndex : 0);
   };
 
   const completeMission = async (missionId) => {
@@ -37,11 +34,11 @@ const Missions = () => {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert(`¡Ganaste ${res.data.recompensa} lowcoins!`);
-      await fetchMissions(); // Actualiza misiones
+      await fetchMissions(); // Actualiza misiones después de completar
 
-      // Avanza automáticamente a la siguiente misión
+      // Avanza automáticamente a la siguiente misión visible
       setCurrentIndex(prev => {
-        const nextIndex = missions.findIndex((m, i) => i > prev && !m.completada);
+        const nextIndex = visibleMissions.findIndex((m, i) => i > prev && (!m.completada || m.tipo !== 'diaria'));
         return nextIndex !== -1 ? nextIndex : prev;
       });
     } catch (err) {
@@ -53,21 +50,12 @@ const Missions = () => {
     fetchMissions();
   }, []);
 
-  if (!missions.length) return <p>No hay misiones disponibles.</p>;
+  // Misiones visibles (oculta diarias completadas)
+  const visibleMissions = missions.filter(m => m.tipo !== 'diaria' || !m.completada);
 
-  const currentMission = missions[currentIndex];
+  if (!visibleMissions.length) return <p>No hay misiones disponibles.</p>;
 
-  const handleNext = () => {
-    if (currentIndex < missions.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    }
-  };
-
-  const handlePrev = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-    }
-  };
+  const currentMission = visibleMissions[currentIndex];
 
   const progressPercent = (dailyProgress.completed / dailyProgress.total) * 100 || 0;
 
@@ -91,42 +79,41 @@ const Missions = () => {
       </div>
 
       <AnimatePresence mode="wait">
-  <motion.div
-    key={currentMission.id}
-    className="mission-card"
-    initial={{ opacity: 0, x: 30 }}
-    animate={{ opacity: 1, x: 0 }}
-    exit={{ opacity: 0, x: -30 }}
-    transition={{ duration: 0.4 }}
-  >
-    <h4>{currentMission.nombre}</h4>
-    <p>{currentMission.descripcion} <br />Tipo de Mision: {currentMission.tipo}</p>
-    <div className="mission-reward">
-      <i className="fas fa-coins"></i>
-      <span>Recompensa: {currentMission.recompensa} lowcoins</span>
-    </div>
-    {currentMission.completada ? (
-      <span className="completed">✅ Completada</span>
-    ) : (
-      <button onClick={() => completeMission(currentMission.id)}>Completar</button>
-    )}
-    <div className="mission-nav">
-  <button
-    onClick={() => setCurrentIndex(prev => prev - 1)}
-    disabled={currentIndex === 0}
-  >
-    <i className="fas fa-arrow-left"></i> Anterior
-  </button>
-
-  <button
-    onClick={() => setCurrentIndex(prev => prev + 1)}
-    disabled={currentIndex === missions.length - 1}
-  >
-    Siguiente <i className="fas fa-arrow-right"></i>
-  </button>
-</div>
-  </motion.div>
-</AnimatePresence>
+        <motion.div
+          key={currentMission.id}
+          className="mission-card"
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -30 }}
+          transition={{ duration: 0.4 }}
+        >
+          <h4>{currentMission.nombre}</h4>
+          <p>{currentMission.descripcion} <br />Tipo de Misión: {currentMission.tipo}</p>
+          <div className="mission-reward">
+            <i className="fas fa-coins"></i>
+            <span>Recompensa: {currentMission.recompensa} lowcoins</span>
+          </div>
+          {currentMission.completada ? (
+            <span className="completed">✅ Completada</span>
+          ) : (
+            <button onClick={() => completeMission(currentMission.id)}>Completar</button>
+          )}
+          <div className="mission-nav">
+            <button
+              onClick={() => setCurrentIndex(prev => prev - 1)}
+              disabled={currentIndex === 0}
+            >
+              <i className="fas fa-arrow-left"></i> Anterior
+            </button>
+            <button
+              onClick={() => setCurrentIndex(prev => prev + 1)}
+              disabled={currentIndex === visibleMissions.length - 1}
+            >
+              Siguiente <i className="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 };
