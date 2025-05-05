@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const Missions = () => {
   const [missions, setMissions] = useState([]);
+  const [visibleMissions, setVisibleMissions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [dailyProgress, setDailyProgress] = useState({ completed: 0, total: 0 });
 
@@ -17,24 +18,36 @@ const Missions = () => {
     const orderedMissions = res.data.missions.sort((a, b) => a.id - b.id);
     setMissions(orderedMissions);
 
-    // Progreso de misiones diarias
     const dailyMissions = orderedMissions.filter(m => m.tipo === 'diaria');
     const completed = dailyMissions.filter(m => m.completada).length;
     setDailyProgress({ completed, total: dailyMissions.length });
 
-    // Buscar primera misión incompleta
-    const nextIndex = orderedMissions.findIndex(m => !m.completada);
+    // Mostrar solo misiones no completadas del día
+    const filtered = orderedMissions.filter(m => !(m.tipo === 'diaria' && m.completada));
+    setVisibleMissions(filtered);
+
+    const nextIndex = filtered.findIndex(m => !m.completada);
     setCurrentIndex(nextIndex !== -1 ? nextIndex : 0);
   };
 
   const completeMission = async (missionId) => {
     const token = localStorage.getItem('token');
     try {
-      const res = await axios.post('https://lowplay.onrender.com/api/missions/complete', { missionId }, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const res = await axios.post(
+        'https://lowplay.onrender.com/api/missions/complete',
+        { missionId },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
       alert(`¡Ganaste ${res.data.recompensa} lowcoins!`);
-      await fetchMissions(); // Recargar misiones
+
+      await fetchMissions();
+
+      // Avanza automáticamente a la siguiente misión visible
+      setCurrentIndex(prev => {
+        const nextIndex = visibleMissions.findIndex((m, i) => i > prev && !m.completada);
+        return nextIndex !== -1 ? nextIndex : prev;
+      });
+
     } catch (err) {
       alert(err.response?.data?.message || 'Error al completar misión');
     }
@@ -44,9 +57,9 @@ const Missions = () => {
     fetchMissions();
   }, []);
 
-  if (!missions.length) return <p>No hay misiones disponibles.</p>;
+  if (!visibleMissions.length) return <p>No hay misiones disponibles por hoy.</p>;
 
-  const currentMission = missions[currentIndex];
+  const currentMission = visibleMissions[currentIndex];
   const progressPercent = (dailyProgress.completed / dailyProgress.total) * 100 || 0;
 
   return (
@@ -84,10 +97,10 @@ const Missions = () => {
             <span>Recompensa: {currentMission.recompensa} lowcoins</span>
           </div>
 
-          {currentMission.completada ? (
-            <span className="completed">✅ Completada</span>
-          ) : (
+          {!currentMission.completada ? (
             <button onClick={() => completeMission(currentMission.id)}>Completar</button>
+          ) : (
+            <span className="completed">✅ Completada</span>
           )}
 
           <div className="mission-nav">
@@ -99,7 +112,7 @@ const Missions = () => {
             </button>
             <button
               onClick={() => setCurrentIndex(prev => prev + 1)}
-              disabled={currentIndex === missions.length - 1}
+              disabled={currentIndex === visibleMissions.length - 1}
             >
               Siguiente <i className="fas fa-arrow-right"></i>
             </button>
