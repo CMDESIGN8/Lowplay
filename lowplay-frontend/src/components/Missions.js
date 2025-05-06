@@ -22,11 +22,10 @@ const Missions = () => {
     const completed = dailyMissions.filter(m => m.completada).length;
     setDailyProgress({ completed, total: dailyMissions.length });
 
-    // Mostrar solo misiones no completadas del día
-    const filtered = orderedMissions.filter(m => !(m.tipo === 'diaria' && m.completada));
-    setVisibleMissions(filtered);
+    // Mostrar todas las misiones diarias, incluso completadas
+    setVisibleMissions(dailyMissions);
 
-    const nextIndex = filtered.findIndex(m => !m.completada);
+    const nextIndex = dailyMissions.findIndex(m => !m.completada);
     setCurrentIndex(nextIndex !== -1 ? nextIndex : 0);
   };
 
@@ -42,12 +41,14 @@ const Missions = () => {
 
       await fetchMissions();
 
-      // Avanza automáticamente a la siguiente misión visible
-      setCurrentIndex(prev => {
-        const nextIndex = visibleMissions.findIndex((m, i) => i > prev && !m.completada);
-        return nextIndex !== -1 ? nextIndex : prev;
-      });
-
+      // Esperar un poco y avanzar a la siguiente misión
+      setTimeout(() => {
+        setVisibleMissions(prevMissions => {
+          const nextIndex = prevMissions.findIndex((m, i) => i > currentIndex && !m.completada);
+          if (nextIndex !== -1) setCurrentIndex(nextIndex);
+          return prevMissions;
+        });
+      }, 300);
     } catch (err) {
       alert(err.response?.data?.message || 'Error al completar misión');
     }
@@ -97,26 +98,28 @@ const Missions = () => {
             <span>Recompensa: {currentMission.recompensa} lowcoins</span>
           </div>
 
-          {!currentMission.completada ? (
-            <button onClick={() => completeMission(currentMission.id)}>Completar</button>
-          ) : (
+          {currentMission.completada ? (
             <span className="completed">✅ Completada</span>
-          )}
+          ) : (
+            <>
+              <button onClick={() => completeMission(currentMission.id)}>Completar</button>
 
-          <div className="mission-nav">
-            <button
-              onClick={() => setCurrentIndex(prev => prev - 1)}
-              disabled={currentIndex === 0}
-            >
-              <i className="fas fa-arrow-left"></i> Anterior
-            </button>
-            <button
-              onClick={() => setCurrentIndex(prev => prev + 1)}
-              disabled={currentIndex === visibleMissions.length - 1}
-            >
-              Siguiente <i className="fas fa-arrow-right"></i>
-            </button>
-          </div>
+              <div className="mission-nav">
+                <button
+                  onClick={() => setCurrentIndex(prev => prev - 1)}
+                  disabled={currentIndex === 0}
+                >
+                  <i className="fas fa-arrow-left"></i> Anterior
+                </button>
+                <button
+                  onClick={() => setCurrentIndex(prev => prev + 1)}
+                  disabled={currentIndex === visibleMissions.length - 1}
+                >
+                  Siguiente <i className="fas fa-arrow-right"></i>
+                </button>
+              </div>
+            </>
+          )}
         </motion.div>
       </AnimatePresence>
     </div>
