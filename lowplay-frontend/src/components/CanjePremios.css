@@ -1,104 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel+Decorative:wght@400;700&display=swap');
+
+
 .canje-premios-section {
     margin-top: 20px;
     padding: 15px;
-    border-radius: 10px;
-    color: #fff;
+    border-radius: 8px;
+    color: #f0e6d2; /* Color pergamino */
+    background-color: #37291d; /* Marrón oscuro */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   }
   
   .canje-premios-section h3 {
-    color: #0070d2; /* Azul PS */
+    color: #c9aa79; /* Dorado envejecido */
     margin-bottom: 15px;
     text-align: left;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+    font-family: 'Pirata One', cursive; /* Una fuente con estilo */
+    font-weight: normal;
   }
   
-  .premio-psplus-card {
-    background-color: #1e3b5b; /* Fondo oscuro PS */
-    border-radius: 8px;
+  .premio-ac-card {
+    background-color: #4a3b31; /* Marrón medio */
+    border-radius: 6px;
     padding: 15px;
     margin-bottom: 15px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    border: 1px solid #5e4d43;
   }
   
-  .premio-psplus-card h4 {
-    color: #6dd5ed; /* Azul claro PS */
+  .premio-ac-card h4 {
+    color: #e0c29e;
     margin: 0;
-    font-size: 1.1rem;
-  }
-  
-  .premio-psplus-card p {
-    color: #d2d2d2;
-    font-size: 0.9rem;
-    line-height: 1.4;
-    margin-bottom: 10px;
-  }
-  
-  .premio-psplus-costo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #ffc107; /* Amarillo PS */
+    font-size: 1.2rem;
+    font-family: 'Cinzel Decorative', serif; /* Otra fuente con estilo */
     font-weight: bold;
   }
   
-  .premio-psplus-costo i {
+  .premio-ac-card p {
+    color: #d1bfa8;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  
+  .premio-ac-costo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #f9d771; /* Dorado brillante */
+    font-weight: bold;
+  }
+  
+  .premio-ac-costo i {
     font-size: 1rem;
   }
   
-  .premio-psplus-card button {
-    background-color: #0070d2; /* Botón azul PS */
-    color: white;
+  .premio-ac-card button {
+    background-color: #795548; /* Marrón arcilla */
+    color: #f0e6d2;
     border: none;
     padding: 10px 15px;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.2s ease;
     width: fit-content;
   }
   
-  .premio-psplus-card button:hover {
-    background-color: #005cb2;
+  .premio-ac-card button:hover {
+    background-color: #5d3e34;
   }
   
-  .premio-psplus-nav {
+  .premio-ac-nav {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
   }
   
-  .premio-psplus-nav button {
+  .premio-ac-nav button {
     background: none;
-    color: #6dd5ed;
-    border: 1px solid #6dd5ed;
+    color: #c9aa79;
+    border: 1px solid #c9aa79;
     padding: 8px 12px;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
     font-size: 0.9rem;
     transition: color 0.2s ease, border-color 0.2s ease;
   }
   
-  .premio-psplus-nav button:hover {
-    color: #fff;
-    border-color: #fff;
+  .premio-ac-nav button:hover {
+    color: #f0e6d2;
+    border-color: #f0e6d2;
   }
   
-  .premio-psplus-list-button {
-    background-color: #0070d2;
-    color: white;
+  .premio-ac-list-button {
+    background-color: #a1887f; /* Marrón claro */
+    color: #37291d;
     border: none;
     padding: 10px 15px;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
     margin-top: 15px;
     width: fit-content;
   }
   
-  .premio-psplus-list-button:hover {
-    background-color: #005cb2;
+  .premio-ac-list-button:hover {
+    background-color: #8d6e63;
   }
   
   /* Estilos para el modal */
@@ -108,7 +118,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -116,19 +126,21 @@
   }
   
   .modal-content {
-    background-color: #1e3b5b;
-    color: #fff;
+    background-color: #4a3b31;
+    color: #f0e6d2;
     padding: 20px;
     border-radius: 8px;
     max-width: 500px;
     width: 90%;
+    border: 1px solid #5e4d43;
   }
   
   .modal-content h3 {
-    color: #6dd5ed;
+    color: #c9aa79;
     margin-top: 0;
     margin-bottom: 15px;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+    font-family: 'Cinzel Decorative', serif;
     text-align: left;
   }
   
@@ -139,7 +151,7 @@
   
   .modal-content li {
     padding: 10px 0;
-    border-bottom: 1px solid #37495e;
+    border-bottom: 1px solid #5e4d43;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -150,11 +162,11 @@
   }
   
   .modal-content li button {
-    background-color: #0070d2;
-    color: white;
+    background-color: #795548;
+    color: #f0e6d2;
     border: none;
     padding: 8px 12px;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
     font-size: 0.9rem;
     font-weight: bold;
@@ -162,15 +174,15 @@
   }
   
   .modal-content li button:hover {
-    background-color: #005cb2;
+    background-color: #5d3e34;
   }
   
   .modal-content button[onClick="() => setShowPrizeList(false)"] {
-    background-color: #dc3545;
-    color: white;
+    background-color: #d32f2f; /* Rojo oscuro para cerrar */
+    color: #f0e6d2;
     border: none;
     padding: 10px 15px;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
     margin-top: 20px;
@@ -179,5 +191,5 @@
   }
   
   .modal-content button[onClick="() => setShowPrizeList(false)"]:hover {
-    background-color: #c82333;
+    background-color: #b71c1c;
   }
