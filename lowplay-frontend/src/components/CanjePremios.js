@@ -132,11 +132,11 @@ const CanjePremios = () => {
             )}
             <button onClick={() => setShowPrizeList(false)}>Cerrar</button>
           </div>
-          <button onClick={() => setShowPrizeList(true)} className="mission-list-button">
-        Lista de Premios
-      </button>
         </div>
       )}
+       <button onClick={() => setShowPrizeList(true)} className="mission-list-button">
+        Lista de Premios
+      </button>
     </div>
   );
 };
