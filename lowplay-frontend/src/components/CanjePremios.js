@@ -73,10 +73,6 @@ const CanjePremios = () => {
   return (
     <div className="missions-section"> {/* Reutilizamos la clase para el estilo */}
       <h3>Canje de Premios</h3>
-      <button onClick={() => setShowPrizeList(true)} className="mission-list-button">
-        Lista de Premios
-      </button>
-
       <AnimatePresence>
         {mensajeCanje && (
           <motion.div
@@ -107,13 +103,10 @@ const CanjePremios = () => {
           </div>
           <button onClick={() => handleCanjear(currentPremio.id)}>Canjear</button>
           <div className="mission-nav"> {/* Reutilizamos la clase para la navegación */}
-            <button onClick={handlePrev} disabled={currentIndex === 0}>
-              <i className="fas fa-arrow-left"></i> Anterior
-            </button>
-            <button onClick={handleNext} disabled={currentIndex === premios.length - 1}>
-              Siguiente <i className="fas fa-arrow-right"></i>
-            </button>
           </div>
+          <button onClick={() => setShowPrizeList(true)} className="mission-list-button">
+        Lista de Premios
+      </button>
         </motion.div>
       </AnimatePresence>
 
