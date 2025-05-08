@@ -150,11 +150,6 @@ const Missions = () => {
             ) : (
               <button onClick={() => completeMission(currentMission.id)}>Completar</button>
             )}
-            <div className="mission-nav">
-            <button onClick={() => setShowMissionList(true)} className="mission-list-button">
-        Lista de Misiones
-      </button>
-            </div>
           </motion.div>
         </AnimatePresence>
       )}
