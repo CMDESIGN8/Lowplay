@@ -190,6 +190,9 @@ const Missions = () => {
           </div>
         </div>
       )}
+      <button onClick={() => setShowMissionList(true)} className="mission-list-button">
+        Lista de Misiones
+      </button>
     </div>
   );
 };
