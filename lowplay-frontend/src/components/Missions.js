@@ -15,21 +15,18 @@ const Missions = () => {
       headers: { Authorization: `Bearer ${token}` }
     });
 
-    const ordered = res.data.missions.sort((a, b) => a.id - b.id);
-    setMissions(ordered);
+    const orderedMissions = res.data.missions.sort((a, b) => a.id - b.id);
+    setMissions(orderedMissions);
 
-    const daily = ordered.filter(m => m.tipo === 'diaria');
-    const completed = daily.filter(m => m.completada).length;
-    setDailyProgress({ completed, total: daily.length });
+    const dailyMissions = orderedMissions.filter(m => m.tipo === 'diaria');
+    const completed = dailyMissions.filter(m => m.completada).length;
+    setDailyProgress({ completed, total: dailyMissions.length });
 
-    // Mostrar solo una misión: la próxima no completada
-    const nextMission = daily.find(m => !m.completada);
-    if (nextMission) {
-      setVisibleMissions([nextMission]);
-      setCurrentIndex(0);
-    } else {
-      setVisibleMissions([]);
-    }
+    // Mostrar todas las misiones diarias, incluso completadas
+    setVisibleMissions(dailyMissions);
+
+    const nextIndex = dailyMissions.findIndex(m => !m.completada);
+    setCurrentIndex(nextIndex !== -1 ? nextIndex : 0);
   };
 
   const completeMission = async (missionId) => {
@@ -40,20 +37,18 @@ const Missions = () => {
         { missionId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-
       alert(`¡Ganaste ${res.data.recompensa} lowcoins!`);
 
-      // Mostrar "completada" por 1 segundo y luego pasar a la siguiente
-      setVisibleMissions(prev => {
-        const updated = [...prev];
-        updated[0] = { ...updated[0], completada: true };
-        return updated;
-      });
+      await fetchMissions();
 
+      // Esperar un poco y avanzar a la siguiente misión
       setTimeout(() => {
-        fetchMissions();
-      }, 1000);
-
+        setVisibleMissions(prevMissions => {
+          const nextIndex = prevMissions.findIndex((m, i) => i > currentIndex && !m.completada);
+          if (nextIndex !== -1) setCurrentIndex(nextIndex);
+          return prevMissions;
+        });
+      }, 300);
     } catch (err) {
       alert(err.response?.data?.message || 'Error al completar misión');
     }
@@ -65,7 +60,7 @@ const Missions = () => {
 
   if (!visibleMissions.length) return <p>No hay misiones disponibles por hoy.</p>;
 
-  const currentMission = visibleMissions[0];
+  const currentMission = visibleMissions[currentIndex];
   const progressPercent = (dailyProgress.completed / dailyProgress.total) * 100 || 0;
 
   return (
@@ -89,7 +84,7 @@ const Missions = () => {
 
       <AnimatePresence mode="wait">
         <motion.div
-          key={currentMission.id + (currentMission.completada ? '-done' : '')}
+          key={currentMission.id}
           className="mission-card"
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
@@ -106,7 +101,24 @@ const Missions = () => {
           {currentMission.completada ? (
             <span className="completed">✅ Completada</span>
           ) : (
-            <button onClick={() => completeMission(currentMission.id)}>Completar</button>
+            <>
+              <button onClick={() => completeMission(currentMission.id)}>Completar</button>
+
+              <div className="mission-nav">
+                <button
+                  onClick={() => setCurrentIndex(prev => prev - 1)}
+                  disabled={currentIndex === 0}
+                >
+                  <i className="fas fa-arrow-left"></i> Anterior
+                </button>
+                <button
+                  onClick={() => setCurrentIndex(prev => prev + 1)}
+                  disabled={currentIndex === visibleMissions.length - 1}
+                >
+                  Siguiente <i className="fas fa-arrow-right"></i>
+                </button>
+              </div>
+            </>
           )}
         </motion.div>
       </AnimatePresence>
