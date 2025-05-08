@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db'); // Ajusta la ruta a tu conexión a la base de datos
-const authenticateToken = require('../middleware/auth'); // Si tienes autenticación
+const authenticateToken = require('../middleware/authMiddleware'); // Si tienes autenticación
 
 // Ruta para obtener todos los premios disponibles
 router.get('/premios', authenticateToken, async (req, res) => {
