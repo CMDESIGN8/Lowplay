@@ -116,10 +116,6 @@ const Missions = () => {
         </div>
       </div>
 
-      <button onClick={() => setShowMissionList(true)} className="mission-list-button">
-        Lista de Misiones
-      </button>
-
       <AnimatePresence>
         {showCompletedMessage && (
           <motion.div
@@ -155,19 +151,9 @@ const Missions = () => {
               <button onClick={() => completeMission(currentMission.id)}>Completar</button>
             )}
             <div className="mission-nav">
-              <button
-                onClick={handlePrev}
-                disabled={currentIndex === 0}
-              >
-                <i className="fas fa-arrow-left"></i> Anterior
-              </button>
-
-              <button
-                onClick={handleNext}
-                disabled={currentIndex === missions.length - 1}
-              >
-                Siguiente <i className="fas fa-arrow-right"></i>
-              </button>
+            <button onClick={() => setShowMissionList(true)} className="mission-list-button">
+        Lista de Misiones
+      </button>
             </div>
           </motion.div>
         </AnimatePresence>
