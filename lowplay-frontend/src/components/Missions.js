@@ -155,6 +155,7 @@ const Missions = () => {
       )}
 
       {/* Modal de lista de misiones */}
+      {/* Modal de lista de misiones */}
       {showMissionList && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -164,7 +165,9 @@ const Missions = () => {
                 {availableMissions.map(mission => (
                   <li key={mission.id}>
                     {mission.nombre} ({mission.tipo})
-                    {!mission.completada && (
+                    {mission.completada ? (
+                      <span className="completed-in-list">✅ Completada</span>
+                    ) : (
                       <button onClick={() => {
                         // Navegar a esta misión en la vista principal
                         const index = missions.findIndex(m => m.id === mission.id);
@@ -174,7 +177,6 @@ const Missions = () => {
                         setShowMissionList(false);
                       }}>Ir</button>
                     )}
-                    {mission.completada && <span className="completed-in-list">✅</span>}
                   </li>
                 ))}
               </ul>
