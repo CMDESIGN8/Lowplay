@@ -6,7 +6,6 @@ import Missions from './Missions';
 import UserProfile from './UserProfile';
 import CanjePremios from './CanjePremios'; // Importa el componente
 
-
 const Dashboard = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -14,7 +13,7 @@ const Dashboard = () => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [editedName, setEditedName] = useState('');
   const [editedEmail, setEditedEmail] = useState('');
-  
+
   const token = localStorage.getItem('token');
 
   const getLevel = (coins) => {
@@ -53,22 +52,19 @@ const Dashboard = () => {
         { name: editedName, email: editedEmail },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      
-      // Actualizar los lowcoins directamente al estado
+
       setUser(prevState => ({
         ...prevState,
         name: editedName,
         email: editedEmail,
-        lowcoins: response.data.user.lowcoins  // Asegúrate de que lowcoins se incluya en la respuesta
+        lowcoins: response.data.user.lowcoins
       }));
-  
+
       setShowEditModal(false);
     } catch (error) {
       console.error('Error actualizando perfil:', error);
     }
-
   };
-  
 
   if (loading) {
     return (
@@ -81,63 +77,55 @@ const Dashboard = () => {
 
   return (
     <div className={`dashboard-wrapper ${showContent ? 'fade-in' : ''}`}>
-       <aside className="sidebar">
-    <h1 className="logo">LOWPLAY</h1>
-    <nav className="menu">
-      <a href="#"><i className="fas fa-home"></i> Inicio</a>
-      <a href="#"><i className="fas fa-wallet"></i> Wallet</a>
-      <a href="#"><i className="fas fa-bullseye"></i> Misiones</a>
-      <a href="#"><i className="fas fa-gift"></i> Premios</a>
-      <a href="#"><i className="fas fa-user"></i> Perfil</a>
-      <a href="#"><i className="fas fa-sign-out-alt"></i> Cerrar sesión</a>
-    </nav>
-  </aside>
+      <aside className="sidebar">
+        <h1 className="logo">LOWPLAY</h1>
+        <nav className="menu">
+          <a href="#"><i className="fas fa-home"></i> Inicio</a>
+          <a href="#"><i className="fas fa-wallet"></i> Wallet</a>
+          <a href="#"><i className="fas fa-bullseye"></i> Misiones</a>
+          <a href="#"><i className="fas fa-gift"></i> Premios</a>
+          <a href="#"><i className="fas fa-user"></i> Perfil</a>
+          <a href="#"><i className="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+        </nav>
+      </aside>
 
       <main className="dashboard-main">
-      <UserProfile
-  user={{
-    username: user.name,
-    avatar: '/assets/avatars/mateo.png',
-    level: getLevel(user.lowcoins),
-    lowcoins: user.lowcoins,
-    email: user.email,
-    wallet: user.wallet,
-    id: user.id,
-    progress: Math.min((user.lowcoins % 100), 100), // por si querés mostrar progreso al siguiente rango
-  }}
-  onEditProfile={() => setShowEditModal(true)}
-/>
-<div className="particles">
-  {[...Array(20)].map((_, i) => (
-    <div
-      key={i}
-      className={`particle ${user.level?.toLowerCase()}`}
-      style={{
-        top: `${Math.random() * 100}%`,
-        left: `${Math.random() * 100}%`,
-        animationDelay: `${Math.random() * 6}s`
-      }}
-    />
-  ))}
-</div>
-      <div className="modules-container">
-        {showMissions ? (
-          <Missions />
-        ) : (
-          <CanjePremios />
-        )}
-      </div>
-      <div className="module-navigation">
-        <button onClick={() => setShowMissions(true)} disabled={showMissions}>
-          Misiones
-        </button>
-        <button onClick={() => setShowMissions(false)} disabled={!showMissions}>
-          Premios
-        </button>
-      </div>
+        <UserProfile
+          user={{
+            username: user.name,
+            avatar: '/assets/avatars/mateo.png',
+            level: getLevel(user.lowcoins),
+            lowcoins: user.lowcoins,
+            email: user.email,
+            wallet: user.wallet,
+            id: user.id,
+            progress: Math.min((user.lowcoins % 100), 100),
+          }}
+          onEditProfile={() => setShowEditModal(true)}
+        />
+        <div className="particles">
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={i}
+              className={`particle ${user.level?.toLowerCase()}`}
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 6}s`
+              }}
+            />
+          ))}
+        </div>
+        <div className="modules-container horizontal-modules"> {/* Nuevo contenedor horizontal */}
+          <div className="module">
+            <Missions />
+          </div>
+          <div className="module">
+            <CanjePremios />
+          </div>
+        </div>
       </main>
 
-      {/* MODAL */}
       {showEditModal && (
         <div className="modal-overlay">
           <div className="modal">
