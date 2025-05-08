@@ -4,6 +4,7 @@ const cors = require('cors');
 const userRoutes = require('./routes/userRoutes');
 require('dotenv').config();
 const missionsRoutes = require('./routes/missions');
+const premiosRoutes = require('./routes/premios'); // Importa las rutas de premios
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -16,6 +17,9 @@ app.use('/api', userRoutes);
 
 // Ruta para misiones
 app.use('/api/missions', missionsRoutes);
+
+// Ruta para premios
+app.use('/api', premiosRoutes); // Prefijo '/api' para consistencia
 
 // Iniciar el servidor
 app.listen(port, () => {
