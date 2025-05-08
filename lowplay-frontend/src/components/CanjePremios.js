@@ -104,9 +104,6 @@ const CanjePremios = () => {
           <button onClick={() => handleCanjear(currentPremio.id)}>Canjear</button>
           <div className="mission-nav"> {/* Reutilizamos la clase para la navegación */}
           </div>
-          <button onClick={() => setShowPrizeList(true)} className="mission-list-button">
-        Lista de Premios
-      </button>
         </motion.div>
       </AnimatePresence>
 
@@ -135,6 +132,9 @@ const CanjePremios = () => {
             )}
             <button onClick={() => setShowPrizeList(false)}>Cerrar</button>
           </div>
+          <button onClick={() => setShowPrizeList(true)} className="mission-list-button">
+        Lista de Premios
+      </button>
         </div>
       )}
     </div>
