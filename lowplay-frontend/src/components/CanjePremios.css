@@ -1,65 +1,61 @@
-@import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel+Decorative:wght@400;700&display=swap');
+/* CanjePremiosEstilos.css */
 
-
-.canje-premios-section {
+/* Estilos para el contenedor principal */
+.missions-section {
     margin-top: 20px;
     padding: 15px;
     border-radius: 8px;
-    color: #f0e6d2; /* Color pergamino */
-    background-color: #37291d; /* Marrón oscuro */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    color: #f8f8f2; /* Un color de texto diferente */
+    background-color: #2e3440; /* Un fondo diferente */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }
   
-  .canje-premios-section h3 {
-    color: #c9aa79; /* Dorado envejecido */
+  .missions-section h3 {
+    color: #81a1c1; /* Un color de título diferente */
     margin-bottom: 15px;
     text-align: left;
-    font-size: 1.6rem;
-    font-family: 'Pirata One', cursive; /* Una fuente con estilo */
-    font-weight: normal;
+    font-size: 1.4rem;
   }
   
-  .premio-ac-card {
-    background-color: #4a3b31; /* Marrón medio */
+  /* Estilos para la tarjeta de premio */
+  .mission-card {
+    background-color: #434c5e; /* Otro color de fondo para la tarjeta */
     border-radius: 6px;
     padding: 15px;
     margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    border: 1px solid #5e4d43;
+    border: 1px solid #4c566a;
   }
   
-  .premio-ac-card h4 {
-    color: #e0c29e;
+  .mission-card h4 {
+    color: #d8dee9;
     margin: 0;
-    font-size: 1.2rem;
-    font-family: 'Cinzel Decorative', serif; /* Otra fuente con estilo */
-    font-weight: bold;
+    font-size: 1.1rem;
   }
   
-  .premio-ac-card p {
-    color: #d1bfa8;
+  .mission-card p {
+    color: #e5e9f0;
     font-size: 0.95rem;
-    line-height: 1.5;
+    line-height: 1.4;
     margin-bottom: 10px;
   }
   
-  .premio-ac-costo {
+  /* Estilos para la recompensa (costo) */
+  .mission-reward {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #f9d771; /* Dorado brillante */
+    color: #a3be8c; /* Un color diferente para el costo */
     font-weight: bold;
+    margin-bottom: 10px;
   }
   
-  .premio-ac-costo i {
+  .mission-reward i {
     font-size: 1rem;
   }
   
-  .premio-ac-card button {
-    background-color: #795548; /* Marrón arcilla */
-    color: #f0e6d2;
+  .mission-card button {
+    background-color: #5e81ac; /* Un color de botón diferente */
+    color: #f8f8f2;
     border: none;
     padding: 10px 15px;
     border-radius: 4px;
@@ -69,20 +65,15 @@
     width: fit-content;
   }
   
-  .premio-ac-card button:hover {
-    background-color: #5d3e34;
+  .mission-card button:hover {
+    background-color: #4c566a;
   }
   
-  .premio-ac-nav {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-  }
-  
-  .premio-ac-nav button {
+  /* Estilos para la navegación */
+  .mission-nav button {
     background: none;
-    color: #c9aa79;
-    border: 1px solid #c9aa79;
+    color: #81a1c1;
+    border: 1px solid #81a1c1;
     padding: 8px 12px;
     border-radius: 4px;
     cursor: pointer;
@@ -90,14 +81,15 @@
     transition: color 0.2s ease, border-color 0.2s ease;
   }
   
-  .premio-ac-nav button:hover {
-    color: #f0e6d2;
-    border-color: #f0e6d2;
+  .mission-nav button:hover {
+    color: #f8f8f2;
+    border-color: #f8f8f2;
   }
   
-  .premio-ac-list-button {
-    background-color: #a1887f; /* Marrón claro */
-    color: #37291d;
+  /* Estilos para el botón de lista */
+  .mission-list-button {
+    background-color: #81a1c1;
+    color: #2e3440;
     border: none;
     padding: 10px 15px;
     border-radius: 4px;
@@ -107,89 +99,44 @@
     width: fit-content;
   }
   
-  .premio-ac-list-button:hover {
-    background-color: #8d6e63;
+  .mission-list-button:hover {
+    background-color: #5e81ac;
   }
   
-  /* Estilos para el modal */
+  /* Estilos para el modal (puedes ajustarlos también) */
   .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+    /* ... tus estilos de modal ... */
+    background-color: rgba(0, 0, 0, 0.7); /* Ejemplo de ajuste */
   }
   
   .modal-content {
-    background-color: #4a3b31;
-    color: #f0e6d2;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 500px;
-    width: 90%;
-    border: 1px solid #5e4d43;
+    background-color: #434c5e; /* Ejemplo de ajuste */
+    color: #d8dee9; /* Ejemplo de ajuste */
+    /* ... otros estilos del modal ... */
   }
   
   .modal-content h3 {
-    color: #c9aa79;
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 1.4rem;
-    font-family: 'Cinzel Decorative', serif;
-    text-align: left;
-  }
-  
-  .modal-content ul {
-    list-style: none;
-    padding: 0;
+    color: #81a1c1; /* Ejemplo de ajuste */
   }
   
   .modal-content li {
-    padding: 10px 0;
-    border-bottom: 1px solid #5e4d43;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .modal-content li:last-child {
-    border-bottom: none;
+    border-bottom-color: #4c566a; /* Ejemplo de ajuste */
   }
   
   .modal-content li button {
-    background-color: #795548;
-    color: #f0e6d2;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: bold;
-    transition: background-color 0.2s ease;
+    background-color: #5e81ac; /* Ejemplo de ajuste */
+    color: #f8f8f2; /* Ejemplo de ajuste */
   }
   
   .modal-content li button:hover {
-    background-color: #5d3e34;
+    background-color: #4c566a; /* Ejemplo de ajuste */
   }
   
   .modal-content button[onClick="() => setShowPrizeList(false)"] {
-    background-color: #d32f2f; /* Rojo oscuro para cerrar */
-    color: #f0e6d2;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 20px;
-    transition: background-color 0.2s ease;
-    width: fit-content;
+    background-color: #bf616a; /* Ejemplo de ajuste para el botón de cerrar */
+    color: #f8f8f2; /* Ejemplo de ajuste */
   }
   
   .modal-content button[onClick="() => setShowPrizeList(false)"]:hover {
-    background-color: #b71c1c;
+    background-color: #964b4f; /* Ejemplo de ajuste */
   }
