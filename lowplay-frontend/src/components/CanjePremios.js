@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './CanjePremios.css'; // Importa los nuevos estilos
+import './Misiones.css'; // Reutilizamos los estilos de Misiones
 import { motion, AnimatePresence } from 'framer-motion';
 
 const CanjePremios = () => {
@@ -71,7 +71,7 @@ const CanjePremios = () => {
   const currentPremio = premios[currentIndex];
 
   return (
-    <div className="canje-premios-section"> {/* Contenedor principal */}
+    <div className="missions-section"> {/* Reutilizamos la clase para el estilo */}
       <h3>Canje de Premios</h3>
       <AnimatePresence>
         {mensajeCanje && (
@@ -79,7 +79,7 @@ const CanjePremios = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="completed-message" // Reutiliza o crea un nuevo estilo
+            className="completed-message" // Reutilizamos el estilo
           >
             {mensajeCanje}
           </motion.div>
@@ -89,7 +89,7 @@ const CanjePremios = () => {
       <AnimatePresence mode="wait">
         <motion.div
           key={currentPremio.id}
-          className="premio-psplus-card" // Usa la nueva clase de estilo
+          className="mission-card" // Reutilizamos la clase para el estilo
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -30 }}
@@ -97,27 +97,17 @@ const CanjePremios = () => {
         >
           <h4>{currentPremio.nombre}</h4>
           <p>{currentPremio.descripcion}</p>
-          <div className="premio-psplus-costo">
+          <div className="mission-reward"> {/* Reutilizamos la clase para el estilo */}
             <i className="fas fa-coins"></i>
-            <span>{currentPremio.costo} lowcoins</span>
+            <span>Costo: {currentPremio.costo} lowcoins</span>
           </div>
           <button onClick={() => handleCanjear(currentPremio.id)}>Canjear</button>
-          <div className="premio-psplus-nav">
-            <button onClick={handlePrev} disabled={currentIndex === 0}>
-              <i className="fas fa-arrow-left"></i>
-            </button>
-            <button onClick={handleNext} disabled={currentIndex === premios.length - 1}>
-              <i className="fas fa-arrow-right"></i>
-            </button>
+          <div className="mission-nav"> {/* Reutilizamos la clase para la navegación */}
           </div>
         </motion.div>
       </AnimatePresence>
 
-      <button onClick={() => setShowPrizeList(true)} className="premio-psplus-list-button">
-        Lista de Premios
-      </button>
-
-      {/* Modal de lista de premios (sin cambios en su estructura) */}
+      {/* Modal de lista de premios */}
       {showPrizeList && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -144,6 +134,9 @@ const CanjePremios = () => {
           </div>
         </div>
       )}
+       <button onClick={() => setShowPrizeList(true)} className="mission-list-button">
+        Lista de Premios
+      </button>
     </div>
   );
 };
