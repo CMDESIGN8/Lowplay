@@ -120,10 +120,21 @@ const Dashboard = () => {
     />
   ))}
 </div>
-        <div className="Misiones">
-            <Missions />
-            <CanjePremios /> {/* Renderiza el componente de canje de premios */}
-            </div>
+      <div className="modules-container">
+        {showMissions ? (
+          <Missions />
+        ) : (
+          <CanjePremios />
+        )}
+      </div>
+      <div className="module-navigation">
+        <button onClick={() => setShowMissions(true)} disabled={showMissions}>
+          Misiones
+        </button>
+        <button onClick={() => setShowMissions(false)} disabled={!showMissions}>
+          Premios
+        </button>
+      </div>
       </main>
 
       {/* MODAL */}
