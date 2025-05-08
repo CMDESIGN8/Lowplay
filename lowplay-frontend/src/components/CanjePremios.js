@@ -7,20 +7,20 @@ const CanjePremios = () => {
   const [error, setError] = useState('');
   const [mensajeCanje, setMensajeCanje] = useState('');
 
-  useEffect(() => {
-    const fetchPremios = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const response = await axios.get('https://lowplay.onrender.com/api/premios', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setPremios(response.data.premios);
-      } catch (err) {
-        setError('Error al cargar los premios disponibles.');
-        console.error('Error fetching premios:', err);
-      }
-    };
+  const fetchPremios = async () => { // Definir fetchPremios aquí
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get('https://lowplay.onrender.com/api/premios', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setPremios(response.data.premios);
+    } catch (err) {
+      setError('Error al cargar los premios disponibles.');
+      console.error('Error fetching premios:', err);
+    }
+  };
 
+  useEffect(() => {
     fetchPremios();
   }, []);
 
@@ -33,8 +33,7 @@ const CanjePremios = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setMensajeCanje(response.data.message || '¡Canje realizado con éxito!');
-      // Opcional: Recargar la lista de premios después del canje
-      fetchPremios();
+      fetchPremios(); // Llamar a fetchPremios aquí
       setTimeout(() => setMensajeCanje(''), 3000);
     } catch (err) {
       setError(err.response?.data?.message || 'Error al canjear el premio.');
