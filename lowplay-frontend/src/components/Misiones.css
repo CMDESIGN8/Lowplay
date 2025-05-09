@@ -41,6 +41,7 @@
   position: relative;
   z-index: 1;
   box-shadow: 0 0 20px rgba(0, 191, 255, 0.2);
+  border: 2px solid #00b2ff;
 }
 
 .mission-card h4 {
