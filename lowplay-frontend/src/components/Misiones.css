@@ -83,7 +83,7 @@
 }
 
 button {
-  background: linear-gradient(90deg, #001a26, #00394d);
+  background: linear-gradient(90deg, #001a26, #001a26);
   border: none;
   padding: 12px 25px;
   border-radius: 10px;
@@ -98,7 +98,7 @@ button {
 }
 
 button:hover {
-  background: linear-gradient(90deg, #00394d, #001a26);
+  background: linear-gradient(90deg, #00394d, #00394d);
   box-shadow: 0 0 25px rgba(0, 178, 255, 0.5);
 }
 
