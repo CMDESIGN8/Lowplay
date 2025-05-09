@@ -1,61 +1,59 @@
-/* CanjePremiosEstilos.css */
-
-/* Estilos para el contenedor principal */
-.missions-section {
+/* Estilos para el contenedor principal de Canje de Premios */
+.canjePremiosSection {
     margin-top: 20px;
     padding: 15px;
     border-radius: 8px;
-    color: #f8f8f2; /* Un color de texto diferente */
-    background-color: #2e3440; /* Un fondo diferente */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    color: #eceff4; /* Otro color de texto */
+    background-color: #3b4252; /* Otro fondo */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   }
   
-  .missions-section h3 {
-    color: #81a1c1; /* Un color de título diferente */
+  .canjePremiosSection h3 {
+    color: #88c0d0; /* Otro color de título */
     margin-bottom: 15px;
     text-align: left;
     font-size: 1.4rem;
   }
   
   /* Estilos para la tarjeta de premio */
-  .mission-card {
-    background-color: #434c5e; /* Otro color de fondo para la tarjeta */
+  .premioCard {
+    background-color: #4c566a; /* Otro fondo para la tarjeta */
     border-radius: 6px;
     padding: 15px;
     margin-bottom: 15px;
-    border: 1px solid #4c566a;
+    border: 1px solid #5e81ac;
   }
   
-  .mission-card h4 {
+  .premioCard h4 {
     color: #d8dee9;
     margin: 0;
     font-size: 1.1rem;
   }
   
-  .mission-card p {
+  .premioCard p {
     color: #e5e9f0;
     font-size: 0.95rem;
     line-height: 1.4;
     margin-bottom: 10px;
   }
   
-  /* Estilos para la recompensa (costo) */
-  .mission-reward {
+  /* Estilos para el costo del premio */
+  .premioCosto {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #a3be8c; /* Un color diferente para el costo */
+    color: #a3be8c; /* Otro color para el costo */
     font-weight: bold;
     margin-bottom: 10px;
   }
   
-  .mission-reward i {
+  .premioCosto i {
     font-size: 1rem;
   }
   
-  .mission-card button {
-    background-color: #5e81ac; /* Un color de botón diferente */
-    color: #f8f8f2;
+  .premioCard button {
+    background-color: #5e81ac; /* Otro color de botón */
+    color: #eceff4;
     border: none;
     padding: 10px 15px;
     border-radius: 4px;
@@ -65,30 +63,13 @@
     width: fit-content;
   }
   
-  .mission-card button:hover {
-    background-color: #4c566a;
+  .premioCard button:hover {
+    background-color: #434c5e;
   }
   
-  /* Estilos para la navegación */
-  .mission-nav button {
-    background: none;
-    color: #81a1c1;
-    border: 1px solid #81a1c1;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: color 0.2s ease, border-color 0.2s ease;
-  }
-  
-  .mission-nav button:hover {
-    color: #f8f8f2;
-    border-color: #f8f8f2;
-  }
-  
-  /* Estilos para el botón de lista */
-  .mission-list-button {
-    background-color: #81a1c1;
+  /* Estilos para el botón de lista de premios */
+  .listaPremiosButton {
+    background-color: #88c0d0;
     color: #2e3440;
     border: none;
     padding: 10px 15px;
@@ -99,44 +80,78 @@
     width: fit-content;
   }
   
-  .mission-list-button:hover {
+  .listaPremiosButton:hover {
     background-color: #5e81ac;
   }
   
-  /* Estilos para el modal (puedes ajustarlos también) */
-  .modal-overlay {
-    /* ... tus estilos de modal ... */
-    background-color: rgba(0, 0, 0, 0.7); /* Ejemplo de ajuste */
+  /* Estilos para el modal */
+  .modalOverlay {
+    background-color: rgba(0, 0, 0, 0.8); /* Ajusta el fondo del modal */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
   }
   
-  .modal-content {
-    background-color: #434c5e; /* Ejemplo de ajuste */
-    color: #d8dee9; /* Ejemplo de ajuste */
-    /* ... otros estilos del modal ... */
+  .modalContent {
+    background-color: #4c566a; /* Otro fondo para el contenido del modal */
+    color: #eceff4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    max-width: 500px;
+    width: 90%;
   }
   
-  .modal-content h3 {
-    color: #81a1c1; /* Ejemplo de ajuste */
+  .modalContent h3 {
+    color: #88c0d0; /* Otro color para el título del modal */
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: center;
   }
   
-  .modal-content li {
-    border-bottom-color: #4c566a; /* Ejemplo de ajuste */
+  .modalContent ul {
+    list-style: none;
+    padding: 0;
   }
   
-  .modal-content li button {
-    background-color: #5e81ac; /* Ejemplo de ajuste */
-    color: #f8f8f2; /* Ejemplo de ajuste */
+  .modalContent li {
+    padding: 10px 0;
+    border-bottom: 1px solid #5e81ac;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   
-  .modal-content li button:hover {
-    background-color: #4c566a; /* Ejemplo de ajuste */
+  .modalContent li:last-child {
+    border-bottom: none;
   }
   
-  .modal-content button[onClick="() => setShowPrizeList(false)"] {
-    background-color: #bf616a; /* Ejemplo de ajuste para el botón de cerrar */
-    color: #f8f8f2; /* Ejemplo de ajuste */
+  .modalContent li button {
+    background-color: #88c0d0; /* Otro color para el botón del modal */
+    color: #2e3440;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
   }
   
-  .modal-content button[onClick="() => setShowPrizeList(false)"]:hover {
-    background-color: #964b4f; /* Ejemplo de ajuste */
+  .modalContent li button:hover {
+    background-color: #5e81ac;
+  }
+  
+  .modalContent button[onClick="() => setShowPrizeList(false)"] {
+    background-color: #bf616a; /* Otro color para el botón de cerrar del modal */
+    color: #eceff4;
+  }
+  
+  .modalContent button[onClick="() => setShowPrizeList(false)"]:hover {
+    background-color: #d08770;
   }
