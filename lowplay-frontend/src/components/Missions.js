@@ -119,50 +119,27 @@ const Missions = () => {
       </AnimatePresence>
       {missions.length > 0 && (
         <AnimatePresence mode="wait">
-        <motion.div
-          key={currentMission.id}
-          className="mission-card"
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -30 }}
-          transition={{ duration: 0.4 }}
-        >
-          <h4>{currentMission.nombre}</h4>
-          <p>
-            {currentMission.descripcion}
-            <br />
-            Tipo de Misión: {currentMission.tipo}
-          </p>
-          <div className="mission-reward">
-            <i className="fas fa-coins"></i>
-            <span>Recompensa: {currentMission.recompensa} lowcoins</span>
-          </div>
-      
-          {currentMission.completada ? (
-            <span className="completed">✅ Completada</span>
-          ) : (
-            <button onClick={() => completeMission(currentMission.id)}>Completar</button>
-          )}
-      
-          <div className="mission-nav-buttons">
-            <button
-              onClick={handlePrev}
-              disabled={currentIndex === 0}
-              className="nav-button"
-            >
-              ⬅️ Anterior misión
-            </button>
-            <button
-              onClick={handleNext}
-              disabled={currentIndex === missions.length - 1}
-              className="nav-button"
-            >
-              Siguiente misión ➡️
-            </button>
-          </div>
-        </motion.div>
-      </AnimatePresence>
-      
+          <motion.div
+            key={currentMission.id}
+            className="mission-card"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -30 }}
+            transition={{ duration: 0.4 }}
+          >
+            <h4>{currentMission.nombre}</h4>
+            <p>{currentMission.descripcion} <br />Tipo de Mision: {currentMission.tipo}</p>
+            <div className="mission-reward">
+              <i className="fas fa-coins"></i>
+              <span>Recompensa: {currentMission.recompensa} lowcoins</span>
+            </div>
+            {currentMission.completada ? (
+              <span className="completed">✅ Completada</span>
+            ) : (
+              <button onClick={() => completeMission(currentMission.id)}>Completar</button>
+            )}
+          </motion.div>
+        </AnimatePresence>
       )}
       {/* Modal de lista de misiones */}
       {/* Modal de lista de misiones */}
