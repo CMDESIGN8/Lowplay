@@ -103,9 +103,10 @@ button:hover {
 
 .completed-message {
   color: #30ffb2;
-  font-size: 17px;
+  font-size: 20px;
   font-weight: bold;
   text-shadow: 0 0 6px #30ffb288;
+  margin-top: 10px;
 }
 
 .modal-content {

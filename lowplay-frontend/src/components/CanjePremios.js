@@ -62,8 +62,8 @@ const CanjePremios = () => {
     <div className="canje-premios-section">
       <h3>Canje de Premios</h3>
       <button className="boton-toggle-lista" onClick={() => setMostrarLista(!mostrarLista)}>
-        {mostrarLista ? 'Ver uno por uno' : 'Lista de Premios'}
-      </button><br></br><br></br>
+        {mostrarLista ? 'Volver' : 'Lista de Premios'}
+      </button><br></br>
 
       {mensajeCanje && <p className="success-message">{mensajeCanje}</p>}
       {error && <p className="error-message">{error}</p>}
