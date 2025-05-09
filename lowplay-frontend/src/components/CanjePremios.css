@@ -137,130 +137,129 @@
 }
 
 .canje-premios-section {
-    background-color: #0d0d0d;
-    color: #f5f5f5;
-    padding: 2rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    border: 2px solid #a41f1f;
-    border-radius: 15px;
-    box-shadow: 0 0 20px #a41f1f66;
+  background-color: #0d0d0d;
+  color: #f5f5f5;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border: 2px solid #a41f1f;
+  border-radius: 15px;
+  box-shadow: 0 0 20px #a41f1f66;
+}
+
+.vista-individual {
+  margin-top: 2rem;
+}
+
+.premio-card {
+  background-color: #1a1a1a;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #555;
+  box-shadow: 0 0 10px #3b1f1f;
+  margin-bottom: 1rem;
+}
+
+.premio-card h4 {
+  color: #e0c068;
+}
+
+.premio-costo {
+  font-weight: bold;
+  margin-top: 0.5rem;
+  color: #ffd700;
+}
+
+.success-message {
+  color: #6ce36c;
+}
+
+.error-message {
+  color: #ff6666;
+}
+
+.navegacion-premio {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.boton-toggle-lista {
+  margin-top: 1.5rem;
+  background-color: #a41f1f;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.boton-toggle-lista:hover {
+  background-color: #cc2b2b;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 10, 10, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.modal-contenido {
+  background: #141414;
+  padding: 2rem;
+  border-radius: 15px;
+  max-width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 2px solid #a41f1f;
+  position: relative;
+  color: #fff;
+  box-shadow: 0 0 25px #a41f1f99;
+}
+
+.modal-contenido h3 {
+  margin-top: 0;
+  font-size: 1.8rem;
+  color: #f2c849;
+  text-align: center;
+}
+
+.cerrar-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #a41f1f;
+  color: white;
+  border: none;
+  font-size: 1.2rem;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.premios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
   }
-  
-  .vista-individual {
-    margin-top: 2rem;
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
-  
-  .premio-card {
-    background-color: #1a1a1a;
-    padding: 1.5rem;
-    border-radius: 12px;
-    border: 1px solid #555;
-    box-shadow: 0 0 10px #3b1f1f;
-    margin-bottom: 1rem;
-  }
-  
-  .premio-card h4 {
-    color: #e0c068;
-  }
-  
-  .premio-costo {
-    font-weight: bold;
-    margin-top: 0.5rem;
-    color: #ffd700;
-  }
-  
-  .success-message {
-    color: #6ce36c;
-  }
-  
-  .error-message {
-    color: #ff6666;
-  }
-  
-  .navegacion-premio {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .boton-toggle-lista {
-    margin-top: 1.5rem;
-    background-color: #a41f1f;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s ease;
-  }
-  
-  .boton-toggle-lista:hover {
-    background-color: #cc2b2b;
-  }
-  
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(10, 10, 10, 0.95);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    animation: fadeIn 0.4s ease-in-out;
-  }
-  
-  .modal-contenido {
-    background: #141414;
-    padding: 2rem;
-    border-radius: 15px;
-    max-width: 90%;
-    max-height: 90vh;
-    overflow-y: auto;
-    border: 2px solid #a41f1f;
-    position: relative;
-    color: #fff;
-    box-shadow: 0 0 25px #a41f1f99;
-  }
-  
-  .modal-contenido h3 {
-    margin-top: 0;
-    font-size: 1.8rem;
-    color: #f2c849;
-    text-align: center;
-  }
-  
-  .cerrar-modal {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: #a41f1f;
-    color: white;
-    border: none;
-    font-size: 1.2rem;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .premios-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-  
+}
