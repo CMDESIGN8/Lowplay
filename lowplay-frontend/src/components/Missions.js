@@ -100,7 +100,7 @@ const Missions = () => {
   return (
     <div className="missions-section">
       <h3>Misiones</h3>
-
+      <br></br><br></br>
       <button onClick={() => setShowMissionList(true)} className="mission-list-button">
         Lista de Misiones
       </button>
