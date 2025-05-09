@@ -114,3 +114,31 @@ button:hover {
   border: 1px solid #00b2ff55;
   box-shadow: 0 0 30px rgba(0, 191, 255, 0.2);
 }
+
+.mission-nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  gap: 10px;
+}
+
+.nav-button {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.nav-button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.nav-button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
