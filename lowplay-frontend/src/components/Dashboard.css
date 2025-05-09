@@ -56,11 +56,10 @@
     flex-direction: column;
     padding: 20px;
     box-shadow: 2px 0 10px rgba(0, 191, 255, 0.2);
-    position: fixed;
-      height: 100vh;
-      top: 0;
-      left: 0;
-      z-index: 100; /* Asegura que esté sobre otros elementos */
+    position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
   }
   
   .logo {
