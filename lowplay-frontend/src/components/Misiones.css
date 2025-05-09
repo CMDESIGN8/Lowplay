@@ -1,141 +1,144 @@
 .missions-section {
-  padding: 1rem;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 25px;
+  background: linear-gradient(145deg, #0b0f16, #101824);
+  color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(0, 178, 255, 0.2);
+  border: 2px solid #00b2ff;
+  font-family: 'Poppins', sans-serif;
   text-align: center;
+  position: relative;
+  backdrop-filter: blur(4px);
+}
+
+.missions-section::before {
+  content: '⛧';
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  color: rgba(255, 255, 255, 0.05);
+  font-size: 90px;
+  z-index: 0;
+  font-family: Georgia, serif;
+}
+
+.missions-section h3 {
+  font-size: 28px;
+  color: #00b2ff;
+  margin-bottom: 25px;
+  letter-spacing: 1.5px;
+  z-index: 1;
+  position: relative;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(0, 178, 255, 0.5);
+  display: inline-block;
+  padding-bottom: 5px;
 }
 
 .mission-card {
-  background: #f4f9ff;
-  border-radius: 12px;
-  padding: 1rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  margin: 1rem auto;
-  max-width: 400px;
+  background: rgba(20, 20, 25, 0.9);
+  padding: 30px;
+  border-radius: 15px;
+  transition: transform 0.3s ease;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+  border: 1px solid rgba(0, 178, 255, 0.3);
+  box-shadow: 0 0 10px rgba(0, 178, 255, 0.1);
+}
+
+.mission-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(0, 178, 255, 0.3);
 }
 
 .mission-card h4 {
-  margin-bottom: 0.5rem;
+  font-size: 22px;
+  color: #ffffff;
+  margin-bottom: 15px;
+  text-shadow: 0 0 6px #00b2ffaa;
+  font-family: 'Georgia', serif;
+}
+
+.mission-card p {
+  font-size: 15px;
+  color: #d0d9ff;
+  margin-bottom: 20px;
+  line-height: 1.5;
 }
 
 .mission-reward {
-  margin-top: 0.5rem;
-  color: #00b2ff;
-  font-weight: bold;
-}
-
-.completed-message {
-  background-color: #d4edda;
-  color: #155724;
-  padding: 0.5rem;
-  border-radius: 6px;
-  margin-bottom: 1rem;
-}
-
-.mission-list-button {
-  background-color: #00b2ff;
-  color: white;
-  padding: 0.6rem 1.2rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.mission-list-button:hover {
-  background-color: #0098db;
-}
-
-/* MODAL ESTILO */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
+  font-size: 17px;
+  color: #e0c068;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999;
+  gap: 10px;
+  text-shadow: 0 0 5px #f1c40f;
+  font-family: 'Georgia', serif;
+}
+
+button {
+  background: linear-gradient(90deg, #001a26, #001a26);
+  border: none;
+  padding: 12px 25px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 15px;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(0, 178, 255, 0.3);
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #00394d, #00394d);
+  box-shadow: 0 0 25px rgba(0, 178, 255, 0.5);
+}
+
+.completed-message {
+  color: #30ffb2;
+  font-size: 20px;
+  font-weight: bold;
+  text-shadow: 0 0 6px #30ffb288;
+  margin-bottom: 10px;
 }
 
 .modal-content {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 16px;
-  width: 90%;
-  max-width: 500px;
-  position: relative;
-  animation: fadeIn 0.3s ease-in-out;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  background: linear-gradient(145deg, #0f192c, #0b111d);
+  border: 1px solid #00b2ff55;
+  box-shadow: 0 0 30px rgba(0, 191, 255, 0.2);
 }
 
-.modal-content h3 {
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
-.modal-content ul {
-  list-style: none;
-  padding: 0;
-}
-
-.modal-content li {
+.mission-nav-buttons {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #eee;
+  margin-top: 15px;
+  gap: 10px;
 }
 
-.modal-content button {
-  background-color: #00b2ff;
+.nav-button {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #007bff;
   color: white;
   border: none;
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
-.modal-content button:hover {
-  background-color: #008dcc;
+.nav-button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
 }
 
-.modal-close {
-  background: transparent;
-  border: none;
-  color: #888;
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  cursor: pointer;
-}
-
-.completed-in-list {
-  color: green;
-  font-weight: bold;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-.daily-progress-bar {
-  margin-top: 2rem;
-  text-align: center;
-}
-
-.progress-bar {
-  background-color: #e6e6e6;
-  border-radius: 10px;
-  overflow: hidden;
-  height: 10px;
-  width: 80%;
-  margin: 0.5rem auto;
-}
-
-.progress-fill {
-  background: linear-gradient(90deg, #3dc7ff, #00b2ff);
-  height: 100%;
-  transition: width 0.3s ease-in-out;
+.nav-button:hover:not(:disabled) {
+  background-color: #0056b3;
 }
