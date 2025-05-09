@@ -76,7 +76,8 @@ const Missions = () => {
         Lista de Misiones
       </button>
       <br></br>
-      
+      <br></br>
+
       <AnimatePresence>
   {showCompletedMessage && (
     <motion.div
