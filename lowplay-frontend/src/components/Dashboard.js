@@ -82,9 +82,10 @@ const Dashboard = () => {
         <nav className="menu">
           <a href="#"><i className="fas fa-home"></i> Inicio</a>
           <a href="#"><i className="fas fa-wallet"></i> Wallet</a>
-          <a href="#"><i className="fas fa-bullseye"></i> Gestiona tu Envio</a>
-          <a href="#"><i className="fas fa-gift"></i> LowTV</a>
-          <a href="#"><i className="fas fa-user"></i> Mi Club</a>
+          <a href="#"><i className="fas fa-truck"></i> Gestiona tu Envio</a>
+          <a href="#"><i className="fas fa-tv"></i> LowTV</a>
+          <a href="#"><i className="fas fa-store"></i> Marketplace</a>
+          <a href="#"><i className="fas fa-futbol"></i> Mi Club</a>
           <a href="#"><i className="fas fa-user"></i> Perfil</a>
           <a href="#"><i className="fas fa-sign-out-alt"></i> Cerrar sesión</a>
         </nav>
