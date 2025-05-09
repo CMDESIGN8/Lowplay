@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Misiones.css'; // Reutilizamos los estilos de Misiones
+import './Canjepremios.css'; // Reutilizamos los estilos de Misiones
 import { motion, AnimatePresence } from 'framer-motion';
 
 const CanjePremios = () => {
