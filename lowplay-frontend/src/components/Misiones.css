@@ -127,7 +127,7 @@ button:hover {
 }
 
 .modal-content {
-  background: linear-gradient(145deg, #0f192c, #0b111d);
+  background: transparent;
   border: 2px solid #00b2ff55;
   box-shadow:
     0 0 30px rgba(0, 191, 255, 0.2),
