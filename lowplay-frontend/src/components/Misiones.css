@@ -222,3 +222,23 @@ button:hover {
 .nav-button:hover:not(:disabled) {
   background-color: #0056b3;
 }
+
+.daily-progress-bar {
+  margin-bottom: 1rem;
+}
+
+.progress-bar {
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  height: 20px;
+  width: 100%;
+  margin-top: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  background: linear-gradient(90deg, #3dc7ff, #00b2ff);
+  height: 100%;
+  transition: width 0.5s ease;
+  border-radius: 8px;
+}
