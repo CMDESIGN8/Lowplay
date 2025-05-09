@@ -103,10 +103,27 @@ button:hover {
 
 .completed-message {
   color: #30ffb2;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
-  text-shadow: 0 0 6px #30ffb288;
-  margin-bottom: 10px;
+  text-shadow: 0 0 10px #30ffb2aa;
+  margin-bottom: 20px;
+  padding: 12px 20px;
+  border: 2px solid #30ffb2;
+  border-radius: 12px;
+  background: rgba(48, 255, 178, 0.1);
+  backdrop-filter: blur(6px);
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 10px #30ffb2;
+  }
+  100% {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #30ffb2;
+  }
 }
 
 .modal-content {

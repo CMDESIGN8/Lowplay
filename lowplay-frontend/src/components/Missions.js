@@ -71,22 +71,24 @@ const Missions = () => {
   return (
     <div className="missions-section">
       <h3>Misiones</h3>
+      <br></br>
       <button onClick={() => setShowMissionList(true)} className="mission-list-button">
         Lista de Misiones
       </button>
 
       <AnimatePresence>
-        {showCompletedMessage && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="completed-message"
-          >
-            ¡Misión completada!
-          </motion.div>
-        )}
-      </AnimatePresence>
+  {showCompletedMessage && (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.8 }}
+      transition={{ duration: 0.5 }}
+      className="completed-message"
+    >
+       ¡Misión completada!  🎉
+    </motion.div>
+  )}
+</AnimatePresence>
 
       {missions.length > 0 && (
         <AnimatePresence mode="wait">
@@ -113,36 +115,49 @@ const Missions = () => {
         </AnimatePresence>
       )}
 
-      {showMissionList && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <button className="modal-close" onClick={() => setShowMissionList(false)}>
-              <X size={20} />
-            </button>
-            <h3>Misiones Disponibles</h3>
-            {availableMissions.length > 0 ? (
-              <ul>
-                {availableMissions.map(mission => (
-                  <li key={mission.id}>
-                    <span>{mission.nombre} ({mission.tipo})</span>
-                    {mission.completada ? (
-                      <span className="completed-in-list">✅</span>
-                    ) : (
-                      <button onClick={() => {
-                        const index = missions.findIndex(m => m.id === mission.id);
-                        if (index !== -1) setCurrentIndex(index);
-                        setShowMissionList(false);
-                      }}>Ir</button>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p>No hay misiones disponibles.</p>
-            )}
-          </div>
-        </div>
-      )}
+<AnimatePresence>
+  {showMissionList && (
+    <motion.div
+      className="modal-overlay"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.div
+        className="modal-content"
+        initial={{ y: "-100vh", opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: "-100vh", opacity: 0 }}
+        transition={{ type: "spring", stiffness: 80 }}
+      >
+        <button className="modal-close" onClick={() => setShowMissionList(false)}>
+          <X size={20} />
+        </button>
+        <h3>Misiones Disponibles</h3>
+        {availableMissions.length > 0 ? (
+          <ul>
+            {availableMissions.map(mission => (
+              <li key={mission.id}>
+                <span>{mission.nombre} ({mission.tipo})</span>
+                {mission.completada ? (
+                  <span className="completed-in-list">✅</span>
+                ) : (
+                  <button onClick={() => {
+                    const index = missions.findIndex(m => m.id === mission.id);
+                    if (index !== -1) setCurrentIndex(index);
+                    setShowMissionList(false);
+                  }}>Ir</button>
+                )}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No hay misiones disponibles.</p>
+        )}
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
 
       <div className="daily-progress-bar">
         <span>Progreso diario: {dailyProgress.completed} / {dailyProgress.total}</span>
