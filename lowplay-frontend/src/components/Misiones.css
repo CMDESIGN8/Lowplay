@@ -129,8 +129,56 @@ button:hover {
 .modal-content {
   background: linear-gradient(145deg, #0f192c, #0b111d);
   border: 1px solid #00b2ff55;
-  box-shadow: 0 0 30px rgba(0, 191, 255, 0.2);
+  box-shadow:
+    0 0 30px rgba(0, 191, 255, 0.2),
+    0 0 10px rgba(0, 191, 255, 0.05) inset;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 1rem;
+  padding: 2rem;
+  transition: all 0.3s ease-in-out;
+  animation: modalFadeIn 0.4s ease;
+  color: white;
+  position: relative;
+  overflow: hidden;
 }
+
+/* Opcional: efecto brillo interno animado */
+.modal-content::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(0, 191, 255, 0.15) 0%, transparent 70%);
+  animation: pulseGlow 6s infinite ease-in-out;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@keyframes modalFadeIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.6;
+  }
+}
+
 
 .mission-nav-buttons {
   display: flex;
