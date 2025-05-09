@@ -75,7 +75,7 @@ const Missions = () => {
       <button onClick={() => setShowMissionList(true)} className="mission-list-button">
         Lista de Misiones
       </button>
-
+      <br></br>
       <AnimatePresence>
   {showCompletedMessage && (
     <motion.div
