@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import styles from './CanjePremios.module.css'; // Importa el archivo CSS Module
+import styles from './CanjePremios.css'; // Importa el archivo CSS Module
 import { motion, AnimatePresence } from 'framer-motion';
 
 const CanjePremios = () => {
