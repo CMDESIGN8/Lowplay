@@ -101,7 +101,7 @@ button:hover {
   box-shadow: 0 0 25px rgba(0, 178, 255, 0.5);
 }
 
-.completed {
+.completed-message {
   color: #30ffb2;
   font-size: 17px;
   font-weight: bold;
