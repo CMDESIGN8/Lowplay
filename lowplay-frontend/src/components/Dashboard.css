@@ -56,9 +56,11 @@
     flex-direction: column;
     padding: 20px;
     box-shadow: 2px 0 10px rgba(0, 191, 255, 0.2);
-    height: 100%; /* se ajusta al contenido de la página */
-    position: relative; /* en lugar de fixed */
-    z-index: 100;
+    position: fixed;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      z-index: 100; /* Asegura que esté sobre otros elementos */
   }
   
   .logo {
