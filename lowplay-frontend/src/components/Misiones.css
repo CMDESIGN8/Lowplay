@@ -126,9 +126,10 @@ button:hover {
   }
 }
 
+/* ===== ESTILO ASSASSIN'S CREED PARA MODAL ===== */
 .modal-content {
   background: linear-gradient(145deg, #070d18, #060b15);
-  border: 2px solid #00b2ff55;
+  border: 2px solid rgba(0, 178, 255, 0.55);
   box-shadow:
     0 0 30px rgba(0, 191, 255, 0.2),
     0 0 10px rgba(0, 191, 255, 0.05) inset;
@@ -138,71 +139,41 @@ button:hover {
   padding: 2rem;
   transition: all 0.3s ease-in-out;
   animation: modalFadeIn 0.4s ease;
-  color: white;
+  color: #fff;
   position: relative;
   overflow: hidden;
 }
 
-/* 🔷 ANIMUS Background Lines */
+/* Brillo interno animado (efecto sutil) */
 .modal-content::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
+  top: -50%;
+  left: -50%;
   width: 200%;
   height: 200%;
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(0, 191, 255, 0.02) 0px,
-    rgba(0, 191, 255, 0.03) 2px,
-    transparent 3px,
-    transparent 10px
-  );
-  animation: animusLines 10s linear infinite;
+  background: radial-gradient(circle at center, rgba(0, 191, 255, 0.15) 0%, transparent 70%);
+  animation: pulseGlow 6s infinite ease-in-out;
   z-index: 0;
   pointer-events: none;
 }
 
-@keyframes animusLines {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-100px);
-  }
+/* Animación de entrada */
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
 }
 
-/* 🔷 Glitch efecto tenue (solo luz) */
-.modal-content::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    to right,
-    transparent,
-    rgba(0, 255, 255, 0.03) 1px,
-    transparent 2px
-  );
-  mix-blend-mode: screen;
-  animation: glitch 1.5s infinite;
-  z-index: 0;
-  pointer-events: none;
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.1); opacity: 0.6; }
 }
 
-@keyframes glitch {
-  0%, 100% {
-    transform: translate(0);
-  }
-  50% {
-    transform: translate(1px, -1px);
-    opacity: 0.2;
-  }
-}
-
-/* Botón del modal */
+/* ===== ESTILO PARA LOS BOTONES DENTRO DEL MODAL ===== */
 .modal-content button {
   background: transparent;
   color: #fff;
+  font-family: 'Cinzel', serif;
   font-weight: bold;
   font-size: 0.9rem;
   border-radius: 0.75rem;
@@ -213,8 +184,8 @@ button:hover {
   letter-spacing: 0.5px;
   z-index: 1;
   position: relative;
-  border: 1px solid #00b2ff55;
-  padding: 0.6rem 1.2rem;
+  border: 1px solid rgba(0, 191, 255, 0.3);
+  padding: 0.5rem 1rem;
 }
 
 .modal-content button:hover {
@@ -230,10 +201,10 @@ button:hover {
   box-shadow: inset 0 0 10px rgba(0, 191, 255, 0.2);
 }
 
-/* Misión list */
-.modal-mission-list {
+/* ===== ESTILO ASSASSIN'S CREED PARA LA LISTA DE MISIONES ===== */
+.mission-list {
   background: linear-gradient(145deg, #0e1729, #0a111f);
-  border: 1px solid #00b2ff33;
+  border: 1px solid rgba(0, 178, 255, 0.2);
   border-radius: 1rem;
   padding: 1.5rem;
   max-height: 70vh;
@@ -241,30 +212,90 @@ button:hover {
   box-shadow: 0 0 20px rgba(0, 191, 255, 0.1);
   backdrop-filter: blur(6px);
   transition: all 0.3s ease;
-  z-index: 1;
-  position: relative;
 }
 
+/* Personalización del scrollbar */
 .mission-list::-webkit-scrollbar {
   width: 6px;
 }
 
 .mission-list::-webkit-scrollbar-thumb {
-  background: #00bfff66;
+  background: rgba(0, 191, 255, 0.4);
   border-radius: 6px;
 }
 
-/* Modal entrada */
-@keyframes modalFadeIn {
-  from {
-    transform: translateY(-20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+/* ===== TEXTO Y ESTILO DE LOS ÍTEMS DE LA MISIÓN ===== */
+.modal-content h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #00b2ff;
+  text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
 }
+
+.modal-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.modal-content li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  color: #cbe8ff;
+}
+
+.modal-content li:last-child {
+  border-bottom: none;
+}
+
+.modal-content li button {
+  background: linear-gradient(145deg, #0a1324, #050b17);
+  border: 1px solid rgba(0, 178, 255, 0.4);
+  color: #00bfff;
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-content li button:hover {
+  background: linear-gradient(145deg, #0d1a2f, #071020);
+  transform: translateY(-1px);
+}
+
+.completed-in-list {
+  color: #30ffb2;
+  font-weight: bold;
+  margin-left: 10px;
+  font-family: 'Cinzel', serif;
+}
+
+/* ===== BOTÓN DE CIERRE DEL MODAL ===== */
+.modal-close {
+  background: transparent;
+  border: none;
+  color: #aaa;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+  color: #00b2ff;
+}
+
 
 
 .mission-nav-buttons {
