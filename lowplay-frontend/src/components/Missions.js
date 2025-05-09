@@ -117,14 +117,6 @@ const Missions = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      <div className="mission-navigation">
-  <button onClick={handlePrev} disabled={currentIndex === 0}>
-    Anterior
-  </button>
-  <button onClick={handleNext} disabled={currentIndex === missions.length - 1}>
-    Siguiente
-  </button>
-</div>
       {missions.length > 0 && (
         <AnimatePresence mode="wait">
           <motion.div
@@ -149,7 +141,14 @@ const Missions = () => {
           </motion.div>
         </AnimatePresence>
       )}
-
+       <div className="mission-navigation">
+  <button onClick={handlePrev} disabled={currentIndex === 0}>
+    Anterior
+  </button>
+  <button onClick={handleNext} disabled={currentIndex === missions.length - 1}>
+    Siguiente
+  </button>
+</div>
       {/* Modal de lista de misiones */}
       {/* Modal de lista de misiones */}
       {showMissionList && (
