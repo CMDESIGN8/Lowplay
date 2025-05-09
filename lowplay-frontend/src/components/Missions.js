@@ -101,20 +101,9 @@ const Missions = () => {
     <div className="missions-section">
       <h3>Misiones</h3>
 
-      <div className="daily-progress-bar">
-        <span>
-          Progreso diario: {dailyProgress.completed} / {dailyProgress.total}
-        </span>
-        <div className="progress-bar">
-          <div
-            className="progress-fill"
-            style={{
-              width: `${progressPercent}%`,
-              background: 'linear-gradient(90deg, #3dc7ff, #00b2ff)'
-            }}
-          ></div>
-        </div>
-      </div>
+      <button onClick={() => setShowMissionList(true)} className="mission-list-button">
+        Lista de Misiones
+      </button>
 
       <AnimatePresence>
         {showCompletedMessage && (
@@ -187,9 +176,20 @@ const Missions = () => {
           </div>
         </div>
       )}
-      <button onClick={() => setShowMissionList(true)} className="mission-list-button">
-        Lista de Misiones
-      </button>
+      <div className="daily-progress-bar">
+        <span>
+          Progreso diario: {dailyProgress.completed} / {dailyProgress.total}
+        </span>
+        <div className="progress-bar">
+          <div
+            className="progress-fill"
+            style={{
+              width: `${progressPercent}%`,
+              background: 'linear-gradient(90deg, #3dc7ff, #00b2ff)'
+            }}
+          ></div>
+        </div>
+      </div>
     </div>
   );
 };
