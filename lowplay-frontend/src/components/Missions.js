@@ -139,9 +139,7 @@ const Missions = () => {
               <button onClick={() => completeMission(currentMission.id)}>Completar</button>
             )}
           </motion.div>
-        </AnimatePresence>
-      )}
-       <div className="mission-navigation">
+          <div className="mission-navigation">
   <button onClick={handlePrev} disabled={currentIndex === 0}>
     Anterior
   </button>
@@ -149,6 +147,8 @@ const Missions = () => {
     Siguiente
   </button>
 </div>
+        </AnimatePresence>
+      )}
       {/* Modal de lista de misiones */}
       {/* Modal de lista de misiones */}
       {showMissionList && (
