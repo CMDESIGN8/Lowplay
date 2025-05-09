@@ -56,11 +56,9 @@
     flex-direction: column;
     padding: 20px;
     box-shadow: 2px 0 10px rgba(0, 191, 255, 0.2);
-    position: fixed;
-      height: 100vh;
-      top: 0;
-      left: 0;
-      z-index: 100; /* Asegura que esté sobre otros elementos */
+    height: 100%; /* se ajusta al contenido de la página */
+    position: relative; /* en lugar de fixed */
+    z-index: 100;
   }
   
   .logo {
@@ -98,7 +96,6 @@
     background: rgba(255, 255, 255, 0.02);
     backdrop-filter: blur(6px);
     margin-left: 240px; /* El mismo ancho que la sidebar */
-
   }
   
   .dashboard-content {
@@ -299,14 +296,6 @@
 @media (max-width: 768px) {
   .dashboard-wrapper {
     flex-direction: column;
-  }
-
-  .sidebar {
-    width: 100%;
-    flex-direction: row;
-    overflow-x: auto;
-    justify-content: space-around;
-    padding: 10px;
   }
 
   .dashboard-main {
