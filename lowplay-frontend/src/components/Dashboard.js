@@ -101,7 +101,7 @@ const Dashboard = () => {
             email: user.email,
             wallet: user.wallet,
             id: user.id,
-            Club: clubs.name,
+            Club: user.club_id,
             progress: Math.min((user.lowcoins % 100), 100),
           }}
           onEditProfile={() => setShowEditModal(true)}
