@@ -78,7 +78,7 @@ const Dashboard = () => {
   return (
     <div className={`dashboard-wrapper ${showContent ? 'fade-in' : ''}`}>
       <aside className="sidebar">
-        <h1 className="logo">LOW</h1>
+        <h1 className="logo">LOWPLUS</h1>
         <nav className="menu">
           <a href="#"><i className="fas fa-home"></i> Inicio</a>
           <a href="#"><i className="fas fa-wallet"></i> Wallet</a>
@@ -101,6 +101,7 @@ const Dashboard = () => {
             email: user.email,
             wallet: user.wallet,
             id: user.id,
+            Club: Club.id,
             progress: Math.min((user.lowcoins % 100), 100),
           }}
           onEditProfile={() => setShowEditModal(true)}
