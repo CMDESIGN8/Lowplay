@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './Register.css'; // Importamos el nuevo estilo
+import './Register.ss'; // Importamos el nuevo estilo
 
 const Register = () => {
   const [name, setName] = useState('');
