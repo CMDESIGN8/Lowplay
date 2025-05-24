@@ -25,6 +25,11 @@ app.use('/api', premiosRoutes); // Prefijo '/api' para consistencia
 const clubRoutes = require('./routes/clubRoutes');
 app.use('/api/clubs', clubRoutes);
 
+// Ruta socioes
+
+const userClubRoutes = require('./routes/userClub.routes');
+app.use('/api/user-clubs', userClubRoutes);
+
 // Iniciar el servidor
 app.listen(port, () => {
   console.log(`Servidor corriendo en el puerto ${port}`);
