@@ -78,7 +78,7 @@ const Dashboard = () => {
   return (
     <div className={`dashboard-wrapper ${showContent ? 'fade-in' : ''}`}>
       <aside className="sidebar">
-        <h1 className="logo">LOWPAPP</h1>
+        <h1 className="logo">LOW</h1>
         <nav className="menu">
           <a href="#"><i className="fas fa-home"></i> Inicio</a>
           <a href="#"><i className="fas fa-wallet"></i> Wallet</a>
