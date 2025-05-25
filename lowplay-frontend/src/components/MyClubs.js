@@ -123,36 +123,25 @@ const MyClubs = () => {
           </button>
         </div>
 
-        <div className="Lowcards">
-  <h2>Cartas FIFA</h2>
-  <div className="fifa-card-list">
-    {fifaCards.map(card => (
-      <div key={card.id} className="fifa-card">
-        <div className="card-background">
-          <img
-            src="(../assets/img/cartaf.png"
-            alt="Fifa Card Background"
-            className="card-template"
-          />
-          <img
-            src={card.logo || '/placeholder.png'}
-            alt={card.name}
-            className="card-logo"
-          />
-          <h4 className="card-name">{card.name}</h4>
-          <div className="card-stats">
-            <p>PAC {card.stats.pace}</p>
-            <p>SHO {card.stats.shooting}</p>
-            <p>PAS {card.stats.passing}</p>
-            <p>DRI {card.stats.dribbling}</p>
-            <p>DEF {card.stats.defense}</p>
-            <p>PHY {card.stats.physical}</p>
+        <div className='Lowcards'>
+          <h2>Cartas FIFA</h2>
+          <div className="fifa-card-list">
+            {fifaCards.map(card => (
+              <div key={card.id} className="fifa-card">
+                <img src={card.logo || '/placeholder.png'} alt={card.name} className="club-logo" />
+                <h4>{card.name}</h4>
+                <div className="stats">
+                  <p>PAC: {card.stats.pace}</p>
+                  <p>SHO: {card.stats.shooting}</p>
+                  <p>PAS: {card.stats.passing}</p>
+                  <p>DRI: {card.stats.dribbling}</p>
+                  <p>DEF: {card.stats.defense}</p>
+                  <p>PHY: {card.stats.physical}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
-    ))}
-  </div>
-</div>
 
         {showModal && (
           <div className="modal-overlay">
