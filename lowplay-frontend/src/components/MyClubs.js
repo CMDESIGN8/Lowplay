@@ -38,48 +38,37 @@ const MyClubs = () => {
   };
 
   const handleAssociate = async () => {
-  try {
-    const res = await axios.post(
-      'https://lowplay.onrender.com/api/user-clubs/asociar',
-      { club_id: selectedClubId },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
+    try {
+      const res = await axios.post(
+        'https://lowplay.onrender.com/api/user-clubs/asociar',
+        { club_id: selectedClubId },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setMessage(res.data.message || '¡Asociación exitosa!');
+      setSelectedClubId('');
+      fetchMyClubs();
+    } catch (err) {
+      const errorMessage = err.response?.data?.message || 'Error al asociarse';
+      setMessage(errorMessage);
+      console.error('Error al asociarse al club:', err);
+    }
 
-    setMessage(res.data.message || '¡Asociación exitosa!');
-
-    // Actualiza clubes del usuario
-    fetchMyClubs();
-
-    // Saca el club de la lista de disponibles
-    setAvailableClubs(prev => prev.filter(c => c.id !== selectedClubId));
-
-    // Agrega carta FIFA
-    setFifaCards(prev => [
-      ...prev,
-      {
-        id: club.id,
-        name: club.name,
-        logo: club.logo_url,
-        stats: {
-          pace: Math.floor(Math.random() * 100),
-          shooting: Math.floor(Math.random() * 100),
-          passing: Math.floor(Math.random() * 100),
-          dribbling: Math.floor(Math.random() * 100),
-          defense: Math.floor(Math.random() * 100),
-          physical: Math.floor(Math.random() * 100),
-        },
-      },
-    ]);
-
-    // Limpiar selección y cerrar modal
-    setSelectedClubId('');
-    setShowModal(false);
-  } catch (err) {
-    const errorMessage = err.response?.data?.message || 'Error al asociarse';
-    setMessage(errorMessage);
-    console.error('Error al asociarse al club:', err);
-  }
-};
+     // Creás la carta FIFA
+    setFifaCards(prev => [...prev, {
+      id: club.id,
+      name: club.name,
+      logo: club.logo_url,
+      stats: {
+        pace: Math.floor(Math.random() * 100),
+        shooting: Math.floor(Math.random() * 100),
+        passing: Math.floor(Math.random() * 100),
+        dribbling: Math.floor(Math.random() * 100),
+        defense: Math.floor(Math.random() * 100),
+        physical: Math.floor(Math.random() * 100)
+      }
+    }]);
+    
+  };
 
   const [showModal, setShowModal] = useState(false);
   const [fifaCards, setFifaCards] = useState([]);
