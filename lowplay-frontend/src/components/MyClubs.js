@@ -168,7 +168,6 @@ const MyClubs = () => {
                 )}
               </div>
               <div className="modal-actions">
-                {message && <p className="message">{message}</p>}
                 <button
                   onClick={handleAssociate}
                   disabled={!selectedClubId}
@@ -180,6 +179,7 @@ const MyClubs = () => {
                   Cerrar
                 </button>
               </div>
+              {message && <p className="message">{message}</p>}
             </div>
           </div>
         )}
