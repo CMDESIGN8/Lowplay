@@ -5,7 +5,8 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import Missions from './Missions';
 import UserProfile from './UserProfile';
 import CanjePremios from './CanjePremios'; // Importa el componente
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';  
+import { useNavigate, Link } from 'react-router-dom';
 
 
 const Dashboard = () => {
@@ -46,7 +47,12 @@ const Dashboard = () => {
 
     fetchUser();
   }, []);
+const navigate = useNavigate();
 
+const handleLogout = () => {
+  localStorage.removeItem('token'); // Borra el token o lo que estés usando para autenticar
+  navigate('/login'); // Redirige al login
+};
   const handleSaveChanges = async () => {
     try {
       const response = await axios.put(
@@ -89,7 +95,9 @@ const Dashboard = () => {
     <a href="#"><i className="fas fa-wallet"></i> Wallet</a>
     <a href="#"><i className="fas fa-truck"></i> Gestiona tu Envío</a>
     <a href="#"><i className="fas fa-user"></i> Perfil</a>
-    <a href="#"><i className="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+    <a href="#" onClick={handleLogout}>
+  <i className="fas fa-sign-out-alt"></i> Cerrar sesión
+</a>
   </nav>
 </aside>
 
