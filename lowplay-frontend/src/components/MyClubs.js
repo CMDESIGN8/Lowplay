@@ -50,24 +50,56 @@ const MyClubs = () => {
       fetchMyClubs();
 
       const club = availableClubs.find(c => c.id === selectedClubId);
-      if (club) {
-        setFifaCards(prev => [
-          ...prev,
-          {
-            id: club.id,
-            name: club.name,
-            logo: club.logo_url,
-            stats: {
-              pace: Math.floor(Math.random() * 100),
-              shooting: Math.floor(Math.random() * 100),
-              passing: Math.floor(Math.random() * 100),
-              dribbling: Math.floor(Math.random() * 100),
-              defense: Math.floor(Math.random() * 100),
-              physical: Math.floor(Math.random() * 100),
-            },
-          },
-        ]);
-      }
+if (club && user) {
+  const newCard = {
+    user_id: user.id, // Asegurate de tener el user logueado
+    club_id: club.id,
+    name: club.name,
+    logo_url: club.logo_url,
+    pace: Math.floor(Math.random() * 100),
+    shooting: Math.floor(Math.random() * 100),
+    passing: Math.floor(Math.random() * 100),
+    dribbling: Math.floor(Math.random() * 100),
+    defense: Math.floor(Math.random() * 100),
+    physical: Math.floor(Math.random() * 100),
+  };
+
+  // 1. Guarda en frontend
+  setFifaCards(prev => [
+    ...prev,
+    {
+      id: club.id,
+      name: newCard.name,
+      logo: newCard.logo_url,
+      stats: {
+        pace: newCard.pace,
+        shooting: newCard.shooting,
+        passing: newCard.passing,
+        dribbling: newCard.dribbling,
+        defense: newCard.defense,
+        physical: newCard.physical,
+      },
+    },
+  ]);
+
+  // 2. Envia al backend
+  fetch('/api/cards', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`, // si usás JWT
+    },
+    body: JSON.stringify(newCard),
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Carta guardada en la base de datos:', data);
+    })
+    .catch(error => {
+      console.error('Error al guardar la carta:', error);
+    });
+}
+
 
       setShowModal(false);
     } catch (err) {
