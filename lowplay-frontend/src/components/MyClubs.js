@@ -16,7 +16,6 @@ const MyClubs = () => {
   useEffect(() => {
     fetchMyClubs();
     fetchAllClubs();
-    fetchMyCards();
   }, []);
 
   const fetchMyClubs = async () => {
@@ -39,17 +38,6 @@ const MyClubs = () => {
     }
   };
 
-  const fetchMyCards = async () => {
-    try {
-      const res = await axios.get('https://lowplay.onrender.com/api/cards', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setFifaCards(res.data.cards || []);
-    } catch (err) {
-      console.error('Error al obtener cartas:', err);
-    }
-  };
-
   const handleAssociate = async () => {
     try {
       const res = await axios.post(
@@ -57,34 +45,28 @@ const MyClubs = () => {
         { club_id: selectedClubId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-
       setMessage(res.data.message || '¡Asociación exitosa!');
       setSelectedClubId('');
       fetchMyClubs();
 
-      const club = allClubs.find(c => c.id === selectedClubId);
+      const club = availableClubs.find(c => c.id === selectedClubId);
       if (club) {
-        const stats = {
-          pace: Math.floor(Math.random() * 100),
-          shooting: Math.floor(Math.random() * 100),
-          passing: Math.floor(Math.random() * 100),
-          dribbling: Math.floor(Math.random() * 100),
-          defense: Math.floor(Math.random() * 100),
-          physical: Math.floor(Math.random() * 100),
-        };
-
-        const cardRes = await axios.post(
-          'https://lowplay.onrender.com/api/cards',
+        setFifaCards(prev => [
+          ...prev,
           {
-            club_id: club.id,
+            id: club.id,
             name: club.name,
-            logo_url: club.logo_url,
-            stats,
+            logo: club.logo_url,
+            stats: {
+              pace: Math.floor(Math.random() * 100),
+              shooting: Math.floor(Math.random() * 100),
+              passing: Math.floor(Math.random() * 100),
+              dribbling: Math.floor(Math.random() * 100),
+              defense: Math.floor(Math.random() * 100),
+              physical: Math.floor(Math.random() * 100),
+            },
           },
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-
-        setFifaCards(prev => [...prev, cardRes.data.card]);
+        ]);
       }
 
       setShowModal(false);
@@ -146,15 +128,15 @@ const MyClubs = () => {
           <div className="fifa-card-list">
             {fifaCards.map(card => (
               <div key={card.id} className="fifa-card">
-                <img src={card.logo_url || '/placeholder.png'} alt={card.name} className="club-logo" />
+                <img src={card.logo || '/placeholder.png'} alt={card.name} className="club-logo" />
                 <h4>{card.name}</h4>
                 <div className="stats">
-                  <p>PAC: {card.pace}</p>
-                  <p>SHO: {card.shooting}</p>
-                  <p>PAS: {card.passing}</p>
-                  <p>DRI: {card.dribbling}</p>
-                  <p>DEF: {card.defense}</p>
-                  <p>PHY: {card.physical}</p>
+                  <p>PAC: {card.stats.pace}</p>
+                  <p>SHO: {card.stats.shooting}</p>
+                  <p>PAS: {card.stats.passing}</p>
+                  <p>DRI: {card.stats.dribbling}</p>
+                  <p>DEF: {card.stats.defense}</p>
+                  <p>PHY: {card.stats.physical}</p>
                 </div>
               </div>
             ))}
