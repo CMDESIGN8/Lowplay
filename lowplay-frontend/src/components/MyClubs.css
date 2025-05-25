@@ -1,5 +1,5 @@
 /* Estructura general */
-.dashboard-wrapper {
+.clubscc {
   display: flex;
   min-height: 100vh;
   background-color: #f9f9f9;
@@ -120,7 +120,7 @@ h2, h3 {
 
 /* Responsive */
 @media (max-width: 768px) {
-  .dashboard-wrapper {
+  .clubscc {
     flex-direction: column;
   }
 
