@@ -129,6 +129,12 @@ const MyClubs = () => {
 
       {message && <p className="message">{message}</p>}
     </div>
+
+
+      <div className='Lowcards'> 
+        <h2>Aca Van las Cartas</h2>
+      </div>
+
   </main>
 </div>
   );
