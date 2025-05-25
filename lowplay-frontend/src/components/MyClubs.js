@@ -130,7 +130,7 @@ const MyClubs = () => {
       <div key={card.id} className="fifa-card">
         <div className="card-background">
           <img
-            src="https://www.kindpng.com/picc/m/681-6812904_fifa-19-uefa-champions-league-man-of-the.png"
+            src="../assets/img/cartaf.png"
             alt="Fifa Card Background"
             className="card-template"
           />
