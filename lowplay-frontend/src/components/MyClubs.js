@@ -84,7 +84,7 @@ const MyClubs = () => {
           myClubs.map((club) => (
             <div key={club.id} style={{ textAlign: 'center' }}>
               <img
-                src={club.logo_url || '/placeholder.png'}
+                src={club.logo_url || ''}
                 alt={club.name}
                 style={{ width: '80px', height: '80px', borderRadius: '50%' }}
               />
