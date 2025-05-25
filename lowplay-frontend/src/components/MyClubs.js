@@ -51,32 +51,58 @@ const MyClubs = () => {
   };
 
   return (
-    <div>
-      <h2>Mis Clubes</h2>
-      <ul>
-        {myClubs.length === 0 ? (
-          <li>No estás asociado a ningún club aún.</li>
-        ) : (
-          myClubs.map((club) => <li key={club.id}>{club.name}</li>)
-        )}
-      </ul>
-
-      <h3>Asociarme a un nuevo club</h3>
-      <select onChange={(e) => setSelectedClubId(e.target.value)} value={selectedClubId}>
-        <option value="">Seleccioná un club</option>
-        {allClubs.map((club) => (
-          <option key={club.id} value={club.id}>
-            {club.name}
-          </option>
-        ))}
-      </select>
-      <button onClick={handleAssociate} disabled={!selectedClubId}>
-        Asociarme
-      </button>
-
-      {message && <p>{message}</p>}
+  <div>
+    <h2>Mis Clubes</h2>
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
+      {myClubs.length === 0 ? (
+        <p>No estás asociado a ningún club aún.</p>
+      ) : (
+        myClubs.map((club) => (
+          <div key={club.id} style={{ textAlign: 'center' }}>
+            <img
+              src={club.logo_url || '/placeholder.png'}
+              alt={club.name}
+              style={{ width: '80px', height: '80px', borderRadius: '50%' }}
+            />
+            <p>{club.name}</p>
+          </div>
+        ))
+      )}
     </div>
-  );
+
+    <h3>Asociarme a un nuevo club</h3>
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
+      {allClubs.map((club) => (
+        <div
+          key={club.id}
+          style={{
+            border: selectedClubId === club.id ? '2px solid #00f' : '1px solid #ccc',
+            borderRadius: '8px',
+            padding: '10px',
+            textAlign: 'center',
+            cursor: 'pointer',
+            width: '100px',
+          }}
+          onClick={() => setSelectedClubId(club.id)}
+        >
+          <img
+            src={club.logo_url || '/placeholder.png'}
+            alt={club.name}
+            style={{ width: '60px', height: '60px', borderRadius: '50%' }}
+          />
+          <p style={{ fontSize: '0.9rem' }}>{club.name}</p>
+        </div>
+      ))}
+    </div>
+
+    <button onClick={handleAssociate} disabled={!selectedClubId} style={{ marginTop: '1rem' }}>
+      Asociarme
+    </button>
+
+    {message && <p>{message}</p>}
+  </div>
+);
+
 };
 
 export default MyClubs;
