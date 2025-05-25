@@ -27,6 +27,17 @@ const register = async (req, res) => {
   }
 };
 
+const getAllClubs = async (req, res) => {
+  try {
+    const result = await pool.query('SELECT id, name FROM clubs');
+    res.json(result.rows);
+  } catch (err) {
+    console.error('Error al obtener clubes: ', err);
+    res.status(500).json({ message: 'Error interno del servidor', error: err.message });
+  }
+};
+
+
 module.exports = {
-  register,
+  register, getAllClubs
 };
