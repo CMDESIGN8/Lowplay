@@ -100,36 +100,9 @@ const MyClubs = () => {
       </div>
 
       <h2>Asociarme a un nuevo club</h2>
-      <div className="club-list">
-        {availableClubs.length === 0 ? (
-          <p>Ya estás asociado a todos los clubes disponibles.</p>
-        ) : (
-          availableClubs.map((club) => (
-            <div
-              key={club.id}
-              className={`club-card selectable ${selectedClubId === club.id ? 'selected' : ''}`}
-              onClick={() => setSelectedClubId(club.id)}
-            >
-              <img
-                src={club.logo_url || '/placeholder.png'}
-                alt={club.name}
-                className="club-logo"
-              />
-              <p>{club.name}</p>
-            </div>
-          ))
-        )}
-      </div>
-
-      {availableClubs.length > 0 && (
-        <button
-          onClick={handleAssociate}
-          disabled={!selectedClubId}
-          className="associate-btn"
-        >
-          Asociarme
-        </button>
-      )}
+<button onClick={() => setShowModal(true)} className="associate-btn">
+  Ver clubes disponibles
+</button>
 
       {message && <p className="message">{message}</p>}
     </div>
@@ -137,10 +110,7 @@ const MyClubs = () => {
 
       <div className='Lowcards'> 
         <h2>Aca Van las Cartas</h2>
-        <h2>Asociarme a un nuevo club</h2>
-<button onClick={() => setShowModal(true)} className="associate-btn">
-  Ver clubes disponibles
-</button>
+        
       </div>
 {showModal && (
   <div className="modal-overlay">
