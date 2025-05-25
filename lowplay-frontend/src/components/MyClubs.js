@@ -60,75 +60,77 @@ const MyClubs = () => {
   );
 
     return (
-    <div className="clubscc fade-in">
-      <aside className="sidebar">
-        <h1 className="logo">LOWPLUS</h1>
-        <nav className="menu">
-          <a href="#"><i className="fas fa-home"></i> Inicio</a>
-          <a href="#"><i className="fas fa-wallet"></i> Wallet</a>
-          <a href="#"><i className="fas fa-truck"></i> Gestiona tu Envío</a>
-          <a href="#"><i className="fas fa-tv"></i> LowTV</a>
-          <a href="#"><i className="fas fa-store"></i> Marketplace</a>
-          <Link to="/mis-clubes"><i className="fas fa-users"></i> Asociar Club</Link>
-          <a href="#"><i className="fas fa-user"></i> Perfil</a>
-          <a href="#"><i className="fas fa-sign-out-alt"></i> Cerrar sesión</a>
-        </nav>
-      </aside>
+   <div className="dashboard-wrapper fade-in">
+  <aside className="sidebar">
+    <h1 className="logo">LOWPLUS</h1>
+    <nav className="menu">
+      <a href="#"><i className="fas fa-home"></i> Inicio</a>
+      <a href="#"><i className="fas fa-wallet"></i> Wallet</a>
+      <a href="#"><i className="fas fa-truck"></i> Gestiona tu Envío</a>
+      <a href="#"><i className="fas fa-tv"></i> LowTV</a>
+      <a href="#"><i className="fas fa-store"></i> Marketplace</a>
+      <Link to="/mis-clubes"><i className="fas fa-users"></i> Asociar Club</Link>
+      <a href="#"><i className="fas fa-user"></i> Perfil</a>
+      <a href="#"><i className="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+    </nav>
+  </aside>
 
-      <section className="main-content">
-        <h2>Mis Clubes</h2>
-        <div className="club-list">
-          {myClubs.length === 0 ? (
-            <p>No estás asociado a ningún club aún.</p>
-          ) : (
-            myClubs.map((club) => (
-              <div key={club.id} className="club-card">
-                <img
-                  src={club.logo_url || '/placeholder.png'}
-                  alt={club.name}
-                  className="club-logo"
-                />
-                <p>{club.name}</p>
-              </div>
-            ))
-          )}
-        </div>
-
-        <h3>Asociarme a un nuevo club</h3>
-        <div className="club-list">
-          {availableClubs.length === 0 ? (
-            <p>Ya estás asociado a todos los clubes disponibles.</p>
-          ) : (
-            availableClubs.map((club) => (
-              <div
-                key={club.id}
-                className={`club-card selectable ${selectedClubId === club.id ? 'selected' : ''}`}
-                onClick={() => setSelectedClubId(club.id)}
-              >
-                <img
-                  src={club.logo_url || '/placeholder.png'}
-                  alt={club.name}
-                  className="club-logo"
-                />
-                <p>{club.name}</p>
-              </div>
-            ))
-          )}
-        </div>
-
-        {availableClubs.length > 0 && (
-          <button
-            onClick={handleAssociate}
-            disabled={!selectedClubId}
-            className="associate-btn"
-          >
-            Asociarme
-          </button>
+  <main className="dashboard-main">
+    <div className="dashboard-content">
+      <h2>Mis Clubes</h2>
+      <div className="club-list">
+        {myClubs.length === 0 ? (
+          <p>No estás asociado a ningún club aún.</p>
+        ) : (
+          myClubs.map((club) => (
+            <div key={club.id} className="club-card">
+              <img
+                src={club.logo_url || '/placeholder.png'}
+                alt={club.name}
+                className="club-logo"
+              />
+              <p>{club.name}</p>
+            </div>
+          ))
         )}
+      </div>
 
-        {message && <p className="message">{message}</p>}
-      </section>
+      <h3>Asociarme a un nuevo club</h3>
+      <div className="club-list">
+        {availableClubs.length === 0 ? (
+          <p>Ya estás asociado a todos los clubes disponibles.</p>
+        ) : (
+          availableClubs.map((club) => (
+            <div
+              key={club.id}
+              className={`club-card selectable ${selectedClubId === club.id ? 'selected' : ''}`}
+              onClick={() => setSelectedClubId(club.id)}
+            >
+              <img
+                src={club.logo_url || '/placeholder.png'}
+                alt={club.name}
+                className="club-logo"
+              />
+              <p>{club.name}</p>
+            </div>
+          ))
+        )}
+      </div>
+
+      {availableClubs.length > 0 && (
+        <button
+          onClick={handleAssociate}
+          disabled={!selectedClubId}
+          className="associate-btn"
+        >
+          Asociarme
+        </button>
+      )}
+
+      {message && <p className="message">{message}</p>}
     </div>
+  </main>
+</div>
   );
 };
 
