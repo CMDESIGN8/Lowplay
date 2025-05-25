@@ -1,7 +1,26 @@
+/* Estructura general */
+.dashboard-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Sidebar */
 .sidebar {
   width: 240px;
   background: rgba(46, 46, 46, 0.95);
   backdrop-filter: blur(8px);
+  color: #fff;
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -9,25 +28,105 @@
   position: sticky;
   top: 0;
   height: 100vh;
-  overflow-y: auto;
   z-index: 100;
-  }
-  /* === Dashboard === */
-  .dashboard-wrapper {
+}
+
+.sidebar .logo {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.sidebar .menu a {
+  color: #fff;
+  text-decoration: none;
+  margin: 10px 0;
+  display: block;
+  transition: color 0.2s;
+}
+
+.sidebar .menu a:hover {
+  color: #00bfff;
+}
+
+/* Contenido principal */
+.main-content {
+  flex: 1;
+  padding: 30px;
+}
+
+h2, h3 {
+  color: #333;
+}
+
+.club-list {
   display: flex;
-  min-height: 100vh;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 20px;
+}
+
+.club-card {
+  width: 100px;
+  text-align: center;
+  background: #fff;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.club-card .club-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 8px;
+}
+
+.selectable {
+  cursor: pointer;
+  transition: transform 0.2s, border 0.2s;
+}
+
+.selectable:hover {
+  transform: scale(1.05);
+}
+
+.selectable.selected {
+  border: 2px solid #00bfff;
+}
+
+.associate-btn {
+  padding: 10px 20px;
+  background-color: #00bfff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.associate-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.message {
+  margin-top: 1rem;
+  font-weight: bold;
+  color: green;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-wrapper {
+    flex-direction: column;
   }
 
-  /* === Responsive === */
-  @media (max-width: 768px) {
-  .dashboard-wrapper {
-  flex-direction: column;
-  }
-  
   .sidebar {
-  width: 100%;
-  position: relative;
-  height: auto;
+    width: 100%;
+    position: relative;
+    height: auto;
   }
-   }
-  
+}
