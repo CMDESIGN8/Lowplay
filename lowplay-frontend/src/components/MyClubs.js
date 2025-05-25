@@ -95,7 +95,7 @@ const MyClubs = () => {
         )}
       </div>
 
-      <h3>Asociarme a un nuevo club</h3>
+      <h2>Asociarme a un nuevo club</h2>
       <div className="club-list">
         {availableClubs.length === 0 ? (
           <p>Ya estás asociado a todos los clubes disponibles.</p>
