@@ -62,7 +62,7 @@ const MyClubs = () => {
   return (
 
     
-    <div>
+    <div className={`dashboard-wrapper ${showContent ? 'fade-in' : ''}`}>
       <aside className="sidebar">
   <h1 className="logo">LOWPLUS</h1>
   <nav className="menu">

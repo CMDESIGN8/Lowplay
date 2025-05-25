@@ -12,3 +12,22 @@
   overflow-y: auto;
   z-index: 100;
   }
+  /* === Dashboard === */
+  .dashboard-wrapper {
+  display: flex;
+  min-height: 100vh;
+  }
+
+  /* === Responsive === */
+  @media (max-width: 768px) {
+  .dashboard-wrapper {
+  flex-direction: column;
+  }
+  
+  .sidebar {
+  width: 100%;
+  position: relative;
+  height: auto;
+  }
+   }
+  
