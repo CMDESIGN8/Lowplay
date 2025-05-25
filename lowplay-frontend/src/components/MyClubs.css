@@ -155,7 +155,7 @@ h2, h3 {
 }
 
 .modal-content {
-  background: white;
+  background: rgb(32, 32, 32);
   padding: 2rem;
   border-radius: 12px;
   max-width: 600px;
