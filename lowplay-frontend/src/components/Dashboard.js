@@ -5,7 +5,6 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import Missions from './Missions';
 import UserProfile from './UserProfile';
 import CanjePremios from './CanjePremios'; // Importa el componente
-import { Link } from 'react-router-dom';  
 import { useNavigate, Link } from 'react-router-dom';
 
 
