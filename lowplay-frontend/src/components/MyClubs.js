@@ -167,7 +167,7 @@ const MyClubs = () => {
               onClick={() => setSelectedClubId(club.id)}
             >
               <img
-                src={club.logo_url || '/placeholder.png'}
+                src={club.logo_url || '../assets/cartaf.png'}
                 alt={club.name}
                 className="club-logo"
               />

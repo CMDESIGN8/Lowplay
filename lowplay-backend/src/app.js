@@ -5,6 +5,8 @@ const userRoutes = require('./routes/userRoutes');
 require('dotenv').config();
 const missionsRoutes = require('./routes/missions');
 const premiosRoutes = require('./routes/premios'); // Importa las rutas de premios
+const cardsRoutes = require('./routes/cards.routes');
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -29,6 +31,10 @@ app.use('/api/clubs', clubRoutes);
 
 const userClubRoutes = require('./routes/userClub.routes');
 app.use('/api/user-clubs', userClubRoutes);
+
+// Rutas cartas
+
+app.use('/api/user-cards', cardsRoutes);
 
 // Iniciar el servidor
 app.listen(port, () => {
