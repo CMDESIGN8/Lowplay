@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { getCardsByUser, createCard } = require('../models/cards.model');
-const authenticateToken = require('../middleware/authenticateToken'); // Middleware que valide JWT
+const { authenticateToken } = require('../middlewares/authMiddleware');
 
 // Obtener cartas del usuario autenticado
 router.get('/', authenticateToken, async (req, res) => {
