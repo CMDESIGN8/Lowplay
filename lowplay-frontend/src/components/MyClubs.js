@@ -127,8 +127,7 @@ const MyClubs = () => {
           <h2>Cartas FIFA</h2>
           <div className="fifa-card-list">
             {fifaCards.map(card => (
-              <div key={card.id} className="fifa-card">
-                <img src={card.logo || '/placeholder.png'} alt={card.name} className="club-logo" />
+              <div className="fifa-card">
                 <h4>{card.name}</h4>
                 <div className="stats">
                   <p>PAC: {card.stats.pace}</p>
