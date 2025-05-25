@@ -87,7 +87,7 @@ const Dashboard = () => {
     <a href="#"><i className="fas fa-truck"></i> Gestiona tu Envío</a>
     <a href="#"><i className="fas fa-tv"></i> LowTV</a>
     <a href="#"><i className="fas fa-store"></i> Marketplace</a>
-    <Link to="/mis-clubes"><i className="fas fa-users"></i> Asociar Club</Link>
+    <Link to="/mis-clubes"><i className="fas fa-people-group"></i> Mi Club</Link>
     <a href="#"><i className="fas fa-user"></i> Perfil</a>
     <a href="#"><i className="fas fa-sign-out-alt"></i> Cerrar sesión</a>
   </nav>
