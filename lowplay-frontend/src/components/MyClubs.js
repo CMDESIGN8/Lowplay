@@ -18,6 +18,23 @@ const MyClubs = () => {
     fetchAllClubs();
   }, []);
 
+  const [user, setUser] = useState(null);
+
+const fetchUser = async () => {
+  try {
+    const res = await axios.get('https://lowplay.onrender.com/api/auth/profile', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    setUser(res.data);
+  } catch (err) {
+    console.error('Error al obtener el usuario:', err);
+  }
+};
+
+useEffect(() => {
+  fetchUser();
+}, []);
+
   const fetchMyClubs = async () => {
     try {
       const res = await axios.get('https://lowplay.onrender.com/api/user-clubs/mis-clubes', {
@@ -52,7 +69,7 @@ const MyClubs = () => {
       const club = availableClubs.find(c => c.id === selectedClubId);
 if (club && user) {
   const newCard = {
-    user_id: user.id, // Asegurate de tener el user logueado
+    user_id: user.id,
     club_id: club.id,
     name: club.name,
     logo_url: club.logo_url,
@@ -64,7 +81,7 @@ if (club && user) {
     physical: Math.floor(Math.random() * 100),
   };
 
-  // 1. Guarda en frontend
+  // Guarda en frontend
   setFifaCards(prev => [
     ...prev,
     {
@@ -82,22 +99,22 @@ if (club && user) {
     },
   ]);
 
-  // 2. Envia al backend
-  fetch('/api/cards', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`, // si usás JWT
-    },
-    body: JSON.stringify(newCard),
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Carta guardada en la base de datos:', data);
-    })
-    .catch(error => {
-      console.error('Error al guardar la carta:', error);
-    });
+  // Enviar al backend
+  try {
+    const response = await axios.post(
+      'https://lowplay.onrender.com/api/cards',
+      newCard,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log('Carta FIFA guardada en la base de datos:', response.data);
+  } catch (error) {
+    console.error('Error al guardar la carta FIFA:', error);
+  }
 }
 
 
