@@ -103,8 +103,6 @@ const MyClubs = () => {
 <button onClick={() => setShowModal(true)} className="associate-btn">
   Ver clubes disponibles
 </button>
-
-      {message && <p className="message">{message}</p>}
     </div>
 
 
@@ -139,6 +137,7 @@ const MyClubs = () => {
       </div>
 
       <div className="modal-actions">
+        {message && <p className="message">{message}</p>}
         <button
           onClick={handleAssociate}
           disabled={!selectedClubId}
@@ -147,7 +146,7 @@ const MyClubs = () => {
           Asociarme
         </button>
         <button onClick={() => setShowModal(false)} className="cancel-btn">
-          Cancelar
+          Cerrar
         </button>
       </div>
     </div>
