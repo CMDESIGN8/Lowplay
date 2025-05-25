@@ -54,10 +54,14 @@ const MyClubs = () => {
     }
   };
 
+  const [showModal, setShowModal] = useState(false);
+
   // 🔎 Filtrar clubes a los que ya estás asociado
   const availableClubs = allClubs.filter(
     (club) => !myClubs.some((myClub) => myClub.id === club.id)
   );
+
+  
 
     return (
    <div className="dashboard-wrapper fade-in">
@@ -133,8 +137,52 @@ const MyClubs = () => {
 
       <div className='Lowcards'> 
         <h2>Aca Van las Cartas</h2>
+        <h2>Asociarme a un nuevo club</h2>
+<button onClick={() => setShowModal(true)} className="associate-btn">
+  Ver clubes disponibles
+</button>
+      </div>
+{showModal && (
+  <div className="modal-overlay">
+    <div className="modal-content">
+      <h3>Clubes Disponibles</h3>
+
+      <div className="club-list">
+        {availableClubs.length === 0 ? (
+          <p>No hay clubes disponibles.</p>
+        ) : (
+          availableClubs.map((club) => (
+            <div
+              key={club.id}
+              className={`club-card selectable ${selectedClubId === club.id ? 'selected' : ''}`}
+              onClick={() => setSelectedClubId(club.id)}
+            >
+              <img
+                src={club.logo_url || '/placeholder.png'}
+                alt={club.name}
+                className="club-logo"
+              />
+              <p>{club.name}</p>
+            </div>
+          ))
+        )}
       </div>
 
+      <div className="modal-actions">
+        <button
+          onClick={handleAssociate}
+          disabled={!selectedClubId}
+          className="associate-btn"
+        >
+          Asociarme
+        </button>
+        <button onClick={() => setShowModal(false)} className="cancel-btn">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+)}
   </main>
 </div>
   );
