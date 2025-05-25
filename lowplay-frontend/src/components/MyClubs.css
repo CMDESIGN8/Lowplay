@@ -31,22 +31,29 @@
   z-index: 100;
   }
 
-.sidebar .logo {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-}
-
-.sidebar .menu a {
+.logo {
+  font-size: 28px;
+  font-weight: 700;
+  color: #00bfff;
+  margin-bottom: 40px;
+  text-align: center;
+  }
+  
+  .menu a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   color: #fff;
   text-decoration: none;
-  margin: 10px 0;
-  display: block;
-  transition: color 0.2s;
-}
-
-.sidebar .menu a:hover {
-  color: #00bfff;
-}
+  padding: 12px 16px;
+  transition: background 0.3s;
+  }
+  
+  .menu a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #3eff61;
+  }
 
 /* Contenido principal */
 .main-content {
@@ -68,7 +75,7 @@ h2, h3 {
 .club-card {
   width: 100px;
   text-align: center;
-  background: #fff;
+  background: transparent;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 12px;
