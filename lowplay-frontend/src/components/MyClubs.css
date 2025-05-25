@@ -204,6 +204,12 @@ h2, h3 {
   margin-bottom: 0.5rem;
 }
 
+.user-avatar img {
+  max-width: 100%;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+}
+
 .fifa-card h4 {
   margin: 0.5rem 0;
 }

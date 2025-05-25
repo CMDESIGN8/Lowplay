@@ -137,13 +137,8 @@ const MyClubs = () => {
   <div className="fifa-card-list">
     {fifaCards.map(card => (
       <div key={card.id} className="fifa-card">
-        {/* Mostrar avatar del usuario o imagen por defecto */}
-        <img
-          src={user.avatar || '/assets/avatars/mateo.png'}
-          alt={`${user.name} avatar`}
-          style={{ width: '100px', borderRadius: '50%' }}
-        />
-        <h3>{user.name}</h3>
+        <img src={card.logo || '/placeholder.png'} alt={card.name} className="club-logo" />
+        <h4>{card.name}</h4>
         <div className="stats">
           <p>PAC: {card.stats.pace}</p>
           <p>SHO: {card.stats.shooting}</p>
