@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); /* Fuente estilo videojuego */
+
+
 /* Estructura general */
 .clubscc {
   display: flex;
@@ -62,7 +65,21 @@
 }
 
 h2, h3 {
-  color: #333;
+  font-family: 'Press Start 2P', cursive;
+  color: #00f0ff; /* color neón celeste */
+  text-shadow: 
+    0 0 5px #00f0ff, 
+    0 0 10px #00f0ff, 
+    0 0 20px #00f0ff, 
+    0 0 40px #0ff, 
+    0 0 80px #0ff;
+
+  background: linear-gradient(90deg, #000000, #2c2c2c); /* fondo oscuro tipo metal */
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid #00f0ff;
+  display: inline-block;
+  letter-spacing: 1px;
 }
 
 .club-list {
