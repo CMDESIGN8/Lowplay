@@ -56,75 +56,73 @@ useEffect(() => {
   };
 
   const handleAssociate = async () => {
-    try {
-      const res = await axios.post(
-        'https://lowplay.onrender.com/api/user-clubs/asociar',
-        { club_id: selectedClubId },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      setMessage(res.data.message || '¡Asociación exitosa!');
-      setSelectedClubId('');
-      fetchMyClubs();
-
-      const club = availableClubs.find(c => c.id === selectedClubId);
-if (club && user) {
-  const newCard = {
-    user_id: user.id,
-    club_id: club.id,
-    name: club.name,
-    logo_url: club.logo_url,
-    pace: Math.floor(Math.random() * 100),
-    shooting: Math.floor(Math.random() * 100),
-    passing: Math.floor(Math.random() * 100),
-    dribbling: Math.floor(Math.random() * 100),
-    defense: Math.floor(Math.random() * 100),
-    physical: Math.floor(Math.random() * 100),
-  };
-
-  // Guarda en frontend
-  setFifaCards(prev => [
-    ...prev,
-    {
-      id: club.id,
-      name: newCard.name,
-      logo: newCard.logo_url,
-      stats: {
-        pace: newCard.pace,
-        shooting: newCard.shooting,
-        passing: newCard.passing,
-        dribbling: newCard.dribbling,
-        defense: newCard.defense,
-        physical: newCard.physical,
-      },
-    },
-  ]);
-
-  // Enviar al backend
   try {
-    const response = await axios.post(
+    const res = await axios.post(
+      'https://lowplay.onrender.com/api/user-clubs/asociar',
+      { club_id: selectedClubId },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    setMessage(res.data.message || '¡Asociación exitosa!');
+    setSelectedClubId('');
+    fetchMyClubs();
+
+    const club = allClubs.find(c => c.id === selectedClubId);
+
+    // Paso 1: Obtener datos del usuario desde el token
+    const userRes = await axios.get('https://lowplay.onrender.com/api/auth/me', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const user = userRes.data;
+
+    // Paso 2: Crear carta FIFA
+    const newCard = {
+      user_id: user.id,
+      club_id: club.id,
+      name: user.name, // o `${user.name} (${club.name})`
+      logo_url: club.logo_url,
+      pace: Math.floor(Math.random() * 100),
+      shooting: Math.floor(Math.random() * 100),
+      passing: Math.floor(Math.random() * 100),
+      dribbling: Math.floor(Math.random() * 100),
+      defense: Math.floor(Math.random() * 100),
+      physical: Math.floor(Math.random() * 100),
+    };
+
+    // Paso 3: Enviar carta al backend
+    const cardRes = await axios.post(
       'https://lowplay.onrender.com/api/cards',
       newCard,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      }
+      { headers: { Authorization: `Bearer ${token}` } }
     );
-    console.log('Carta FIFA guardada en la base de datos:', response.data);
-  } catch (error) {
-    console.error('Error al guardar la carta FIFA:', error);
+
+    // Paso 4: Guardar en el frontend
+    setFifaCards(prev => [
+      ...prev,
+      {
+        id: cardRes.data.id,
+        name: newCard.name,
+        logo: newCard.logo_url,
+        stats: {
+          pace: newCard.pace,
+          shooting: newCard.shooting,
+          passing: newCard.passing,
+          dribbling: newCard.dribbling,
+          defense: newCard.defense,
+          physical: newCard.physical,
+        },
+      },
+    ]);
+
+    console.log('Carta creada y guardada correctamente:', cardRes.data);
+    setShowModal(false);
+  } catch (err) {
+    const errorMessage = err.response?.data?.message || 'Error al asociarse';
+    setMessage(errorMessage);
+    console.error('Error al asociarse o crear carta:', err);
   }
-}
+};
 
-
-      setShowModal(false);
-    } catch (err) {
-      const errorMessage = err.response?.data?.message || 'Error al asociarse';
-      setMessage(errorMessage);
-      console.error('Error al asociarse al club:', err);
-    }
-  };
 
   const availableClubs = allClubs.filter(
     (club) => !myClubs.some((myClub) => myClub.id === club.id)
