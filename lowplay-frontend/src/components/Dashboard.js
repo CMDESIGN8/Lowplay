@@ -83,7 +83,7 @@ const Dashboard = () => {
   <h1 className="logo">LOWPLUS</h1>
   <nav className="menu">
     <a href="#"><i className="fas fa-home"></i> Inicio</a>
-    <Link to="/mis-clubes"><i className="fas fa-people-group fa-bounce"></i> Mi Club</Link>
+    <Link to="/mis-clubes"><i className="fas fa-people-group"></i> Mi Club</Link>
     <a href="#"><i className="fas fa-tv"></i> LowTV</a>
     <a href="#"><i className="fas fa-store"></i> Marketplace</a>
     <a href="#"><i className="fas fa-wallet"></i> Wallet</a>
