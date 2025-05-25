@@ -2,7 +2,7 @@
 .clubscc {
   display: flex;
   min-height: 100vh;
-  background-color: #f9f9f9;
+  background-color: transparent;
   font-family: 'Segoe UI', sans-serif;
 }
 
@@ -20,7 +20,6 @@
   width: 240px;
   background: rgba(46, 46, 46, 0.95);
   backdrop-filter: blur(8px);
-  color: #fff;
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -28,8 +27,9 @@
   position: sticky;
   top: 0;
   height: 100vh;
+  overflow-y: auto;
   z-index: 100;
-}
+  }
 
 .sidebar .logo {
   font-size: 1.8rem;
