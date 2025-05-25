@@ -187,12 +187,12 @@ h2, h3 {
 
 .fifa-card {
   background-image: url(../assets/img/cartaf.png);
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   border-radius: 16px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
   padding: 1rem;
-  width: 100%;
+  width: 300px;
   text-align: center;
   font-family: 'Arial', sans-serif;
 }
@@ -202,12 +202,6 @@ h2, h3 {
   height: 60px;
   object-fit: contain;
   margin-bottom: 0.5rem;
-}
-
-.user-avatar img {
-  max-width: 100%;
-  border-radius: 50%;
-  box-shadow: 0 0 8px rgba(0,0,0,0.3);
 }
 
 .fifa-card h4 {
