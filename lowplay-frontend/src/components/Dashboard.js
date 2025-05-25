@@ -5,7 +5,6 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import Missions from './Missions';
 import UserProfile from './UserProfile';
 import CanjePremios from './CanjePremios'; // Importa el componente
-import MyClubs from './MyClubs';
 import { Link } from 'react-router-dom';
 
 
@@ -128,9 +127,6 @@ const Dashboard = () => {
           </div>
           <div className="module">
             <CanjePremios />
-          </div>
-          <div className="module">
-            <MyClubs />
           </div>
         </div>
       </main>

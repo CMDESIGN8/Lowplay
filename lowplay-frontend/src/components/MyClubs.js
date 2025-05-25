@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './MyClubs.css';
+
 
 const MyClubs = () => {
   const [myClubs, setMyClubs] = useState([]);
@@ -57,7 +59,22 @@ const MyClubs = () => {
   );
 
   return (
+
+    
     <div>
+      <aside className="sidebar">
+  <h1 className="logo">LOWPLUS</h1>
+  <nav className="menu">
+    <a href="#"><i className="fas fa-home"></i> Inicio</a>
+    <a href="#"><i className="fas fa-wallet"></i> Wallet</a>
+    <a href="#"><i className="fas fa-truck"></i> Gestiona tu Envío</a>
+    <a href="#"><i className="fas fa-tv"></i> LowTV</a>
+    <a href="#"><i className="fas fa-store"></i> Marketplace</a>
+    <Link to="/mis-clubes"><i className="fas fa-users"></i> Asociar Club</Link>
+    <a href="#"><i className="fas fa-user"></i> Perfil</a>
+    <a href="#"><i className="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+  </nav>
+</aside>
       <h2>Mis Clubes</h2>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
         {myClubs.length === 0 ? (
