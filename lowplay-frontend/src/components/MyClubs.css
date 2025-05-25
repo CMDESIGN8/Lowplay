@@ -178,3 +178,35 @@ h2, h3 {
   border-radius: 8px;
   cursor: pointer;
 }
+
+.fifa-card-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.fifa-card {
+  background: linear-gradient(145deg, #e0e0e0, #ffffff);
+  border-radius: 16px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  padding: 1rem;
+  width: 180px;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+.fifa-card .club-logo {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+.fifa-card h4 {
+  margin: 0.5rem 0;
+}
+
+.fifa-card .stats p {
+  margin: 0.2rem 0;
+  font-size: 0.85rem;
+}

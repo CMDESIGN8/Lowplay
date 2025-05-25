@@ -38,23 +38,57 @@ const MyClubs = () => {
   };
 
   const handleAssociate = async () => {
-    try {
-      const res = await axios.post(
-        'https://lowplay.onrender.com/api/user-clubs/asociar',
-        { club_id: selectedClubId },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      setMessage(res.data.message || '¡Asociación exitosa!');
-      setSelectedClubId('');
-      fetchMyClubs();
-    } catch (err) {
-      const errorMessage = err.response?.data?.message || 'Error al asociarse';
-      setMessage(errorMessage);
-      console.error('Error al asociarse al club:', err);
-    }
-  };
+  if (!selectedClubId) return;
+
+  const club = availableClubs.find(c => c.id === selectedClubId);
+  if (!club) return;
+
+  try {
+    const res = await axios.post(
+      'https://lowplay.onrender.com/api/user-clubs/asociar',
+      { club_id: selectedClubId },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    setMessage(res.data.message || '¡Asociación exitosa!');
+
+    // Actualiza clubes del usuario
+    fetchMyClubs();
+
+    // Saca el club de la lista de disponibles
+    setAvailableClubs(prev => prev.filter(c => c.id !== selectedClubId));
+
+    // Agrega carta FIFA
+    setFifaCards(prev => [
+      ...prev,
+      {
+        id: club.id,
+        name: club.name,
+        logo: club.logo_url,
+        stats: {
+          pace: Math.floor(Math.random() * 100),
+          shooting: Math.floor(Math.random() * 100),
+          passing: Math.floor(Math.random() * 100),
+          dribbling: Math.floor(Math.random() * 100),
+          defense: Math.floor(Math.random() * 100),
+          physical: Math.floor(Math.random() * 100),
+        },
+      },
+    ]);
+
+    // Limpiar selección y cerrar modal
+    setSelectedClubId('');
+    setShowModal(false);
+  } catch (err) {
+    const errorMessage = err.response?.data?.message || 'Error al asociarse';
+    setMessage(errorMessage);
+    console.error('Error al asociarse al club:', err);
+  }
+};
 
   const [showModal, setShowModal] = useState(false);
+  const [fifaCards, setFifaCards] = useState([]);
+
 
   // 🔎 Filtrar clubes a los que ya estás asociado
   const availableClubs = allClubs.filter(
@@ -107,9 +141,25 @@ const MyClubs = () => {
 
 
       <div className='Lowcards'> 
-        <h2>Aca Van las Cartas</h2>
-        
+  <h2>Tus cartas FIFA</h2>
+  <div className="fifa-card-list">
+    {fifaCards.map(card => (
+      <div key={card.id} className="fifa-card">
+        <img src={card.logo || '/placeholder.png'} alt={card.name} className="club-logo" />
+        <h4>{card.name}</h4>
+        <div className="stats">
+          <p>PAC: {card.stats.pace}</p>
+          <p>SHO: {card.stats.shooting}</p>
+          <p>PAS: {card.stats.passing}</p>
+          <p>DRI: {card.stats.dribbling}</p>
+          <p>DEF: {card.stats.defense}</p>
+          <p>PHY: {card.stats.physical}</p>
+        </div>
       </div>
+    ))}
+  </div>
+</div>
+
 {showModal && (
   <div className="modal-overlay">
     <div className="modal-content">
