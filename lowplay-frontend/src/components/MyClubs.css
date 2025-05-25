@@ -186,7 +186,9 @@ h2, h3 {
 }
 
 .fifa-card {
-  background: linear-gradient(145deg, #e0e0e0, #ffffff);
+  background-image: url(/assets/avatars/cartaf.png);
+  background-size: cover;
+  background-repeat: no-repeat;
   border-radius: 16px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
   padding: 1rem;
