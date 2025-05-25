@@ -128,6 +128,9 @@ const Dashboard = () => {
           <div className="module">
             <CanjePremios />
           </div>
+          <div className="module">
+            <MyClubs />
+          </div>
         </div>
       </main>
 
