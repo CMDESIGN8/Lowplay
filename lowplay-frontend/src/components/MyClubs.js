@@ -44,39 +44,56 @@ const MyClubs = () => {
       { club_id: selectedClubId },
       { headers: { Authorization: `Bearer ${token}` } }
     );
+
     setMessage(res.data.message || '¡Asociación exitosa!');
     setSelectedClubId('');
     fetchMyClubs();
 
-    // ✅ Encontrar el club seleccionado para usar sus datos
-    const club = availableClubs.find(c => c.id === selectedClubId);
+    // ✅ Encontrar el club seleccionado
+    const club = availableClubs.find((c) => c.id === selectedClubId);
     if (club) {
-      setFifaCards(prev => [
+      // Generar stats random
+      const stats = {
+        pace: Math.floor(Math.random() * 100),
+        shooting: Math.floor(Math.random() * 100),
+        passing: Math.floor(Math.random() * 100),
+        dribbling: Math.floor(Math.random() * 100),
+        defense: Math.floor(Math.random() * 100),
+        physical: Math.floor(Math.random() * 100),
+      };
+
+      // ✅ Guardar carta en la base de datos
+      await axios.post(
+        'https://lowplay.onrender.com/api/fifa-cards/create',
+        {
+          club_id: selectedClubId,
+          stats,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      // Actualizar frontend con la nueva carta
+      setFifaCards((prev) => [
         ...prev,
         {
           id: club.id,
           name: club.name,
           logo: club.logo_url,
-          stats: {
-            pace: Math.floor(Math.random() * 100),
-            shooting: Math.floor(Math.random() * 100),
-            passing: Math.floor(Math.random() * 100),
-            dribbling: Math.floor(Math.random() * 100),
-            defense: Math.floor(Math.random() * 100),
-            physical: Math.floor(Math.random() * 100),
-          },
+          stats,
         },
       ]);
     }
 
-    setShowModal(false); // Cerrar modal después de asociar
-
+    setShowModal(false);
   } catch (err) {
     const errorMessage = err.response?.data?.message || 'Error al asociarse';
     setMessage(errorMessage);
     console.error('Error al asociarse al club:', err);
   }
 };
+
 
   const [showModal, setShowModal] = useState(false);
   const [fifaCards, setFifaCards] = useState([]);
