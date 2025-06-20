@@ -69,11 +69,6 @@ const MyClubs = () => {
       setSelectedClubId('');
       await fetchMyClubs();
 
-      const userId = obtenerUserId();
-      if (!userId) {
-        setMessage('No se pudo obtener el ID de usuario desde el token.');
-        return;
-      }
 
       const club = allClubs.find((c) => c.id === selectedClubId);
       if (club) {
