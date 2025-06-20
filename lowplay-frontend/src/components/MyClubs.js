@@ -64,7 +64,7 @@ const MyClubs = () => {
 
       // ✅ Guardar carta en la base de datos
       await axios.post(
-        'https://lowplay.onrender.com/api/fifa-cards/create',
+  'https://lowplay.onrender.com/api/user-cards/create', // <== Cambiar aquí
         {
           club_id: selectedClubId,
           stats,
