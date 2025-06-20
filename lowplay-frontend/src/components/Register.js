@@ -14,7 +14,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      await axios.post('https://lowplay.onrender.com/api/register', {
+      await axios.post('http://localhost:5000/api/register', {
         name,
         email,
         password,
