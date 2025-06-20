@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import jwtDecode from 'jwt-decode'; // npm install jwt-decode
 import './MyClubs.css';
 import { Link } from 'react-router-dom';
 
@@ -12,6 +13,16 @@ const MyClubs = () => {
   const [fifaCards, setFifaCards] = useState([]);
 
   const token = localStorage.getItem('token');
+
+  const obtenerUserId = () => {
+    if (!token) return null;
+    try {
+      const decoded = jwtDecode(token);
+      return decoded.userId || decoded.id || null;
+    } catch {
+      return null;
+    }
+  };
 
   useEffect(() => {
     fetchMyClubs();
@@ -68,24 +79,31 @@ const MyClubs = () => {
       setSelectedClubId('');
       await fetchMyClubs();
 
-      // Buscar club en allClubs para datos
+      const userId = obtenerUserId();
+      if (!userId) {
+        setMessage('No se pudo obtener el ID de usuario desde el token.');
+        return;
+      }
+
       const club = allClubs.find((c) => c.id === selectedClubId);
       if (club) {
         // Generar stats aleatorios
         const stats = {
-  pace: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
-  shooting: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
-  passing: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
-  dribbling: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
-  defense: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
-  physical: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
-};
+          pace: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
+          shooting: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
+          passing: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
+          dribbling: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
+          defense: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
+          physical: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
+        };
 
         // Guardar carta en base de datos
         const cardRes = await axios.post(
           'https://lowplay.onrender.com/api/user-cards/create',
           {
+            userId: userId,
             club_id: club.id,
+            playerName: club.name,
             stats,
           },
           {
@@ -93,19 +111,25 @@ const MyClubs = () => {
           }
         );
 
-        // Actualizar cartas en frontend con carta nueva
+        // Agregar carta nueva a estado
         setFifaCards((prev) => [
           ...prev,
           {
-            id: cardRes.data.card.id, // id real de la carta creada en backend
-            name: club.name,
+            id: cardRes.data.card.id,
+            name: cardRes.data.card.name || club.name,
             logo: club.logo_url,
-            stats,
+            pace: cardRes.data.card.pace || stats.pace,
+            shooting: cardRes.data.card.shooting || stats.shooting,
+            passing: cardRes.data.card.passing || stats.passing,
+            dribbling: cardRes.data.card.dribbling || stats.dribbling,
+            defense: cardRes.data.card.defense || stats.defense,
+            physical: cardRes.data.card.physical || stats.physical,
           },
         ]);
       }
 
       setShowModal(false);
+      setMessage('');
     } catch (err) {
       const errorMessage = err.response?.data?.message || 'Error al asociarse';
       setMessage(errorMessage);
@@ -113,7 +137,6 @@ const MyClubs = () => {
     }
   };
 
-  // Filtrar clubes disponibles para asociación (no asociados aún)
   const availableClubs = allClubs.filter(
     (club) => !myClubs.some((myClub) => myClub.id === club.id)
   );
@@ -144,7 +167,7 @@ const MyClubs = () => {
               myClubs.map((club) => (
                 <div key={club.id} className="club-card">
                   <img
-                    src={club.logo_url || '/placeholder.png'}
+                    src={club.logo_url || 'https://via.placeholder.com/100x100?text=Logo'}
                     alt={club.name}
                     className="club-logo"
                   />
@@ -169,19 +192,19 @@ const MyClubs = () => {
               fifaCards.map((card) => (
                 <div key={card.id} className="fifa-card">
                   <img
-                    src={card.logo || '/placeholder.png'}
+                    src={card.logo || 'https://via.placeholder.com/100x100?text=Logo'}
                     alt={card.name}
                     className="club-logo"
                   />
                   <h4>{card.name}</h4>
                   <div className="stats">
-  <p>PAC: {card.pace}</p>
-  <p>SHO: {card.shooting}</p>
-  <p>PAS: {card.passing}</p>
-  <p>DRI: {card.dribbling}</p>
-  <p>DEF: {card.defense}</p>
-  <p>PHY: {card.physical}</p>
-</div>
+                    <p>PAC: {card.pace}</p>
+                    <p>SHO: {card.shooting}</p>
+                    <p>PAS: {card.passing}</p>
+                    <p>DRI: {card.dribbling}</p>
+                    <p>DEF: {card.defense}</p>
+                    <p>PHY: {card.physical}</p>
+                  </div>
                 </div>
               ))
             )}
@@ -206,7 +229,7 @@ const MyClubs = () => {
                       onClick={() => setSelectedClubId(club.id)}
                     >
                       <img
-                        src={club.logo_url || '/placeholder.png'}
+                        src={club.logo_url || 'https://via.placeholder.com/100x100?text=Logo'}
                         alt={club.name}
                         className="club-logo"
                       />
