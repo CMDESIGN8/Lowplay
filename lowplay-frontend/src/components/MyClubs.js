@@ -73,13 +73,13 @@ const MyClubs = () => {
       if (club) {
         // Generar stats aleatorios
         const stats = {
-          pace: Math.floor(Math.random() * 100),
-          shooting: Math.floor(Math.random() * 100),
-          passing: Math.floor(Math.random() * 100),
-          dribbling: Math.floor(Math.random() * 100),
-          defense: Math.floor(Math.random() * 100),
-          physical: Math.floor(Math.random() * 100),
-        };
+  pace: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
+  shooting: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
+  passing: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
+  dribbling: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
+  defense: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
+  physical: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
+};
 
         // Guardar carta en base de datos
         const cardRes = await axios.post(

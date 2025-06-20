@@ -1,47 +1,67 @@
 const express = require('express');
 const router = express.Router();
-const { getCardsByUser, createCard } = require('../models/cards.model');
-const { authenticateToken } = require('../middlewares/authMiddleware');
+const { Pool } = require('pg');
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
-// Obtener cartas del usuario autenticado
-router.get('/', authenticateToken, async (req, res) => {
-  try {
-    const userId = req.user.id;
-    const cards = await getCardsByUser(userId);
-    res.json({ cards });
-  } catch (error) {
-    console.error('Error fetching cards:', error);
-    res.status(500).json({ message: 'Error al obtener cartas' });
+// Función para generar stats entre 70 y 99
+function generateStats() {
+  return {
+    pace: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
+    shooting: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
+    passing: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
+    dribbling: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
+    defense: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
+    physical: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
+  };
+}
+
+// Crear una carta nueva
+router.post('/create', async (req, res) => {
+  const { userId, playerName } = req.body;
+  if (!userId || !playerName) {
+    return res.status(400).json({ message: 'Faltan userId o playerName' });
   }
-});
 
-// Crear nueva carta para el usuario
-router.post('/', authenticateToken, async (req, res) => {
+  const stats = generateStats();
+
+  const query = `
+    INSERT INTO cards
+      (user_id, name, pace, shooting, passing, dribbling, defense, physical)
+    VALUES
+      ($1, $2, $3, $4, $5, $6, $7, $8)
+    RETURNING *;
+  `;
+
+  const values = [
+    userId,
+    playerName,
+    stats.pace,
+    stats.shooting,
+    stats.passing,
+    stats.dribbling,
+    stats.defense,
+    stats.physical,
+  ];
+
   try {
-    const userId = req.user.id;
-    const { club_id, name, logo_url, stats } = req.body;
-
-    if (!club_id || !name || !stats) {
-      return res.status(400).json({ message: 'Faltan datos obligatorios' });
-    }
-
-    const newCard = await createCard({
-      user_id: userId,
-      club_id,
-      name,
-      logo_url,
-      pace: stats.pace,
-      shooting: stats.shooting,
-      passing: stats.passing,
-      dribbling: stats.dribbling,
-      defense: stats.defense,
-      physical: stats.physical,
-    });
-
-    res.status(201).json({ card: newCard });
+    const result = await pool.query(query, values);
+    res.status(201).json(result.rows[0]);
   } catch (error) {
     console.error('Error creando carta:', error);
     res.status(500).json({ message: 'Error al crear carta' });
+  }
+});
+
+// Listar cartas de un usuario
+router.get('/:userId', async (req, res) => {
+  const userId = req.params.userId;
+  try {
+    const query = 'SELECT * FROM cards WHERE user_id = $1 ORDER BY created_at DESC';
+    const result = await pool.query(query, [userId]);
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error al obtener cartas:', error);
+    res.status(500).json({ message: 'Error al obtener cartas' });
   }
 });
 
