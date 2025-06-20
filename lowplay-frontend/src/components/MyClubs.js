@@ -109,9 +109,9 @@ const MyClubs = () => {
     return (
    <div className="dashboard-wrapper fade-in">
   <aside className="sidebar">
-    <h1 className="logo">LOWPLUS</h1>
+    <h1 className="logo">LUPI APP</h1>
     <nav className="menu">
-      <a href="#"><i className="fas fa-home"></i> Inicio</a>
+      <Link to="/Dashboard"><i className="fas fa-home"></i> Inicio</Link>
       <a href="#"><i className="fas fa-wallet"></i> Wallet</a>
       <a href="#"><i className="fas fa-truck"></i> Gestiona tu Envío</a>
       <a href="#"><i className="fas fa-tv"></i> LowTV</a>

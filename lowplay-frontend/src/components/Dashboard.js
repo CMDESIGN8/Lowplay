@@ -85,7 +85,7 @@ const handleLogout = () => {
   return (
     <div className={`dashboard-wrapper ${showContent ? 'fade-in' : ''}`}>
       <aside className="sidebar">
-  <h1 className="logo">LOWPLUS</h1>
+  <h1 className="logo">LUPI APP</h1>
   <nav className="menu">
     <a href="#"><i className="fas fa-home"></i> Inicio</a>
     <Link to="/mis-clubes"><i className="fas fa-people-group"></i> Mi Club</Link>
