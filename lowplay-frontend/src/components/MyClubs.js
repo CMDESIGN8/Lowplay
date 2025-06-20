@@ -13,15 +13,6 @@ const MyClubs = () => {
 
   const token = localStorage.getItem('token');
 
-  const obtenerUserId = () => {
-    if (!token) return null;
-    try {
-      const decoded = jwtDecode(token);
-      return decoded.userId || decoded.id || null;
-    } catch {
-      return null;
-    }
-  };
 
   useEffect(() => {
     fetchMyClubs();
