@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import jwtDecode from 'jwt-decode'; // npm install jwt-decode
 import './MyClubs.css';
 import { Link } from 'react-router-dom';
 
