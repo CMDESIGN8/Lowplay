@@ -6,13 +6,18 @@ function randomStat() {
 
 const createUserCard = async (req, res) => {
   try {
-    const { userId, playerName, clubId } = req.body;
+    const userId = req.user.id;  // O como se llame en tu token
+    const { playerName, clubId } = req.body;
 
-    if (!userId || !playerName) {
-      return res.status(400).json({ message: 'Faltan datos obligatorios.' });
+    if (!playerName) {
+      return res.status(400).json({ message: 'Falta el nombre del jugador.' });
     }
 
-    // Crear objeto carta con stats aleatorias
+    // stats aleatorios, los tuyos están perfectos
+    function randomStat() {
+      return Math.floor(Math.random() * 50) + 50;
+    }
+
     const newCard = {
       userId,
       name: playerName,
@@ -26,8 +31,6 @@ const createUserCard = async (req, res) => {
       createdAt: new Date(),
     };
 
-    // Guardar en base de datos
-    // Ejemplo con PostgreSQL (ajusta según tu DB):
     const query = `
       INSERT INTO user_cards
       (user_id, name, club_id, pace, shooting, passing, dribbling, defense, physical, created_at)
@@ -57,6 +60,7 @@ const createUserCard = async (req, res) => {
     res.status(500).json({ message: 'Error al crear la carta' });
   }
 };
+
 
 const getUserCards = async (req, res) => {
   try {
