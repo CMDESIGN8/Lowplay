@@ -51,68 +51,58 @@ const MyClubs = () => {
   };
 
   const handleAssociate = async () => {
-    try {
-      if (!selectedClubId) {
-        setMessage('Por favor selecciona un club');
-        return;
-      }
+  try {
+    if (!selectedClubId) {
+      setMessage('Por favor selecciona un club');
+      return;
+    }
 
-      // Asociar usuario al club
-      const res = await axios.post(
-        'https://lowplay.onrender.com/api/user-clubs/asociar',
-        { club_id: selectedClubId },
-        { headers: { Authorization: `Bearer ${token}` } }
+    // Asociar usuario al club
+    const res = await axios.post(
+      'https://lowplay.onrender.com/api/user-clubs/asociar',
+      { club_id: selectedClubId },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    setMessage(res.data.message || '¡Asociación exitosa!');
+    setSelectedClubId('');
+    await fetchMyClubs();
+
+    // Obtener userId desde donde tengas (ejemplo: localStorage, o decodificar token)
+    const userId = obtenerUserId(); // <-- implementar esta función o cambiar
+
+    // Buscar club para datos
+    const club = allClubs.find((c) => c.id === selectedClubId);
+    if (club) {
+      // Crear carta enviando solo userId y playerName (nombre club o personalizado)
+      const cardRes = await axios.post(
+        'https://lowplay.onrender.com/api/user-cards/create',
+        {
+          userId: userId,
+          playerName: club.name, // o cualquier nombre que quieras darle a la carta
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
 
-      setMessage(res.data.message || '¡Asociación exitosa!');
-      setSelectedClubId('');
-      await fetchMyClubs();
-
-      // Buscar club en allClubs para datos
-      const club = allClubs.find((c) => c.id === selectedClubId);
-      if (club) {
-        // Generar stats aleatorios
-        const stats = {
-  pace: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
-  shooting: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
-  passing: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
-  dribbling: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
-  defense: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
-  physical: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
-};
-
-        // Guardar carta en base de datos
-        const cardRes = await axios.post(
-          'https://lowplay.onrender.com/api/user-cards/create',
-          {
-            club_id: club.id,
-            stats,
-          },
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-
-        // Actualizar cartas en frontend con carta nueva
-        setFifaCards((prev) => [
-          ...prev,
-          {
-            id: cardRes.data.card.id, // id real de la carta creada en backend
-            name: club.name,
-            logo: club.logo_url,
-            stats,
-          },
-        ]);
-      }
-
-      setShowModal(false);
-    } catch (err) {
-      const errorMessage = err.response?.data?.message || 'Error al asociarse';
-      setMessage(errorMessage);
-      console.error('Error al asociarse al club:', err);
+      // Actualizar cartas en frontend con carta nueva desde respuesta backend
+      setFifaCards((prev) => [
+        ...prev,
+        {
+          ...cardRes.data,
+          logo: club.logo_url, // añadir logo para mostrar
+        },
+      ]);
     }
-  };
 
+    setShowModal(false);
+  } catch (err) {
+    const errorMessage = err.response?.data?.message || 'Error al asociarse';
+    setMessage(errorMessage);
+    console.error('Error al asociarse al club:', err);
+  }
+};
   // Filtrar clubes disponibles para asociación (no asociados aún)
   const availableClubs = allClubs.filter(
     (club) => !myClubs.some((myClub) => myClub.id === club.id)
@@ -175,13 +165,13 @@ const MyClubs = () => {
                   />
                   <h4>{card.name}</h4>
                   <div className="stats">
-                    <p>PAC: {card.stats.pace}</p>
-                    <p>SHO: {card.stats.shooting}</p>
-                    <p>PAS: {card.stats.passing}</p>
-                    <p>DRI: {card.stats.dribbling}</p>
-                    <p>DEF: {card.stats.defense}</p>
-                    <p>PHY: {card.stats.physical}</p>
-                  </div>
+  <p>PAC: {card.pace}</p>
+  <p>SHO: {card.shooting}</p>
+  <p>PAS: {card.passing}</p>
+  <p>DRI: {card.dribbling}</p>
+  <p>DEF: {card.defense}</p>
+  <p>PHY: {card.physical}</p>
+</div>
                 </div>
               ))
             )}
