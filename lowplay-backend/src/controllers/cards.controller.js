@@ -1,33 +1,30 @@
-const db = require('../db'); // tu conexión y acceso a BD (ajusta según tu implementación)
+const db = require('../db'); // tu conexión a la base de datos
 
+// Genera un número aleatorio entre 50 y 99
 function randomStat() {
-  return Math.floor(Math.random() * 50) + 50; // stats entre 50 y 99
+  return Math.floor(Math.random() * 50) + 50;
 }
 
+// Crear una carta FIFA para el usuario autenticado
 const createUserCard = async (req, res) => {
   try {
-    const userId = req.user.id;  // O como se llame en tu token
-    const { playerName, clubId } = req.body;
+    const { playerName, club_id, stats } = req.body;
+    const userId = req.user.id;
 
-    if (!playerName) {
-      return res.status(400).json({ message: 'Falta el nombre del jugador.' });
-    }
-
-    // stats aleatorios, los tuyos están perfectos
-    function randomStat() {
-      return Math.floor(Math.random() * 50) + 50;
+    if (!userId || !playerName) {
+      return res.status(400).json({ message: 'Faltan usuario o nombre del jugador.' });
     }
 
     const newCard = {
       userId,
       name: playerName,
-      clubId: clubId || null,
-      pace: randomStat(),
-      shooting: randomStat(),
-      passing: randomStat(),
-      dribbling: randomStat(),
-      defense: randomStat(),
-      physical: randomStat(),
+      clubId: club_id || null,
+      pace: stats?.pace || randomStat(),
+      shooting: stats?.shooting || randomStat(),
+      passing: stats?.passing || randomStat(),
+      dribbling: stats?.dribbling || randomStat(),
+      defense: stats?.defense || randomStat(),
+      physical: stats?.physical || randomStat(),
       createdAt: new Date(),
     };
 
@@ -61,12 +58,14 @@ const createUserCard = async (req, res) => {
   }
 };
 
-
+// Obtener todas las cartas del usuario autenticado
 const getUserCards = async (req, res) => {
   try {
-    const userId = req.user.id; // asumido de authMiddleware
+    const userId = req.user.id;
+
     const query = `SELECT * FROM user_cards WHERE user_id = $1 ORDER BY created_at DESC`;
     const result = await db.query(query, [userId]);
+
     res.json({ cards: result.rows });
   } catch (error) {
     console.error('Error obteniendo cartas:', error);
@@ -74,4 +73,7 @@ const getUserCards = async (req, res) => {
   }
 };
 
-module.exports = { createUserCard, getUserCards };
+module.exports = {
+  createUserCard,
+  getUserCards,
+};
