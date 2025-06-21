@@ -86,7 +86,6 @@ const MyClubs = () => {
         const cardRes = await axios.post(
           'https://lowplay.onrender.com/api/user-cards/create',
           {
-            userId: userId,
             club_id: club.id,
             playerName: club.name,
             stats,
