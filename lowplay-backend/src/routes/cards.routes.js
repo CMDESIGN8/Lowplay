@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { createUserCard, getUserCards } = require('../controllers/cards.controller');
-const { authenticateToken } = require('../middleware/authMiddleware');
+const { authenticateToken } = require('../middlewares/authMiddleware');
 
 // Ruta para crear una carta (requiere token JWT)
 router.post('/create', authenticateToken, createUserCard);
