@@ -242,14 +242,7 @@
   box-shadow: 0 0 5px #fff;
 }
 
-.card-avatar {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid white;
-  box-shadow: 0 0 5px #fff;
-}
+
 
 .card-name-logo-container {
   text-align: center;
