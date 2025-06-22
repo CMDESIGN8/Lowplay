@@ -183,52 +183,44 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
           </button>
         </div>
 
-        <div className="Lowcards">
-          <h2>Mis Cartas FIFA</h2>
-          <div className="fifa-card-list">
-            {fifaCards.length === 0 ? (
-              <p>No tienes cartas FIFA todavía.</p>
-            ) : (
-              fifaCards.map((card) => (
-                <div key={card.id} className="fifa-card">
+        <div className="fifa-card">
   <div className="card-background">
-    {/* Overall + Avatar */}
     <div className="card-header">
-      <div className="card-overall">{Math.round(
-        (card.pace + card.shooting + card.passing + card.dribbling + card.defense + card.physical) / 6
-      )}</div>
+      <div className="card-overall">
+        {Math.round(
+          (card.pace + card.shooting + card.passing + card.dribbling + card.defense + card.physical) / 6
+        )}
+      </div>
       <img
         src={card.avatarUrl || '/assets/avatars/mateo.png'}
-        alt="avatar"
+        alt={card.playerName || 'Jugador'}
         className="card-avatar"
       />
     </div>
 
-    {/* Club logo */}
-    <img
-      src={card.logo || '/assets/club-default.png'}
-      alt="club"
-      className="card-club-logo"
-    />
+    <div className="card-name-logo-container">
+      <div className="card-name">{card.playerName || 'Jugador'}</div>
+      <img
+        src={card.logo || '/assets/club-default.png'}
+        alt="Club"
+        className="card-club-logo"
+      />
+    </div>
 
-    {/* Nombre del jugador */}
-    <div className="card-name">{card.playerName || 'Jugador'}</div>
-
-    {/* Stats */}
     <div className="card-stats">
-      <p>PAC: {card.pace}</p>
-      <p>SHO: {card.shooting}</p>
-      <p>PAS: {card.passing}</p>
-      <p>DRI: {card.dribbling}</p>
-      <p>DEF: {card.defense}</p>
-      <p>PHY: {card.physical}</p>
+      <div className="stat-col">
+        <p>PAC</p><p>{card.pace}</p>
+        <p>DRI</p><p>{card.dribbling}</p>
+        <p>PHY</p><p>{card.physical}</p>
+      </div>
+      <div className="stat-col">
+        <p>SHO</p><p>{card.shooting}</p>
+        <p>DEF</p><p>{card.defense}</p>
+        <p>PAS</p><p>{card.passing}</p>
+      </div>
     </div>
   </div>
 </div>
-              ))
-            )}
-          </div>
-        </div>
 
         {showModal && (
           <div className="modal-overlay">
