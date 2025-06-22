@@ -192,11 +192,11 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
               fifaCards.map((card) => (
                 <div key={card.id} className="fifa-card">
   <img
-    src="/src-avatars-mateo.png" // ✅ Avatar fijo para pruebas
-    alt={card.name}
-    className="club-logo"
-    style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover' }}
-  />
+  src={card.avatarUrl || '/avatars/mateo.png'}
+  alt={card.name}
+  className="club-logo"
+  style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover' }}
+/>
   <h4>{card.name}</h4>
   <div className="stats">
     <p>PAC: {card.pace}</p>
