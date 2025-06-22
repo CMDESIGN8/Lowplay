@@ -194,37 +194,50 @@
   margin: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
   display: flex;
-  flex-direction: column; /* Changed to column to stack elements */
-  align-items: center;
-  justify-content: flex-start; /* Align items to the start of the column */
+  flex-direction: column; /* Keep as column */
+  /* Remove align-items: center; and justify-content: flex-start; from here,
+     we'll manage layout with internal containers */
+  padding: 10px; /* Add some padding to the card itself */
 }
 
+/* We don't need .card-background as a separate layer if .fifa-card has padding */
+/* Remove or adjust .card-background if it's causing issues.
+   For this layout, it's better to manage padding directly on .fifa-card. */
 .card-background {
-  width: 100%;
-  height: 100%;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center; /* Center content horizontally */
+    /* You can remove this or set its properties to not interfere */
+    /* width: 100%; */
+    /* height: 100%; */
+    /* padding: 0; */ /* No need for padding here */
+    display: none; /* Hide if not needed, or remove completely */
 }
 
-/* No longer needed as much for primary positioning,
-   its content will be absolutely positioned */
+
 .card-header {
-  width: 100%; /* Ensure it takes full width */
+  width: 100%;
   display: flex;
-  justify-content: center; /* Center its content if any */
+  /* Align items to the start (left) */
+  justify-content: flex-start;
   align-items: flex-start;
-  position: relative; /* Needed for absolute children */
-  height: 0; /* Don't take up space */
+  position: relative;
+  height: auto; /* Allow height to be determined by content */
+  margin-bottom: 10px; /* Space between header and stats (if stats are below) */
+}
+
+.top-left-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align contents to the left */
+    gap: 5px; /* Space between overall, avatar, name, and club logo */
+    margin-top: 10px; /* Adjust as needed to move the whole section down */
+    margin-left: 10px; /* Adjust as needed to move the whole section right */
 }
 
 .card-overall {
-  position: absolute;
-  top: 45px; /* Adjusted to be above the avatar */
-  transform: translateX(-50%);
-  background-color: initial; /* Keep initial or transparent */
+  position: relative; /* Change to relative to flow with content */
+  top: initial; /* Reset top */
+  right: initial; /* Reset right */
+  transform: none; /* Reset transform */
+  background-color: initial;
   border-radius: 50%;
   box-shadow: 0 0 6px #fff;
   color: #fff;
@@ -233,65 +246,69 @@
   font-weight: 700;
   height: 45px;
   width: 45px;
-  right: 120px;
-  z-index: 2; /* Ensure it's above the avatar */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 2;
+  /* margin-bottom: 5px; */ /* Space below overall rating */
 }
 
 .card-avatar {
-  position: absolute;
-  top: 40px; /* Position relative to the top of the card, below overall */
-  width: 70px; /* Slightly larger to match image */
-  height: 70px; /* Slightly larger to match image */
+  position: relative; /* Change to relative to flow with content */
+  top: initial; /* Reset top */
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid white;
-  box-shadow: 0 0 8px #fff; /* Slightly stronger shadow */
-  z-index: 1; /* Below overall */
+  box-shadow: 0 0 8px #fff;
+  z-index: 1;
+  /* margin-bottom: 5px; */ /* Space below avatar */
 }
 
 .card-name-logo-container {
-  position: absolute;
-  top: 125px; /* Position below avatar */
-  text-align: center;
-  width: 100%;
+  position: relative; /* Change to relative */
+  top: initial; /* Reset top */
+  text-align: left; /* Align text to the left */
+  width: auto; /* Let content define width */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 4px; /* Space between name and club logo */
+  align-items: flex-start; /* Align items to the left */
+  gap: 2px; /* Smaller gap between name and club logo */
 }
 
 .card-name {
   font-weight: bold;
   color: white;
   text-shadow: 1px 1px 2px black;
-  font-size: 16px; /* Slightly larger for prominence */
-  margin-bottom: 0; /* Remove default margin */
+  font-size: 16px;
+  margin-bottom: 0;
 }
 
 .card-club-logo {
-  width: 35px; /* Slightly larger */
-  height: 35px; /* Slightly larger */
+  width: 35px;
+  height: 35px;
   object-fit: contain;
 }
 
 .card-stats-grid {
-  position: absolute;
-  bottom: 10px; /* Position at the bottom of the card */
-  width: calc(100% - 40px); /* Account for padding */
-  padding: 0 20px;
+  position: absolute; /* Keep absolute for now to place on the right */
+  bottom: 10px;
+  right: 10px; /* Position from the right edge */
+  width: auto; /* Let content define width */
+  padding: 0; /* Remove padding from here, it's on .fifa-card */
   display: flex;
   flex-direction: column;
-  gap: 8px; /* Slightly more space between stat pairs */
-  font-family: 'Press Start 2P', sans-serif; /* Ensure this font is imported */
+  gap: 8px;
+  font-family: 'Press Start 2P', sans-serif;
   font-size: 10px;
   color: white;
   text-shadow: 1px 1px 1px black;
-  top: 200px;
-
+  top: initial; /* Reset top */
+  /* You might need to adjust 'right' and 'bottom' values based on card size */
 }
 
 .stat-pair {
   display: flex;
   justify-content: space-between;
-  
 }
