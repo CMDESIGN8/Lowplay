@@ -193,11 +193,11 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
                 <div key={card.id} className="fifa-card">
   <img
   src={card.avatarUrl || '../public/assets/avatars/mateo.png'}
-  alt={card.name}
+  alt={card.playerName}
   className="club-logo"
   style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover' }}
 />
-  <h4 className="card-name">{card.playerName || card.name}</h4>
+  <h4>{card.playerName}</h4>
   <div className="stats">
     <p>PAC: {card.pace}</p>
     <p>SHO: {card.shooting}</p>
