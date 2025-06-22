@@ -195,14 +195,15 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
            <div className="card-overall">
         {Math.round((card.pace + card.shooting + card.passing + card.dribbling + card.defense + card.physical) / 6)}
           </div>
-          <img
+          
+    </div>
+
+    <div className="card-name-logo-container">
+      <img
         src={card.avatarUrl || '/assets/avatars/mateo.png'}
         alt={card.playerName}
         className="card-avatar"
         />
-    </div>
-
-    <div className="card-name-logo-container">
       <div className="card-name">{card.playerName || 'Jugador'}</div>
       <img
         src={card.logo || '/assets/club-default.png'}
