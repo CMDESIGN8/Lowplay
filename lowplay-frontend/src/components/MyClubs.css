@@ -193,19 +193,26 @@
   overflow: hidden;
   margin: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-background {
-  position: relative;
   width: 100%;
   height: 100%;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .card-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  gap: 20px;
+  margin-top: 50px; /* antes era pegado arriba, ahora centrado */
 }
 
 .card-overall {
@@ -214,23 +221,25 @@
   font-weight: bold;
   font-size: 18px;
   border-radius: 50%;
-  width: 38px;
-  height: 38px;
+  width: 45px;
+  height: 45px;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 0 6px #fff;
 }
 
 .card-avatar {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid white;
+  box-shadow: 0 0 5px #fff;
 }
 
 .card-name-logo-container {
-  margin-top: 40px;
+  margin-top: 20px;
   text-align: center;
 }
 
@@ -243,14 +252,14 @@
 }
 
 .card-club-logo {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   object-fit: contain;
 }
 
 .card-stats-grid {
-  margin-top: 60px;
-  padding: 0 20px;
+  margin-top: auto;
+  padding: 0 20px 10px 20px;
   display: flex;
   flex-direction: column;
   gap: 6px;
