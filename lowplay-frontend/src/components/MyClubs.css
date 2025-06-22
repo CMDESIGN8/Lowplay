@@ -1,239 +1,239 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); /* Fuente estilo videojuego */
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); /* Fuente estilo videojuego */
 
 
-/* Estructura general */
-.clubscc {
-  display: flex;
-  min-height: 100vh;
-  background-color: transparent;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-.fade-in {
-  animation: fadeIn 0.5s ease-in;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Sidebar */
-.sidebar {
-  width: 240px;
-  background: rgba(46, 46, 46, 0.95);
-  backdrop-filter: blur(8px);
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  box-shadow: 2px 0 10px rgba(0, 191, 255, 0.2);
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow-y: auto;
-  z-index: 100;
-  }
-
-.logo {
-  font-size: 28px;
-  font-weight: 700;
-  color: #00bfff;
-  margin-bottom: 40px;
-  text-align: center;
-  }
-  
-  .menu a {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #fff;
-  text-decoration: none;
-  padding: 12px 16px;
-  transition: background 0.3s;
-  }
-  
-  .menu a:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  color: #00bfff;
-  }
-
-/* Contenido principal */
-.main-content {
-  flex: 1;
-  padding: 30px;
-}
-
-.club-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 20px;
-}
-
-.club-card {
-  width: 100px;
-  text-align: center;
-  background: transparent;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-}
-
-.club-card .club-logo {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 8px;
-}
-
-.selectable {
-  cursor: pointer;
-  transition: transform 0.2s, border 0.2s;
-}
-
-.selectable:hover {
-  transform: scale(1.05);
-}
-
-.selectable.selected {
-  border: 2px solid #00bfff;
-}
-
-.associate-btn {
-  padding: 10px 20px;
-  background-color: #00bfff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
-}
-
-.associate-btn:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.message {
-  margin-top: 1rem;
-  font-weight: bold;
-  color: green;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
+  /* Estructura general */
   .clubscc {
-    flex-direction: column;
+    display: flex;
+    min-height: 100vh;
+    background-color: transparent;
+    font-family: 'Segoe UI', sans-serif;
   }
 
+  .fade-in {
+    animation: fadeIn 0.5s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Sidebar */
   .sidebar {
-    width: 100%;
-    position: relative;
-    height: auto;
+    width: 240px;
+    background: rgba(46, 46, 46, 0.95);
+    backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 2px 0 10px rgba(0, 191, 255, 0.2);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+    }
+
+  .logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: #00bfff;
+    margin-bottom: 40px;
+    text-align: center;
+    }
+    
+    .menu a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 16px;
+    transition: background 0.3s;
+    }
+    
+    .menu a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #00bfff;
+    }
+
+  /* Contenido principal */
+  .main-content {
+    flex: 1;
+    padding: 30px;
   }
-}
 
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
+  .club-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 20px;
+  }
 
-.modal-content {
-  background: rgb(32, 32, 32);
-  padding: 2rem;
-  border-radius: 12px;
-  max-width: 600px;
-  width: 90%;
-  max-height: 80vh;
-  overflow-y: auto;
-}
+  .club-card {
+    width: 100px;
+    text-align: center;
+    background: transparent;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
 
-.modal-actions {
-  margin-top: 1rem;
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-}
+  .club-card .club-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 8px;
+  }
 
-.cancel-btn {
-  background-color: #ccc;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
+  .selectable {
+    cursor: pointer;
+    transition: transform 0.2s, border 0.2s;
+  }
 
-.fifa-card-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
+  .selectable:hover {
+    transform: scale(1.05);
+  }
 
-.fifa-card {
-  position: relative;
-  width: 200px;
-  height: 300px;
-    background-image: url(../assets/img/cartaf.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-}
+  .selectable.selected {
+    border: 2px solid #00bfff;
+  }
 
-.card-background {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
+  .associate-btn {
+    padding: 10px 20px;
+    background-color: #00bfff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
 
-.card-template {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
-}
+  .associate-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
 
-.card-logo {
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  width: 60px;
-  height: 60px;
-  transform: translateX(-50%);
-  object-fit: contain;
-  background-color: white;
-  border-radius: 50%;
-  padding: 5px;
-}
+  .message {
+    margin-top: 1rem;
+    font-weight: bold;
+    color: green;
+  }
 
-.card-name {
-  position: absolute;
-  top: 90px;
-  width: 100%;
-  text-align: center;
-  font-weight: bold;
-  color: #fff;
-  text-shadow: 1px 1px 2px #000;
-}
+  /* Responsive */
+  @media (max-width: 768px) {
+    .clubscc {
+      flex-direction: column;
+    }
 
-.card-stats {
-  position: absolute;
-  bottom: 20px;
-  width: 100%;
-  text-align: center;
-  color: white;
-  font-weight: bold;
-  text-shadow: 1px 1px 2px black;
-  font-size: 14px;
-  line-height: 1.4;
-}
+    .sidebar {
+      width: 100%;
+      position: relative;
+      height: auto;
+    }
+  }
+
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+
+  .modal-content {
+    background: rgb(32, 32, 32);
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .modal-actions {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+
+  .cancel-btn {
+    background-color: #ccc;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .fifa-card-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .fifa-card {
+    position: relative;
+    width: 200px;
+    height: 300px;
+      background-image: url(../assets/img/cartaf.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .card-background {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .card-template {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .card-logo {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    transform: translateX(-50%);
+    object-fit: contain;
+    background-color: white;
+    border-radius: 50%;
+    padding: 5px;
+  }
+
+  .card-name {
+    position: absolute;
+    top: 90px;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 1px 1px 2px #000;
+  }
+
+  .card-stats {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px black;
+    font-size: 14px;
+    line-height: 1.4;
+  }
