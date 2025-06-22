@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './MyClubs.css';
 import { Link } from 'react-router-dom';
-import jwtDecode from 'jwt-decode'; // Asegurate de tener instalado: npm install jwt-decode
+import { jwtDecode } from 'jwt-decode';
 
 
 const MyClubs = () => {
@@ -24,7 +24,7 @@ const MyClubs = () => {
 const obtenerDatosUsuario = () => {
   if (!token) return { userId: null, nombre: 'Jugador' };
   try {
-    const decoded = jwtDecode(token);
+const decoded = jwtDecode(token);
     return {
       userId: decoded.id || decoded.userId,
       nombre: decoded.name || decoded.username || 'Jugador',
