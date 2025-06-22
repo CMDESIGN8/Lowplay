@@ -175,89 +175,88 @@
     cursor: pointer;
   }
 
-  .fifa-card {
+ .fifa-card {
   position: relative;
   width: 200px;
-  height: 320px;
+  height: 300px;
   background-image: url(../assets/img/cartaf.png);
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-  font-family: 'Press Start 2P', sans-serif;
+  font-family: 'Press Start 2P', cursive;
+  color: white;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
 }
 
-.card-background {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.card-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 10px;
-  position: relative;
-}
-
-.card-overall {
+/* Promedio */
+.fifa-overall {
   position: absolute;
-  left: 12px;
-  top: 12px;
-  background: #111;
-  color: #fff;
-  font-size: 18px;
+  top: 15px;
+  left: 15px;
+  background: black;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 38px;
+  font-size: 16px;
   font-weight: bold;
-  padding: 6px;
-  border-radius: 50%;
-  width: 42px;
-  height: 42px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid #00bfff;
+  border: 2px solid white;
 }
 
-.card-avatar {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid white;
-  background-color: #fff;
-  z-index: 1;
-}
-
-.card-club-logo {
+/* Avatar */
+.fifa-avatar {
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 36px;
-  height: 36px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
-  background-color: white;
-  object-fit: contain;
+  object-fit: cover;
+  border: 2px solid white;
 }
 
-.card-name {
-  margin-top: 8px;
-  font-size: 12px;
-  text-align: center;
-  color: #fff;
-  text-shadow: 1px 1px 2px black;
-  font-weight: bold;
-}
-
-.card-stats {
+/* Nombre */
+.fifa-name {
   position: absolute;
-  bottom: 10px;
-  left: 0;
+  top: 70px;
   width: 100%;
-  color: #fff;
-  font-size: 11px;
   text-align: center;
-  text-shadow: 1px 1px 2px #000;
-  line-height: 1.6;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+}
+
+/* Logo del club */
+.fifa-club-logo {
+  position: absolute;
+  top: 95px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  background-color: white;
+  border-radius: 50%;
+  padding: 2px;
+}
+
+/* Stats */
+.fifa-stats {
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 20px;
+  font-size: 11px;
+  text-shadow: 1px 1px 2px black;
+}
+
+.fifa-stats-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
