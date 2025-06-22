@@ -4,7 +4,6 @@ import './MyClubs.css';
 import { Link } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 
-
 const MyClubs = () => {
   const [myClubs, setMyClubs] = useState([]);
   const [allClubs, setAllClubs] = useState([]);
@@ -15,26 +14,27 @@ const MyClubs = () => {
 
   const token = localStorage.getItem('token');
 
-
   useEffect(() => {
     fetchMyClubs();
     fetchAllClubs();
     fetchFifaCards();
   }, []);
-const obtenerDatosUsuario = () => {
-  if (!token) return { userId: null, nombre: 'Jugador' };
-  try {
-const decoded = jwtDecode(token);
-    return {
-      userId: decoded.id || decoded.userId,
-      nombre: decoded.name || decoded.username || 'Jugador',
-    };
-  } catch {
-    return { userId: null, nombre: 'Jugador' };
-  }
-};
 
-const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del top del componente
+  const obtenerDatosUsuario = () => {
+    if (!token) return { userId: null, nombre: 'Jugador' };
+    try {
+      const decoded = jwtDecode(token);
+      return {
+        userId: decoded.id || decoded.userId,
+        nombre: decoded.name || decoded.username || 'Jugador',
+      };
+    } catch {
+      return { userId: null, nombre: 'Jugador' };
+    }
+  };
+
+  const { userId, nombre } = obtenerDatosUsuario();
+
   const fetchMyClubs = async () => {
     try {
       const res = await axios.get('https://lowplay.onrender.com/api/user-clubs/mis-clubes', {
@@ -73,7 +73,6 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
         return;
       }
 
-      // Asociar usuario al club
       const res = await axios.post(
         'https://lowplay.onrender.com/api/user-clubs/asociar',
         { club_id: selectedClubId },
@@ -84,34 +83,30 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
       setSelectedClubId('');
       await fetchMyClubs();
 
-
       const club = allClubs.find((c) => c.id === selectedClubId);
       if (club) {
-        // Generar stats aleatorios
         const stats = {
-          pace: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
-          shooting: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
-          passing: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
-          dribbling: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
-          defense: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
-          physical: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
+          pace: Math.floor(Math.random() * 30) + 70,
+          shooting: Math.floor(Math.random() * 30) + 70,
+          passing: Math.floor(Math.random() * 30) + 70,
+          dribbling: Math.floor(Math.random() * 30) + 70,
+          defense: Math.floor(Math.random() * 30) + 70,
+          physical: Math.floor(Math.random() * 30) + 70,
         };
 
-        // Guardar carta en base de datos
         const cardRes = await axios.post(
-  'https://lowplay.onrender.com/api/user-cards/create',
-  {
-    userId,
-    club_id: club.id,
-    playerName: nombre, // ✅ nombre del usuario
-    stats,
-  },
-  {
-    headers: { Authorization: `Bearer ${token}` },
-  }
-);
+          'https://lowplay.onrender.com/api/user-cards/create',
+          {
+            userId,
+            club_id: club.id,
+            playerName: nombre,
+            stats,
+          },
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
 
-        // Agregar carta nueva a estado
         setFifaCards((prev) => [
           ...prev,
           {
@@ -184,36 +179,53 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
         </div>
 
         <h2>Mis Cartas FIFA</h2>
-<div className="fifa-card-list">
-  {fifaCards.length === 0 ? (
-    <p>No tienes cartas FIFA todavía.</p>
-  ) : (
-    fifaCards.map((card) => (
-      <div className="fifa-card">
-  <div className="card-glow-border">
-    <div className="card-level">{overall}</div>
-    <img src={avatar} alt="Jugador" className="card-character" />
-    <div className="card-name">{playerName}</div>
-    <img src={clubLogo} alt="Club" className="card-club" />
-    <div className="card-stats">
-      <div className="stat">PAC {pace}</div>
-      <div className="stat">SHO {shooting}</div>
-      <div className="stat">PAS {passing}</div>
-      <div className="stat">DRI {dribbling}</div>
-      <div className="stat">DEF {defense}</div>
-      <div className="stat">PHY {physical}</div>
-    </div>
-  </div>
-</div>
-    ))
-  )}
-</div>
+        <div className="fifa-card-list">
+          {fifaCards.length === 0 ? (
+            <p>No tienes cartas FIFA todavía.</p>
+          ) : (
+            fifaCards.map((card) => {
+              const {
+                pace,
+                shooting,
+                passing,
+                dribbling,
+                defense,
+                physical,
+                name: playerName,
+                logo: clubLogo,
+              } = card;
+
+              const avatar = '/assets/img/lupi.png'; // Cambiar a dinámica si querés
+              const overall = Math.round(
+                (pace + shooting + passing + dribbling + defense + physical) / 6
+              );
+
+              return (
+                <div key={card.id} className="fifa-card">
+                  <div className="card-glow-border">
+                    <div className="card-level">{overall}</div>
+                    <img src={avatar} alt="Jugador" className="card-character" />
+                    <div className="card-name">{playerName}</div>
+                    <img src={clubLogo} alt="Club" className="card-club" />
+                    <div className="card-stats">
+                      <div className="stat">PAC {pace}</div>
+                      <div className="stat">SHO {shooting}</div>
+                      <div className="stat">PAS {passing}</div>
+                      <div className="stat">DRI {dribbling}</div>
+                      <div className="stat">DEF {defense}</div>
+                      <div className="stat">PHY {physical}</div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          )}
+        </div>
 
         {showModal && (
           <div className="modal-overlay">
             <div className="modal-content">
               <h3>Clubes Disponibles</h3>
-
               <div className="club-list">
                 {availableClubs.length === 0 ? (
                   <p>No hay clubes disponibles.</p>
@@ -221,9 +233,7 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
                   availableClubs.map((club) => (
                     <div
                       key={club.id}
-                      className={`club-card selectable ${
-                        selectedClubId === club.id ? 'selected' : ''
-                      }`}
+                      className={`club-card selectable ${selectedClubId === club.id ? 'selected' : ''}`}
                       onClick={() => setSelectedClubId(club.id)}
                     >
                       <img
@@ -236,7 +246,6 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
                   ))
                 )}
               </div>
-
               <div className="modal-actions">
                 {message && <p className="message">{message}</p>}
                 <button
