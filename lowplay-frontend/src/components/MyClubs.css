@@ -222,8 +222,7 @@
 
 .card-overall {
   position: absolute;
-  top: 15px; /* Adjusted to be above the avatar */
-  left: 50%;
+  top: 45px; /* Adjusted to be above the avatar */
   transform: translateX(-50%);
   background-color: initial; /* Keep initial or transparent */
   border-radius: 50%;
@@ -234,9 +233,7 @@
   font-weight: 700;
   height: 45px;
   width: 45px;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  right: 120px;
   z-index: 2; /* Ensure it's above the avatar */
 }
 
