@@ -192,7 +192,7 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
               fifaCards.map((card) => (
                 <div key={card.id} className="fifa-card">
   <img
-  src={card.avatarUrl || '../public/assets/avatars/mateo.png'}
+  src={card.avatarUrl || '/assets/avatars/mateo.png'}
   alt={card.playerName}
   className="club-logo"
   style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover' }}
