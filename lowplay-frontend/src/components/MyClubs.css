@@ -184,9 +184,9 @@
 
 .fifa-card {
   position: relative;
-  width: 200px;
-  height: 300px;
-  background-image: url('../assets/img/cartaf.png');
+  width: 200px; /* Adjust as needed */
+  height: 300px; /* Adjust as needed */
+  background-image: url('../assets/img/cartaf.png'); /* Ensure this path is correct */
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: 10px;
@@ -194,8 +194,9 @@
   margin: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
   display: flex;
+  flex-direction: column; /* Changed to column to stack elements */
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; /* Align items to the start of the column */
 }
 
 .card-background {
@@ -205,20 +206,26 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center; /* Center content horizontally */
 }
 
+/* No longer needed as much for primary positioning,
+   its content will be absolutely positioned */
 .card-header {
+  width: 100%; /* Ensure it takes full width */
   display: flex;
-  align-items: center;
-  gap: 20px;
+  justify-content: center; /* Center its content if any */
+  align-items: flex-start;
+  position: relative; /* Needed for absolute children */
+  height: 0; /* Don't take up space */
 }
 
 .card-overall {
   position: absolute;
-  top: 20px; /* Ajustá este valor según lo que necesites */
+  top: 15px; /* Adjusted to be above the avatar */
   left: 50%;
   transform: translateX(-50%);
-  background-color: initial;
+  background-color: initial; /* Keep initial or transparent */
   border-radius: 50%;
   box-shadow: 0 0 6px #fff;
   color: #fff;
@@ -230,47 +237,55 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  z-index: 2; /* Ensure it's above the avatar */
 }
 
-
 .card-avatar {
-  width: 60px;
-  height: 60px;
+  position: absolute;
+  top: 40px; /* Position relative to the top of the card, below overall */
+  width: 70px; /* Slightly larger to match image */
+  height: 70px; /* Slightly larger to match image */
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid white;
-  box-shadow: 0 0 5px #fff;
+  box-shadow: 0 0 8px #fff; /* Slightly stronger shadow */
+  z-index: 1; /* Below overall */
 }
 
-
-
 .card-name-logo-container {
+  position: absolute;
+  top: 125px; /* Position below avatar */
   text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px; /* Space between name and club logo */
 }
 
 .card-name {
   font-weight: bold;
   color: white;
   text-shadow: 1px 1px 2px black;
-  font-size: 14px;
-  margin-bottom: 4px;
+  font-size: 16px; /* Slightly larger for prominence */
+  margin-bottom: 0; /* Remove default margin */
 }
 
 .card-club-logo {
-  width: 28px;
-  height: 28px;
+  width: 35px; /* Slightly larger */
+  height: 35px; /* Slightly larger */
   object-fit: contain;
 }
 
 .card-stats-grid {
-  padding: 0 20px 10px 20px;
-    margin-top: 50px;
-    padding-top: 0px;
-    margin-bottom: 150px;
+  position: absolute;
+  bottom: 10px; /* Position at the bottom of the card */
+  width: calc(100% - 40px); /* Account for padding */
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  font-family: 'Press Start 2P', sans-serif;
+  gap: 8px; /* Slightly more space between stat pairs */
+  font-family: 'Press Start 2P', sans-serif; /* Ensure this font is imported */
   font-size: 10px;
   color: white;
   text-shadow: 1px 1px 1px black;

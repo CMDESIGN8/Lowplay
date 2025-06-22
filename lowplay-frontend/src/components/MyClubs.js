@@ -184,47 +184,46 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
         </div>
 
         <h2>Mis Cartas FIFA</h2>
-<div className="fifa-card-list">
+    <div className="fifa-card-list">
   {fifaCards.length === 0 ? (
     <p>No tienes cartas FIFA todavía.</p>
   ) : (
     fifaCards.map((card) => (
       <div className="fifa-card">
-          <div className="card-background">
-          <div className="card-header">
-           <div className="card-overall">
-        {Math.round((card.pace + card.shooting + card.passing + card.dribbling + card.defense + card.physical) / 6)}
-          </div>
-          
-    </div>
+  {/* The overall rating needs to be placed first for z-index to work cleanly,
+      or ensure its z-index is higher than the avatar */}
+  <div className="card-overall">
+    {Math.round((card.pace + card.shooting + card.passing + card.dribbling + card.defense + card.physical) / 6)}
+  </div>
 
-    <div className="card-name-logo-container">
-      <img
-        src={card.avatarUrl || '/assets/avatars/mateo.png'}
-        alt={card.playerName}
-        className="card-avatar"
-        />
-      <div className="card-name">{card.playerName || 'Jugador'}</div>
-      <img
-        src={card.logo || '/assets/club-default.png'}
-        alt="Club"
-        className="card-club-logo"
-      />
-    </div>
+  <img
+    src={card.avatarUrl || '/assets/avatars/mateo.png'}
+    alt={card.playerName}
+    className="card-avatar"
+  />
 
-    <div className="card-stats-grid">
-      <div className="stat-pair">
-        <span>PAC {card.pace}</span>
-        <span>SHO {card.shooting}</span>
-      </div>
-      <div className="stat-pair">
-        <span>DRI {card.dribbling}</span>
-        <span>DEF {card.defense}</span>
-      </div>
-      <div className="stat-pair">
-        <span>PHY {card.physical}</span>
-        <span>PAS {card.passing}</span>
-      </div>
+  <div className="card-name-logo-container">
+    <div className="card-name">{card.playerName || 'Jugador'}</div>
+    {/* Moved club logo below name for correct stacking */}
+    <img
+      src={card.logo || '/assets/club-default.png'}
+      alt="Club"
+      className="card-club-logo"
+    />
+  </div>
+
+  <div className="card-stats-grid">
+    <div className="stat-pair">
+      <span>PAC {card.pace}</span>
+      <span>SHO {card.shooting}</span>
+    </div>
+    <div className="stat-pair">
+      <span>DRI {card.dribbling}</span>
+      <span>DEF {card.defense}</span>
+    </div>
+    <div className="stat-pair">
+      <span>PHY {card.physical}</span>
+      <span>PAS {card.passing}</span>
     </div>
   </div>
 </div>
