@@ -192,16 +192,7 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
       <div className="fifa-card">
  <div className="card-background">
     
-    <div className="card-name-logo-container">
-      <div className="card-name">{card.playerName || 'Jugador'}</div>
-      <img
-        src={card.logo || '/assets/club-default.png'}
-        alt="Club"
-        className="card-club-logo"
-      />
-    </div>
-
-    <div className="card-header">
+    <div className="top-section">
       <div className="card-overall">
         {Math.round(
           (card.pace + card.shooting + card.passing + card.dribbling + card.defense + card.physical) / 6
@@ -214,12 +205,19 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
       />
     </div>
 
+    <div className="card-name">{card.playerName || 'Jugador'}</div>
+    <img
+      src={card.logo || '/assets/club-default.png'}
+      alt="Club"
+      className="card-club-logo"
+    />
+
     <div className="card-stats-grid">
       <div className="stat-pair"><span>PAC {card.pace}</span><span>SHO {card.shooting}</span></div>
       <div className="stat-pair"><span>DRI {card.dribbling}</span><span>DEF {card.defense}</span></div>
       <div className="stat-pair"><span>PHY {card.physical}</span><span>PAS {card.passing}</span></div>
     </div>
-
+    
   </div>
 </div>
     ))

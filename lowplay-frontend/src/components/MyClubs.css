@@ -188,42 +188,22 @@
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .card-background {
-  padding: 10px;
+  padding: 12px;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-}
-
-.card-name-logo-container {
-  text-align: center;
-  margin-bottom: auto;
-  margin-top: 20px;
-}
-
-.card-name {
-  font-weight: bold;
-  color: white;
-  font-size: 14px;
-  margin-bottom: 4px;
-  text-shadow: 1px 1px 2px black;
-}
-
-.card-club-logo {
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
+}
+
+.top-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .card-overall {
@@ -238,18 +218,37 @@
   align-items: center;
   justify-content: center;
   border: 2px solid white;
+  margin-bottom: 4px;
 }
 
 .card-avatar {
-  width: 50px;
-  height: 50px;
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid white;
+  margin-bottom: 8px;
+}
+
+.card-name {
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.card-club-logo {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  margin-bottom: 8px;
 }
 
 .card-stats-grid {
-  padding: 10px 20px;
+  margin-top: auto;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
   gap: 6px;
