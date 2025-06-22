@@ -190,26 +190,26 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
   ) : (
     fifaCards.map((card) => (
       <div className="fifa-card">
-  {/* We'll wrap the top-left elements in a new container */}
-  <div className="top-left-section">
-    <div className="card-overall">
-      {Math.round((card.pace + card.shooting + card.passing + card.dribbling + card.defense + card.physical) / 6)}
-    </div>
+  {/* The overall rating needs to be placed first for z-index to work cleanly,
+      or ensure its z-index is higher than the avatar */}
+  <div className="card-overall">
+    {Math.round((card.pace + card.shooting + card.passing + card.dribbling + card.defense + card.physical) / 6)}
+  </div>
 
+  <img
+    src={card.avatarUrl || '/assets/avatars/mateo.png'}
+    alt={card.playerName}
+    className="card-avatar"
+  />
+
+  <div className="card-name-logo-container">
+    <div className="card-name">{card.playerName || 'Jugador'}</div>
+    {/* Moved club logo below name for correct stacking */}
     <img
-      src={card.avatarUrl || '/assets/avatars/mateo.png'}
-      alt={card.playerName}
-      className="card-avatar"
+      src={card.logo || '/assets/club-default.png'}
+      alt="Club"
+      className="card-club-logo"
     />
-
-    <div className="card-name-logo-container">
-      <div className="card-name">{card.playerName || 'Jugador'}</div>
-      <img
-        src={card.logo || '/assets/club-default.png'}
-        alt="Club"
-        className="card-club-logo"
-      />
-    </div>
   </div>
 
   <div className="card-stats-grid">
