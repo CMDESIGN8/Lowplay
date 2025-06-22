@@ -216,7 +216,7 @@
 }
 
 .card-overall {
-  background-color: black;
+  background-color: transparent;
   color: white;
   font-weight: bold;
   font-size: 18px;
@@ -239,7 +239,6 @@
 }
 
 .card-name-logo-container {
-  margin-top: 20px;
   text-align: center;
 }
 
@@ -258,8 +257,10 @@
 }
 
 .card-stats-grid {
-  margin-top: auto;
   padding: 0 20px 10px 20px;
+    margin-top: 20px;
+    padding-top: 0px;
+    margin-bottom: 150px;
   display: flex;
   flex-direction: column;
   gap: 6px;
