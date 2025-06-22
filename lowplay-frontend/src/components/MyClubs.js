@@ -197,7 +197,7 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
   className="club-logo"
   style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover' }}
 />
-  <h4>{card.name}</h4>
+  <h4 className="card-name">{card.playerName || card.name}</h4>
   <div className="stats">
     <p>PAC: {card.pace}</p>
     <p>SHO: {card.shooting}</p>
