@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './MyClubs.css';
 import { Link } from 'react-router-dom';
+import jwtDecode from 'jwt-decode'; // Asegurate de tener instalado: npm install jwt-decode
+
 
 const MyClubs = () => {
   const [myClubs, setMyClubs] = useState([]);
@@ -19,7 +21,20 @@ const MyClubs = () => {
     fetchAllClubs();
     fetchFifaCards();
   }, []);
+const obtenerDatosUsuario = () => {
+  if (!token) return { userId: null, nombre: 'Jugador' };
+  try {
+    const decoded = jwtDecode(token);
+    return {
+      userId: decoded.id || decoded.userId,
+      nombre: decoded.name || decoded.username || 'Jugador',
+    };
+  } catch {
+    return { userId: null, nombre: 'Jugador' };
+  }
+};
 
+const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del top del componente
   const fetchMyClubs = async () => {
     try {
       const res = await axios.get('https://lowplay.onrender.com/api/user-clubs/mis-clubes', {
@@ -84,16 +99,17 @@ const MyClubs = () => {
 
         // Guardar carta en base de datos
         const cardRes = await axios.post(
-          'https://lowplay.onrender.com/api/user-cards/create',
-          {
-            club_id: club.id,
-            playerName: club.name,
-            stats,
-          },
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+  'https://lowplay.onrender.com/api/user-cards/create',
+  {
+    userId,
+    club_id: club.id,
+    playerName: nombre, // ✅ nombre del usuario
+    stats,
+  },
+  {
+    headers: { Authorization: `Bearer ${token}` },
+  }
+);
 
         // Agregar carta nueva a estado
         setFifaCards((prev) => [
@@ -175,21 +191,22 @@ const MyClubs = () => {
             ) : (
               fifaCards.map((card) => (
                 <div key={card.id} className="fifa-card">
-                  <img
-                    src={card.logo || 'https://via.placeholder.com/100x100?text=Logo'}
-                    alt={card.name}
-                    className="club-logo"
-                  />
-                  <h4>{card.name}</h4>
-                  <div className="stats">
-                    <p>PAC: {card.pace}</p>
-                    <p>SHO: {card.shooting}</p>
-                    <p>PAS: {card.passing}</p>
-                    <p>DRI: {card.dribbling}</p>
-                    <p>DEF: {card.defense}</p>
-                    <p>PHY: {card.physical}</p>
-                  </div>
-                </div>
+  <img
+    src="/src-avatars-mateo.png" // ✅ Avatar fijo para pruebas
+    alt={card.name}
+    className="club-logo"
+    style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover' }}
+  />
+  <h4>{card.name}</h4>
+  <div className="stats">
+    <p>PAC: {card.pace}</p>
+    <p>SHO: {card.shooting}</p>
+    <p>PAS: {card.passing}</p>
+    <p>DRI: {card.dribbling}</p>
+    <p>DEF: {card.defense}</p>
+    <p>PHY: {card.physical}</p>
+  </div>
+</div>
               ))
             )}
           </div>
