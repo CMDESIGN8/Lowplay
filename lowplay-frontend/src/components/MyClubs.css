@@ -242,18 +242,21 @@
   object-fit: contain;
 }
 
-.card-stats {
-  position: absolute;
-  bottom: 20px;
-  width: 100%;
+.card-stats-grid {
   display: flex;
-  justify-content: space-evenly;
-  color: #fff;
-  font-size: 12px;
-  line-height: 1.2;
-  text-shadow: 1px 1px 2px #000;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+  font-size: 14px;
+  margin-top: 10px;
 }
 
-.stat-col p {
-  margin: 2px 0;
+.stat-pair {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 15px;
 }

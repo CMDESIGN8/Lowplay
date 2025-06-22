@@ -213,18 +213,20 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
             />
           </div>
 
-          <div className="card-stats">
-            <div className="stat-col">
-              <p>PAC</p><p>{card.pace}</p>
-              <p>DRI</p><p>{card.dribbling}</p>
-              <p>PHY</p><p>{card.physical}</p>
-            </div>
-            <div className="stat-col">
-              <p>SHO</p><p>{card.shooting}</p>
-              <p>DEF</p><p>{card.defense}</p>
-              <p>PAS</p><p>{card.passing}</p>
-            </div>
-          </div>
+          <div className="card-stats-grid">
+  <div className="stat-pair">
+    <span>PAC {card.pace}</span>
+    <span>SHO {card.shooting}</span>
+  </div>
+  <div className="stat-pair">
+    <span>DRI {card.dribbling}</span>
+    <span>DEF {card.defense}</span>
+  </div>
+  <div className="stat-pair">
+    <span>PHY {card.physical}</span>
+    <span>PAS {card.passing}</span>
+  </div>
+</div>
         </div>
       </div>
     ))
