@@ -226,14 +226,13 @@
   transform: translateX(-50%);
   background-color: initial; /* Keep initial or transparent */
   border-radius: 50%;
-  box-shadow: 0 0 6px #fff;
   color: #d8db08;
   display: flex;
-  font-size: 28px;
+  font-size: 38px;
   font-weight: 700;
   height: 45px;
   width: 45px;
-  right: 120px;
+  right: 100px;
   z-index: 2; /* Ensure it's above the avatar */
 }
 
