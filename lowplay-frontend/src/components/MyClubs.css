@@ -209,7 +209,6 @@
 
 .card-header {
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 20px;
   margin-top: 50px; /* antes era pegado arriba, ahora centrado */
