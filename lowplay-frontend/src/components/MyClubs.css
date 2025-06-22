@@ -227,9 +227,9 @@
   background-color: initial; /* Keep initial or transparent */
   border-radius: 50%;
   box-shadow: 0 0 6px #fff;
-  color: #fff;
+  color: #d8db08;
   display: flex;
-  font-size: 18px;
+  font-size: 28px;
   font-weight: 700;
   height: 45px;
   width: 45px;
@@ -247,6 +247,7 @@
   border: 2px solid white;
   box-shadow: 0 0 8px #fff; /* Slightly stronger shadow */
   z-index: 1; /* Below overall */
+  left:50%;
 }
 
 .card-name-logo-container {
