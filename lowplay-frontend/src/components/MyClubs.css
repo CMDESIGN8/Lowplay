@@ -214,16 +214,19 @@
 }
 
 .card-overall {
-  background-color: transparent;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  border-radius: 50%;
-  width: 45px;
-  height: 45px;
-  display: flex;
-  box-shadow: 0 0 6px #fff;
-  justify-content: center;
+ background-color: initial;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #fff;
+    color: #fff;
+    display: flex;
+    font-size: 18px;
+    font-weight: 700;
+    height: 45px;
+    justify-content: center;
+    text-align: center;
+    width: 45px;
+    flex-direction: row;
+    align-items: center;
 }
 
 .card-avatar {
