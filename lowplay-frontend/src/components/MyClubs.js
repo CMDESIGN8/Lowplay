@@ -191,20 +191,38 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
             ) : (
               fifaCards.map((card) => (
                 <div key={card.id} className="fifa-card">
-  <img
-  src={card.avatarUrl || '/assets/avatars/mateo.png'}
-  alt={card.playerName}
-  className="club-logo"
-  style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover' }}
-/>
-  <h4>{card.playerName}</h4>
-  <div className="stats">
-    <p>PAC: {card.pace}</p>
-    <p>SHO: {card.shooting}</p>
-    <p>PAS: {card.passing}</p>
-    <p>DRI: {card.dribbling}</p>
-    <p>DEF: {card.defense}</p>
-    <p>PHY: {card.physical}</p>
+  <div className="card-background">
+    {/* Overall + Avatar */}
+    <div className="card-header">
+      <div className="card-overall">{Math.round(
+        (card.pace + card.shooting + card.passing + card.dribbling + card.defense + card.physical) / 6
+      )}</div>
+      <img
+        src={card.avatarUrl || '/assets/avatars/mateo.png'}
+        alt="avatar"
+        className="card-avatar"
+      />
+    </div>
+
+    {/* Club logo */}
+    <img
+      src={card.logo || '/assets/club-default.png'}
+      alt="club"
+      className="card-club-logo"
+    />
+
+    {/* Nombre del jugador */}
+    <div className="card-name">{card.playerName || 'Jugador'}</div>
+
+    {/* Stats */}
+    <div className="card-stats">
+      <p>PAC: {card.pace}</p>
+      <p>SHO: {card.shooting}</p>
+      <p>PAS: {card.passing}</p>
+      <p>DRI: {card.dribbling}</p>
+      <p>DEF: {card.defense}</p>
+      <p>PHY: {card.physical}</p>
+    </div>
   </div>
 </div>
               ))

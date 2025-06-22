@@ -175,65 +175,89 @@
     cursor: pointer;
   }
 
-  .fifa-card-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-
   .fifa-card {
-    position: relative;
-    width: 200px;
-    height: 300px;
-      background-image: url(../assets/img/cartaf.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
+  position: relative;
+  width: 200px;
+  height: 320px;
+  background-image: url(../assets/img/cartaf.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  font-family: 'Press Start 2P', sans-serif;
+}
 
-  .card-background {
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
+.card-background {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
 
-  .card-template {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-  }
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px;
+  position: relative;
+}
 
-  .card-logo {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    width: 60px;
-    height: 60px;
-    transform: translateX(-50%);
-    object-fit: contain;
-    background-color: white;
-    border-radius: 50%;
-    padding: 5px;
-  }
+.card-overall {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  background: #111;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 6px;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #00bfff;
+}
 
-  .card-name {
-    position: absolute;
-    top: 90px;
-    width: 100%;
-    text-align: center;
-    font-weight: bold;
-    color: #fff;
-    text-shadow: 1px 1px 2px #000;
-  }
+.card-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid white;
+  background-color: #fff;
+  z-index: 1;
+}
 
-  .card-stats {
-    position: absolute;
-    bottom: 20px;
-    width: 100%;
-    text-align: center;
-    color: white;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px black;
-    font-size: 14px;
-    line-height: 1.4;
-  }
+.card-club-logo {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: white;
+  object-fit: contain;
+}
+
+.card-name {
+  margin-top: 8px;
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
+  text-shadow: 1px 1px 2px black;
+  font-weight: bold;
+}
+
+.card-stats {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  color: #fff;
+  font-size: 11px;
+  text-align: center;
+  text-shadow: 1px 1px 2px #000;
+  line-height: 1.6;
+}
