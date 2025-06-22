@@ -176,89 +176,68 @@
   }
 
 .fifa-card {
-  position: relative;
-  width: 200px;
-  height: 310px;
-  background-image: url('../assets/img/cartaf.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  border-radius: 10px;
-  overflow: hidden;
-  margin: 10px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.card-background {
+  width: 230px;
+  height: 330px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #0d0d1a, #1a1a40);
   padding: 12px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  position: relative;
+  box-shadow: 0 0 20px #0ff;
+  font-family: 'Orbitron', sans-serif;
+  color: #fff;
+  text-align: center;
 }
 
-.top-section {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+.card-glow-border {
+  border: 3px solid #0ff;
+  border-radius: 18px;
+  padding: 10px;
+  background: radial-gradient(circle at center, #001122, #000);
 }
 
-.card-overall {
-  background-color: black;
-  color: white;
+.card-level {
+  font-size: 26px;
   font-weight: bold;
-  font-size: 18px;
-  border-radius: 50%;
-  width: 38px;
-  height: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid white;
-  margin-bottom: 4px;
+  color: #0ff;
+  text-shadow: 0 0 5px #0ff;
 }
 
-.card-avatar {
-  width: 55px;
-  height: 55px;
+.card-character {
+  width: 90px;
+  height: 90px;
+  margin: 10px auto;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid white;
-  margin-bottom: 8px;
+  border: 3px solid #fff;
 }
 
 .card-name {
+  font-size: 16px;
   font-weight: bold;
-  color: white;
-  text-shadow: 1px 1px 2px black;
-  font-size: 14px;
-  text-align: center;
-  margin-bottom: 4px;
+  margin: 8px 0 4px 0;
+  color: #fff;
+  text-shadow: 1px 1px 2px #000;
 }
 
-.card-club-logo {
+.card-club {
   width: 30px;
   height: 30px;
   object-fit: contain;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
-.card-stats-grid {
-  margin-top: auto;
-  padding: 0 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-family: 'Press Start 2P', sans-serif;
-  font-size: 10px;
-  color: white;
-  text-shadow: 1px 1px 1px black;
+.card-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 10px;
+  font-size: 12px;
+  margin-top: 10px;
 }
 
-.stat-pair {
-  display: flex;
-  justify-content: space-between;
+.stat {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 4px;
+  border-radius: 6px;
+  color: #0ff;
+  text-shadow: 0 0 3px #0ff;
 }

@@ -190,34 +190,19 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
   ) : (
     fifaCards.map((card) => (
       <div className="fifa-card">
- <div className="card-background">
-    
-    <div className="top-section">
-      <div className="card-overall">
-        {Math.round(
-          (card.pace + card.shooting + card.passing + card.dribbling + card.defense + card.physical) / 6
-        )}
-      </div>
-      <img
-        src={card.avatarUrl || '/assets/avatars/mateo.png'}
-        alt={card.playerName || 'Jugador'}
-        className="card-avatar"
-      />
+  <div className="card-glow-border">
+    <div className="card-level">{overall}</div>
+    <img src={avatar} alt="Jugador" className="card-character" />
+    <div className="card-name">{playerName}</div>
+    <img src={clubLogo} alt="Club" className="card-club" />
+    <div className="card-stats">
+      <div className="stat">PAC {pace}</div>
+      <div className="stat">SHO {shooting}</div>
+      <div className="stat">PAS {passing}</div>
+      <div className="stat">DRI {dribbling}</div>
+      <div className="stat">DEF {defense}</div>
+      <div className="stat">PHY {physical}</div>
     </div>
-
-    <div className="card-name">{card.playerName || 'Jugador'}</div>
-    <img
-      src={card.logo || '/assets/club-default.png'}
-      alt="Club"
-      className="card-club-logo"
-    />
-
-    <div className="card-stats-grid">
-      <div className="stat-pair"><span>PAC {card.pace}</span><span>SHO {card.shooting}</span></div>
-      <div className="stat-pair"><span>DRI {card.dribbling}</span><span>DEF {card.defense}</span></div>
-      <div className="stat-pair"><span>PHY {card.physical}</span><span>PAS {card.passing}</span></div>
-    </div>
-    
   </div>
 </div>
     ))
