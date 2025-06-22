@@ -214,20 +214,24 @@
 }
 
 .card-overall {
- background-color: initial;
-    border-radius: 50%;
-    box-shadow: 0 0 6px #fff;
-    color: #fff;
-    display: flex;
-    font-size: 18px;
-    font-weight: 700;
-    height: 45px;
-    justify-content: center;
-    text-align: center;
-    width: 45px;
-    flex-direction: row;
-    align-items: center;
+  position: absolute;
+  top: 20px; /* Ajustá este valor según lo que necesites */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: initial;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #fff;
+  color: #fff;
+  display: flex;
+  font-size: 18px;
+  font-weight: 700;
+  height: 45px;
+  width: 45px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
+
 
 .card-avatar {
   width: 60px;
@@ -236,6 +240,11 @@
   object-fit: cover;
   border: 2px solid white;
   box-shadow: 0 0 5px #fff;
+}
+
+.card-avatar img {
+  text-align: end;
+  justify-content: left;
 }
 
 .card-name-logo-container {
