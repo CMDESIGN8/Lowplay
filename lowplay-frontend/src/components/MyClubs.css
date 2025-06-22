@@ -230,7 +230,7 @@
 }
 
 .card-name-logo-container {
-  margin-top: 6px;
+  margin-top: 40px;
   text-align: center;
 }
 
@@ -249,7 +249,7 @@
 }
 
 .card-stats-grid {
-  margin-top: 100px;
+  margin-top: 60px;
   padding: 0 20px;
   display: flex;
   flex-direction: column;
