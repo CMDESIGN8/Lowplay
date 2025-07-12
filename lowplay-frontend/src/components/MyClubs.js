@@ -167,7 +167,7 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
               myClubs.map((club) => (
                 <div key={club.id} className="club-card">
                   <img
-                    src={club.logo_url || 'https://via.placeholder.com/100x100?text=Logo'}
+                    src={club.logo_url || 'https://pbs.twimg.com/profile_images/833721715477868545/B9Fppowg_400x400.jpg'}
                     alt={club.name}
                     className="club-logo"
                   />
