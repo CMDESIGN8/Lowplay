@@ -118,7 +118,6 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
             id: cardRes.data.card.id,
             name: cardRes.data.card.name || club.name,
             logo: club.logo_url,
-            clubName: club.name,
             pace: cardRes.data.card.pace || stats.pace,
             shooting: cardRes.data.card.shooting || stats.shooting,
             passing: cardRes.data.card.passing || stats.passing,
@@ -168,10 +167,10 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
               myClubs.map((club) => (
                 <div key={club.id} className="club-card">
                   <img
-  src={`/assets/Elogos/${club.name}.png`}
-  alt={card.clubName}
-  className="club-logo"
-/>
+                    src={club.logo_url || 'https://via.placeholder.com/100x100?text=Logo'}
+                    alt={club.name}
+                    className="club-logo"
+                  />
                   <p>{club.name}</p>
                 </div>
               ))
@@ -207,10 +206,10 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
     <div className="card-name">{card.playerName || 'Jugador'}</div>
     {/* Moved club logo below name for correct stacking */}
     <img
-  src={`/assets/Elogos/${club.name}.png`}
-  alt={card.clubName}
-  className="club-logo"
-/>
+      src={card.logo || '/assets/club-default.png'}
+      alt="Club"
+      className="card-club-logo"
+    />
   </div>
 
   <div className="card-stats-grid">
@@ -249,11 +248,11 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
                       }`}
                       onClick={() => setSelectedClubId(club.id)}
                     >
-                     <img
-  src={`/assets/Elogos/${club.name}.png`}
-  alt={card.clubName}
-  className="club-logo"
-/>
+                      <img
+                        src={club.logo_url || 'https://via.placeholder.com/100x100?text=Logo'}
+                        alt={club.name}
+                        className="club-logo"
+                      />
                       <p>{club.name}</p>
                     </div>
                   ))
