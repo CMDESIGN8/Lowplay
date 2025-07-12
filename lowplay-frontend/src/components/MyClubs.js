@@ -116,7 +116,7 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
           ...prev,
           {
             id: cardRes.data.card.id,
-            name: cardRes.data.card.name || club.name,
+            playerName: nombre, // ✅ aseguramos el nombre del usuario
             logo: club.logo_url,
             pace: cardRes.data.card.pace || stats.pace,
             shooting: cardRes.data.card.shooting || stats.shooting,
@@ -203,7 +203,7 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
   />
 
   <div className="card-name-logo-container">
-    <div className="card-name">{card.name || 'Jugador'}</div>
+    <div className="card-name">{card.playerName || 'Jugador'}</div>
     {/* Moved club logo below name for correct stacking */}
     <img
       src={card.logo || 'https://www.camred.uy/logo-guardia.png'}
