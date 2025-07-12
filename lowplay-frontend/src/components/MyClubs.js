@@ -203,7 +203,7 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
   />
 
   <div className="card-name-logo-container">
-    <div className="card-name">{card.playerName || 'Jugador'}</div>
+    <div className="card-name">{card.name || 'Jugador'}</div>
     {/* Moved club logo below name for correct stacking */}
     <img
       src={card.logo || 'https://www.camred.uy/logo-guardia.png'}
