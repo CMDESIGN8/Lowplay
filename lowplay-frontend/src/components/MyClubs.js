@@ -167,7 +167,7 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
               myClubs.map((club) => (
                 <div key={club.id} className="club-card">
                   <img
-                    src={club.logo_url || 'https://pbs.twimg.com/profile_images/833721715477868545/B9Fppowg_400x400.jpg'}
+                    src={club.logo_url || 'https://www.camred.uy/logo-guardia.png'}
                     alt={club.name}
                     className="club-logo"
                   />
@@ -206,7 +206,7 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
     <div className="card-name">{card.playerName || 'Jugador'}</div>
     {/* Moved club logo below name for correct stacking */}
     <img
-      src={card.logo || '/assets/club-default.png'}
+      src={card.logo || 'https://www.camred.uy/logo-guardia.png'}
       alt="Club"
       className="card-club-logo"
     />
@@ -249,7 +249,7 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
                       onClick={() => setSelectedClubId(club.id)}
                     >
                       <img
-                        src={club.logo_url || 'https://via.placeholder.com/100x100?text=Logo'}
+                        src={club.logo_url || 'https://www.camred.uy/logo-guardia.png'}
                         alt={club.name}
                         className="club-logo"
                       />
