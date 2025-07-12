@@ -118,6 +118,7 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
             id: cardRes.data.card.id,
             name: cardRes.data.card.name || club.name,
             logo: club.logo_url,
+            clubName: club.name,
             pace: cardRes.data.card.pace || stats.pace,
             shooting: cardRes.data.card.shooting || stats.shooting,
             passing: cardRes.data.card.passing || stats.passing,
@@ -168,7 +169,7 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
                 <div key={club.id} className="club-card">
                   <img
   src={`/assets/Elogos/${club.name}.png`}
-  alt={club.name}
+  alt={card.clubName}
   className="club-logo"
 />
                   <p>{club.name}</p>
@@ -207,7 +208,7 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
     {/* Moved club logo below name for correct stacking */}
     <img
   src={`/assets/Elogos/${club.name}.png`}
-  alt={club.name}
+  alt={card.clubName}
   className="club-logo"
 />
   </div>
@@ -250,7 +251,7 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
                     >
                      <img
   src={`/assets/Elogos/${club.name}.png`}
-  alt={club.name}
+  alt={card.clubName}
   className="club-logo"
 />
                       <p>{club.name}</p>
