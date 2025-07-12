@@ -4,7 +4,6 @@ import './MyClubs.css';
 import { Link } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 
-
 const MyClubs = () => {
   const [myClubs, setMyClubs] = useState([]);
   const [allClubs, setAllClubs] = useState([]);
@@ -15,26 +14,27 @@ const MyClubs = () => {
 
   const token = localStorage.getItem('token');
 
-
   useEffect(() => {
     fetchMyClubs();
     fetchAllClubs();
     fetchFifaCards();
   }, []);
-const obtenerDatosUsuario = () => {
-  if (!token) return { userId: null, nombre: 'Jugador' };
-  try {
-const decoded = jwtDecode(token);
-    return {
-      userId: decoded.id || decoded.userId,
-      nombre: decoded.name || decoded.username || 'Jugador',
-    };
-  } catch {
-    return { userId: null, nombre: 'Jugador' };
-  }
-};
 
-const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del top del componente
+  const obtenerDatosUsuario = () => {
+    if (!token) return { userId: null, nombre: 'Jugador' };
+    try {
+      const decoded = jwtDecode(token);
+      return {
+        userId: decoded.id || decoded.userId,
+        nombre: decoded.name || decoded.username || 'Jugador',
+      };
+    } catch {
+      return { userId: null, nombre: 'Jugador' };
+    }
+  };
+
+  const { userId, nombre } = obtenerDatosUsuario();
+
   const fetchMyClubs = async () => {
     try {
       const res = await axios.get('https://lowplay.onrender.com/api/user-clubs/mis-clubes', {
@@ -60,7 +60,13 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
       const res = await axios.get('https://lowplay.onrender.com/api/user-cards', {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setFifaCards(res.data.cards);
+
+      setFifaCards(
+        res.data.cards.map((card) => ({
+          ...card,
+          logo: allClubs.find((c) => c.id === card.club_id)?.logo_url || 'https://www.camred.uy/logo-guardia.png',
+        }))
+      );
     } catch (err) {
       console.error('Error al obtener cartas FIFA:', err);
     }
@@ -73,21 +79,16 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
         return;
       }
 
-      // Asociar usuario al club
-      const res = await axios.post(
+      await axios.post(
         'https://lowplay.onrender.com/api/user-clubs/asociar',
         { club_id: selectedClubId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      setMessage(res.data.message || '¡Asociación exitosa!');
-      setSelectedClubId('');
       await fetchMyClubs();
-
 
       const club = allClubs.find((c) => c.id === selectedClubId);
       if (club) {
-        // Generar stats aleatorios
         const stats = {
           pace: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
           shooting: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
@@ -97,26 +98,24 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
           physical: Math.floor(Math.random() * (99 - 70 + 1)) + 70,
         };
 
-        // Guardar carta en base de datos
         const cardRes = await axios.post(
-  'https://lowplay.onrender.com/api/user-cards/create',
-  {
-    userId,
-    club_id: club.id,
-    playerName: nombre, // ✅ nombre del usuario
-    stats,
-  },
-  {
-    headers: { Authorization: `Bearer ${token}` },
-  }
-);
+          'https://lowplay.onrender.com/api/user-cards/create',
+          {
+            userId,
+            club_id: club.id,
+            name: nombre, // ✅ nombre correcto
+            stats,
+          },
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
 
-        // Agregar carta nueva a estado
         setFifaCards((prev) => [
           ...prev,
           {
             id: cardRes.data.card.id,
-            playerName: nombre, // ✅ aseguramos el nombre del usuario
+            name: nombre,
             logo: club.logo_url,
             pace: cardRes.data.card.pace || stats.pace,
             shooting: cardRes.data.card.shooting || stats.shooting,
@@ -184,52 +183,51 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
         </div>
 
         <h2>Mis Cartas FIFA</h2>
-    <div className="fifa-card-list">
-  {fifaCards.length === 0 ? (
-    <p>No tienes cartas FIFA todavía.</p>
-  ) : (
-    fifaCards.map((card) => (
-      <div className="fifa-card">
-  {/* The overall rating needs to be placed first for z-index to work cleanly,
-      or ensure its z-index is higher than the avatar */}
-  <div className="card-overall">
-    {Math.round((card.pace + card.shooting + card.passing + card.dribbling + card.defense + card.physical) / 6)}
-  </div>
+        <div className="fifa-card-list">
+          {fifaCards.length === 0 ? (
+            <p>No tienes cartas FIFA todavía.</p>
+          ) : (
+            fifaCards.map((card) => (
+              <div key={card.id} className="fifa-card">
+                <div className="card-overall">
+                  {Math.round(
+                    (card.pace + card.shooting + card.passing + card.dribbling + card.defense + card.physical) / 6
+                  )}
+                </div>
 
-  <img
-    src={card.avatarUrl || '/assets/avatars/mateo.png'}
-    alt={card.playerName}
-    className="card-avatar"
-  />
+                <img
+                  src={card.avatarUrl || '/assets/avatars/mateo.png'}
+                  alt={card.name}
+                  className="card-avatar"
+                />
 
-  <div className="card-name-logo-container">
-    <div className="card-name">{card.playerName || 'Jugador'}</div>
-    {/* Moved club logo below name for correct stacking */}
-    <img
-      src={card.logo || 'https://www.camred.uy/logo-guardia.png'}
-      alt="Club"
-      className="card-club-logo"
-    />
-  </div>
+                <div className="card-name-logo-container">
+                  <div className="card-name">{card.name || 'Jugador'}</div>
+                  <img
+                    src={card.logo || 'https://www.camred.uy/logo-guardia.png'}
+                    alt="Club"
+                    className="card-club-logo"
+                  />
+                </div>
 
-  <div className="card-stats-grid">
-    <div className="stat-pair">
-      <span>PAC {card.pace}</span>
-      <span>SHO {card.shooting}</span>
-    </div>
-    <div className="stat-pair">
-      <span>DRI {card.dribbling}</span>
-      <span>DEF {card.defense}</span>
-    </div>
-    <div className="stat-pair">
-      <span>PHY {card.physical}</span>
-      <span>PAS {card.passing}</span>
-    </div>
-  </div>
-</div>
-    ))
-  )}
-</div>
+                <div className="card-stats-grid">
+                  <div className="stat-pair">
+                    <span>PAC {card.pace}</span>
+                    <span>SHO {card.shooting}</span>
+                  </div>
+                  <div className="stat-pair">
+                    <span>DRI {card.dribbling}</span>
+                    <span>DEF {card.defense}</span>
+                  </div>
+                  <div className="stat-pair">
+                    <span>PHY {card.physical}</span>
+                    <span>PAS {card.passing}</span>
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
 
         {showModal && (
           <div className="modal-overlay">
@@ -243,9 +241,7 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
                   availableClubs.map((club) => (
                     <div
                       key={club.id}
-                      className={`club-card selectable ${
-                        selectedClubId === club.id ? 'selected' : ''
-                      }`}
+                      className={`club-card selectable ${selectedClubId === club.id ? 'selected' : ''}`}
                       onClick={() => setSelectedClubId(club.id)}
                     >
                       <img
