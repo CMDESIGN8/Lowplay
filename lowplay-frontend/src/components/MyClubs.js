@@ -3,7 +3,7 @@ import axios from 'axios';
 import './MyClubs.css';
 import { Link } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const MyClubs = () => {
@@ -46,6 +46,7 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
       console.error('Error al obtener mis clubes:', err);
     }
   };
+const navigate = useNavigate();
 
   const handleLogout = () => {
   localStorage.removeItem('token'); // Borra el token o lo que estés usando para autenticar
