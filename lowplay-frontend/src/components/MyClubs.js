@@ -46,6 +46,11 @@ const { userId, nombre } = obtenerDatosUsuario(); // Esto lo ponés cerca del to
     }
   };
 
+  const handleLogout = () => {
+  localStorage.removeItem('token'); // Borra el token o lo que estés usando para autenticar
+  navigate('/login'); // Redirige al login
+};
+
   const fetchAllClubs = async () => {
     try {
       const res = await axios.get('https://lowplay.onrender.com/api/clubs');
