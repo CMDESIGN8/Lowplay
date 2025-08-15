@@ -9,22 +9,7 @@ const MissionsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('Físico-Deportiva');
   const [showEvidenceModal, setShowEvidenceModal] = useState(false);
   const [currentMission, setCurrentMission] = useState(null);
-
-  const fetchMissions = async () => {
-    const token = localStorage.getItem('token');
-    try {
-      const res = await axios.get('https://lowplay.onrender.com/api/missions/all', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      setMissions(res.data.missions);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  useEffect(() => {
-    fetchMissions();
-  }, []);
+  const [file, setFile] = useState(null);
 
   const categories = [
     'Físico-Deportiva',
@@ -33,33 +18,61 @@ const MissionsPage = () => {
     'Única y Especial'
   ];
 
+  // Fetch misiones desde el backend
+  const fetchMissions = async () => {
+    const token = localStorage.getItem('token');
+    try {
+      const res = await axios.get('https://lowplay.onrender.com/api/missions/all', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setMissions(res.data.missions);
+    } catch (err) {
+      console.error('Error fetching missions:', err);
+    }
+  };
+
+  useEffect(() => {
+    fetchMissions();
+  }, []);
+
   const missionsByCategory = missions.filter(m => m.categoria === selectedCategory);
 
-  const submitEvidence = async (e) => {
-  e.preventDefault();
-  const token = localStorage.getItem('token');
-  const fileInput = document.querySelector('input[type="file"]');
-  if (!fileInput.files[0]) return alert('Seleccioná un archivo');
+  // Función para abrir el modal de evidencia
+  const handleEvidenceModal = (mission) => {
+    setCurrentMission(mission);
+    setShowEvidenceModal(true);
+  };
 
-  const formData = new FormData();
-  formData.append('missionId', currentMission.id);
-  formData.append('evidence', fileInput.files[0]);
+  // Función para manejar archivo seleccionado
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
 
-  try {
-    await axios.post('https://lowplay.onrender.com/api/missions/submit', formData, {
-      headers: { 
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data'
-      }
-    });
-    alert(`¡Misión completada! Ganaste ${currentMission.recompensa} lupicoins`);
-    setShowEvidenceModal(false);
-    fetchMissions();
-  } catch (err) {
-    alert(err.response?.data?.error || 'Error al enviar evidencia');
-  }
-};
+  // Función para enviar evidencia
+  const submitEvidence = async () => {
+    if (!file || !currentMission) return alert('Seleccione un archivo.');
 
+    const token = localStorage.getItem('token');
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('missionId', currentMission.id);
+
+    try {
+      await axios.post('https://lowplay.onrender.com/api/missions/submit', formData, {
+        headers: { 
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      setShowEvidenceModal(false);
+      setFile(null);
+      fetchMissions();
+      alert('¡Misión completada y evidencia enviada!');
+    } catch (err) {
+      console.error(err);
+      alert(err.response?.data?.message || 'Error al enviar evidencia.');
+    }
+  };
 
   return (
     <div className="missions-page">
@@ -87,7 +100,7 @@ const MissionsPage = () => {
               {m.completada ? (
                 <span className="completed">✅ Completada</span>
               ) : (
-                <button onClick={() => handleEvidenceUpload(m)}>
+                <button onClick={() => handleEvidenceModal(m)}>
                   Completar / Subir evidencia
                 </button>
               )}
@@ -98,6 +111,7 @@ const MissionsPage = () => {
         )}
       </div>
 
+      {/* Modal de evidencia */}
       <AnimatePresence>
         {showEvidenceModal && currentMission && (
           <motion.div
@@ -118,11 +132,8 @@ const MissionsPage = () => {
               <h3>{currentMission.nombre}</h3>
               <p>{currentMission.descripcion}</p>
               <span>Recompensa: {currentMission.recompensa} lupicoins</span>
-              <form onSubmit={submitEvidence}>
-  <input type="file" accept="image/*,video/*" />
-  <button type="submit">Enviar Evidencia</button>
-</form>
-
+              <input type="file" accept="image/*,video/*" onChange={handleFileChange} />
+              <button onClick={submitEvidence}>Enviar Evidencia</button>
             </motion.div>
           </motion.div>
         )}
