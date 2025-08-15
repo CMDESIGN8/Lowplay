@@ -50,7 +50,7 @@ const Missions = () => {
   const completeMission = async (missionId) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.post('https://lowplay.onrender.com/api/missions/complete', { missionId }, {
+      await axios.post('https://lowplay.onrender.com/api/missions/progress' , { missionId }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setShowCompletedMessage(true);
