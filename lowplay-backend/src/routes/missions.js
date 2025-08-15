@@ -1,85 +1,62 @@
+// src/routes/missions.js
 const express = require('express');
 const router = express.Router();
 const pool = require('../db');
 const { authenticateToken } = require('../middlewares/authMiddleware');
 
-// Obtener todas las misiones con progreso del usuario
-router.get('/', authenticateToken, async (req, res) => {
-  const userId = req.user.id;
-  try {
-    const missionsRes = await pool.query(`
-      SELECT m.*, 
-             COALESCE(um.progreso_actual, 0) AS progreso_actual,
-             CASE WHEN um.completed_at IS NOT NULL THEN true ELSE false END AS completada
-      FROM missions m
-      LEFT JOIN user_missions um
-        ON m.id = um.mission_id AND um.user_id = $1
-      ORDER BY m.id ASC
-    `, [userId]);
-
-    res.json({ missions: missionsRes.rows });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Error al obtener misiones' });
-  }
-});
-
-// Actualizar progreso / completar misión
+// POST para actualizar progreso
 router.post('/progress', authenticateToken, async (req, res) => {
+  const { missionId, cantidad } = req.body;
   const userId = req.user.id;
-  const { missionId, cantidad = 1 } = req.body;
 
   try {
+    // Traer misión
     const missionRes = await pool.query('SELECT * FROM missions WHERE id = $1', [missionId]);
     const mission = missionRes.rows[0];
     if (!mission) return res.status(404).json({ error: 'Misión no encontrada' });
 
-    // Buscar registro de progreso
-    const userMissionRes = await pool.query(
-      'SELECT * FROM user_missions WHERE user_id=$1 AND mission_id=$2',
-      [userId, missionId]
-    );
+    // Revisar progreso actual
+    const existingRes = await pool.query(`
+      SELECT * FROM user_missions 
+      WHERE user_id = $1 AND mission_id = $2
+    `, [userId, missionId]);
 
     let progreso = cantidad;
-    let completed_at = null;
+    let completada = false;
 
-    if (userMissionRes.rows.length > 0) {
-      progreso = userMissionRes.rows[0].progreso_actual + cantidad;
-      if (progreso >= mission.meta) completed_at = new Date();
-      await pool.query(
-        'UPDATE user_missions SET progreso_actual=$1, completed_at=$2 WHERE id=$3',
-        [progreso, completed_at, userMissionRes.rows[0].id]
-      );
+    if (existingRes.rows.length > 0) {
+      progreso = existingRes.rows[0].progreso_actual + cantidad;
+      completada = progreso >= mission.meta;
+      await pool.query(`
+        UPDATE user_missions 
+        SET progreso_actual=$1, completada=$2, completed_at=NOW()
+        WHERE id=$3
+      `, [progreso, completada, existingRes.rows[0].id]);
     } else {
-      if (progreso >= mission.meta) completed_at = new Date();
-      await pool.query(
-        'INSERT INTO user_missions (user_id, mission_id, progreso_actual, completed_at) VALUES ($1,$2,$3,$4)',
-        [userId, missionId, progreso, completed_at]
-      );
+      completada = progreso >= mission.meta;
+      await pool.query(`
+        INSERT INTO user_missions (user_id, mission_id, progreso_actual, completada, completed_at)
+        VALUES ($1,$2,$3,$4,NOW())
+      `, [userId, missionId, progreso, completada]);
     }
 
-    // Si completada, sumar lowcoins y mejorar carta
-    if (progreso >= mission.meta) {
-      await pool.query(
-        `UPDATE user_cards
-         SET lowcoins = lowcoins + $1,
-             ${mission.atributo_afectado} = ${mission.atributo_afectado} + $2
-         WHERE user_id=$3`,
-        [mission.recompensa, mission.valor_por_completacion, userId]
-      );
+    // Sumar lowcoins
+    await pool.query(`UPDATE users SET lowcoins = lowcoins + $1 WHERE id = $2`, [mission.recompensa, userId]);
+
+    // Subir atributo de carta si completada
+    if (completada) {
+      await pool.query(`
+        UPDATE user_cards 
+        SET ${mission.atributo_afectado} = ${mission.atributo_afectado} + ${mission.valor_por_completacion}
+        WHERE user_id=$1
+      `, [userId]);
     }
 
-    res.json({
-      progreso,
-      completada: progreso >= mission.meta,
-      recompensa: progreso >= mission.meta ? mission.recompensa : 0,
-      atributo_afectado: mission.atributo_afectado,
-      valor_por_completacion: mission.valor_por_completacion
-    });
+    res.json({ progreso, completada, recompensa: mission.recompensa, atributo_afectado: mission.atributo_afectado, valor_por_completacion: mission.valor_por_completacion });
 
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error al actualizar misión' });
+    res.status(500).json({ error: 'Error al actualizar progreso de misión' });
   }
 });
 
