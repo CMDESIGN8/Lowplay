@@ -8,14 +8,16 @@ import Missions from './components/Missions';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/mis-clubes" element={<MyClubs />} />
-      <Route path="/missions" element={<Missions />} />
-    </Routes>
+     <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/mis-clubes" element={<MyClubs />} />
+        <Route path="/missions" element={<Missions />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
