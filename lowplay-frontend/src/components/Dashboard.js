@@ -104,7 +104,7 @@ const handleLogout = () => {
         <UserProfile
           user={{
             username: user.name,
-            avatar: '/assets/avatars/mateo.png',
+            avatar: '/assets/avatars/1.gif',
             level: getLevel(user.lowcoins),
             lowcoins: user.lowcoins,
             email: user.email,
