@@ -4,12 +4,15 @@ const pool = require('../db'); // tu pool de conexión
 const { authenticateToken } = require('../middlewares/authMiddleware');
 
 // GET todas las misiones
+// GET todas las misiones (con progreso)
 router.get('/', authenticateToken, async (req, res) => {
   try {
     const userId = req.user.id;
 
     const missions = await pool.query(`
       SELECT m.*, 
+        COALESCE(um.progreso, 0) AS progreso,
+        m.meta,
         CASE 
           WHEN um.completed_at IS NULL THEN false
           WHEN m.tipo = 'única' THEN true
@@ -19,6 +22,9 @@ router.get('/', authenticateToken, async (req, res) => {
       FROM missions m
       LEFT JOIN user_missions um 
         ON m.id = um.mission_id AND um.user_id = $1
+      WHERE (m.fecha_inicio IS NULL OR m.fecha_inicio <= CURRENT_DATE)
+        AND (m.fecha_fin IS NULL OR m.fecha_fin >= CURRENT_DATE)
+      ORDER BY m.tipo, m.id
     `, [userId]);
 
     res.json({ missions: missions.rows });
@@ -28,42 +34,56 @@ router.get('/', authenticateToken, async (req, res) => {
   }
 });
 
-// POST completar misión
-router.post('/complete', authenticateToken, async (req, res) => {
+// POST actualizar progreso de misión
+router.post('/progress', authenticateToken, async (req, res) => {
   const userId = req.user.id;
-  const { missionId } = req.body;
+  const { missionId, cantidad } = req.body;
 
   try {
     const missionRes = await pool.query('SELECT * FROM missions WHERE id = $1', [missionId]);
     const mission = missionRes.rows[0];
     if (!mission) return res.status(404).json({ error: 'Misión no encontrada' });
 
-    // Verificar si ya la completó
-    const existingRes = await pool.query(`
-      SELECT * FROM user_missions 
+    // Obtener progreso actual
+    const userMissionRes = await pool.query(`
+      SELECT progreso FROM user_missions
       WHERE user_id = $1 AND mission_id = $2
-      ${mission.tipo === 'diaria' ? "AND DATE(completed_at) = CURRENT_DATE" : ""}
     `, [userId, missionId]);
 
-    if (existingRes.rows.length > 0) {
-      return res.status(400).json({ message: 'Ya completaste esta misión' });
+    let nuevoProgreso = cantidad;
+    if (userMissionRes.rows.length > 0) {
+      nuevoProgreso += userMissionRes.rows[0].progreso;
+      await pool.query(`
+        UPDATE user_missions
+        SET progreso = $1, ultima_actualizacion = NOW()
+        WHERE user_id = $2 AND mission_id = $3
+      `, [nuevoProgreso, userId, missionId]);
+    } else {
+      await pool.query(`
+        INSERT INTO user_missions (user_id, mission_id, progreso)
+        VALUES ($1, $2, $3)
+      `, [userId, missionId, cantidad]);
     }
 
-    // Insertar en user_missions
-    await pool.query(`
-      INSERT INTO user_missions (user_id, mission_id) 
-      VALUES ($1, $2)
-    `, [userId, missionId]);
+    // Si ya llegó a la meta → completar misión
+    if (nuevoProgreso >= mission.meta) {
+      await pool.query(`
+        UPDATE user_missions
+        SET completed_at = NOW()
+        WHERE user_id = $1 AND mission_id = $2
+      `, [userId, missionId]);
 
-    // Sumar lowcoins
-    await pool.query(`
-      UPDATE users SET lowcoins = lowcoins + $1 WHERE id = $2
-    `, [mission.recompensa, userId]);
+      await pool.query(`
+        UPDATE users SET lowcoins = lowcoins + $1 WHERE id = $2
+      `, [mission.recompensa, userId]);
 
-    res.json({ success: true, recompensa: mission.recompensa });
+      return res.json({ completada: true, recompensa: mission.recompensa });
+    }
+
+    res.json({ completada: false, progreso: nuevoProgreso, meta: mission.meta });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error al completar misión' });
+    res.status(500).json({ error: 'Error al actualizar progreso' });
   }
 });
 
