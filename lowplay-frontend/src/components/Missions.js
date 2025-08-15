@@ -12,13 +12,23 @@ const Missions = () => {
 
   const fetchData = async () => {
     const token = localStorage.getItem('token');
+    if (!token) {
+      setError('Debes iniciar sesión para ver tus misiones');
+      return;
+    }
+
     setLoading(true);
     setError('');
+
     try {
-      const [resMissions, resCard] = await Promise.all([
-        axios.get('https://lowplay.onrender.com/api/missions', { headers: { Authorization: `Bearer ${token}` } }),
-        axios.get('https://lowplay.onrender.com/api/cards', { headers: { Authorization: `Bearer ${token}` } }),
-      ]);
+      const resMissions = await axios.get('https://lowplay.onrender.com/api/missions', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      const resCard = await axios.get('https://lowplay.onrender.com/api/cards', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
       setMissions(resMissions.data.missions);
       setCard(resCard.data.card);
     } catch (err) {
@@ -30,6 +40,11 @@ const Missions = () => {
 
   const completeMission = async (missionId) => {
     const token = localStorage.getItem('token');
+    if (!token) {
+      alert('Debes iniciar sesión para completar misiones');
+      return;
+    }
+
     try {
       const res = await axios.post(
         'https://lowplay.onrender.com/api/missions/complete',
@@ -37,22 +52,21 @@ const Missions = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      // Mostrar mensaje de completada
       setShowCompletedMessage(true);
       setTimeout(() => setShowCompletedMessage(false), 3000);
 
-      // Actualizar stats y progreso localmente
-      const updatedMission = missions.map((m) =>
-        m.id === missionId ? { ...m, completada: res.data.completada, progreso_actual: res.data.progreso } : m
+      // Actualizar misiones localmente
+      setMissions((prev) =>
+        prev.map((m) =>
+          m.id === missionId ? { ...m, completada: res.data.completada, progreso_actual: res.data.progreso } : m
+        )
       );
-      setMissions(updatedMission);
 
+      // Actualizar carta localmente
       if (res.data.completada && card) {
-        // Sumar lowcoins
         setCard((prev) => ({
           ...prev,
           lowcoins: (prev.lowcoins || 0) + res.data.recompensa,
-          // Incrementar el atributo afectado según backend
           pace: res.data.atributo_afectado === 'pace' ? prev.pace + res.data.valor_por_completacion : prev.pace,
           shooting: res.data.atributo_afectado === 'shooting' ? prev.shooting + res.data.valor_por_completacion : prev.shooting,
           passing: res.data.atributo_afectado === 'passing' ? prev.passing + res.data.valor_por_completacion : prev.passing,
@@ -61,7 +75,6 @@ const Missions = () => {
           physical: res.data.atributo_afectado === 'physical' ? prev.physical + res.data.valor_por_completacion : prev.physical,
         }));
       }
-
     } catch (err) {
       alert(err.response?.data?.error || 'Error al completar misión');
     }
@@ -78,7 +91,6 @@ const Missions = () => {
       {loading && <p>Cargando...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
-      {/* Carta del usuario */}
       {card && (
         <div className="card-preview">
           <h4>{card.name}</h4>
@@ -91,18 +103,9 @@ const Missions = () => {
             <li>Physical: {card.physical}</li>
           </ul>
           <p>Lowcoins: {card.lowcoins || 0}</p>
-          <p>Misiones completadas: {card.missionsCompleted || 0}/{card.totalMissions || 10}</p>
-          <div className="progress-bar">
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: `${((card.missionsCompleted || 0) / (card.totalMissions || 10)) * 100}%` }}
-              className="progress-bar-fill"
-            />
-          </div>
         </div>
       )}
 
-      {/* Animación de misión completada */}
       <AnimatePresence>
         {showCompletedMessage && (
           <motion.div
@@ -116,14 +119,11 @@ const Missions = () => {
         )}
       </AnimatePresence>
 
-      {/* Listado de misiones */}
       {missions.map((m) => (
         <div key={m.id} className="mission-card">
           <h4>{m.nombre}</h4>
           <p>{m.descripcion}</p>
-          <p>
-            Progreso: {m.progreso_actual}/{m.meta}
-          </p>
+          <p>Progreso: {m.progreso_actual}/{m.meta}</p>
           <p>Recompensa: {m.recompensa} lowcoins</p>
           {m.completada ? (
             <span>✅ Completada</span>

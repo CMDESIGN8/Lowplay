@@ -83,7 +83,7 @@ const UserProfile = ({ user }) => {
           <br />
           <div className="wallet-email-info">
             <p><i className="fa-solid fa-id-card"></i> Socio: {user.id}</p>
-            <p><i className="fa-solid fa-futbol"></i> Club: </p>
+            <p><i className="fa-solid fa-futbol"></i> Ranking: 28 </p>
             <p><i className="fa-solid fa-wallet"></i> Wallet: {user.wallet}</p>
           </div>
           {/* BOTÓN PARA GENERAR PNG */}
