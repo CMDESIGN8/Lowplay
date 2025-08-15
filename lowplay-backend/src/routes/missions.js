@@ -69,22 +69,7 @@ router.post('/complete', authenticateToken, async (req, res) => {
 
 router.get('/all', authenticateToken, async (req, res) => {
   try {
-    const userId = req.user.id;
-
-    const missionsRes = await pool.query(`
-      SELECT m.*, 
-        CASE 
-          WHEN um.completed_at IS NULL THEN false
-          WHEN m.tipo = 'única' THEN true
-          WHEN m.tipo = 'diaria' AND DATE(um.completed_at) = CURRENT_DATE THEN true
-          ELSE false
-        END AS completada,
-        COALESCE(um.evidencia, '') AS evidencia
-      FROM missions m
-      LEFT JOIN user_missions um 
-        ON m.id = um.mission_id AND um.user_id = $1
-    `, [userId]);
-
+    const missionsRes = await pool.query('SELECT * FROM missions');
     res.json({ missions: missionsRes.rows });
   } catch (err) {
     console.error(err);
