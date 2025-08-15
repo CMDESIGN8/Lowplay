@@ -3,6 +3,9 @@ const router = express.Router();
 const pool = require('../db'); // tu pool de conexión
 const { authenticateToken } = require('../middlewares/authMiddleware');
 
+// Lista de atributos válidos de la carta
+const validAttributes = ['pace','shooting','passing','dribbling','defense','physical'];
+
 // GET todas las misiones
 router.get('/', authenticateToken, async (req, res) => {
   try {
@@ -12,8 +15,8 @@ router.get('/', authenticateToken, async (req, res) => {
       SELECT m.*, 
         CASE 
           WHEN um.completed_at IS NULL THEN false
-          WHEN m.tipo = 'única' THEN um.completada
-          WHEN m.tipo = 'diaria' AND DATE(um.completed_at) = CURRENT_DATE THEN um.completada
+          WHEN m.tipo = 'única' THEN COALESCE(um.completada,false)
+          WHEN m.tipo = 'diaria' AND DATE(um.completed_at) = CURRENT_DATE THEN COALESCE(um.completada,false)
           ELSE false
         END AS completada,
         COALESCE(um.progreso_actual, 0) AS progreso_actual
@@ -25,7 +28,7 @@ router.get('/', authenticateToken, async (req, res) => {
 
     res.json({ missions: missions.rows });
   } catch (err) {
-    console.error(err);
+    console.error('Error GET /missions:', err);
     res.status(500).json({ error: 'Error al obtener misiones' });
   }
 });
@@ -66,21 +69,21 @@ router.post('/complete', authenticateToken, async (req, res) => {
       `, [userId, missionId, progreso, completada]);
     }
 
-    // Sumar lowcoins
+    // Sumar lowcoins al usuario
     await pool.query(`UPDATE users SET lowcoins = lowcoins + $1 WHERE id = $2`, [mission.recompensa, userId]);
 
     // Subir atributo de la carta si completada
-    if (completada) {
+    if (completada && validAttributes.includes(mission.atributo_afectado)) {
       await pool.query(`
         UPDATE user_cards 
-        SET ${mission.atributo_afectado} = ${mission.atributo_afectado} + ${mission.valor_por_completacion}
-        WHERE user_id=$1
-      `, [userId]);
+        SET ${mission.atributo_afectado} = ${mission.atributo_afectado} + $1
+        WHERE user_id=$2
+      `, [mission.valor_por_completacion, userId]);
     }
 
     res.json({ success: true, recompensa: mission.recompensa, progreso, completada });
   } catch (err) {
-    console.error(err);
+    console.error('Error POST /missions/complete:', err);
     res.status(500).json({ error: 'Error al completar misión' });
   }
 });
