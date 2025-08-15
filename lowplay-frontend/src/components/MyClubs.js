@@ -206,7 +206,7 @@ const navigate = useNavigate();
   </div>
 
   <img
-    src={card.avatarUrl || '/assets/avatars/mateo.png'}
+    src={card.avatarUrl || '/assets/avatars/1.gif'}
     alt={card.playerName}
     className="card-avatar"
   />
