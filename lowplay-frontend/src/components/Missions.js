@@ -1,150 +1,172 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { motion, AnimatePresence } from 'framer-motion';
 import './Misiones.css';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X } from 'lucide-react'; // Para ícono de cerrar
 
 const Missions = () => {
   const [missions, setMissions] = useState([]);
-  const [card, setCard] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [dailyProgress, setDailyProgress] = useState({ completed: 0, total: 0 });
   const [showCompletedMessage, setShowCompletedMessage] = useState(false);
-  const [attributeAnimation, setAttributeAnimation] = useState(null);
+  const [showMissionList, setShowMissionList] = useState(false);
+  const [availableMissions, setAvailableMissions] = useState([]);
 
-  const fetchData = async () => {
+  const fetchMissions = async () => {
     const token = localStorage.getItem('token');
-    if (!token) {
-      setError('Debes iniciar sesión para ver tus misiones');
-      return;
-    }
-    setLoading(true);
-    setError('');
     try {
-      const resMissions = await axios.get('https://lowplay.onrender.com/api/missions', { headers: { Authorization: `Bearer ${token}` } });
-      const resCard = await axios.get('https://lowplay.onrender.com/api/cards', { headers: { Authorization: `Bearer ${token}` } });
-      setMissions(resMissions.data.missions);
-      setCard(resCard.data.card);
-    } catch (err) {
-      setError(err.response?.data?.error || 'Error al cargar misiones o carta');
-    } finally {
-      setLoading(false);
+      const res = await axios.get('https://lowplay.onrender.com/api/missions', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      // Eliminar misiones duplicadas por ID
+      const allMissionsRaw = res.data.missions;
+      const uniqueMissionsMap = new Map();
+      allMissionsRaw.forEach(m => uniqueMissionsMap.set(m.id, m));
+      const allMissions = Array.from(uniqueMissionsMap.values());
+
+      const available = allMissions.filter(m => !m.completada);
+      const orderedAvailableMissions = available.sort((a, b) => a.id - b.id);
+      setAvailableMissions(orderedAvailableMissions);
+
+      if (orderedAvailableMissions.length > 0) {
+        setMissions(orderedAvailableMissions);
+        const firstAvailableIndex = allMissions.findIndex(m => !m.completada);
+        setCurrentIndex(firstAvailableIndex !== -1 ? firstAvailableIndex : 0);
+      } else {
+        setMissions([]);
+        setCurrentIndex(0);
+      }
+
+      const dailyMissions = allMissions.filter(m => m.tipo === 'diaria');
+      const completedDaily = dailyMissions.filter(m => m.completada).length;
+      setDailyProgress({ completed: completedDaily, total: dailyMissions.length });
+
+    } catch (error) {
+      console.error("Error fetching missions:", error);
     }
   };
 
   const completeMission = async (missionId) => {
     const token = localStorage.getItem('token');
-    if (!token) {
-      alert('Debes iniciar sesión para completar misiones');
-      return;
-    }
-
     try {
-      const res = await axios.post(
-        'https://lowplay.onrender.com/api/missions/complete',
-        { missionId },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
+      await axios.post('https://lowplay.onrender.com/api/missions/complete', { missionId }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
       setShowCompletedMessage(true);
       setTimeout(() => setShowCompletedMessage(false), 3000);
-
-      // Actualizar misiones
-      setMissions((prev) =>
-        prev.map((m) =>
-          m.id === missionId ? { ...m, completada: res.data.completada, progreso_actual: res.data.progreso } : m
-        )
-      );
-
-      // Actualizar carta y disparar animación si se completó
-      if (res.data.completada && card) {
-        const atributo = res.data.atributo_afectado;
-        const valor = res.data.valor_por_completacion;
-        setCard((prev) => ({
-          ...prev,
-          lowcoins: (prev.lowcoins || 0) + res.data.recompensa,
-          [atributo]: prev[atributo] + valor,
-        }));
-        setAttributeAnimation({ atributo, valor });
-        setTimeout(() => setAttributeAnimation(null), 1000); // dura 1s
-      }
+      await fetchMissions();
     } catch (err) {
-      alert(err.response?.data?.error || 'Error al completar misión');
+      alert(err.response?.data?.message || 'Error al completar misión');
     }
   };
 
   useEffect(() => {
-    fetchData();
+    fetchMissions();
   }, []);
+
+  const currentMission = missions[currentIndex];
+  const progressPercent = (dailyProgress.completed / dailyProgress.total) * 100 || 0;
 
   return (
     <div className="missions-section">
       <h3>Misiones</h3>
-
-      {loading && <p>Cargando...</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-
-      {card && (
-        <div className="card-preview" style={{ position: 'relative' }}>
-          <h4>{card.name}</h4>
-          <ul>
-            <li>Pace: {card.pace}</li>
-            <li>Shooting: {card.shooting}</li>
-            <li>Passing: {card.passing}</li>
-            <li>Dribbling: {card.dribbling}</li>
-            <li>Defense: {card.defense}</li>
-            <li>Physical: {card.physical}</li>
-          </ul>
-          <p>Lowcoins: {card.lowcoins || 0}</p>
-
-          {/* Animación de incremento de atributo */}
-          <AnimatePresence>
-            {attributeAnimation && (
-              <motion.div
-                key={attributeAnimation.atributo}
-                initial={{ opacity: 1, y: 0 }}
-                animate={{ opacity: 0, y: -30 }}
-                exit={{ opacity: 0 }}
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  right: 0,
-                  color: 'gold',
-                  fontWeight: 'bold',
-                }}
-              >
-                +{attributeAnimation.valor} {attributeAnimation.atributo}
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      )}
+      <br></br>
+      <button onClick={() => setShowMissionList(true)} className="mission-list-button">
+        Lista de Misiones
+      </button>
+      <br></br>
+      <br></br>
 
       <AnimatePresence>
-        {showCompletedMessage && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            className="completed-message"
-          >
-            ¡Misión completada! 🎉
-          </motion.div>
-        )}
-      </AnimatePresence>
+  {showCompletedMessage && (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.8 }}
+      transition={{ duration: 0.5 }}
+      className="completed-message"
+    >
+       ¡Misión completada!  🎉
+    </motion.div>
+  )}
+</AnimatePresence>
 
-      {missions.map((m) => (
-        <div key={m.id} className="mission-card">
-          <h4>{m.nombre}</h4>
-          <p>{m.descripcion}</p>
-          <p>Progreso: {m.progreso_actual}/{m.meta}</p>
-          <p>Recompensa: {m.recompensa} lowcoins</p>
-          {m.completada ? (
-            <span>✅ Completada</span>
-          ) : (
-            <button onClick={() => completeMission(m.id)}>Completar</button>
-          )}
+      {missions.length > 0 && (
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentMission.id}
+            className="mission-card"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -30 }}
+            transition={{ duration: 0.4 }}
+          >
+            <h4>{currentMission.nombre}</h4>
+            <p>{currentMission.descripcion} <br />Tipo de Misión: {currentMission.tipo}</p>
+            <div className="mission-reward">
+              <i className="fas fa-coins"></i>
+              <span>Recompensa: {currentMission.recompensa} lowcoins</span>
+            </div>
+            {currentMission.completada ? (
+              <span className="completed">✅ Completada</span>
+            ) : (
+              <button onClick={() => completeMission(currentMission.id)}>Completar</button>
+            )}
+          </motion.div>
+        </AnimatePresence>
+      )}
+
+<AnimatePresence>
+  {showMissionList && (
+    <motion.div
+      className="modal-overlay"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.div
+        className="modal-content"
+        initial={{ y: "-100vh", opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: "-100vh", opacity: 0 }}
+        transition={{ type: "spring", stiffness: 80 }}
+      >
+        <button className="modal-close" onClick={() => setShowMissionList(false)}>
+          <X size={20} />
+        </button>
+        <h3>Misiones Disponibles</h3>
+        {availableMissions.length > 0 ? (
+          <ul>
+            {availableMissions.map(mission => (
+              <li key={mission.id}>
+                <span>{mission.nombre} ({mission.tipo})</span>
+                {mission.completada ? (
+                  <span className="completed-in-list">✅</span>
+                ) : (
+                  <button onClick={() => {
+                    const index = missions.findIndex(m => m.id === mission.id);
+                    if (index !== -1) setCurrentIndex(index);
+                    setShowMissionList(false);
+                  }}>Ir</button>
+                )}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No hay misiones disponibles.</p>
+        )}
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
+      <div className="daily-progress-bar">
+        <span>Progreso diario: {dailyProgress.completed} / {dailyProgress.total}</span>
+        <div className="progress-bar">
+          <div className="progress-fill" style={{ width: `${progressPercent}%` }}></div>
         </div>
-      ))}
+      </div>
     </div>
   );
 };
