@@ -9,6 +9,7 @@ const Missions = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [showCompletedMessage, setShowCompletedMessage] = useState(false);
+  const [attributeAnimation, setAttributeAnimation] = useState(null);
 
   const fetchData = async () => {
     const token = localStorage.getItem('token');
@@ -16,19 +17,11 @@ const Missions = () => {
       setError('Debes iniciar sesión para ver tus misiones');
       return;
     }
-
     setLoading(true);
     setError('');
-
     try {
-      const resMissions = await axios.get('https://lowplay.onrender.com/api/missions', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-
-      const resCard = await axios.get('https://lowplay.onrender.com/api/cards', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-
+      const resMissions = await axios.get('https://lowplay.onrender.com/api/missions', { headers: { Authorization: `Bearer ${token}` } });
+      const resCard = await axios.get('https://lowplay.onrender.com/api/cards', { headers: { Authorization: `Bearer ${token}` } });
       setMissions(resMissions.data.missions);
       setCard(resCard.data.card);
     } catch (err) {
@@ -55,25 +48,24 @@ const Missions = () => {
       setShowCompletedMessage(true);
       setTimeout(() => setShowCompletedMessage(false), 3000);
 
-      // Actualizar misiones localmente
+      // Actualizar misiones
       setMissions((prev) =>
         prev.map((m) =>
           m.id === missionId ? { ...m, completada: res.data.completada, progreso_actual: res.data.progreso } : m
         )
       );
 
-      // Actualizar carta localmente
+      // Actualizar carta y disparar animación si se completó
       if (res.data.completada && card) {
+        const atributo = res.data.atributo_afectado;
+        const valor = res.data.valor_por_completacion;
         setCard((prev) => ({
           ...prev,
           lowcoins: (prev.lowcoins || 0) + res.data.recompensa,
-          pace: res.data.atributo_afectado === 'pace' ? prev.pace + res.data.valor_por_completacion : prev.pace,
-          shooting: res.data.atributo_afectado === 'shooting' ? prev.shooting + res.data.valor_por_completacion : prev.shooting,
-          passing: res.data.atributo_afectado === 'passing' ? prev.passing + res.data.valor_por_completacion : prev.passing,
-          dribbling: res.data.atributo_afectado === 'dribbling' ? prev.dribbling + res.data.valor_por_completacion : prev.dribbling,
-          defense: res.data.atributo_afectado === 'defense' ? prev.defense + res.data.valor_por_completacion : prev.defense,
-          physical: res.data.atributo_afectado === 'physical' ? prev.physical + res.data.valor_por_completacion : prev.physical,
+          [atributo]: prev[atributo] + valor,
         }));
+        setAttributeAnimation({ atributo, valor });
+        setTimeout(() => setAttributeAnimation(null), 1000); // dura 1s
       }
     } catch (err) {
       alert(err.response?.data?.error || 'Error al completar misión');
@@ -92,7 +84,7 @@ const Missions = () => {
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
       {card && (
-        <div className="card-preview">
+        <div className="card-preview" style={{ position: 'relative' }}>
           <h4>{card.name}</h4>
           <ul>
             <li>Pace: {card.pace}</li>
@@ -103,6 +95,27 @@ const Missions = () => {
             <li>Physical: {card.physical}</li>
           </ul>
           <p>Lowcoins: {card.lowcoins || 0}</p>
+
+          {/* Animación de incremento de atributo */}
+          <AnimatePresence>
+            {attributeAnimation && (
+              <motion.div
+                key={attributeAnimation.atributo}
+                initial={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 0, y: -30 }}
+                exit={{ opacity: 0 }}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  right: 0,
+                  color: 'gold',
+                  fontWeight: 'bold',
+                }}
+              >
+                +{attributeAnimation.valor} {attributeAnimation.atributo}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       )}
 
