@@ -89,6 +89,7 @@ const handleLogout = () => {
   <nav className="menu">
     <a href="#"><i className="fas fa-home"></i> Inicio</a>
     <Link to="/mis-clubes"><i className="fas fa-people-group"></i> Mi Club</Link>
+    <Link to="/missions"><i className="fas fa-people-group"></i> Misiones</Link>
     <a href="#"><i className="fas fa-tv"></i> LupiTV</a>
     <a href="#"><i className="fas fa-store"></i> Marketplace</a>
     <a href="#"><i className="fas fa-wallet"></i> Wallet</a>
