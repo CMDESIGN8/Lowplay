@@ -44,7 +44,7 @@ const UserProfile = ({ user }) => {
     <>
       <div ref={cardRef} className={`user-profile-card ${normalizedLevel}`}>
         <div className="user-avatar">
-          <img src={user.avatar || '/assets/avatars/mateo.png'} alt="avatar" />
+          <img src={user.avatar || '/assets/avatars/1.gif'} alt="avatar" />
           {getBadge(user.level) && (
             <div className="avatar-badge">{getBadge(user.level)}</div>
           )}
@@ -60,7 +60,7 @@ const UserProfile = ({ user }) => {
           <p className="user-level">Ranked {user.level}</p>
           <br />
           <div className="lowcoins-display">
-            <span className="lowcoins-count">LOWCOINS</span>
+            <span className="lowcoins-count">LupiCoins</span>
           </div>
           <div className="lowcoins-display">
           {!showQR ? (
