@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Misiones.css';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react'; // Para ícono de cerrar
+import { X } from 'lucide-react';
 
 const Missions = () => {
   const [missions, setMissions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [dailyProgress, setDailyProgress] = useState({ completed: 0, total: 0 });
   const [showCompletedMessage, setShowCompletedMessage] = useState(false);
   const [showMissionList, setShowMissionList] = useState(false);
-  const [availableMissions, setAvailableMissions] = useState([]);
+  const [evidenciaFile, setEvidenciaFile] = useState(null);
 
   const fetchMissions = async () => {
     const token = localStorage.getItem('token');
@@ -18,43 +17,33 @@ const Missions = () => {
       const res = await axios.get('https://lowplay.onrender.com/api/missions', {
         headers: { Authorization: `Bearer ${token}` }
       });
-
-      // Eliminar misiones duplicadas por ID
-      const allMissionsRaw = res.data.missions;
-      const uniqueMissionsMap = new Map();
-      allMissionsRaw.forEach(m => uniqueMissionsMap.set(m.id, m));
-      const allMissions = Array.from(uniqueMissionsMap.values());
-
-      const available = allMissions.filter(m => !m.completada);
-      const orderedAvailableMissions = available.sort((a, b) => a.id - b.id);
-      setAvailableMissions(orderedAvailableMissions);
-
-      if (orderedAvailableMissions.length > 0) {
-        setMissions(orderedAvailableMissions);
-        const firstAvailableIndex = allMissions.findIndex(m => !m.completada);
-        setCurrentIndex(firstAvailableIndex !== -1 ? firstAvailableIndex : 0);
-      } else {
-        setMissions([]);
-        setCurrentIndex(0);
-      }
-
-      const dailyMissions = allMissions.filter(m => m.tipo === 'diaria');
-      const completedDaily = dailyMissions.filter(m => m.completada).length;
-      setDailyProgress({ completed: completedDaily, total: dailyMissions.length });
-
-    } catch (error) {
-      console.error("Error fetching missions:", error);
+      setMissions(res.data.missions);
+    } catch (err) {
+      console.error('Error fetching missions:', err);
     }
   };
 
   const completeMission = async (missionId) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.post('https://lowplay.onrender.com/api/missions/complete' , { missionId }, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      let evidencia_url = null;
+
+      // Si hay archivo, subirlo (simulación)
+      if (evidenciaFile) {
+        const formData = new FormData();
+        formData.append('file', evidenciaFile);
+        // Aquí podrías integrar tu endpoint de uploads
+        evidencia_url = '/uploads/' + evidenciaFile.name; 
+      }
+
+      await axios.post('https://lowplay.onrender.com/api/missions/complete', 
+        { missionId, evidencia_url },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
       setShowCompletedMessage(true);
       setTimeout(() => setShowCompletedMessage(false), 3000);
+      setEvidenciaFile(null);
       await fetchMissions();
     } catch (err) {
       alert(err.response?.data?.message || 'Error al completar misión');
@@ -66,107 +55,69 @@ const Missions = () => {
   }, []);
 
   const currentMission = missions[currentIndex];
-  const progressPercent = (dailyProgress.completed / dailyProgress.total) * 100 || 0;
+  const availableMissions = missions.filter(m => !m.completada);
 
   return (
     <div className="missions-section">
       <h3>Misiones</h3>
-      <br></br>
-      <button onClick={() => setShowMissionList(true)} className="mission-list-button">
-        Lista de Misiones
-      </button>
-      <br></br>
-      <br></br>
+      <button onClick={() => setShowMissionList(true)}>Lista de Misiones</button>
 
       <AnimatePresence>
-  {showCompletedMessage && (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.8 }}
-      transition={{ duration: 0.5 }}
-      className="completed-message"
-    >
-       ¡Misión completada!  🎉
-    </motion.div>
-  )}
-</AnimatePresence>
-
-      {missions.length > 0 && (
-        <AnimatePresence mode="wait">
+        {showCompletedMessage && (
           <motion.div
-            key={currentMission.id}
-            className="mission-card"
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -30 }}
-            transition={{ duration: 0.4 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            className="completed-message"
           >
-            <h4>{currentMission.nombre}</h4>
-            <p>{currentMission.descripcion} <br />Tipo de Misión: {currentMission.tipo}</p>
-            <div className="mission-reward">
-              <i className="fas fa-coins"></i>
-              <span>Recompensa: {currentMission.recompensa} lowcoins</span>
-            </div>
-            {currentMission.completada ? (
-              <span className="completed">✅ Completada</span>
-            ) : (
-              <button onClick={() => completeMission(currentMission.id)}>Completar</button>
-            )}
+            ¡Misión completada! 🎉
           </motion.div>
-        </AnimatePresence>
+        )}
+      </AnimatePresence>
+
+      {currentMission && (
+        <motion.div key={currentMission.id} className="mission-card">
+          <h4>{currentMission.nombre}</h4>
+          <p>{currentMission.descripcion}</p>
+          <p>Categoría: {currentMission.categoria}</p>
+          <p>Recompensa: {currentMission.recompensa} lowcoins</p>
+
+          {currentMission.evidencia && (
+            <input type="file" onChange={e => setEvidenciaFile(e.target.files[0])} />
+          )}
+
+          {currentMission.completada ? (
+            <span className="completed">✅ Completada</span>
+          ) : (
+            <button onClick={() => completeMission(currentMission.id)}>Completar</button>
+          )}
+        </motion.div>
       )}
 
-<AnimatePresence>
-  {showMissionList && (
-    <motion.div
-      className="modal-overlay"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <motion.div
-        className="modal-content"
-        initial={{ y: "-100vh", opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        exit={{ y: "-100vh", opacity: 0 }}
-        transition={{ type: "spring", stiffness: 80 }}
-      >
-        <button className="modal-close" onClick={() => setShowMissionList(false)}>
-          <X size={20} />
-        </button>
-        <h3>Misiones Disponibles</h3>
-        {availableMissions.length > 0 ? (
-          <ul>
-            {availableMissions.map(mission => (
-              <li key={mission.id}>
-                <span>{mission.nombre} ({mission.tipo})</span>
-                {mission.completada ? (
-                  <span className="completed-in-list">✅</span>
-                ) : (
-                  <button onClick={() => {
-                    const index = missions.findIndex(m => m.id === mission.id);
-                    if (index !== -1) setCurrentIndex(index);
-                    setShowMissionList(false);
-                  }}>Ir</button>
-                )}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No hay misiones disponibles.</p>
+      <AnimatePresence>
+        {showMissionList && (
+          <motion.div className="modal-overlay">
+            <motion.div className="modal-content">
+              <button className="modal-close" onClick={() => setShowMissionList(false)}>
+                <X size={20} />
+              </button>
+              <h3>Misiones Disponibles</h3>
+              {availableMissions.length > 0 ? (
+                <ul>
+                  {availableMissions.map(m => (
+                    <li key={m.id}>
+                      <span>{m.nombre} ({m.categoria})</span>
+                      <button onClick={() => { setCurrentIndex(missions.findIndex(ms => ms.id === m.id)); setShowMissionList(false); }}>
+                        Ir
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              ) : <p>No hay misiones disponibles.</p>}
+            </motion.div>
+          </motion.div>
         )}
-      </motion.div>
-    </motion.div>
-  )}
-</AnimatePresence>
-
-      <div className="daily-progress-bar">
-        <span>Progreso diario: {dailyProgress.completed} / {dailyProgress.total}</span>
-        <div className="progress-bar">
-          <div className="progress-fill" style={{ width: `${progressPercent}%` }}></div>
-        </div>
-      </div>
+      </AnimatePresence>
     </div>
   );
 };
