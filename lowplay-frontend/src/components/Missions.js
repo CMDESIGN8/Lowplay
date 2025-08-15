@@ -35,10 +35,31 @@ const MissionsPage = () => {
 
   const missionsByCategory = missions.filter(m => m.categoria === selectedCategory);
 
-  const handleEvidenceUpload = (mission) => {
-    setCurrentMission(mission);
-    setShowEvidenceModal(true);
-  };
+  const submitEvidence = async (e) => {
+  e.preventDefault();
+  const token = localStorage.getItem('token');
+  const fileInput = document.querySelector('input[type="file"]');
+  if (!fileInput.files[0]) return alert('Seleccioná un archivo');
+
+  const formData = new FormData();
+  formData.append('missionId', currentMission.id);
+  formData.append('evidence', fileInput.files[0]);
+
+  try {
+    await axios.post('https://lowplay.onrender.com/api/missions/submit', formData, {
+      headers: { 
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    alert(`¡Misión completada! Ganaste ${currentMission.recompensa} lupicoins`);
+    setShowEvidenceModal(false);
+    fetchMissions();
+  } catch (err) {
+    alert(err.response?.data?.error || 'Error al enviar evidencia');
+  }
+};
+
 
   return (
     <div className="missions-page">
@@ -97,8 +118,11 @@ const MissionsPage = () => {
               <h3>{currentMission.nombre}</h3>
               <p>{currentMission.descripcion}</p>
               <span>Recompensa: {currentMission.recompensa} lupicoins</span>
-              <input type="file" accept="image/*,video/*" />
-              <button>Enviar Evidencia</button>
+              <form onSubmit={submitEvidence}>
+  <input type="file" accept="image/*,video/*" />
+  <button type="submit">Enviar Evidencia</button>
+</form>
+
             </motion.div>
           </motion.div>
         )}

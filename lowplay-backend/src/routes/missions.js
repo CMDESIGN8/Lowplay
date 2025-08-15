@@ -1,24 +1,31 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../db'); // tu pool de conexión
+const pool = require('../db');
 const { authenticateToken } = require('../middlewares/authMiddleware');
+const multer = require('multer');
 
-// GET todas las misiones
-router.get('/', authenticateToken, async (req, res) => {
+// Configuración de multer para subir evidencia
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/'); // Carpeta donde se guardan archivos
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname);
+  }
+});
+const upload = multer({ storage });
+
+// Obtener todas las misiones
+router.get('/all', authenticateToken, async (req, res) => {
   try {
     const userId = req.user.id;
-
     const missions = await pool.query(`
       SELECT m.*, 
-        CASE 
-          WHEN um.completed_at IS NULL THEN false
-          WHEN m.tipo = 'única' THEN true
-          WHEN m.tipo = 'diaria' AND DATE(um.completed_at) = CURRENT_DATE THEN true
-          ELSE false
-        END AS completada
+        CASE WHEN um.completed_at IS NOT NULL THEN true ELSE false END AS completada
       FROM missions m
       LEFT JOIN user_missions um 
         ON m.id = um.mission_id AND um.user_id = $1
+      ORDER BY m.id
     `, [userId]);
 
     res.json({ missions: missions.rows });
@@ -28,52 +35,32 @@ router.get('/', authenticateToken, async (req, res) => {
   }
 });
 
-// POST completar misión
-router.post('/complete', authenticateToken, async (req, res) => {
-  const userId = req.user.id;
-  const { missionId } = req.body;
-
+// Completar misión subiendo evidencia
+router.post('/submit', authenticateToken, upload.single('evidence'), async (req, res) => {
   try {
-    const missionRes = await pool.query('SELECT * FROM missions WHERE id = $1', [missionId]);
-    const mission = missionRes.rows[0];
-    if (!mission) return res.status(404).json({ error: 'Misión no encontrada' });
+    const userId = req.user.id;
+    const { missionId } = req.body;
+    const filePath = req.file?.path;
 
-    // Verificar si ya la completó
-    const existingRes = await pool.query(`
-      SELECT * FROM user_missions 
-      WHERE user_id = $1 AND mission_id = $2
-      ${mission.tipo === 'diaria' ? "AND DATE(completed_at) = CURRENT_DATE" : ""}
-    `, [userId, missionId]);
-
-    if (existingRes.rows.length > 0) {
-      return res.status(400).json({ message: 'Ya completaste esta misión' });
-    }
+    if (!filePath) return res.status(400).json({ error: 'Se requiere evidencia' });
 
     // Insertar en user_missions
     await pool.query(`
-      INSERT INTO user_missions (user_id, mission_id) 
-      VALUES ($1, $2)
-    `, [userId, missionId]);
+      INSERT INTO user_missions (user_id, mission_id, completed_at, evidencia)
+      VALUES ($1, $2, NOW(), $3)
+      ON CONFLICT (user_id, mission_id) DO NOTHING
+    `, [userId, missionId, filePath]);
 
-    // Sumar lowcoins
-    await pool.query(`
-      UPDATE users SET lowcoins = lowcoins + $1 WHERE id = $2
-    `, [mission.recompensa, userId]);
+    // Sumar lupicoins
+    const missionRes = await pool.query('SELECT recompensa FROM missions WHERE id = $1', [missionId]);
+    const recompensa = missionRes.rows[0]?.recompensa || 0;
 
-    res.json({ success: true, recompensa: mission.recompensa });
+    await pool.query('UPDATE users SET lowcoins = lowcoins + $1 WHERE id = $2', [recompensa, userId]);
+
+    res.json({ success: true, recompensa });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error al completar misión' });
-  }
-});
-
-router.get('/all', authenticateToken, async (req, res) => {
-  try {
-    const missionsRes = await pool.query('SELECT * FROM missions');
-    res.json({ missions: missionsRes.rows });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Error al obtener misiones' });
+    res.status(500).json({ error: 'Error al enviar misión' });
   }
 });
 
