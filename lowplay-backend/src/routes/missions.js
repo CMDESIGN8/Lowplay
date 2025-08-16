@@ -1,7 +1,8 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const { Mission, UserMission, UserXP } = require("../models"); // Ajustá según tu ORM
-
+const pool = require('../db');
+const { authenticateToken } = require('../middlewares/authMiddleware');
+const multer = require('multer');
 // GET - Misiones activas
 router.get("/", async (req, res) => {
   const missions = await Mission.findAll({ where: { activo: true }});
