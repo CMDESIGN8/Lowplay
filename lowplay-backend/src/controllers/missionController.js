@@ -1,4 +1,4 @@
-const Mission = require("../models/missions"); // <-- usa el modelo con pg
+const Mission = require("../models/Missions"); // <-- usa el modelo con pg
 
 // GET todas las misiones
 exports.getMissions = async (req, res) => {
