@@ -1,67 +1,62 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const pool = require('../db');
-const { authenticateToken } = require('../middlewares/authMiddleware');
-const multer = require('multer');
+const { Mission, UserMission, UserXP } = require("../models"); // Ajustá según tu ORM
 
-// Configuración de multer para subir evidencia
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/'); // Carpeta donde se guardan archivos
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname);
-  }
-});
-const upload = multer({ storage });
-
-// Obtener todas las misiones
-router.get('/all', authenticateToken, async (req, res) => {
-  try {
-    const userId = req.user.id;
-    const missions = await pool.query(`
-      SELECT m.*, 
-        CASE WHEN um.completed_at IS NOT NULL THEN true ELSE false END AS completada
-      FROM missions m
-      LEFT JOIN user_missions um 
-        ON m.id = um.mission_id AND um.user_id = $1
-      ORDER BY m.id
-    `, [userId]);
-
-    res.json({ missions: missions.rows });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Error al obtener misiones' });
-  }
+// GET - Misiones activas
+router.get("/", async (req, res) => {
+  const missions = await Mission.findAll({ where: { activo: true }});
+  res.json(missions);
 });
 
-// Completar misión subiendo evidencia
-router.post('/submit', authenticateToken, upload.single('evidence'), async (req, res) => {
-  try {
-    const userId = req.user.id;
-    const { missionId } = req.body;
-    const filePath = req.file?.path;
+// POST - Registrar progreso en misión
+router.post("/:id/progreso", async (req, res) => {
+  const { userId } = req.body;
+  const { id } = req.params;
 
-    if (!filePath) return res.status(400).json({ error: 'Se requiere evidencia' });
-
-    // Insertar en user_missions
-    await pool.query(`
-      INSERT INTO user_missions (user_id, mission_id, completed_at, evidencia)
-      VALUES ($1, $2, NOW(), $3)
-      ON CONFLICT (user_id, mission_id) DO NOTHING
-    `, [userId, missionId, filePath]);
-
-    // Sumar lupicoins
-    const missionRes = await pool.query('SELECT recompensa FROM missions WHERE id = $1', [missionId]);
-    const recompensa = missionRes.rows[0]?.recompensa || 0;
-
-    await pool.query('UPDATE users SET lowcoins = lowcoins + $1 WHERE id = $2', [recompensa, userId]);
-
-    res.json({ success: true, recompensa });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Error al enviar misión' });
+  let userMission = await UserMission.findOne({ where: { userId, missionId: id }});
+  if (!userMission) {
+    userMission = await UserMission.create({ userId, missionId: id, progreso: 0 });
   }
+
+  userMission.progreso += 1;
+  if (userMission.progreso >= userMission.meta) {
+    userMission.progreso = userMission.meta;
+  }
+  await userMission.save();
+
+  res.json(userMission);
+});
+
+// POST - Completar misión
+router.post("/:id/completar", async (req, res) => {
+  const { userId } = req.body;
+  const { id } = req.params;
+
+  const mission = await Mission.findByPk(id);
+  const userMission = await UserMission.findOne({ where: { userId, missionId: id }});
+
+  if (!userMission || userMission.completada) {
+    return res.status(400).json({ error: "Misión ya completada o inexistente" });
+  }
+
+  if (userMission.progreso < mission.meta) {
+    return res.status(400).json({ error: "No alcanzaste la meta aún" });
+  }
+
+  userMission.completada = true;
+  userMission.fecha_completada = new Date();
+  await userMission.save();
+
+  // Sumar XP y monedas
+  let userXP = await UserXP.findOne({ where: { userId }});
+  if (!userXP) {
+    userXP = await UserXP.create({ userId, xp_total: 0, nivel: 1 });
+  }
+  userXP.xp_total += mission.recompensa_xp;
+  userXP.nivel = Math.floor(userXP.xp_total / 100) + 1;
+  await userXP.save();
+
+  res.json({ message: "Misión completada", xp: userXP.xp_total, nivel: userXP.nivel });
 });
 
 module.exports = router;
